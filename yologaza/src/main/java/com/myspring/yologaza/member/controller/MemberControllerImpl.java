@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myspring.yologaza.member.controller.MemberController;
-import com.myspring.yologaza.member.controller.MemberControllerImpl;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 
@@ -119,7 +117,7 @@ public class MemberControllerImpl implements MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:action");
 			} else {
-				mav.setViewName("redirect:/member/listMembers.do");
+				mav.setViewName("redirect:/main.do");
 			}
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
@@ -136,7 +134,7 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
 	

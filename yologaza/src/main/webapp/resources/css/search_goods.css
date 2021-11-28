@@ -68,10 +68,6 @@ body{
   }
   
   /* 상세검색창 */
-  .detail-select .detail-select-box{
-  /*   background: red; */
-    height: 3000px;
-  }
   .detail-select .detail-select-box .top_menu{
     display: block;
     width: 100%;
@@ -95,6 +91,7 @@ body{
     border:1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    margin-bottom: 90px;
   }
   /* 달력 */
   .detail-select .detail-select-box .filter_wrap .date-wrap{
@@ -252,8 +249,6 @@ body{
   .detail-select .detail-select-box .list_wrap{
     float: left;
     width: 70%;
-    height: 3000px;
-  /*   background: purple; */
   }
   .search-menu{
     overflow: hidden;
@@ -261,7 +256,6 @@ body{
     background: #fff;
     box-shadow: none;
     text-align: center;
-  /*   background: red; */
   }
   .goods-wrap{
     padding-left: 20px;
