@@ -308,13 +308,13 @@ for(var i = 0; i < tabList.length; i++){
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/member/User_CCForm.do">공지사항</a>
+              <a href="${contextPath}/CC/User_CCForm.do">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question1Form.do" class="active">자주묻는 질문</a>
+              <a href="${contextPath}/CC/Question1Form.do" class="active">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
             </li>
           </ul>
         </nav>

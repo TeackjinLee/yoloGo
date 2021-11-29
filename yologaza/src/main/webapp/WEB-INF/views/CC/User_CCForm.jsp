@@ -244,13 +244,13 @@ p {
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/member/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
             </li>
           </ul>
         </nav>
@@ -266,7 +266,7 @@ p {
             <div class="tab_each">
               <ul id="notices" class="show_list">
                 <li>
-                  <a href="#" id="notice_tab" class="list_que">
+                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
                     <p>[공지]11월 이벤트</p>
                     <span>
                       2021.11.10
@@ -274,7 +274,7 @@ p {
                   </a>
                 </li>
                 <li>
-                  <a href="#" id="notice_tab" class="list_que">
+                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
                     <p>[공지]10월 이벤트</p>
                     <span>
                       2021.10.07

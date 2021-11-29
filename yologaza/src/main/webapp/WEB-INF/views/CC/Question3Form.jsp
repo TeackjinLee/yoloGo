@@ -375,13 +375,13 @@ window.onload=()=>{
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/member/User_CCForm.do">공지사항</a>
+              <a href="${contextPath}/CC/User_CCForm.do">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question2Form.do" class="active">1:1문의</a>
+              <a href="${contextPath}/CC/Question2Form.do" class="active">1:1문의</a>
             </li>
           </ul>
         </nav>
@@ -391,8 +391,8 @@ window.onload=()=>{
             <div class="tab">
               <div class="tab_btn">
                 <ul>
-                  <li><a href="${contextPath}/member/Question2Form.do">내 문의내역</a></li>
-                  <li class="active"><a href="${contextPath}/member/Question3Form.do">문의작성</a></li>
+                  <li><a href="${contextPath}/CC/Question2Form.do">내 문의내역</a></li>
+                  <li class="active"><a href="${contextPath}/CC/Question3Form.do">문의작성</a></li>
                 </ul>
               </div>
             </div>

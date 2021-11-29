@@ -193,94 +193,52 @@ p {
 .tab{
 	text-align:left;
 }
-.tab .tab_btn ul li{
+.tab span.tab_btn {
     display: inline-block;
     float: none;
     position: relative;
-    margin-right: 64px;
-    font-size: 18px;
+    width: auto;
+    height: 30px;
+    margin-right: 22px;
+    font-size: 20px;
     line-height: normal;
+    color: black;
     text-align: left;
     cursor: pointer;
+    font-weight:bold;
     padding-left:5px;
-    top:10px;
-    color:black;
 }
 
-.tab .tab_btn ul li.active a{
-  color:rgb(112,173,71);
+.sub_wrap{
+  background-color:red;
 }
 
-.tab .tab_btn ul li a{
-  color:black;
-}
-
-.tab_each ul li label::before{
-  content: "\f078";
-  font-family:"Font Awesome 5 Free";
-  font-weight: 600;
-  display: block;
-  color: black;
-  float: right;
-  cursor:pointer;
-}
-
-.tab_each ul li input:checked + label::before{
-  content:"\f077"
-}
-
-.tab_each ul li label{
-    font-size: 19px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background: none;
-    width: 97%;
-    text-align: left;
+textarea{
+  width:650px;
+  height:250px;
+  border-radius:7px;
 }
 
 .tab_each ul li{
-  margin:15px;
+    display: inline-block;
 }
 
-.tab_each ul li .question{
-  display:none;
-}
-
-.tab_each ul li .answer{
-  display: none;
-  font-size: 0.9375em;
-  overflow: hidden;
-  padding: 0 0 10px 40px;
-  box-sizing: border-box;
-  transition: max-height 0.4s;
-}
-
-.tab_each ul li .ask{
-  display:none;
-  font-size: 0.9375em;
-  overflow: hidden;
-  padding: 10px 0 10px 10px;
-  box-sizing: border-box;
-  transition: max-height 0.4s;
-}
-
-.tab_each ul li input:checked + label + input + .ask, .tab_each ul li input:checked + label + input + .ask + .answer{
-  display:block;
-}
-
-.tab_each ul li .ans{
-  width: 65px;
-  height: 24px;
+.tab_each ul li span{
   position:relative;
-  bottom:2px;
-  text-align:center;
-  border:0px;
-  color:rgb(112,173,71);
+  font-size:18px;
+  font-weight:bold;
+  top:3px;
 }
 
-.tab_each ul li div{
-  background:rgba(0,0,0,0.08);
+.tab_each ul li input{
+  width:70px;
+  border-radius:4px;
+  height:18px;
+  margin-top:0px;
+}
+
+.tab_each ul li .input2{
+  width:120px;
 }
 </style>
 </head>
@@ -295,13 +253,13 @@ p {
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/member/User_CCForm.do">공지사항</a>
+              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/member/Question2Form.do" class="active">1:1문의</a>
+              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
             </li>
           </ul>
         </nav>
@@ -309,34 +267,29 @@ p {
           <div class="notice">
             <!-- Tab -->
             <div class="tab">
-              <div class="tab_btn">
-                <ul>
-                  <li class="active"><a href="${contextPath}/member/Question2Form.do">내 문의내역</a></li>
-                  <li><a href="${contextPath}/member/Question3Form.do">문의작성</a></li>
-                </ul>
-              </div>
+              <span class="tab_btn">
+                공지사항
+              </span>
             </div>
             <!-- 공지사항  -->
             <div class="tab_each">
-              <ul id="tab1">
+              <ul>
                 <li>
-                  <input type="checkbox" class="question" id="que-1">
-                  <label for="que-1">
-                    문의 유형 / 문의 내용
-                  </label>
-                  <input type="text" class="ans" value="답변 완료" readonly>
-                  <div class="ask">[문의] 작성일 2021.11.24<br>문의 내용입니다.</div>
-                  <div class="answer">[답변] 작성일 2021.11.25<br>답변 내용입니다.</div>
+                  <span>작성자</span>
                 </li>
                 <li>
-                  <input type="checkbox" class="question" id="que-2">
-                  <label for="que-2">
-                    문의 유형 / 문의 내용
-                  </label>
-                  <input type="text" class="ans" value="답변 대기" readonly>
-                  <div class="ask">[문의] 작성일 2021.11.24<br>문의 내용입니다.</div>
+                  <input type="text" class="input1" value="#" disabled/>
+                </li>
+                <li>
+                  &nbsp&nbsp<span>작성일</span>
+                </li>
+                <li>
+                  <input type="text" class="input2" value="#" disabled/>
                 </li>
               </ul>
+              <div>
+                <textarea disabled></textarea>
+              </div>
             </div>
           </div>
         </div>
