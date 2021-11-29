@@ -65,5 +65,24 @@
       <put-attribute name="title" value="비밀번호 찾기" />
       <put-attribute name="body" value="/WEB-INF/views/member/pwdFind2Form.jsp" />
    </definition>
+   
+   <definition name="/member/User_CCForm" extends="baseLayout">
+      <put-attribute name="title" value="공지사항" />
+      <put-attribute name="body" value="/WEB-INF/views/member/User_CCForm.jsp" />
+   </definition>
+   
+   <definition name="/member/Question1Form" extends="baseLayout">
+      <put-attribute name="title" value="자주 묻는 질문" />
+      <put-attribute name="body" value="/WEB-INF/views/member/Question1Form.jsp" />
+   </definition>
 
+   <definition name="/member/Question2Form" extends="baseLayout">
+      <put-attribute name="title" value="1:1문의" />
+      <put-attribute name="body" value="/WEB-INF/views/member/Question2Form.jsp" />
+   </definition>
+   
+   <definition name="/member/Question3Form" extends="baseLayout">
+      <put-attribute name="title" value="문의 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/member/Question3Form.jsp" />
+   </definition>
 </tiles-definitions>
