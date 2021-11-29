@@ -51,23 +51,25 @@ ul {
 }
 
 .sub_top_wrap{
-  height: 211px;
+  height: 120px;
   background:rgb(112,173,71);
 }
 
 .sub_top{
+	position:relative;
   width:1024px;
-  height:211px;
+  height:120px;
   margin:0 auto;
   border-radius:0;
-  padding-top:110px;
+	text-align:left;
 }
 
-.sub_top h1{
-  display:block;
-  color:#fff;
-  text-align:left;
-  
+.sub_top a{
+	position: absolute;
+    color: white;
+    font-weight: 500;
+    font-size: 32px;
+    bottom:20px;
 }
 
 
@@ -119,14 +121,13 @@ ul {
     color:black;
 }
 
-.tab_each {
-    border-top: none;
-}
 
 .tab_each {
     clear: both;
-    border-top: 1px solid black;
+    display:block;
+  padding-top:8px;
     text-align:left;
+    border-top:1px solid black;
 }
 
 div {
@@ -144,10 +145,6 @@ p {
 .show_list {
     margin-bottom: 0;
     padding: 0 0;
-}
-
-.sub_top{
-  margin:0 auto;
 }
 
 .sub_wrap nav ul li a{
@@ -177,13 +174,6 @@ p {
     background: #fff;
     opacity: 0;
     visibility: hidden;
-}
-
-.sub_top li {
-    margin: 21px 0 0 0px;
-    font-size: 16px;
-    font-weight: normal;
-    letter-spacing: -1px;
 }
 
 .sub_wrap nav ul li {
@@ -368,7 +358,7 @@ window.onload=()=>{
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <h1><i class="fas fa-phone-alt fa-lg"></i> 고객센터</h1>
+          <a><i class="fas fa-phone-alt fa-lg"></i> 고객센터</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">

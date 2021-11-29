@@ -10,6 +10,7 @@
 
 <html>
 <head>
+<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <style>
 a{text-decoration:none}
 ul,ol,li{list-style:none}
@@ -121,13 +122,16 @@ ul {
     color:black;
 }
 
+.tab_each {
+    border-top: none;
+}
 
 .tab_each {
     clear: both;
+    border-bottom: 1px solid black;
     display:block;
   padding-top:8px;
     text-align:left;
-    border-top:1px solid black;
 }
 
 div {
@@ -183,64 +187,102 @@ p {
 .tab{
 	text-align:left;
 }
-
-.tab span.tab_btn {
+.tab .tab_btn ul li{
     display: inline-block;
     float: none;
     position: relative;
-    width: auto;
-    height: 30px;
-    margin-right: 22px;
+    margin-right: 64px;
     font-size: 18px;
     line-height: normal;
-    color: black;
     text-align: left;
     cursor: pointer;
+    padding-left:5px;
+    top:10px;
+    color:black;
 }
 
-
-
-.paging {
-  padding:32px 0 0 32px;
+.tab .tab_btn ul li a{
+  color:black;
 }
 
-.paging button{
-    width: 32px;
-    height: 32px;
-    box-sizing: inherit;
-    align-items: center;
-    border-radius: 3px;
-    border: none;
-    box-shadow: none;
-    font-size: 13px;
-    line-height: 1.5;
-    text-align: center;
+.withdrawal {
+  color:black;
+  position:relative;
+  top:10px;
+    float:left;
 }
 
-.paging .on{
-  background:rgb(112,173,71);
-  color:#fff;
+.tab_each ul li div span{
+  font-size:16px;
+  width:130px;
+  display:inline-block;
 }
+
+.tab_each ul li div input{
+  width:150px;
+  font-size:16px;
+  border:0px;
+}
+
+.tab_each ul li .modify{
+  width:130px;
+  height:32px;
+  margin-top:20px;
+  border : 1px solid rgba(0,0,0,0.2);
+  border-radius : 4px;
+  background-color: #fff;
+  font-weight: 400;
+  padding : 4px;
+  color:black;
+  text-align: center;
+  font-size : 16px;
+  position : relative;
+  box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.6);
+  cursor:pointer;
+}
+
+.tab_each ul li a{
+  position:relative;
+  top:10px;
+}
+
 </style>
+<script type="text/javascript">
+$(function() {
+  $('.modify').val('수정')
+  $('.modify').click( function() {
+  var idx = $(".modify").index(this)
+    if( $(this).val() == '수정' ) {
+      $(this).replaceWith('<input type="submit" class="modify" value="변경"></input>');
+      $('.mod').eq(idx).attr("readonly", false);
+      $('.mod').eq(idx).css({'border':'1px solid rgba(0,0,0,0.2)','border-radius':'4px;', 'width':'150px', 'box-shadow': '0px 0px 1px 1px rgba(190, 190, 190, 0.6)','height':'28px','border-radius':'4px'});
+    }
+  });
+});
+
+</script>
 </head>
 <body class="pc">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a><i class="fas fa-phone-alt fa-lg"></i> 고객센터</a>
+          <a>MY페이지</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/mypage/Mypage1.do" class="active">회원정보 수정</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/mypage/Mypage3.do">예약 내역</a>
+            </li>
+            <li>
+              <a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a>
             </li>
           </ul>
         </nav>
@@ -248,43 +290,54 @@ p {
           <div class="notice">
             <!-- Tab -->
             <div class="tab">
-              <span class="tab_btn">
-                공지사항
-              </span>
-            </div>
-            <!-- 공지사항  -->
-            <div class="tab_each">
-              <ul id="notices" class="show_list">
-                <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]11월 이벤트</p>
-                    <span>
-                      2021.11.10
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]10월 이벤트</p>
-                    <span>
-                      2021.10.07
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div id="notice_pagination">
-                <div class="paging">
-                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
-                  <button class="on">1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                  <button>6</button>
-                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
-                </div>
+              <div class="tab_btn">
+                <ul>
+                  <li><a href="#">회원정보 수정</a></li>
+                </ul>
               </div>
             </div>
+            <div class="tab_each">
+              <ul>
+                <li>
+                  <div>
+                    <span>닉네임</span>
+                    <input type="text" class="mod" value="#" readonly>
+                  </div>
+                </li>
+                <li>
+                  <input type="button" class="modify">
+                  </input>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <div>
+                    <span>예약자 성함</span>
+                    <input type="text" class="mod" value="#" readonly>
+                  </div>
+                </li>
+                <li>
+                  <input type="button" class="modify">
+                  </input>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <div>
+                    <span>휴대폰 번호</span>
+                    <input type="text" class="mod" value="#" readonly>
+                  </div>
+                </li>
+                <li>
+                  <a>개인정보 보호를 위해 내 정보는 모두 안전하게 암호화됩니다.</a>
+                </li>
+                <li>
+                  <input type="button" class="modify">
+                  </input>
+                </li>
+              </ul>
+            </div>
+            <a href="#" class="withdrawal">회원 탈퇴</a>
           </div>
         </div>
       </div>
