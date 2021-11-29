@@ -70,7 +70,7 @@
 	    </tr>
 	    </tbody>
 	  </table>
-	  <button type="button" onclick="location.href='${contextPath}/member/pwdFind2Form.do' ">비밀번호 찾기</button>
+	  <button type="button" onclick="location.href='${contextPath}/member/pwdFind2Form.do' ">비밀번호 재설정</button>
 	  <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
 	</form>
 </body>

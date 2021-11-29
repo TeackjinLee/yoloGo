@@ -41,7 +41,7 @@
 		        </div>
 		      </div>
 		    </div>
-		    <a class="login_event" href="#"><div class="login-box"><img src="https://image.goodchoice.kr/images/web_v3/bg_login_m.png" alt="로그인후 이벤트 적용 이미지"><p>로그인 후 쿠폰 적립/적용 가능 합니다.<br>- 로그인하러가기 -</p></div></a>
+		    <a class="login_event" href="${contextPath}/member/loginForm.do"><div class="login-box"><img src="https://image.goodchoice.kr/images/web_v3/bg_login_m.png" alt="로그인후 이벤트 적용 이미지"><p>로그인 후 쿠폰 적립/적용 가능 합니다.<br>- 로그인하러가기 -</p></div></a>
 		    <div class="pay_select">
 		      <h3>결제수단 선택</h3>
 		      <select id="payment-select" class="select_type_1">

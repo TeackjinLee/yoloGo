@@ -138,7 +138,7 @@
                               &nbsp;&nbsp;&nbsp;22시까지</h3>
                             <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5시간</h3>
-                            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+                            <button type="button" onclick="location.href='${contextPath}/member/orderForm.do' ">예약하기</button>
                           </div>
                           <div class="reserve cell">
                             <h2>객실 타이틀</h2>
@@ -149,7 +149,7 @@
                               &nbsp;&nbsp;&nbsp;14시부터</h3>
                             <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일12시</h3>
-                            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+                            <button type="button" onclick="location.href='${contextPath}/member/orderForm.do' ">예약하기</button>
                           </div>
                         </div>
                       </div>
@@ -176,7 +176,7 @@
                               &nbsp;&nbsp;&nbsp;22시까지</h3>
                             <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5시간</h3>
-                            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+                            <button type="button" onclick="location.href='${contextPath}/member/orderForm.do' ">예약하기</button>
                           </div>
                           <div class="reserve cell">
                             <h2>객실 타이틀</h2>
@@ -187,7 +187,7 @@
                               &nbsp;&nbsp;&nbsp;14시부터</h3>
                             <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일12시</h3>
-                            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+                            <button type="button" onclick="location.href='${contextPath}/member/orderForm.do' ">예약하기</button>
                           </div>
                         </div>
                       </div>

@@ -31,6 +31,7 @@ ul {
     margin-inline-end: 0px;
 }
 
+
 .sub_wrap .align_rt {
     float: right;
     width: 750px;

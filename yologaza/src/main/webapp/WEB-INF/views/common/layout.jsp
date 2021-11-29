@@ -32,10 +32,11 @@
         font-size:10px;
       }
       #content {
+      	height:auto;
       }
       #footer {
         clear: both;
-		margin-top: 30px;
+		margin-top: 150px;
         border: 0px solid #bcbcbc;
       }
       
