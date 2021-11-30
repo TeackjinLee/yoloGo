@@ -24,7 +24,7 @@
       }
   }  
   function backToList(obj){
-    obj.action="${contextPath}/board/listArticles.do";
+    obj.action="${contextPath}/board/goodsInformation.do";
     obj.submit();
   }
   

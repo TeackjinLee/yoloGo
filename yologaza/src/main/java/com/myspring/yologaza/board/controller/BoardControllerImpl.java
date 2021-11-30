@@ -38,7 +38,7 @@ public class BoardControllerImpl implements BoardController {
 	ArticleVO articleVO;
 	
 	@Override
-	@RequestMapping(value="/board/listArticles.do",
+	@RequestMapping(value="/board/goodsInformation.do",
 							method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");

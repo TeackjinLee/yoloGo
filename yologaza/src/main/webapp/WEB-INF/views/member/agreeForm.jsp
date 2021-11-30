@@ -94,7 +94,7 @@
 		        <div class="pay_payment cell" style="margin-left: 10px; background:none; width:100%;">
 					  <div class="payment_information">
 					       <div class="pay_result">
-					         <button type="submit" onclick="location.href='${contextPath}/member/idFindForm.do' " class="next-button" style="border-radius: 5px; height:50px; margin-top:30px; width:100%;" disabled>동의하기</button>
+					         <button type="submit" onclick="location.href='${contextPath}/member/joinForm.do' " class="next-button" style="border-radius: 5px; height:50px; margin-top:30px; width:100%;" disabled>동의하기</button>
 					       </div>
 					   </div>
 					</div>

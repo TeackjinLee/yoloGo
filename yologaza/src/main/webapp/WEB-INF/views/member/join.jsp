@@ -1,4 +1,4 @@
-<!-- 기여도: 이택진50% / 윤진50% -->
+<!-- 기여도: 이택진70% / 윤진30% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 	isELIgnored="false"%>

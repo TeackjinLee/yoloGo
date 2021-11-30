@@ -178,7 +178,7 @@
           <div class="goods_list">
             <div class="goods_title"><h3>상품 리스트</h3></div>
             <li class="list_1 goods_menu1 goods_box">
-              <a href="${contextPath}/board/listArticles.do">
+              <a href="${contextPath}/board/goodsInformation.do">
                 <div class="goods_picture">
                   <img src="https://image.goodchoice.kr/resize_1000X500x0/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg" alt="숙소 이미지">
                 </div>
@@ -220,7 +220,7 @@
               </a>
             </li><!--    goods_menu1/2/3/4/5(호텔 모텔 리조트 등등 번호 순차 등록)      -->
             <li class="list_1 goods_menu1 goods_box">
-              <a href="${contextPath}/board/listArticles.do">
+              <a href="${contextPath}/board/goodsInformation.do">
                 <div class="goods_picture">
                   <img src="https://image.goodchoice.kr/resize_1000X500x0/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg" alt="숙소 이미지">
                 </div>

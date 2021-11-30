@@ -41,9 +41,9 @@
       <put-attribute name="body" value="/WEB-INF/views/member/agreeForm.jsp" />
    </definition>
 
-	<definition name="/member/memberForm" extends="baseLayout">
-      <put-attribute name="title" value="회원등록창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+	<definition name="/member/joinForm" extends="baseLayout">
+      <put-attribute name="title" value="회원가입창" />
+      <put-attribute name="body" value="/WEB-INF/views/member/join.jsp" />
    </definition>
    
    <definition name="/member/idFindForm" extends="baseLayout">
@@ -66,12 +66,12 @@
       <put-attribute name="body" value="/WEB-INF/views/member/pwdFind2Form.jsp" />
    </definition>
    
-   <definition name="/member/orderForm" extends="baseLayout">
+   <definition name="/member/reservationForm" extends="baseLayout">
       <put-attribute name="title" value="상품 예약 페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/order/orderGoodsForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
    </definition>
    <definition name="/member/nonMemberForm" extends="baseLayout">
-      <put-attribute name="title" value="상품 예약 페이지" />
+      <put-attribute name="title" value="비회원 상품 예약 페이지" />
       <put-attribute name="body" value="/WEB-INF/views/member/nonMember.jsp" />
    </definition>
 </tiles-definitions>
