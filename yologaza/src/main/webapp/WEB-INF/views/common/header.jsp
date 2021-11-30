@@ -21,7 +21,7 @@
 	  <!-- Header -->
 	  <header>
 	    <div id="head_link" class="con">
-	      <ul class = row>
+	      <ul class = "row">
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
 	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do">마이페이지</a></li>
@@ -78,8 +78,14 @@
 	              </div>  
 	             </li>
 	            <li class="cell">
-	              <a href="#">예약내역</a>
-	
+					<c:choose>
+			      		<c:when test="${isLogOn == true  && member!= null}">
+			      			<a href="${contextPath}/mypage/Mypage3.do">예약내역</a>
+			      		</c:when>
+			      		<c:otherwise>
+			      			<a href="${contextPath}/member/loginForm.do">예약내역</a>
+			      		</c:otherwise>
+			      	</c:choose>
 	            </li>
 	            <li class="cell">
 	              <a href="#">매장안내</a>

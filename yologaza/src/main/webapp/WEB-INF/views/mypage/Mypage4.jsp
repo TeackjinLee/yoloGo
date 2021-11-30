@@ -43,6 +43,20 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     box-sizing: border-box;
 }
 
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 .sub_wrap .align_rt {
     float: right;

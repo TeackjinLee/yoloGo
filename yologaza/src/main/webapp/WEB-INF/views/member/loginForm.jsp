@@ -1,4 +1,4 @@
-<!-- 기여도: 이택진10% / 윤진90% -->
+<!-- 기여도: 이택진20% / 윤진80% -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -58,7 +58,8 @@
 	    |
 	    <a href="${contextPath}/member/idFindForm.do">아이디찾기</a>
 	    |
-	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br><br>
+	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br>
+	    <a href="${contextPath}/member/nonMemberForm.do">비회원 예약 내역 조회</a>
 	</form>
 </body>
 </html>
