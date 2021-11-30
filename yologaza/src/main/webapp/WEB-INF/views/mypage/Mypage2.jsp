@@ -12,8 +12,29 @@
 <head>
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <style>
-a{text-decoration:none}
-ul,ol,li{list-style:none}
+body{
+  font-size: 14px;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     margin: 0;
@@ -22,14 +43,6 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     box-sizing: border-box;
 }
 
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
 
 .sub_wrap .align_rt {
     float: right;
@@ -186,6 +199,13 @@ p {
 .tab{
 	text-align:left;
 }
+
+.tab .tab_btn ul{
+	margin-bottom:15px;
+	position:relative;
+    margin-top:30px;
+}
+
 .tab .tab_btn ul li{
     display: inline-block;
     float: none;
@@ -196,7 +216,6 @@ p {
     text-align: left;
     cursor: pointer;
     padding-left:5px;
-    top:10px;
     color:black;
 }
 

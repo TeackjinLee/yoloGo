@@ -12,8 +12,29 @@
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1f3ccdf06f19b1518173124c82247b3"></script>
 <style>
-a{text-decoration:none}
-ul,ol,li{list-style:none}
+body{
+  font-size: 14px;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     margin: 0;
@@ -22,14 +43,6 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     box-sizing: border-box;
 }
 
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
 
 .sub_wrap .align_rt {
     float: right;
@@ -237,7 +250,6 @@ p {
 
 .tab_each .reservation .descript input{
   float:right;
-  zoom:1.5;
   cursor:pointer;
 }
 
@@ -261,18 +273,17 @@ p {
   margin-top:30px;
 }
 
-.tab_each .phonenumber{
+.tab_each .reservation .descript .detail .phonenumber{
   display:none;
   width:200px;
   height:30px;
-  zoom:1;
-  position:absolute;
+  position:relative;
   border : 1px solid rgba(0,0,0,0.2);
   border-radius : 4px;
   box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.6);
   text-align:center;
-  z-index:1;
-  margin-left:300px;
+  z-index:2;
+  float:left;
 }
 
 .tab_each .reservation .descript .detail .cancel{
@@ -334,7 +345,7 @@ p {
   height:300px;
   position:absolute;
   margin-left:200px;
-  z-index:10;
+  z-index:2;
   background:red;
 }
 </style>
@@ -359,15 +370,6 @@ $(function() {
     }
 });
 });
-
-var container = document.getElementsById('map1'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, option); //지도 생성 및 객체 리턴
-
 </script>
 </head>
 <body class="pc">
@@ -415,6 +417,7 @@ var map = new kakao.maps.Map(container, option); //지도 생성 및 객체 리�
                   <a3>체크인</a3>~<a3>체크아웃</a3>
                   <div class="detail">
                     <button class="cancel">예약 취소</button>
+                    <input class="phonenumber" type="text" value="#" readonly>
                   </div>
                   <div class="button">
                     <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
@@ -426,7 +429,6 @@ var map = new kakao.maps.Map(container, option); //지도 생성 및 객체 리�
                 <div id="map1" class="map">
                 </div>
               </div>
-              <input class="phonenumber" type="text" value="#" readonly>
               <div class="reservation">
                 <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/68065/381552/536f3a7ee6b4bba14b3c710645062570.jpg">
                 <div class="descript">
@@ -436,6 +438,7 @@ var map = new kakao.maps.Map(container, option); //지도 생성 및 객체 리�
                   <a3>체크인</a3>~<a3>체크아웃</a3>
                   <div class="detail">
                     <button class="used">이용 완료</button>
+             	 	<input class="phonenumber" type="text" value="#" readonly>
                   </div>
                   <div class="button">
                     <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
@@ -447,12 +450,21 @@ var map = new kakao.maps.Map(container, option); //지도 생성 및 객체 리�
                 <div id="map2" class="map">
                 </div>
               </div>
-              <input class="phonenumber" type="text" value="#" readonly>
             </div>
             
           </div>
         </div>
       </div>
     </div>
+<script>
+var container = document.getElementsById('map1'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
+
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+</script>
 </body>
 </html>
