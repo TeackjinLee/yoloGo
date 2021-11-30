@@ -212,7 +212,6 @@ p {
 }
 
 .sub_wrap{
-  background-color:red;
 }
 
 textarea{
