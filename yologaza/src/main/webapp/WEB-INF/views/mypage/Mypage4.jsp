@@ -10,26 +10,51 @@
 
 <html>
 <head>
+<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <style>
-a{text-decoration:none}
-ul,ol,li{list-style:none}
-
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
+body{
+  font-size: 14px;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
 }
 
-ul {
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 라이브러리 */
+.cell {
+    float: left;
+}
+
+.cell-r {
+    float: right;
+}
+
+.row::after {
     display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    clear: both;
+    content: "";
 }
 
+.con {
+    max-width: 1024px;
+    margin: 0 auto;
+}
 .sub_wrap .align_rt {
     float: right;
     width: 750px;
@@ -121,13 +146,15 @@ ul {
     color:black;
 }
 
+.tab_each {
+    border-top: none;
+}
 
 .tab_each {
     clear: both;
     display:block;
   padding-top:8px;
     text-align:left;
-    border-top:1px solid black;
 }
 
 div {
@@ -183,64 +210,84 @@ p {
 .tab{
 	text-align:left;
 }
-
-.tab span.tab_btn {
-    display: inline-block;
-    float: none;
-    position: relative;
-    width: auto;
-    height: 30px;
-    margin-right: 22px;
-    font-size: 18px;
-    line-height: normal;
-    color: black;
-    text-align: left;
-    cursor: pointer;
+.tab_each{
+  height:500px;
 }
 
-
-
-.paging {
-  padding:32px 0 0 32px;
+.tab_each .reservation img{
+  width:45%;
+  height:220px;
+  border:1px solid rgba(0,0,0,0.2);
+  display:inline-block;
 }
 
-.paging button{
-    width: 32px;
-    height: 32px;
-    box-sizing: inherit;
-    align-items: center;
-    border-radius: 3px;
-    border: none;
-    box-shadow: none;
-    font-size: 13px;
-    line-height: 1.5;
-    text-align: center;
+.tab_each .reservation .descript{
+  width:54%;
+  height:220px;
+  border:1px solid rgba(0,0,0,0.2);
+  display:inline-block;
+  position:relative;
+  right:6px;
+  padding:10px 10px 10px 15px;
+  vertical-align:top;
 }
 
-.paging .on{
-  background:rgb(112,173,71);
-  color:#fff;
+.tab_each .reservation .descript .reviewdate{
+  float:right;
+  text-align:right;
+  border:0;
+  font-size:18px;
 }
+
+.tab_each .reservation .descript a1{
+  font-size:24px;
+}
+
+.tab_each .reservation .descript a2{
+  display:block;
+}
+
+.tab_each .reservation .descript a3{
+  display:inline-block;
+  margin-top:15px;
+  margin-right:20px;
+}
+
+.tab_each .reservation .descript .reviewtxt{
+  display:block;
+  width:330px;
+  height:90px;
+  padding:5px;
+  margin-top:13px;
+}
+
+.tab_btn ul li a{
+	font-size:18px;
+}
+
 </style>
 </head>
 <body class="pc">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a><i class="fas fa-phone-alt fa-lg"></i> 고객센터</a>
+          <a>MY페이지</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/mypage/Mypage1.do">회원정보 수정</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/mypage/Mypage3.do">예약 내역</a>
+            </li>
+            <li>
+              <a href="${contextPath}/mypage/Mypage4.do" class="active">내 리뷰 관리</a>
             </li>
           </ul>
         </nav>
@@ -248,40 +295,35 @@ p {
           <div class="notice">
             <!-- Tab -->
             <div class="tab">
-              <span class="tab_btn">
-                공지사항
-              </span>
+              <div class="tab_btn">
+                <ul>
+                  <li><a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a></li>
+                </ul>
+              </div>
             </div>
-            <!-- 공지사항  -->
             <div class="tab_each">
-              <ul id="notices" class="show_list">
-                <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]11월 이벤트</p>
-                    <span>
-                      2021.11.10
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]10월 이벤트</p>
-                    <span>
-                      2021.10.07
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div id="notice_pagination">
-                <div class="paging">
-                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
-                  <button class="on">1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                  <button>6</button>
-                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
+              <div class="reservation">
+                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg">
+                <div class="descript">
+                  <a1>숙소명</a1>
+                  <input type="text" class="reviewdate" value="2011. 11. 11" readonly>
+                  <a2>선택한 방 종류</a2>
+                  <a3>닉네임</a3><a3>평점 4.5</a3>
+                  <div class="reviewtxt">
+                    리뷰 내용
+                  </div>
+                </div>
+              </div>
+              <div class="reservation">
+                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/68065/381552/536f3a7ee6b4bba14b3c710645062570.jpg">
+                <div class="descript">
+                  <a1>숙소명</a1>
+                  <input type="text" class="reviewdate" value="2011. 11. 11" readonly>
+                  <a2>선택한 방 종류</a2>
+                  <a3>닉네임</a3><a3>평점 4.5</a3>
+                  <div class="reviewtxt">
+                    리뷰 내용
+                  </div>
                 </div>
               </div>
             </div>

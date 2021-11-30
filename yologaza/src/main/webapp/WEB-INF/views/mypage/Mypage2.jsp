@@ -10,6 +10,7 @@
 
 <html>
 <head>
+<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <style>
 a{text-decoration:none}
 ul,ol,li{list-style:none}
@@ -121,13 +122,15 @@ ul {
     color:black;
 }
 
+.tab_each {
+    border-top: none;
+}
 
 .tab_each {
     clear: both;
     display:block;
   padding-top:8px;
     text-align:left;
-    border-top:1px solid black;
 }
 
 div {
@@ -183,64 +186,93 @@ p {
 .tab{
 	text-align:left;
 }
-
-.tab span.tab_btn {
+.tab .tab_btn ul li{
     display: inline-block;
     float: none;
     position: relative;
-    width: auto;
-    height: 30px;
-    margin-right: 22px;
+    margin-right: 64px;
     font-size: 18px;
     line-height: normal;
-    color: black;
     text-align: left;
     cursor: pointer;
+    padding-left:5px;
+    top:10px;
+    color:black;
 }
 
-
-
-.paging {
-  padding:32px 0 0 32px;
+.tab .tab_btn ul li a{
+  color:black;
 }
 
-.paging button{
-    width: 32px;
-    height: 32px;
-    box-sizing: inherit;
-    align-items: center;
-    border-radius: 3px;
-    border: none;
-    box-shadow: none;
-    font-size: 13px;
-    line-height: 1.5;
-    text-align: center;
+.tab_each .point{
+  border-bottom:1px solid;
+  padding-bottom:40px;
 }
 
-.paging .on{
-  background:rgb(112,173,71);
-  color:#fff;
+.tab_each .coupon{
+  padding-top:20px;
 }
+
+.tab_each ul li span{
+  width:150px;
+  display:inline-block;
+}
+
+.tab_each ul li input{
+  border:0;
+  color:rgb(112,173,71);
+  font-size:16px;
+}
+
+.tab_each .coupon .coupon_name{
+  width:660px;
+  height:120px;
+  background:rgba(0,0,0,0.05);
+  margin-top:40px;
+  position:relative;
+  padding:10px;
+}
+
+.coupon_name a1{
+  display:block;
+  font-size:22px;
+}
+
+.coupon_name a2{
+  display:block;
+  font-size:16px;
+}
+
+.coupon_name a3{
+  display:block;
+  position:absolute;
+  bottom:10px;
+  right:10px;
+}
+
 </style>
 </head>
 <body class="pc">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a><i class="fas fa-phone-alt fa-lg"></i> 고객센터</a>
+          <a>MY페이지</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/mypage/Mypage1.do">회원정보 수정</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/mypage/Mypage2.do" class="active">쿠폰/포인트</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/mypage/Mypage3.do">예약 내역</a>
+            </li>
+            <li>
+              <a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a>
             </li>
           </ul>
         </nav>
@@ -248,42 +280,30 @@ p {
           <div class="notice">
             <!-- Tab -->
             <div class="tab">
-              <span class="tab_btn">
-                공지사항
-              </span>
+              <div class="tab_btn">
+                <ul>
+                  <li><a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a></li>
+                </ul>
+              </div>
             </div>
-            <!-- 공지사항  -->
             <div class="tab_each">
-              <ul id="notices" class="show_list">
+              <ul class="point">
                 <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]11월 이벤트</p>
-                    <span>
-                      2021.11.10
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="${contextPath}/CC/User_CCForm2.do" id="notice_tab" class="list_que">
-                    <p>[공지]10월 이벤트</p>
-                    <span>
-                      2021.10.07
-                    </span>
-                  </a>
+                  <span>사용가능 포인트</span>
+                  <input type="text" value="#P" readonly>
                 </li>
               </ul>
-              <div id="notice_pagination">
-                <div class="paging">
-                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
-                  <button class="on">1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                  <button>6</button>
-                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
+              <ul class="coupon">
+                <li>
+                  <span>보유 쿠폰</span>
+                  <input type="text" value="#장" readonly>
+                </li>
+                <div class="coupon_name">
+                  <a1>쿠폰명</a1>
+                  <a2>쿠폰사용기한</a2>
+                  <a3>할인가/할인율</a3>
                 </div>
-              </div>
+              </ul>
             </div>
           </div>
         </div>

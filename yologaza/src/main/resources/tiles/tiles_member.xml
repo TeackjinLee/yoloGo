@@ -70,4 +70,8 @@
       <put-attribute name="title" value="상품 예약 페이지" />
       <put-attribute name="body" value="/WEB-INF/views/order/orderGoodsForm.jsp" />
    </definition>
+   <definition name="/member/nonMemberForm" extends="baseLayout">
+      <put-attribute name="title" value="상품 예약 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/member/nonMember.jsp" />
+   </definition>
 </tiles-definitions>

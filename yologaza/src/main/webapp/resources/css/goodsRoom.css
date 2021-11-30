@@ -402,14 +402,16 @@ body{
   .tab_each ul li .room-box .room-text .reserve .point{
     display:block;
   }
-  .tab_each ul li .room-box .room-text .reserve .point a h3{
-    width:100px;
-    height:30px;
-    padding-top:5px;
+  .tab_each ul li .room-box .room-text .reserve .point button{
+    width: 100px;
+    height: 30px;
     box-sizing: border-box;
-    background:#ddd;
+    background: #ddd;
     text-align: center;
-    border-radius:5px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
     border: 1px solid #777;
   }
   

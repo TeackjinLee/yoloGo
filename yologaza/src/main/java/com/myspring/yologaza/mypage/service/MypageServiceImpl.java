@@ -1,17 +1,17 @@
-package com.myspring.yologaza.CC.service;
+package com.myspring.yologaza.mypage.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.yologaza.CC.dao.CC_DAO;
+import com.myspring.yologaza.mypage.dao.MypageDAO;
 
-@Service("cc_Service")
+@Service("mypage_Service")
 @Transactional(propagation = Propagation.REQUIRED)
-public class CC_ServiceImpl implements CC_Service{
+public class MypageServiceImpl implements MypageService{
 	@Autowired
-	private CC_DAO cc_DAO;
+	private MypageDAO mypageDAO;
 	
 	
 }

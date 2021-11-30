@@ -1,4 +1,4 @@
-<!-- 기여도: 이택진30% / 윤진70% -->
+<!-- 기여도: 이택진100% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 	isELIgnored="false"%>
@@ -51,13 +51,13 @@
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
 	<form  class="join_inner_float">
 	  <div class="input_line">
-	    <h1 class="join_minisub">비밀번호찾기</h1>
+	    <h1 class="join_minisub">비회원 예약 조회</h1>
 	  </div>
 	  <table>
 	  <tbody>
 	    <tr>
 	      <td> 아이디 </td>
-	      <td> <input type="text" name="id" placeholder="아이디를 입력하세요"></td>
+	      <td> <input type="text" name="name" placeholder="예약자 이름을 입력해 주세요."></td>
 	    </tr>
 	    <tr class="dot_line">
 	      <td class="fixed_join">휴대폰 번호</td>
@@ -70,8 +70,7 @@
 	    </tr>
 	    </tbody>
 	  </table>
-	  <button type="button" onclick="location.href='${contextPath}/member/pwdFind2Form.do' ">비밀번호 재설정</button>
-	  <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
+	  <button type="button" onclick="location.href='${contextPath}/mypage/Mypage3.do' ">예약 확인하기</button>
 	</form>
 </body>
 </html>
