@@ -1,4 +1,4 @@
-<!-- 기여도: 이택진10% / 윤진90% -->
+<!-- 기여도: 이택진70% / 윤진30% -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -15,120 +15,92 @@
 <meta charset="utf-8">
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<title> 회원가입 | 약관동의 </title>
-	<style>
-		.join_inner_float
-		{
-		  border: 5px solid #ddd;
-		  border-radius: 10px;
-		  text-align: center;
-		  width: 330px;
-		  height: auto;
-		  background-color: white;
-		  margin: auto;
-		  margin-bottom: 150px;
-		  padding: 20px;
-		  box-sizing: border-box;
-		}
-		.join_inner_float .input_line h1{
-		  margin-top:0;
-		}
-		.join_inner_float .input_line .check_line{
-		  margin-bottom: 10px;
-		  text-align: left;
-		}
-		.input_line button{
-		  background-color:rgb(112, 173, 71);;
-		  color: white;
-		  width: 170px;
-		  height: 30px;
-		  border-radius: 5px;
-		  box-sizing: border-box;
-		  margin-bottom: 10px;
-		  font-weight: bold;
-		  border-width: 1px;
-		  margin-bottom: 0px;
-		}
-		.input_line .button{
-			background-color: rgb(112, 173, 71);
-			color: white;
-			width: 170px;
-			height: 30px;
-			border-radius: 5px;
-			box-sizing: border-box;
-			font-weight: bold;
-			border-width: 1px;
-			text-align: center;
-			padding: 5px;
-			cursor: pointer;
-			margin: 0 auto;
-		}
-		.input_line .button a{
-			padding: 0 40%;
-    		box-sizing: border-box;
-		}
-		.in_label_viewmore{
-			color:darkred;
-			border-bottom: 1px solid darkred;
-			box-sizing: border-box;
-		}
-	</style>
+	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
+    <script src="${contextPath}/resources/js/orderGoodsForm.js"></script>
 	<script type="text/javascript">
-  $(document).on("click", "#allCheck", function(e) {
-    if ($(this).is(":checked")) {
-      $(":checkbox.check").prop("checked", true);
-    } else {
-      $(":checkbox.check").removeAttr("checked");
-    }
-  });
-
-  $(document).on("click", ":checkbox.check", function(e) {
-    var length = $(":checkbox.check").length;
-    var checkLen = $(":checkbox.check:checked").length;
-    if (length == checkLen) {
-      $(":checkbox#allCheck").prop("checked", true);
-    } else {
-      $("#allCheck").removeAttr("checked");
-    }
-  });
   </script>
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<div class="join_inner_float">
-	   <div class="input_line">
-	     <h1 class="join_minisub">약관동의</h1>
-	   </div>
-	    <div class="input_line">
-	      <div class="check_line check_all">
-	        <input name="chkAll" type="checkbox" id="allCheck" class="fakebox" />
-	        <label for="allCheck" class="">전체동의</label><br>
-	      </div>
-	      <div class="check_line">
-	        <input type="checkbox" name="check_01" id="check_01" class="fakebox check">
-	        <label for="check_01" class="labelbox">
-	          만 14세 이상 동의
-	          <a href="" class="in_label_viewmore"> 보기 <i class="fas fa-chevron-right"></i></a>
-	        </label>
-	      </div>
-	      <div class="check_line">
-	        <input type="checkbox" id="check_02" class="fakebox check">
-	        <label for="check_02" class="labelbox">
-	          이용동의
-	          <a href="" class="in_label_viewmore"> 보기 <i class="fas fa-chevron-right"></i></a>
-	        </label>
-	      </div>
-	      <div class="check_line">
-	        <input type="checkbox" id="check_03" class="fakebox check">
-	        <label for="check_03" class="labelbox">
-	          개인정보 수집 및 이용안내
-	          <a href="" class="in_label_viewmore"> 보기 <i class="fas fa-chevron-right"></i></a>
-	        </label>
-	      </div><br>
-	    <div class="input_line">
-	      <div class="button"><a href="${contextPath}/member/memberForm.do">다음</a></div>
-	    </div>
-	  </div>
-	</div>
-  
+	<div id="pay" class="wrap">
+		<div class="pay-box con row" style="display:block;
+											border: 5px solid #ddd;
+											border-radius: 10px;
+											text-align: center;
+											width: 450px;
+											height: auto;
+											background-color: white;
+											margin: auto;
+											margin-bottom: 150px;
+											padding: 20px;
+											box-sizing: border-box;">
+		  <div class="input_line">
+		    <h1 class="join_minisub">아이디찾기</h1>
+		  </div>
+		  <div class="pay_user_information" style="width:100%; text-align: left;">
+		    <div class="agree">
+		         <form class="checkbox_group" action="/" method="POST" id="form__wrap">
+		           <div class="terms__check__all">
+		             <input type="checkbox" name="checkAll" id="checkAll" />
+		             <label for="checkAll"><h3>전체 동의</h3></label>
+		           </div>
+		           <ul class="terms__list">
+		             <li class="terms__box">
+		               <div class="input__check">
+		                 <input
+		                        type="checkbox"
+		                        name="agreement"
+		                        id="goodsRefundAgree"
+		                        value="goodsRefundAgree"
+		                        required/>
+		                 <label for="goodsRefundAgree" class="required"><a href="#">숙소이용규칙 및 취소/환불규정 동의<span>(필수)</span></a></label>
+		               </div>
+		             </li>
+		             <li class="terms__box">
+		               <div class="input__check">
+		                 <input
+		                        type="checkbox"
+		                        name="agreement"
+		                        id="privacyPolicy"
+		                        value="privacyPolicy"
+		                        required/>
+		                 <label for="privacyPolicy" class="required"><a href="#">개인정보 처리방침 동의<span>(필수)</span></a></label>
+		               </div>
+		             </li>
+		             <li class="terms__box">
+		               <div class="input__check">
+		                 <input
+		                        type="checkbox"
+		                        name="agreement"
+		                        id="serviceAgree"
+		                        value="serviceAgree"/>
+		                 <label for="serviceAgree"><a href="#">서비스 이용약관 동의<span>(필수)</span></a></label>
+		               </div>
+		             </li>
+		             <li class="terms__box">
+		               <div class="input__check">
+		                 <input
+		                        type="checkbox"
+		                        name="agreement"
+		                        id="ageAgree"
+		                        value="ageAgree"/>
+		                 <label for="ageAgree"><a href="#">만 14세 이상 확인<span>(필수)</span></a></label>
+		               </div>
+		             </li>
+		           </ul>
+		           
+		        </form>
+		        <div class="pay_payment cell" style="margin-left: 10px; mrgin-top:20px; background:none; width:100%;">
+					  <div class="payment_information">
+					       <div class="pay_result">
+					         <button type="submit" onclick="location.href='${contextPath}/member/idFindForm.do' " class="next-button" style="border-radius: 5px; height:50px; margin-top:30px; width:100%;" disabled>동의하기</button>
+					       </div>
+					   </div>
+					</div>
+		     </div>
+		  	</div>
+		   </div>
+		</div>
 </body>
 </html>

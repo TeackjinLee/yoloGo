@@ -2,7 +2,7 @@ $(document).ready(function(){
   const form = document.querySelector("#form__wrap");
   const checkAll = document.querySelector(".terms__check__all input");
   const checkBoxes = document.querySelectorAll(".input__check input");
-  const submitButton = document.querySelector("#pay .pay-box .pay_payment .pay_result button");
+  const submitButton = document.querySelector(".pay_result .next-button");
   
   const agreements = {
     goodsRefundAgree: false,
