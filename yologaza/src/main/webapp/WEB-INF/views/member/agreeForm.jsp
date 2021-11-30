@@ -16,7 +16,7 @@
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<title> 회원가입 | 약관동의 </title>
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<link rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
     <script src="${contextPath}/resources/js/orderGoodsForm.js"></script>
 	<script type="text/javascript">
   </script>
@@ -91,7 +91,7 @@
 		           </ul>
 		           
 		        </form>
-		        <div class="pay_payment cell" style="margin-left: 10px; mrgin-top:20px; background:none; width:100%;">
+		        <div class="pay_payment cell" style="margin-left: 10px; background:none; width:100%;">
 					  <div class="payment_information">
 					       <div class="pay_result">
 					         <button type="submit" onclick="location.href='${contextPath}/member/idFindForm.do' " class="next-button" style="border-radius: 5px; height:50px; margin-top:30px; width:100%;" disabled>동의하기</button>

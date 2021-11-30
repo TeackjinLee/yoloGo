@@ -101,7 +101,7 @@ a {
   float:right;
   color: white;
   background:rgb(112, 173, 71);
-  font-size: 16p;
+  font-size: 16px;
   border:none;
 }
 
@@ -223,7 +223,7 @@ a {
   margin-top:0;
 }
 .join_inner_float form{
-	text-algin:left;
+	text-align: left;
 }
 
 

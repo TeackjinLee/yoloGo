@@ -97,9 +97,8 @@ ul{
 .sub_wrap{
   width: 1024px;
   margin:0 auto 0 auto;
-  padding_top:54px;
-  padding_bottom:54px;
-  background:red;
+  padding-top:54px;
+  padding-bottom:54px;
 }
 
 .show_list li .list_que span {
