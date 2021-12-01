@@ -36,7 +36,7 @@
 <body>
  <h1>답글쓰기</h1>
   <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
-    <table>
+    <table style="margin:0 auto;">
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>
 			<td><input type="text" size="20" maxlength="100"  name="writer"></input> </td>

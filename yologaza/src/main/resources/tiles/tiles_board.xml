@@ -5,7 +5,7 @@
 <tiles-definitions>
 	<definition name="/board/goodsInformation" extends="baseLayout">
 	      <put-attribute name="title" value="글목록창" />
-	      <put-attribute name="body" value="/WEB-INF/views/board/goodsInformation.jsp" />
+	      <put-attribute name="body" value="/WEB-INF/views/goods/goodsInformation.jsp" />
 	</definition>
 	
 	<definition name="/board/articleForm" extends="baseLayout">

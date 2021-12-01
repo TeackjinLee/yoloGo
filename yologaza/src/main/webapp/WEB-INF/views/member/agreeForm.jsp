@@ -36,7 +36,7 @@
 											padding: 20px;
 											box-sizing: border-box;">
 		  <div class="input_line">
-		    <h1 class="join_minisub">아이디찾기</h1>
+		    <h1 class="join_minisub">약관 동의</h1>
 		  </div>
 		  <div class="pay_user_information" style="width:100%; text-align: left;">
 		    <div class="agree">
