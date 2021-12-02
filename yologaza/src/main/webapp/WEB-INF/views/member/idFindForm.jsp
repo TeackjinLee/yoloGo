@@ -58,7 +58,7 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form class="join_inner_float" action="${contextPath}/member/idFind2Form.do" method="POST">
+	<form class="join_inner_float" action="${contextPath}/member/idFind2Form.do" method="GET">
 	  <div class="input_line">
 	    <h1 class="join_minisub">아이디찾기</h1>
 	  </div>

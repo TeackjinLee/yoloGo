@@ -359,7 +359,7 @@ $(function() {
                 </li>
               </ul>
             </div>
-            <a href="#" class="withdrawal">회원 탈퇴</a>
+            <a href="${contextPath}/member/QuitForm.do" class="withdrawal">회원 탈퇴</a>
           </div>
         </div>
       </div>

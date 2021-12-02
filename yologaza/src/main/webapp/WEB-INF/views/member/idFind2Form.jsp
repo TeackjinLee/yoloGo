@@ -7,13 +7,13 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="result" value="${param.result }" />
 <%
-   request.setCharacterEncoding("UTF-8");
+ request.setCharacterEncoding("UTF-8");
+    String id = request.getParameter("id");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디찾기</title>
 <title>아이디찾기</title>
 	<style>
 		.join_inner_float
@@ -58,14 +58,12 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form class="join_inner_float">
+	<form class="join_inner_float" method="GET">
       <div class="input_line">
         <h1 class="join_minisub">아이디찾기</h1>
       </div>
         <br>
-          <c:forEach var="member" items="${membersList}" >
-        	<h3>${member.id}</h3>
-          </c:forEach>
+		  <h3> <%= id %> </h3>
           <h3> 입니다. </h3>
           <button type="button" onclick="location.href='${contextPath}/member/pwdFindForm.do' ">비밀번호찾기</button>
           <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
