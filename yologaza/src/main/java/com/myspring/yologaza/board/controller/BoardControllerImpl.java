@@ -83,7 +83,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 				message = "<script>";
 				message += " alert('새글을 추가했습니다.');";
-				message += "location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
+				message += "location.href='"+multipartRequest.getContextPath()+"/board/goodsInformation.do'; ";
 				message +=" </script>";
 				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			}catch(Exception e) {
@@ -135,7 +135,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 				message = "<script>";
 				message += " alert('댓글 추가했습니다.');";
-				message += "location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
+				message += "location.href='"+multipartRequest.getContextPath()+"/board/goodsInformation.do'; ";
 				message +=" </script>";
 				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			}catch(Exception e) {
@@ -264,13 +264,13 @@ public class BoardControllerImpl implements BoardController {
 			FileUtils.deleteDirectory(destDir);
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/board/goodsInformation.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch(Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/board/goodsInformation.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

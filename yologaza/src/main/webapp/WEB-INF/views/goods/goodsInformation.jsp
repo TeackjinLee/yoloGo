@@ -242,7 +242,7 @@
 					     <tr align="center" style="background-color:rgba(0, 0, 0, 0.03); height:50px;">
 						<td width="5%">${articleNum.count}</td>
 						<td width="10%">${article.id }</td>
-						<td align='left'  width="35%">
+						<td align='left'  width="60%">
 						  <span style="padding-right:30px"></span>
 						   <c:choose>
 						      <c:when test='${article.level > 1 }'>  
@@ -259,7 +259,7 @@
 						  </td>
 					      <td>
 						     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-						     <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="max-height:150px;"  /><br>
+						     <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="max-height:50px;"  /><br>
 						   </td> 
 						  <td  width="10%">${article.writeDate}</td> 
 						</tr>

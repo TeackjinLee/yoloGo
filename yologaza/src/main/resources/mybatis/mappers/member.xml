@@ -8,7 +8,10 @@
 		<result property="id" column="id" />
         <result property="pwd" column="pwd" />
         <result property="name" column="name" />
-        <result property="email" column="email" />
+        <result property="email1" column="email1" />
+        <result property="email2" column="email2" />
+        <result property="hp" column="hp" />
+        <result property="type" column="type" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
 	<!-- 
@@ -23,27 +26,27 @@
 
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from t_member	order by joinDate desc	 	
+         select * from member	order by joinDate desc	 	
       ]]>
 	</select>
 
 	<select id="selectName" resultType="String">
     <![CDATA[
-	select name from t_member
+	select name from member
 	where id = 'hong'			
     ]]>
 	</select>
 	
 	<select id="selectPwd" resultType="int" >
 	  <![CDATA[ 
-	    select pwd from t_member 
+	    select pwd from member 
 	    where id = 'hong'
 	 ]]>
 	 </select> 
 	 
 	<select id="selectMemberById" resultType="memberVO"  parameterType="String" >
       <![CDATA[
-         select * from t_member
+         select * from member
          where
          id=#{id}			
       ]]>
@@ -51,7 +54,7 @@
 	
 	<select id="selectMemberByPwd" resultMap="memResult"  parameterType="int" >
       <![CDATA[
-         select * from t_member
+         select * from member
          where
          pwd = #{pwd}			
       ]]>
@@ -59,21 +62,21 @@
     
      <insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into t_member(id,pwd, name, email)
-		 values(#{id}, #{pwd}, #{name}, #{email})
+		 insert into member(id,pwd, name, email1, email2, hp, type)
+		 values(#{id}, #{pwd}, #{name}, #{email1}, #{email2}, #{hp}, "1")
 		]]>      
 	</insert>
 	
 	<insert id="insertMember2"  parameterType="java.util.HashMap">
 		<![CDATA[
-			 insert into t_member(id,pwd, name, email)
-			 values(#{id}, #{pwd}, #{name}, #{email})
+		 insert into member(id,pwd, name, email1, email2, hp, type)
+		 values(#{id}, #{pwd}, #{name}, #{email1}, #{email2}, #{hp}, #{type}, "1")
 		]]>      
    </insert>
    
    <update id="updateMember"  parameterType="memberVO">
      <![CDATA[
-	     update t_member
+	     update member
 	     set pwd=#{pwd}, name=#{name}, email=#{email}
 	     where
 	     id=#{id}
@@ -82,7 +85,7 @@
      
    <delete id="deleteMember"  parameterType="String">
 	<![CDATA[
-	   delete from  t_member
+	   delete from  member
 	   where
 	   id=#{id}
 	]]>      
@@ -92,7 +95,7 @@
 	<!-- 동적 SQL문 -->
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">
       <![CDATA[
-          select * from t_member
+          select * from member
       ]]>
       <where>
          <if test=" name != ''  and  name != null">
@@ -108,7 +111,7 @@
  <!--  
    <sql id="a">
     <![CDATA[
-      select * from t_member
+      select * from member
      ]]> 
    </sql>  -->  
   
@@ -116,7 +119,7 @@
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">
 	     <include refid="a" /> 
 	   <![CDATA[
-         select * from t_member 
+         select * from member 
       ]]>
 	  
        <where>
@@ -138,7 +141,7 @@
    <select id="foreachSelect" resultMap="memResult" parameterType="java.util.Map">
       <!-- <include refid="a" /> -->
       <![CDATA[
-        select * from t_member 
+        select * from member 
           
       ]]>
       
@@ -150,19 +153,22 @@
    </select>
    
    <insert id="foreachInsert"  parameterType="java.util.Map">
-		insert into t_member(id, pwd, name, email)
+		insert into member(id, pwd, name, email1, email2, hp, type)
 		values
 		<foreach item="item" collection="list" separator=",">
 			(#{item.id},
 			#{item.pwd},
 			#{item.name},
-			#{item.email})
+			#{item.email1},
+			#{item.email2},
+			#{item.hp},
+			#{item.type})
 		</foreach>
    </insert>
 
 	<select id="loginById" resultType="memberVO"  parameterType="memberVO" >
       <![CDATA[
-         select * from t_member
+         select * from member
          where id = #{id} and pwd = #{pwd}
       ]]>
     </select>

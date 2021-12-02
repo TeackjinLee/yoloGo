@@ -13,13 +13,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인창</title>
-	
+	<title>로그인창</title>	
 	<c:choose>
 		<c:when test="${result=='loginFailed' }">
 		  <script>
 		    window.onload=function(){
-		      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
+		      alert("올바른 아이디와 비밀번호를 입력해주세요!");
+		    }
+		  </script>
+		</c:when>
+		<c:when test="${result=='idFailed' }">
+		  <script>
+		    window.onload=function(){
+		      alert("아이디를 입력해 주세요!");
+		    }
+		  </script>
+		</c:when>
+		<c:when test="${result=='PwdFailed' }">
+		  <script>
+		    window.onload=function(){
+		      alert("비밀번호를 입력해 주세요!");
 		    }
 		  </script>
 		</c:when>

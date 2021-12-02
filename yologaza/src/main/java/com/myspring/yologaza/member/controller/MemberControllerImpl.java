@@ -119,6 +119,12 @@ public class MemberControllerImpl implements MemberController {
 			} else {
 				mav.setViewName("redirect:/main.do");
 			}
+		} else if(member.getId() == null || member.getId() == "" ) {
+			rAttr.addAttribute("result", "idFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		} else if(member.getPwd() == null || member.getPwd() == "" ) {
+			rAttr.addAttribute("result", "PwdFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginForm.do");

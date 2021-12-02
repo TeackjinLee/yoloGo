@@ -58,7 +58,7 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form class="join_inner_float">
+	<form class="join_inner_float" action="${contextPath}/member/idFind2Form.do" method="POST">
 	  <div class="input_line">
 	    <h1 class="join_minisub">아이디찾기</h1>
 	  </div>
@@ -67,7 +67,7 @@
 	  <tbody>
 	    <tr>
 	      <td> 이름 </td>
-	      <td> <input type="text" name="id" placeholder="이름을 입력하세요"></td>
+	      <td> <input type="text" name="name" placeholder="이름을 입력하세요"></td>
 	    </tr>
 	
 	    <tr>
@@ -75,14 +75,14 @@
 	      <td>
 	        <div class="input_email on">
 	          <span class="text_box text_complete">
-	            <input type="text" name="text" placeholder="휴대폰번호를 입력하세요">
+	            <input type="text" name="hp" placeholder="휴대폰번호를 입력하세요">
 	          </span>
 	        </div>
 	      </td>
 	    </tr>
 	    </tbody>
 	  </table>
-	  <button type="button" onclick="location.href='${contextPath}/member/idFind2Form.do' ">아이디찾기</button>
+	  <button type="submit">아이디찾기</button>
 	  <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
 	</form>
 </body>

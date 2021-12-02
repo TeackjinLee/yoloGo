@@ -9,18 +9,24 @@ public class MemberVO {
 	private String id;
 	private String pwd;
 	private String name;
-	private String email;
+	private String email1;
+	private String email2;
+	private String hp;
+	private String type;
 	private Date joinDate;
 	
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email) {
+	public MemberVO(String id, String pwd, String name, String email1, String email2, String hp, String type) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
-		this.email = email;
+		this.email1 = email1;
+		this.email2 = email2;
+		this.hp = hp;
+		this.type = type;
 	}
 
 	public String getId() {
@@ -47,12 +53,34 @@ public class MemberVO {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmail1() {
+		return email1;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+	
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+	public String gethp() {
+		return hp;
+	}
+
+	public void sethp(String hp) {
+		this.hp = hp;
+	}
+	public String gettype() {
+		return type;
+	}
+
+	public void settype(String type) {
+		this.type = type;
 	}
 
 	public Date getJoinDate() {
