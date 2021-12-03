@@ -5,13 +5,14 @@
 
 <mapper namespace="mapper.member">
 	<resultMap id="memResult" type="memberVO">
+		<result property="uid" column="uid" />
 		<result property="id" column="id" />
         <result property="pwd" column="pwd" />
         <result property="name" column="name" />
         <result property="email1" column="email1" />
         <result property="email2" column="email2" />
         <result property="hp" column="hp" />
-        <result property="type" column="type" />
+        <result property="auth" column="auth" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
 	<!-- 
@@ -62,15 +63,15 @@
     
      <insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into member(id,pwd, name, email1, email2, hp, type)
+		 insert into member(id,pwd, name, email1, email2, hp, auth)
 		 values(#{id}, #{pwd}, #{name}, #{email1}, #{email2}, #{hp}, "1")
 		]]>      
 	</insert>
 	
 	<insert id="insertMember2"  parameterType="java.util.HashMap">
 		<![CDATA[
-		 insert into member(id,pwd, name, email1, email2, hp, type)
-		 values(#{id}, #{pwd}, #{name}, #{email1}, #{email2}, #{hp}, #{type}, "1")
+		 insert into member(id,pwd, name, email1, email2, hp, auth)
+		 values(#{id}, #{pwd}, #{name}, #{email1}, #{email2}, #{hp}, "1")
 		]]>      
    </insert>
    
@@ -153,7 +154,7 @@
    </select>
    
    <insert id="foreachInsert"  parameterType="java.util.Map">
-		insert into member(id, pwd, name, email1, email2, hp, type)
+		insert into member(uid, id, pwd, name, email1, email2, hp, auth)
 		values
 		<foreach item="item" collection="list" separator=",">
 			(#{item.id},
@@ -162,7 +163,7 @@
 			#{item.email1},
 			#{item.email2},
 			#{item.hp},
-			#{item.type})
+			#{item.auth})
 		</foreach>
    </insert>
 
