@@ -13,7 +13,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-<title>헤더</title>
+<title>비지니스헤더</title>
 <link href="${contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
@@ -25,18 +25,18 @@
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
 	      			<li class = cell-r><a href="#">마이페이지</a></li>
-	        		<li class = cell-r><a href="${contextPath}/member/logout.do">로그아웃</a></li>
+	        		<li class = cell-r><a href="${contextPath}/businessMember/logout.do">로그아웃</a></li>
 	      		</c:when>
 	      		<c:otherwise>
-	      			<li class = cell-r><a href="${contextPath}/member/memberForm.do">회원가입</a></li>
-	        		<li class = cell-r><a href="${contextPath}/member/loginForm.do">로그인</a></li>
+	      			<li class = cell-r><a href="${contextPath}/businessMember/memberForm.do">회원가입</a></li>
+	        		<li class = cell-r><a href="${contextPath}/businessMember/business_loginForm.do">로그인</a></li>
 	      		</c:otherwise>
 	      	</c:choose>
 	      </ul>
 	    </div>
 	    <section id="business_header" style="background-color:rgb(52, 152, 219)">
 	      <div class="menu con">
-	        <div id = "logo"><a href="${contextPath}/main.do"><img src="${contextPath}/resources/image/yolo-logo-w.png" alt="YOLO가자로고"></a></div>
+	        <div id = "logo"><a href="${contextPath}/business_main.do"><img src="${contextPath}/resources/image/yolo-logo-w.png" alt="YOLO가자로고"></a></div>
 	        <div class="menu-bar row">
 		        
 	          <ul class="gnb-list row cell">

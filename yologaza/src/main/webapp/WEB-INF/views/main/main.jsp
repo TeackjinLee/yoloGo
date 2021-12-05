@@ -15,7 +15,7 @@
   <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>YOLO가자!메인페이지</title>
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
     <!-- gsap 용 플러그인 -->
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick.css">
@@ -160,7 +160,7 @@
           <div class="community-name"><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;EVENT</p></div>
         </div>
         <div class="coupon-box">
-          <a href="#"><img src="${contextPath}/resources/image/coupon.png" alt="고객센터 쿠폰이미지"></a>
+          <a href="${contextPath}/CC/User_CCForm.do"><img src="${contextPath}/resources/image/coupon.png" alt="고객센터 쿠폰이미지"></a>
         </div>
       </div>
       <div class="business-box cell">
@@ -168,7 +168,7 @@
           <div class="community-name"><img src="${contextPath}/resources/image/yolo-guesthouse.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;등록하기</p></div>
         </div>
         <div class="host-box">
-          <a href="#"><img src="${contextPath}/resources/image/host.png" alt="사업자등록"></a>
+          <a href="${contextPath}/businessMember/business_loginForm.do"><img src="${contextPath}/resources/image/host.png" alt="사업자등록"></a>
         </div>
       </div>
 
