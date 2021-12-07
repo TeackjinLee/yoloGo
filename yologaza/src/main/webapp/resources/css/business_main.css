@@ -82,12 +82,17 @@ a {
 
 /* main_box */
 .business_main_wrap .business_main_box .main_box{
-  background: green;
+  position: relative;
   margin: 30px 0;
   height: 390px;
   overflow: hidden;
 }
-
+.business_main_wrap .business_main_box .main_box .img-box a .text-box{
+	position: absolute;
+	bottom:20px;
+	right:20px;
+	color: #777;
+}
 /* goodsRoom_sell */
 .business_main_wrap .business_main_box .goodsRoom_sell{
   background: rgb(52, 152, 219);

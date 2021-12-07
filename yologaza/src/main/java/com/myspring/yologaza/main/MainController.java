@@ -48,4 +48,13 @@ public class MainController extends BaseController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	@RequestMapping(value = {"/admin_main.do"} ,method={RequestMethod.POST,RequestMethod.GET})
+	private ModelAndView admin_main(HttpServletRequest request,
+								HttpServletResponse response) throws Exception{
+		String viewName = (String) request.getAttribute("viewName");
+		List membersList = memberService.listMembers();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("membersList", membersList);
+		return mav;
+	}
 }

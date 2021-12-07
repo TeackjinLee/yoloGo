@@ -65,7 +65,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 
 .sub_top_wrap{
   height: 120px;
-  background:rgb(112,173,71);
+  background:rgb(52, 152, 219);
 }
 
 .sub_top{
@@ -172,7 +172,7 @@ p {
 
 .sub_wrap nav ul li a.active{
   font-size:20px;
-  color:rgb(112,173,71);
+  color:rgb(52, 152, 219);
   font-weight:bold;
 }
 
@@ -195,6 +195,7 @@ p {
 .tab{
 	text-align:left;
 }
+
 .tab span.tab_btn {
     display: inline-block;
     float: none;
@@ -202,45 +203,35 @@ p {
     width: auto;
     height: 30px;
     margin-right: 22px;
-    font-size: 20px;
+    font-size: 18px;
     line-height: normal;
     color: black;
     text-align: left;
     cursor: pointer;
-    font-weight:bold;
-    padding-left:5px;
 }
 
-.sub_wrap{
+
+
+.paging {
+  padding:32px 0 0 32px;
 }
 
-textarea{
-  width:650px;
-  height:250px;
-  border-radius:7px;
-  margin-top:10px;
+.paging button{
+    width: 32px;
+    height: 32px;
+    box-sizing: inherit;
+    align-items: center;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
 }
 
-.tab_each ul li{
-    display: inline-block;
-}
-
-.tab_each ul li span{
-  position:relative;
-  font-size:18px;
-  font-weight:bold;
-  top:3px;
-}
-
-.tab_each ul li input{
-  width:70px;
-  border-radius:4px;
-  height:18px;
-  margin-top:0px;
-}
-
-.tab_each ul li .input2{
-  width:120px;
+.paging .on{
+  background:rgb(52, 152, 219);
+  color:#fff;
 }
 </style>
 </head>
@@ -255,13 +246,10 @@ textarea{
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/BusinessCC/Business_CCForm.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
-            </li>
-            <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a>
             </li>
           </ul>
         </nav>
@@ -275,22 +263,35 @@ textarea{
             </div>
             <!-- 공지사항  -->
             <div class="tab_each">
-              <ul>
+              <ul id="notices" class="show_list">
                 <li>
-                  <span>작성자</span>
+                  <a href="${contextPath}/BusinessCC/Business_CC2Form.do" class="list_que">
+                    <p>[공지]11월 이벤트</p>
+                    <span>
+                      2021.11.10
+                    </span>
+                  </a>
                 </li>
                 <li>
-                  <input type="text" class="input1" value="#" disabled/>
-                </li>
-                <li>
-                  &nbsp&nbsp<span>작성일</span>
-                </li>
-                <li>
-                  <input type="text" class="input2" value="#" disabled/>
+                  <a href="${contextPath}/BusinessCC/Business_CC2Form.do" class="list_que">
+                    <p>[공지]10월 이벤트</p>
+                    <span>
+                      2021.10.07
+                    </span>
+                  </a>
                 </li>
               </ul>
-              <div>
-                <textarea disabled></textarea>
+              <div id="notice_pagination">
+                <div class="paging">
+                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
+                  <button class="on">1</button>
+                  <button>2</button>
+                  <button>3</button>
+                  <button>4</button>
+                  <button>5</button>
+                  <button>6</button>
+                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
+                </div>
               </div>
             </div>
           </div>
