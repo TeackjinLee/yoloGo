@@ -23,6 +23,18 @@ ul,ol,li{list-style:none}
 footer{
 	text-align: left;
 }
+
+footer div ul{
+	display: block;
+    list-style-type: disc;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+
 footer .link li{
     display:inline-block;
 }
