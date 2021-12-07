@@ -268,7 +268,7 @@ p {
             <div class="tab_each">
               <ul id="notices" class="show_list">
                 <li>
-                  <a href="${contextPath}/CC/User_CC2Form.do" id="notice_tab" class="list_que">
+                  <a href="${contextPath}/CC/User_CC2Form.do" class="list_que">
                     <p>[공지]11월 이벤트</p>
                     <span>
                       2021.11.10
@@ -276,7 +276,7 @@ p {
                   </a>
                 </li>
                 <li>
-                  <a href="${contextPath}/CC/User_CC2Form.do" id="notice_tab" class="list_que">
+                  <a href="${contextPath}/CC/User_CC2Form.do" class="list_que">
                     <p>[공지]10월 이벤트</p>
                     <span>
                       2021.10.07

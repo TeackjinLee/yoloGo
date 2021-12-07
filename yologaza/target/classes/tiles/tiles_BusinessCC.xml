@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+   <definition name="/BusinessCC/Business_CCForm" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 공지사항" />
+      <put-attribute name="body" value="/WEB-INF/views/business/CC/Business_CCForm.jsp" />
+   </definition>
+   
+   <definition name="/BusinessCC/Business_CC2Form" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 공지사항 세부" />
+      <put-attribute name="body" value="/WEB-INF/views/business/CC/Business_CC2Form.jsp" />
+   </definition>
+   
+   <definition name="/BusinessCC/Business_Question1Form" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 자주 묻는 질문" />
+      <put-attribute name="body" value="/WEB-INF/views/business/CC/Business_Question1Form.jsp" />
+   </definition>
+
+</tiles-definitions>

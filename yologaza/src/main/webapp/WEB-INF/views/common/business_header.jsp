@@ -63,11 +63,11 @@
 	              </div>
 	            </li>
 	            <li class="cell">
-	              <a href="#">고객센터</a>
+	              <a>고객센터</a>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="#">공지사항</a></li>
-	                  <li><a href="#">자주묻는 질문</a></li>
+	                  <li><a href="${contextPath}/BusinessCC/Business_CCForm.do">공지사항</a></li>
+	                  <li><a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a></li>
 	                </ul>
 	              </div>
 	            </li>

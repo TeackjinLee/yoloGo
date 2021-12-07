@@ -65,7 +65,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 
 .sub_top_wrap{
   height: 120px;
-  background:rgb(112,173,71);
+  background:rgb(52, 152, 219);
 }
 
 .sub_top{
@@ -172,7 +172,7 @@ p {
 
 .sub_wrap nav ul li a.active{
   font-size:20px;
-  color:rgb(112,173,71);
+  color:rgb(52, 152, 219);
   font-weight:bold;
 }
 
@@ -255,13 +255,10 @@ textarea{
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/BusinessCC/Business_CCForm.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
-            </li>
-            <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a>
             </li>
           </ul>
         </nav>
