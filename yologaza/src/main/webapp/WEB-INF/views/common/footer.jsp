@@ -12,13 +12,14 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <style>
 footer{
-  background-color:red;
   position:relative;
   padding:10px 16px 180px 16px;
   background:rgb(200,200,200);
 }
 a{text-decoration:none}
+
 ul,ol,li{list-style:none}
+
 footer{
 	text-align: left;
 }
