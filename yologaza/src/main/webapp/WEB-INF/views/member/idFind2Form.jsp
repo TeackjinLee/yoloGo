@@ -63,7 +63,7 @@
         <h1 class="join_minisub">아이디찾기</h1>
       </div>
         <br>
-		  <h3> <%= id %> </h3>
+		  <h3> ${member.id} </h3>
           <h3> 입니다. </h3>
           <button type="button" onclick="location.href='${contextPath}/member/pwdFindForm.do' ">비밀번호찾기</button>
           <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>

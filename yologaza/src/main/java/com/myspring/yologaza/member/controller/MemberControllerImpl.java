@@ -8,7 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 
 @Controller("memberController")
-public class MemberControllerImpl implements MemberController {
+public class MemberControllerImpl extends ViewNameInterceptor implements MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
 	@Autowired
 	private MemberService memberService;
@@ -61,14 +66,31 @@ public class MemberControllerImpl implements MemberController {
 	}
 	@Override
 	@RequestMapping(value="/member/addMember.do", method=RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, 
+	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO, 
 								HttpServletRequest request, 
 								HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
-		int result = 0;
-		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/admin_main.do");
-		return mav;
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+		    memberService.addMember(_memberVO);
+		    message  = "<script>";
+		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			message  = "<script>";
+		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
+		    message += " location.href='"+request.getContextPath()+"/admin_main.do';";
+		    message += " </script>";
+			e.printStackTrace();
+		}
+		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
 	}
 	
 	@Override
@@ -150,36 +172,13 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-
-	private String getViewName(HttpServletRequest request) throws Exception {
-		String contextPath = request.getContextPath();
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		if(uri == null || uri.trim().equals("")) {
-			uri = request.getRequestURI();
-		}
-		
-		int begin = 0;
-		if(!((contextPath == null) || ("".equals(contextPath)))) {
-			begin = contextPath.length();
-		}
-		int end;
-		if (uri.indexOf(";") != -1) {
-			end = uri.indexOf(";");
-		} else if (uri.indexOf("?") != -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-		
-		String viewName = uri.substring(begin, end);
-		if(viewName.indexOf(".")!=-1) {
-			viewName = viewName.substring(0, viewName.lastIndexOf("."));
-		}
-		if(viewName.lastIndexOf("/")!=-1) {
-			viewName = viewName.substring(viewName.lastIndexOf("/",1),viewName.length());
-		}
-		return viewName;
+	@Override
+	@RequestMapping(value="/member/overlapped.do" ,method = RequestMethod.POST)
+	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.overlapped(id);
+		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
 	}
-	
+
 }

@@ -9,39 +9,6 @@
 <head>
 <meta charset="utf-8">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-function fn_overlapped(){
-    var id=$("#id").val();
-    if(id==''){
-   	 alert("ID를 입력하세요");
-   	 return;
-    }
-    $.ajax({
-       type:"post",
-       async:false,  
-       url:"${contextPath}/member/overlapped.do",
-       dataType:"text",
-       data: {_id:id},
-       success:function (data,textStatus){
-          if(data=='false'){
-       	    alert("사용할 수 있는 ID입니다.");
-       	    $('#btnOverlapped').prop("disabled", true);
-       	    $('#id').prop("disabled", true);
-       	    $('#_id').val(id);
-          }else{
-        	  alert("사용할 수 없는 ID입니다.");
-          }
-       },
-       error:function(data,textStatus){
-          alert("에러가 발생했습니다.");ㅣ
-       },
-       complete:function(data,textStatus){
-          //alert("작업을완료 했습니다");
-       }
-    });  //end ajax	 
- }	
-</script>
-
 <style>
 #detail_table table tbody tr{
 	display: block;
@@ -65,6 +32,39 @@ function fn_overlapped(){
     margin-bottom: 10px;
 }
 </style>
+<script>
+	function fn_overlapped(){
+	    var _id=$("#id").val();
+	    if(_id==''){
+	   	 alert("ID를 입력하세요");
+	   	 return;
+	    }
+	    $.ajax({
+	       type:"post",
+	       async:false,  
+	       url:"${contextPath}/member/overlapped.do",
+	       dataType:"text",
+	       data: {id:_id},
+	       success:function (data,textStatus){
+	          if(data=='false'){
+	       	    alert("사용할 수 있는 ID입니다.");
+	       	    $('#btnOverlapped').prop("disabled", true);
+	       	    $('#id').prop("disabled", true);
+	       	    $('#_id').val(_id);
+	          }else{
+	        	  alert("사용할 수 없는 ID입니다.");
+	          }
+	       },
+	       error:function(data,textStatus){
+	          alert("에러가 발생했습니다.");ㅣ
+	       },
+	       complete:function(data,textStatus){
+	          //alert("작업을완료 했습니다");
+	       }
+	    });  //end ajax	 
+	 }	
+</script>
+
 </head>
 <body>
 	
@@ -79,14 +79,18 @@ function fn_overlapped(){
 				<tr class="dot_line">
 					<td class="fixed_join">아이디</td>
 					<td>
-					  <input type="text" name="id"  id="id" style="width:78%;" />
-					  <input type="hidden" name="_id"  id="_id" />
+					  <input type="text" name="_id"  id="_id" style="width:78%;" />
+					  <input type="hidden" name="id"  id="id" />
 					  <input type="button"  id="btnOverlapped" value="중복체크" onClick="fn_overlapped()" style="width:20%; float:right; cursor:pointer;"/>
 					</td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">비밀번호</td>
 					<td><input name="pwd" type="password"  /></td>
+				</tr>
+				<tr class="dot_line">
+					<td class="fixed_join">비밀번호 확인</td>
+					<td><input name="pwd2" type="password"  /></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">이름</td>

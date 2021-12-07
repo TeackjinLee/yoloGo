@@ -23,6 +23,12 @@
       <result property="email" column="email" />
       <result property="joinDate" column="joinDate" />
    </resultMap> -->
+   
+   <select id="selectOverlappedID" parameterType="String" resultType="String">
+	   select if(count(*),'true','false')
+	   from member
+	   where id = #{id}
+	</select>
 
 
 	<select id="selectAllMemberList" resultMap="memResult">
