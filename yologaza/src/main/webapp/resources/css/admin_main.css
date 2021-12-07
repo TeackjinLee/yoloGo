@@ -80,7 +80,7 @@ a {
 	right:20px;
 	color: #ddd;
 }
-.admin_main_wrap .admin_main_box .main_box .img_box a .text-box:hover{
+.admin_main_wrap .admin_main_box .main_box .img_box:hover a .text-box{
 	color: white;
 }
 /* goodsRoom_sell */
