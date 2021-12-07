@@ -14,6 +14,9 @@
     <title>YOLO가자!</title>
     <style>
       #container {
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
         width: 100%;
         margin: 0px auto;
           text-align:center;
@@ -33,7 +36,7 @@
         font-size:10px;
       }
       #content {
-      	height:auto;
+      flex:1;
       }
       #footer {
         clear: both;
