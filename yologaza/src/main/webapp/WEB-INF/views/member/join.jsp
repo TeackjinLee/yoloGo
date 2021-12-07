@@ -125,11 +125,9 @@ function fn_overlapped(){
 						<input  type="reset"  value="다시입력"  style="width:30%; cursor:pointer;">
 					</td>
 				</tr>
-
 			</tbody>
 		</table>
-		</div>
-		
+		</div>	
 	</form>	
 </body>
 </html>
