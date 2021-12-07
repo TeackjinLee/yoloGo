@@ -48,7 +48,6 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     width: 750px;
     margin-right: 31px;
   margin-top:20px;
-  margin-bottom:100px;
 }
 
 .sub_wrap nav {
