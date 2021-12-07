@@ -67,7 +67,7 @@ public class MemberControllerImpl implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/admin_main.do");
 		return mav;
 	}
 	
@@ -78,7 +78,7 @@ public class MemberControllerImpl implements MemberController {
 							HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/admin_main.do");
 		return mav;
 	}
 	
