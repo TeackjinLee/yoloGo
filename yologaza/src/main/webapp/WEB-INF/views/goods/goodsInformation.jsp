@@ -29,7 +29,7 @@
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
     
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="${contextPath}/resources/css/goodsRoom.css">
     <script src="${contextPath}/resources/js/goodsRoom.js"></script>
     
@@ -45,15 +45,16 @@
 
     });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
     <script>
 	function fn_articleForm(isLogOn,articleForm,loginForm){
 	  if(isLogOn != '' && isLogOn != 'false'){
 	    location.href=articleForm;
 	  }else{
-	    alert("로그인 후 글쓰기가 가능합니다.")
-	    location.href=loginForm+'?action=/board/articleForm.do';
+		swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
 	  }
 	}
+	
 	</script>
 </head>
 <body>
