@@ -74,26 +74,26 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-//		try {
-//			if(_memberVO.getId() != "" && _memberVO.getPwd() != "" && _memberVO.getName() != "" && _memberVO.gethp() != "") {
-//				memberService.addMember(_memberVO);
-//				message = "<script>";
-//				message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
-//				message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
-//				message += " </script>";
-//			} else {
-//				message = "<script>";
-//				message +=" alert('필수 정보를 입력해주세요!');";
-//				message += " location.href='"+request.getContextPath()+"/member/joinForm.do';";
-//				message += " </script>";
-//			}
-//		}catch(Exception e) {
-//			message = "<script>";
-//			message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
-//			message += " location.href='"+request.getContextPath()+"/admin_main.do';";
-//			message += " </script>";
-//			e.printStackTrace();
-//		}
+		try {
+			if(_memberVO.getId() != "" && _memberVO.getPwd() != "" && _memberVO.getName() != "" && _memberVO.gethp() != "") {
+				memberService.addMember(_memberVO);
+				message = "<script>";
+				message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
+				message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
+				message += " </script>";
+			} else {
+				message = "<script>";
+				message +=" alert('필수 정보를 입력해주세요!');";
+				message += " location.href='"+request.getContextPath()+"/member/joinForm.do';";
+				message += " </script>";
+			}
+		}catch(Exception e) {
+			message = "<script>";
+			message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
+			message += " location.href='"+request.getContextPath()+"/admin_main.do';";
+			message += " </script>";
+			e.printStackTrace();
+		}
 
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
