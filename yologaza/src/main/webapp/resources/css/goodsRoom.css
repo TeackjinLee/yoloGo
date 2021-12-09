@@ -33,7 +33,7 @@ body{
       float: right;
   }
   
-  .row::after {
+  .row::before {
       display: block;
       clear: both;
       content: "";
@@ -59,9 +59,9 @@ body{
   .js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
 	/* ¼÷¼Ò »çÁø */
   .slick-slider {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
-  .slick-slide img{
+  .slick-slider img{
     width:100%;
   }
   .slider-nav .slick-slide{
@@ -220,62 +220,30 @@ body{
   
   
   /* ·ë¼³Á¤ */
-  .tab_each ul li{
-    margin-top:15px;
-    width: 100%;
-    height: auto;
-    /*   background:pink; */
-  }
-  .tab_each ul li .room-box{
-    width: 100%;
-    /*   background:blue; */
-    border: 1px solid #ddd;
-    padding:10px;
-    box-sizing:border-box;
-  }
-  .tab_each ul li .room-box label{
-      display:block;
-      font-size: 19px;
-      cursor: pointer;
-      padding: 5px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      outline: none;
-      background: none;
-      width: 97%;
-      text-align: left;
-      color: #555;
-      margin-top:10px;
-  }
-  .tab_each ul li label{
-    cursor: pointer;
-  }
-  .tab_each ul li .room-box img{
-    width: 50%;
-  }
-  .tab_each ul li .room-box input{
-    display:none;
-  }
-  
-  .tab_each ul li .room-box div{
-    display: flex;
-    color: #666;
-    font-size: 0.9375em;
-    overflow: hidden;
-    padding-top: 10px;
-    box-sizing: border-box;
-    transition: max-height 0.4s;
-  }
-  
-  .tab_each ul li .room-box .price{
-    border-bottom: 1px solid #ddd;
-    padding-bottom:10px;
-    box-sizing: border-box;
-  }
-  
-  .tab_each ul li .room-box input:checked + label + div{
-    display:none;
-  }
+.tab_each #tab1 .room{
+  display: block;
+  border:1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+}
+#tab1 li{
+  margin-bottom: 30px;
+}
+#tab1 .room{
+  position: relative;
+}
+.tab_each #tab1 .room .room-box .room-select img{
+  width:40%;
+  cursor: pointer;
+}
+.tab_each #tab1 .room .room-box .room-text-box{
+  padding:5px 0;
+  box-sizing: border-box;
+}
+#tab1 .slick-slide img{
+  padding: 5px;
+  box-sizing: border-box;
+}
   
   .tab_each ul{
     display:none;
@@ -366,7 +334,18 @@ body{
     display:block;
     width:100%;
   }
-  
+.tab_each ul{
+  bottom: -30px;
+}
+#tab1 .slick-list{
+  background: rgba(0,0,0,0.05);
+}
+#tab1 .slick-slide img{
+  display:block;
+  width: 80%;
+  padding: 50px 0;
+  margin: 0 auto;
+}
   .tab_each ul li .room-box .room-pic .content img{
     width:100%;
     padding: 0 5px;
@@ -379,7 +358,7 @@ body{
   }
   .tab_each ul li .room-box .room-text{
     display:block;
-    width:50%;
+    width:60%;
     /*   background:pink; */
   }
   .tab_each ul li .room-box .room-text .reserve:nth-child(1){
@@ -414,7 +393,65 @@ body{
     font-weight: bold;
     border: 1px solid #777;
   }
+/* on */
+#tab1 .on{
+  display: none;
+}
+
+/* ¹æ */
+#tab1 .room-box-wrap{
+  margin-top: 30px;
+}
+#tab1 .slick-prev{
+  left: 30px;
+  z-index: 9;
   
+}
+#tab1 .slick-slider {
+    margin-bottom: 0px;
+}
+#tab1 .slick-next{
+  right: 50px;
+  z-index: 9;
+  
+}
+
+#tab1 .slick-prev:before{
+  content: '<';
+  font-size: 60px;
+  color: #777;
+}
+
+#tab1 .slick-next:before{
+  content: '>';
+  font-size: 60px;
+  color: #777;
+}
+
+#tab1 .room-pic-box{
+  position: relative;
+}
+
+#tab1 .page-num{
+  width: 70px;
+  height: 30px;
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translatex(-50%);
+  z-index: 9;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  background:rgba(0,0,0,0.3);
+  border-radius: 6px;
+  padding: 3px 5px 0px 15px; 
+  box-sizing: border-box;
+  color: white;
+}
+
+
   /*  Å©±â */
   @media screen and (max-width: 1024px) {
     #content {
@@ -432,7 +469,7 @@ body{
       display: flex;
       flex-direction: column;
     }
-    .tab_each ul li .room-box img{
+    .tab_each #tab1 .room .room-box .room-select img{
       width:100%;
     }
     .tab_each ul li .room-box .room-text{

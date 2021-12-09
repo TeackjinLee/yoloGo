@@ -42,26 +42,8 @@
 
 <body>
 	<img src="${contextPath}/resources/image/yolo-guesthouse.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/businessMember/login.do">
-	  <h3>회원로그인</h3><br>
-	    <button type="button" id="kakao-login-btn" class="btn_start-btn_kakao" data-device-type="w">
-	      <span>
-	        <img class="icon-ic_login_kakao" src="${contextPath}/resources/image/ico-kakao.svg" alt="카카오 로고">
-	        <p>카카오톡 로그인</p> 
-	      </span>
-	    </button>
-	    <button type="button" id="facebook-login-btn" class="btn_start-btn_fb">
-	      <span>
-	        <img class="icon-ic_login_facebook" src="${contextPath}/resources/image/ico-facebook.svg" alt="페이스북 로고">
-	        <p>페이스북 로그인</p> 
-	      </span>
-	    </button>
-	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver">
-	      <span>
-	        <img class="icon-ic_login_naver" src="${contextPath}/resources/image/ico-naver.svg" alt="네이버 로고">
-	        <p>네이버 로그인</p> 
-	      </span>
-	    </button>
+	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/businessMember/login.do" style="height:auto; padding-bottom:20px;">
+	  <h3>사업자 로그인</h3><br>
 	
 	    <input type="text" name="id" placeholder="아이디를 입력하세요"><br>
 	    <input type="password" name="pwd" placeholder="비밀번호를 입력하세요"><br>
@@ -72,7 +54,6 @@
 	    <a href="${contextPath}/member/idFindForm.do">아이디찾기</a>
 	    |
 	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br>
-	    <a href="${contextPath}/member/nonMemberForm.do">비회원 예약 내역 조회</a>
 	</form>
 </body>
 </html>
