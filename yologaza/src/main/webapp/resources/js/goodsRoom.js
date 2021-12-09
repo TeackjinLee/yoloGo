@@ -103,11 +103,8 @@ for(var i = 0; i < tabList.length; i++){
     
    });
   
-});
-
-// on 실행
-  $(document).ready(function(){
   
+  // on 실행
   $(".tab_each #tab1 .room .room-box .room-select img").click(function(){
     
     var indexNum = $(this).index();
@@ -127,8 +124,6 @@ for(var i = 0; i < tabList.length; i++){
   });
   
   var indexNum=0 ;
-
-  
-  
   
 });
+
