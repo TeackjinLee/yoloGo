@@ -25,7 +25,7 @@
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
 	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do">마이페이지</a></li>
-	      			<li class = cell-r><a href="#">장바구니</a></li>
+	      			<li class = cell-r><a href="${contextPath}/cartForm.do">장바구니</a></li>
 	        		<li class = cell-r><a href="${contextPath}/member/logout.do">로그아웃</a></li>
 	      		</c:when>
 	      		<c:otherwise>
