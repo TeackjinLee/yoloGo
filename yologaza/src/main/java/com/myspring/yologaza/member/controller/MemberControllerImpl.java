@@ -83,7 +83,7 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 				message += " </script>";
 			} else {
 				message = "<script>";
-				message +=" alert('필수 정보를 입력해주세요!');";
+				message +=" alert('필수 정보를 입력해주세요!' );";
 				message += " location.href='"+request.getContextPath()+"/member/joinForm.do';";
 				message += " </script>";
 			}
