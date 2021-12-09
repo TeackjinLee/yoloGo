@@ -1,5 +1,5 @@
- $(document).ready(function () {
- $('.slider-single').slick({
+$(document).ready(function(){ 
+$('.slider-single').slick({
  	slidesToShow: 1,
  	slidesToScroll: 1,
  	arrows: false,
@@ -80,4 +80,55 @@ for(var i = 0; i < tabList.length; i++){
       document.querySelector(activeCont).style.display = 'block';
     });
   }
+
+  
+  
+  
+//   룸 슬라이드
+  $('.room-pic-box').on('init', function(event, slick){  
+    $(".test-slider .img-box").eq(1).addClass("active");    
+  });
+  
+  $(".room-pic-box").slick({
+    arrows: true ,
+    dots: false ,
+    autoplay: false ,
+    slidesToShow: 1,
+    autoplaySpeed: 1000 
+  });
+  
+  $('.room-pic-box').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    $(".page-num > .current-txt").text(currentSlide + 1);
+    console.log(currentSlide)
+    
+   });
+  
+});
+
+// on 실행
+  $(document).ready(function(){
+  
+  $(".tab_each #tab1 .room .room-box .room-select img").click(function(){
+    
+    var indexNum = $(this).index();
+    console.log(indexNum);
+    if($("#tab1 .room-box-wrap").hasClass("on")){
+      $("#tab1 .room-box-wrap").removeClass("on");
+
+      
+      
+    } else{
+      
+      $("#tab1 .room-box-wrap").removeClass("on");
+      $("#tab1 .room-box-wrap").eq(indexNum).addClass("on");   
+
+    }
+ 
+  });
+  
+  var indexNum=0 ;
+
+  
+  
+  
 });

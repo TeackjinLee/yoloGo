@@ -67,57 +67,6 @@ function fn_overlapped(){
 }
 </style>
 <script>
-	
-function checkfield(){
-	 
-	 if(document.addjoin.id.value==""){ //id값이 없을 경우
-	 alert("아이디를 입력하세요");         //메세지 경고창을 띄운 후
-	 document.addjoin.id.focus();     // id 텍스트박스에 커서를 위치
-	 exit;
-	 
-	 }else if(document.addjoin.pwd.value==""){
-	 alert("비밀번호를 입력하세요");
-	 document.addjoin.pw.focus();
-	 exit;
-	 
-	 }else if(document.addjoin.pwd2.value==""){
-	 alert("비밀번호확인을 입력하세요");
-	 document.addjoin.pw2.focus();
-	 exit;
-	 
-	 }else if(document.addjoin.name.value==""){
-	 alert("이름을 입력하세요");
-	 document.addjoin.name.focus();
-	 exit;
-	 
-	 
-	 }
-	 
-	 
-	 if(document.addjoin.pwd.value!=document.addjoin.pwd2.value){
-	 //비밀번호와 비밀번호확인의 값이 다를 경우
-	 
-	 alert("입력한 2개의 비밀번호가 일치하지 않습니다.");
-	 document.addjoin.pw.focus();
-	 exit;
-	 
-	 }
-	 
-	 
-	 var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-	 
-	 if(exptext.test(document.addjoin.email.value)==false){
-	 //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
-	 
-	 alert("이 메일형식이 올바르지 않습니다.");
-	 document.addjoin.email.focus();
-	 exit;
-	 }
-	 
-	 document.addjoin.submit();
-	 
-	}
-
 	function check_id(){
 			var uid = document.getElementById('_id').value;
 			var idReg = /^[a-zA-Z]+[a-z0-9A-Z]{3,19}$/g;
@@ -160,6 +109,84 @@ function checkfield(){
     }
 	
 </script>
+
+<script>
+        
+            $(function(){
+
+                //------- 회원가입 입력란
+                $( "form" ).submit(function( event ) {
+                    var uid = $('#id');
+                    var upwd = $('#pwd');
+                    var upwd2 = $('#pwd2');
+                    var uname = $('#name');
+                    var uhp = $('#hp');
+                    
+                    //아이디 검사
+                    if($('#id').val()==""){
+                        swal ( "Oops" , "아이디를 입력후 중복체크해 주시기 바랍니다." ,  "error" );
+                        uid.removeClass("has-success");
+                        uid.addClass("has-error");
+                        $('#id').focus();
+                        return false;
+                    }else{
+                    	uid.removeClass("has-error");
+                    	uid.addClass("has-success");
+                    }
+                    
+                    //패스워드 검사
+                    if($('#pwd').val()==""){
+                        swal ( "Oops" , "패스워드를 입력하여 주시기 바랍니다." ,  "error" );
+                        upwd.removeClass("has-success");
+                        upwd.addClass("has-error");
+                        $('#pwd').focus();
+                        return false;
+                    }else{
+                    	upwd.removeClass("has-error");
+                    	upwd.addClass("has-success");
+                    }
+                    
+                    //패스워드 확인
+                    if($('#pwd2').val()==""){
+                        swal ( "Oops" , "패스워드 확인을 입력하여 주시기 바랍니다." ,  "error" );
+                        upwd2.removeClass("has-success");
+                        upwd2.addClass("has-error");
+                        $('#pwd2').focus();
+                        return false;
+                    }else{
+                    	upwd2.removeClass("has-error");
+                    	upwd2.addClass("has-success");
+                    }
+                    
+                    //이름
+                    if($('#name').val()==""){
+                    	swal ( "Oops" ,  "이름을 입력하여 주시기 바랍니다." ,  "error" );
+                        uname.removeClass("has-success");
+                        uname.addClass("has-error");
+                        $('#name').focus();
+                        return false;
+                    }else{
+                    	uname.removeClass("has-error");
+                    	uname.addClass("has-success");
+                    }
+                    
+                    //휴대폰 번호
+                    if($('#hp').val()==""){
+                    	swal ( "Oops" ,  "휴대폰 번호를 입력하여 주시기 바랍니다." ,  "error" );
+                        uhp.removeClass("has-success");
+                        uhp.addClass("has-error");
+                        $('#phoneNumber').focus();
+                        return false;
+                    }else{
+                    	uhp.removeClass("has-error");
+                    	uhp.addClass("has-success");
+                    }
+                });
+                
+            });
+            
+</script>
+
 </head>
 <body>
 	
@@ -189,7 +216,7 @@ function checkfield(){
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">*이름</td>
-					<td><input name="name" type="text" /></td>
+					<td><input id="name" name="name" type="text" /></td>
 				</tr>		
 				<tr class="dot_line">
 					<td class="fixed_join">*휴대폰 번호</td>
@@ -202,8 +229,8 @@ function checkfield(){
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">이메일(e-mail)</td>
-					<td><input size="10px"   type="text" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
-						  <select name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right;">
+					<td><input size="10px"   type="text" id="email1" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
+						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right;">
 									<option value="">직접입력</option>
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="naver.com">naver.com</option>
