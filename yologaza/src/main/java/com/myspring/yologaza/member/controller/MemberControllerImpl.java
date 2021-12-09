@@ -177,6 +177,7 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
+
 	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,

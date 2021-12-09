@@ -99,6 +99,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 			return resEnt;
 	}
+	
 	@Override
 	@RequestMapping(value={"/board/addReply.do"}, method = RequestMethod.POST)
 	@ResponseBody
