@@ -9,8 +9,6 @@
 <head>
 <meta charset="utf-8">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<<<<<<< HEAD
-=======
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 function fn_overlapped(){
@@ -45,7 +43,6 @@ function fn_overlapped(){
 }	
 </script>
 
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
 <style>
 #detail_table table tbody tr{
 	display: block;
@@ -70,38 +67,6 @@ function fn_overlapped(){
 }
 </style>
 <script>
-<<<<<<< HEAD
-	function fn_overlapped(){
-	    var _id=$("#id").val();
-	    if(_id==''){
-	   	 alert("ID를 입력하세요");
-	   	 return;
-	    }
-	    $.ajax({
-	       type:"post",
-	       async:false,  
-	       url:"${contextPath}/member/overlapped.do",
-	       dataType:"text",
-	       data: {id:_id},
-	       success:function (data,textStatus){
-	          if(data=='false'){
-	       	    alert("사용할 수 있는 ID입니다.");
-	       	    $('#btnOverlapped').prop("disabled", true);
-	       	    $('#id').prop("disabled", true);
-	       	    $('#_id').val(_id);
-	          }else{
-	        	  alert("사용할 수 없는 ID입니다.");
-	          }
-	       },
-	       error:function(data,textStatus){
-	          alert("에러가 발생했습니다.");ㅣ
-	       },
-	       complete:function(data,textStatus){
-	          //alert("작업을완료 했습니다");
-	       }
-	    });  //end ajax	 
-	 }	
-=======
 	function check_id(){
 			var uid = document.getElementById('_id').value;
 			var idReg = /^[a-zA-Z]+[a-z0-9A-Z]{3,19}$/g;
@@ -220,7 +185,6 @@ function fn_overlapped(){
                 
             });
             
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
 </script>
 
 </head>
@@ -237,11 +201,7 @@ function fn_overlapped(){
 				<tr class="dot_line">
 					<td class="fixed_join">*아이디</td>
 					<td>
-<<<<<<< HEAD
-					  <input type="text" name="_id"  id="_id" style="width:78%;" />
-=======
 					  <input type="text" name="_id"  id="_id" onchange="check_id()" style="width:78%;" placeholder="영문자와 숫자를 4~20자내로 입력해 주세요." />
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
 					  <input type="hidden" name="id"  id="id" />
 					  <input type="button"  id="btnOverlapped" value="중복체크" onClick="fn_overlapped()" style="width:20%; float:right; cursor:pointer;"/>
 					</td>
@@ -251,21 +211,12 @@ function fn_overlapped(){
 					<td><input id="pwd" name="pwd" type="password" onchange="check_pw()" placeholder="6자리이상 16자리이하 특수기호 포함" /></td>
 				</tr>
 				<tr class="dot_line">
-<<<<<<< HEAD
-					<td class="fixed_join">비밀번호 확인</td>
-					<td><input name="pwd2" type="password"  /></td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이름</td>
-					<td><input name="name" type="text" /></td>
-=======
 					<td class="fixed_join">*비밀번호 재확인</td>
 					<td><input id="pwd2" name="pwd2" type="password" onchange="check_pw()" />&nbsp;<span id="check"></span></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">*이름</td>
 					<td><input id="name" name="name" type="text" /></td>
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
 				</tr>		
 				<tr class="dot_line">
 					<td class="fixed_join">*휴대폰 번호</td>
