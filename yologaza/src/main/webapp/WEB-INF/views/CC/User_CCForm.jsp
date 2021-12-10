@@ -268,7 +268,7 @@ p {
               <ul id="notices" class="show_list">
                 <c:forEach  var="announce" items="${announceList}">
                 <li>
-                  <a href="#" class="list_que">
+                  <a href="${contextPath}/CC/viewAnnounce.do?articleNo=${announce.articleNo}" class="list_que">
                     <p>${announce.title}</p>
                     <span>
                       ${announce.writeDate}

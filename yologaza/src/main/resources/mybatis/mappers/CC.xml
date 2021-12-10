@@ -20,5 +20,10 @@
          select * from announce	order by writeDate asc 	
     ]]>
   </select>
-
+  <select id="selectAnnounce" resultType="announce_VO"   parameterType="int">
+    <![CDATA[
+      SELECT * from announce
+      where articleNo = #{articleNo}		
+    ]]>
+  </select>
 </mapper>

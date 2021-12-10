@@ -6,4 +6,5 @@ import com.myspring.yologaza.CC.vo.Announce_VO;
 
 public interface CC_Service {
 	public List<Announce_VO> listAnnounce() throws Exception;
+	public Announce_VO viewAnnounce(int articleNo) throws Exception;
 }

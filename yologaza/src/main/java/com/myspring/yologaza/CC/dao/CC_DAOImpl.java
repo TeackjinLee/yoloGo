@@ -19,4 +19,9 @@ public class CC_DAOImpl implements CC_DAO{
 		List<Announce_VO> announceList = announceList = sqlSession.selectList("mapper.CC.selectAllAnnounceList");
 		return announceList;
 	}
+	
+	@Override
+	public Announce_VO selectAnnounce(int articleNo) throws DataAccessException {
+		return sqlSession.selectOne("mapper.CC.selectAnnounce", articleNo);
+	}
 }

@@ -20,4 +20,10 @@ public class CC_ServiceImpl implements CC_Service{
 		List<Announce_VO> announceList =  cc_DAO.selectAllAnnounceList();
         return announceList;
 	}
+	
+	@Override
+	public Announce_VO viewAnnounce(int articleNo) throws Exception {
+		Announce_VO announce_VO = cc_DAO.selectAnnounce(articleNo);
+		return announce_VO;
+	}
 }

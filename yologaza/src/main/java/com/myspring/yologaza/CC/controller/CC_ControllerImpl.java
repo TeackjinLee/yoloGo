@@ -51,6 +51,17 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
+	@RequestMapping(value="/CC/viewAnnounce.do" ,method = RequestMethod.GET)
+	public ModelAndView viewAnnounce(@RequestParam("articleNo") int articleNo,
+                                    HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		announce_VO=cc_Service.viewAnnounce(articleNo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("announce", announce_VO);
+		return mav;
+	}
+	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
