@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -88,27 +90,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 			e.printStackTrace();
 		}
 		
-//		try {
-//			if(_memberVO.getId() != "" && _memberVO.getPwd() != "" && _memberVO.getName() != "" && _memberVO.gethp() != "") {
-//				memberService.addMember(_memberVO);
-//				message = "<script>";
-//				message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
-//				message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
-//				message += " </script>";
-//			} else {
-//				message = "<script>";
-//				message +=" alert('필수 정보를 입력해주세요!');";
-//				message += " location.href='"+request.getContextPath()+"/member/joinForm.do';";
-//				message += " </script>";
-//			}
-//		}catch(Exception e) {
-//			message = "<script>";
-//			message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
-//			message += " location.href='"+request.getContextPath()+"/admin_main.do';";
-//			message += " </script>";
-//			e.printStackTrace();
-//		}
-
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
@@ -133,6 +114,21 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		return mav;
 	}
 	
+	
+	// 아이디 찾기
+	@ResponseBody
+	@RequestMapping(value = "/member/idFind2.do", method = RequestMethod.GET)
+	public ModelAndView userIdSearch(@ModelAttribute("member") MemberVO member,
+			RedirectAttributes rAttr,
+			HttpServletRequest request, 
+			HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		memberVO = memberService.idFind(member);
+		HttpSession session = request.getSession();
+		session.setAttribute("member", memberVO);
+		return mav;
+	}
+
 
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)

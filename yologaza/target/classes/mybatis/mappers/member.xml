@@ -31,6 +31,10 @@
       ]]>
 	</select>
 	
+	<select id="idFind" parameterType="String" resultType="String">
+	   select * from member where name=#{name} and hp=#{hp}
+	</select>
+	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select if(count(*),'true','false')
 	   from member

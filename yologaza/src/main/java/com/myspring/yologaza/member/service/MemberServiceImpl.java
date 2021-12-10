@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService{
 		membersList = memberDAO.selectAllMemberList();
 		return membersList;
 	}
+	
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
@@ -39,5 +40,11 @@ public class MemberServiceImpl implements MemberService{
 	public String overlapped(String id) throws Exception{
 		return memberDAO.selectOverlappedID(id);
 	}
+
+	@Override
+	public MemberVO idFind(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.idFind(memberVO);
+	}
+	
 	
 }

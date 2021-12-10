@@ -158,6 +158,18 @@ function fn_overlapped(){
                     	upwd2.addClass("has-success");
                     }
                     
+                  //패스워드 비교
+                    if($('#pwd').val()!=$('#pwd2').val() || $('#pwd2').val()==""){
+                    	swal ( "Oops" , "패스워드가 일치하지 않습니다." ,  "error" );
+                        upwd2.removeClass("has-success");
+                        upwd2.addClass("has-error");
+                        $('#pwd2').focus();
+                        return false;
+                    }else{
+                    	upwd2.removeClass("has-error");
+                    	upwd2.addClass("has-success");
+                    }
+                    
                     //이름
                     if($('#name').val()==""){
                     	swal ( "Oops" ,  "이름을 입력하여 주시기 바랍니다." ,  "error" );

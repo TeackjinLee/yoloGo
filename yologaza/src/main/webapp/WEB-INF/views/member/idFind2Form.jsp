@@ -8,7 +8,6 @@
 <c:set var="result" value="${param.result }" />
 <%
  request.setCharacterEncoding("UTF-8");
-    String id = request.getParameter("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -63,7 +62,21 @@
         <h1 class="join_minisub">아이디찾기</h1>
       </div>
         <br>
-		  <h3> <%= id %> </h3>
+	       <c:if test="${check == 1}">
+				<script>
+					opener.document.findform.name.value = "";
+					opener.document.findform.hp.value = "";
+				</script>
+				<label>일치하는 정보가 존재하지 않습니다.</label>
+			</c:if>
+			<c:if test="${check == 0 }">
+			<label>찾으시는 아이디는' ${id}' 입니다.</label>
+			<div class="form-label-group">
+					<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+						type="button" value="OK" onclick="closethewindow()">
+				</div>
+			</c:if>
+		  <h3 id="id" name="id"> ${id} </h3>
           <h3> 입니다. </h3>
           <button type="button" onclick="location.href='${contextPath}/member/pwdFindForm.do' ">비밀번호찾기</button>
           <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>

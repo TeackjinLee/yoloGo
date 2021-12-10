@@ -46,7 +46,7 @@
       <put-attribute name="body" value="/WEB-INF/views/member/idFindForm.jsp" />
    </definition>
    
-   <definition name="/member/idFind2Form" extends="baseLayout">
+   <definition name="/member/idFind2" extends="baseLayout">
       <put-attribute name="title" value="아이디 찾기" />
       <put-attribute name="body" value="/WEB-INF/views/member/idFind2Form.jsp" />
    </definition>
