@@ -1,5 +1,7 @@
 package com.myspring.yologaza.CC.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.service.CC_Service;
-import com.myspring.yologaza.CC.vo.CC_VO;
+import com.myspring.yologaza.CC.vo.Announce_VO;
 
 @Controller("cc_Controller")
 public class CC_ControllerImpl implements CC_Controller {
@@ -22,7 +24,17 @@ public class CC_ControllerImpl implements CC_Controller {
 	@Autowired
 	private CC_Service cc_Service;
 	@Autowired
-	CC_VO cc_VO;
+	Announce_VO announce_VO;
+	
+	@Override
+	@RequestMapping(value= "/CC/announceList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		List announceList = cc_Service.listAnnounce();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("announceList", announceList);
+		return mav;
+	}
 	
 	@RequestMapping(value="/CC/*Form.do", method=RequestMethod.GET)
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
