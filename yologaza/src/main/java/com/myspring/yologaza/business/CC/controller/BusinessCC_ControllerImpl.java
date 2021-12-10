@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.controller.CC_ControllerImpl;
 import com.myspring.yologaza.CC.service.CC_Service;
-import com.myspring.yologaza.CC.vo.CC_VO;
+import com.myspring.yologaza.CC.vo.Announce_VO;
 
 @Controller("businessCC_Controller")
 public class BusinessCC_ControllerImpl implements BusinessCC_Controller {

@@ -4,12 +4,12 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-   <definition name="/CC/User_CCForm" extends="baseLayout">
+   <definition name="/CC/announceList" extends="baseLayout">
       <put-attribute name="title" value="공지사항" />
       <put-attribute name="body" value="/WEB-INF/views/CC/User_CCForm.jsp" />
    </definition>
    
-   <definition name="/CC/User_CC2Form" extends="baseLayout">
+   <definition name="/CC/viewAnnounce" extends="baseLayout">
       <put-attribute name="title" value="공지사항 세부" />
       <put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
    </definition>

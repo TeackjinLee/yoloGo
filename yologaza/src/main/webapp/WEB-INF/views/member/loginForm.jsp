@@ -13,7 +13,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+<<<<<<< HEAD
 	<title>로그인창</title>
+=======
+	<title>로그인창</title>	
+>>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<c:choose>
 		<c:when test="${result=='loginFailed' }">

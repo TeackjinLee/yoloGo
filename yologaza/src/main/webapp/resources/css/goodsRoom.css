@@ -1,281 +1,249 @@
 body{
     font-size: 16px;
     height:900px;
-  }
-  section{
-    box-sizing: border-box;
-  }
-  .wrap.show{
+}
+section{
+  box-sizing: border-box;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 라이브러리 */
+.cell {
+    float: left;
+}
+
+.cell-r {
+    float: right;
+}
+
+.row::before {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.con {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+*{
+  padding:0;
+  margin:0;
+}
+
+/* 숙소 객실정보 예약 사이트 */
+#content{
+  display: flex;
+}
+
+.js .slider-single > div:nth-child(1n+2) { display: none }
+
+.js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
+/* 숙소 사진 */
+.slick-slider {
+  margin-bottom: 0px;
+}
+.slick-slider img{
+  width:100%;
+}
+.slider-nav .slick-slide{
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+}
+.slider-nav{
+  padding:0 20px;
+  box-sizing: border-box;
+}
+.slider-nav .slick-slide {
+  cursor: pointer; 
+}
+.slider-nav .slick-next {
+    right: 0;
+}
+.slider-nav .slick-prev {
+    left: 0;
+}
+.slider-nav .slick-prev:before {
+    color: rgb(112,173,71);
+}
+.slider-nav .slick-next:before {
+    color: rgb(112,173,71);
+}
+.slider-nav .slick-prev.slick-disabled:before {
+    color: rgb(112,173,71);
+}
+#content #page{
+  width:50%;
+  /*   background: green; */
+}
+
+
+.goods_impormation{
+  width: 50%;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+  text-align:left;
+}
+.goods_impormation .name p{
+  margin-top: 5px;
+}
+.goods_impormation{
+  color: rgba(0,0,0,0.87);
+  font-size: 18px;
+  line-height: 21px;
+}
+.goods_impormation .name h2{
+  margin-bottom: 20px;
+}
+.goods_impormation .business_tell{
+  display: block;
+  width: 100%;
+  height: auto;
+  background:  rgba(0,0,0,0.05);
+  margin-top:20px;
+  padding:20px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.goods_impormation .business_tell .tell-box p{
+  margin-top: 20px;
+  color: #555;
+}
+
+/* 객실 안내 뷰 */
+#room{
+  width:100%;
+  padding:20px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.sub_top{
+  width:1024px;
+  height:211px;
+  margin:0 auto;
+  border-radius:0;
+  padding-top:110px;
+  /*   background:red; */
+}
+
+.sub_top h1{
+  display:block;
+  margin-left:40px;
+  color:#fff;
+}
+
+.sub_wrap{
+  width: 1024px;
+  margin:0 auto 0 auto;
+  padding-top:54px;
+  padding-bottom:54px;
+}
+
+.show_list li .list_que span {
+    font-size: 16px;
+    color: black;
+}
+
+.tab_each {
+    clear: both;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.sub_top{
+  margin:0 auto;
+}
+
+.sub_wrap nav ul li a{
+  display:block;
+  font-size:20px;
+}
+
+.sub_wrap nav ul li a.active{
+  font-size:20px;
+  color:rgb(112,173,71);
+  font-weight:bold;
+}
+
+.wrap.show, footer.show {
     opacity: 1;
     visibility: visible;
-  }
-  
-  .wrap{
-    width: 100%;
-  }
-  
-  ul,
-  li {
-      list-style: none;
-  }
-  
-  a {
-      color: inherit;
-      text-decoration: none;
-  }
-  
-  /* 라이브러리 */
-  .cell {
-      float: left;
-  }
-  
-  .cell-r {
-      float: right;
-  }
-  
-  .row::after {
-      display: block;
-      clear: both;
-      content: "";
-  }
-  
-  .con {
-      max-width: 1024px;
-      margin: 0 auto;
-  }
-  
-  *{
-    padding:0;
-    margin:0;
-  }
-  
-/* 숙소 객실정보 예약 사이트 */
-  #content{
-    display: flex;
-  }
-  
-  .js .slider-single > div:nth-child(1n+2) { display: none }
-  
-  .js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
-	/* 숙소 사진 */
-  .slick-slider {
-    margin-bottom: 10px;
-  }
-  .slick-slide img{
-    width:100%;
-  }
-  .slider-nav .slick-slide{
-    padding: 0 10px 0 10px;
-    box-sizing: border-box;
-  }
-  .slider-nav{
-    padding:0 20px;
-    box-sizing: border-box;
-  }
-  .slider-nav .slick-slide {
-    cursor: pointer; 
-  }
-  .slider-nav .slick-next {
-      right: 0;
-  }
-  .slider-nav .slick-prev {
-      left: 0;
-  }
-  .slider-nav .slick-prev:before {
-      color: rgb(112,173,71);
-  }
-  .slider-nav .slick-next:before {
-      color: rgb(112,173,71);
-  }
-  .slider-nav .slick-prev.slick-disabled:before {
-      color: rgb(112,173,71);
-  }
-  #content #page{
-    width:50%;
-    /*   background: green; */
-  }
-  
-  
-  .goods_impormation{
-    width: 50%;
-    padding: 20px 20px 0;
-    box-sizing: border-box;
-    text-align:left;
-  }
-  .goods_impormation .name p{
-    margin-top: 5px;
-  }
-  .goods_impormation{
-    color: rgba(0,0,0,0.87);
+}
+
+.sub_wrap nav ul li {
+    margin-bottom: 26px;
+}
+
+.tab .tab_btn ul li{
+    display: inline-block;
+    float: none;
+    position: relative;
+    margin-right: 64px;
     font-size: 18px;
-    line-height: 21px;
-  }
-  .goods_impormation .name h2{
-    margin-bottom: 20px;
-  }
-  .goods_impormation .business_tell{
-    display: block;
-    width: 100%;
-    height: auto;
-    background:  rgba(0,0,0,0.05);
-    margin-top:20px;
-    padding:20px;
-    box-sizing: border-box;
-    border-radius: 3px;
-  }
-  .goods_impormation .business_tell .tell-box p{
-    margin-top: 20px;
-    color: #555;
-  }
-  
-  /* 객실 안내 뷰 */
-  #room{
-    width:100%;
-    padding:20px;
-    box-sizing: border-box;
+    line-height: normal;
     text-align: left;
-  }
-  
-  .sub_top{
-    width:1024px;
-    height:211px;
-    margin:0 auto;
-    border-radius:0;
-    padding-top:110px;
-    /*   background:red; */
-  }
-  
-  .sub_top h1{
-    display:block;
-    margin-left:40px;
-    color:#fff;
-  }
-  
-  .sub_wrap{
-    width: 1024px;
-    margin:0 auto 0 auto;
-    padding-top:54px;
-    padding-bottom:54px;
-  }
-  
-  .show_list li .list_que span {
-      font-size: 16px;
-      color: black;
-  }
-  
-  .tab_each {
-      clear: both;
-      border-top: 1px solid #ddd;
-      margin-top: 20px;
-  }
-  
-  .sub_top{
-    margin:0 auto;
-  }
-  
-  .sub_wrap nav ul li a{
-    display:block;
-    font-size:20px;
-  }
-  
-  .sub_wrap nav ul li a.active{
-    font-size:20px;
-    color:rgb(112,173,71);
-    font-weight:bold;
-  }
-  
-  .wrap.show, footer.show {
-      opacity: 1;
-      visibility: visible;
-  }
-  
-  .sub_wrap nav ul li {
-      margin-bottom: 26px;
-  }
-  
-  .tab .tab_btn ul li{
-      display: inline-block;
-      float: none;
-      position: relative;
-      margin-right: 64px;
-      font-size: 18px;
-      line-height: normal;
-      text-align: left;
-      cursor: pointer;
-      padding-left:5px;
-      top:10px;
-      color:black;
-  }
-  
-  .tab .tab_btn ul li.active a{
-    color:rgb(112,173,71);
-    border-bottom:3px solid rgb(112,173,71);
-    box-sizing: border-box;
-  }
-  
-  .tab .tab_btn ul li a{
-    color:#555;
-    padding-bottom: 10px;
-  }
-  
-  
-  /* 룸설정 */
-  .tab_each ul li{
-    margin-top:15px;
-    width: 100%;
-    height: auto;
-    /*   background:pink; */
-  }
-  .tab_each ul li .room-box{
-    width: 100%;
-    /*   background:blue; */
-    border: 1px solid #ddd;
-    padding:10px;
-    box-sizing:border-box;
-  }
-  .tab_each ul li .room-box label{
-      display:block;
-      font-size: 19px;
-      cursor: pointer;
-      padding: 5px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      outline: none;
-      background: none;
-      width: 97%;
-      text-align: left;
-      color: #555;
-      margin-top:10px;
-  }
-  .tab_each ul li label{
     cursor: pointer;
-  }
-  .tab_each ul li .room-box img{
-    width: 50%;
-  }
-  .tab_each ul li .room-box input{
-    display:none;
-  }
-  
-  .tab_each ul li .room-box div{
-    display: flex;
-    color: #666;
-    font-size: 0.9375em;
-    overflow: hidden;
-    padding-top: 10px;
-    box-sizing: border-box;
-    transition: max-height 0.4s;
-  }
-  
-  .tab_each ul li .room-box .price{
-    border-bottom: 1px solid #ddd;
-    padding-bottom:10px;
-    box-sizing: border-box;
-  }
-  
-  .tab_each ul li .room-box input:checked + label + div{
-    display:none;
-  }
+    padding-left:5px;
+    top:10px;
+    color:black;
+}
+
+.tab .tab_btn ul li.active a{
+  color:rgb(112,173,71);
+  border-bottom:3px solid rgb(112,173,71);
+  box-sizing: border-box;
+}
+
+.tab .tab_btn ul li a{
+  color:#555;
+  padding-bottom: 10px;
+}
+
+
+/* 룸설정 */
+.tab_each #tab1 .room{
+  display: block;
+  border:1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+}
+#tab1 li{
+  margin-bottom: 30px;
+}
+#tab1 .room{
+  position: relative;
+}
+.tab_each #tab1 .room .room-box .room-select img{
+  width:40%;
+  cursor: pointer;
+}
+.tab_each #tab1 .room .room-box .room-text-box{
+  padding:5px 0;
+  box-sizing: border-box;
+}
+#tab1 .slick-slide img{
+  padding: 5px;
+  box-sizing: border-box;
+}
   
   .tab_each ul{
     display:none;
@@ -322,36 +290,36 @@ body{
   
   
   /* 달력 */
-  .tab_each .date-wrap{
-    display: block;
-    width: 100%;
-  }
-  .tab_each .date-wrap .btn_date{
-    display: block;
-    width: 240px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    /*   background-color: blue; */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  .tab_each .date-wrap .btn_date .date-box{
-    text-align: center;
-    margin: 0 auto;
-    padding:0;
-    border:0;
-    box-sizing: border-box;
-  }
-  .tab_each .date-wrap .btn_date input{
-    width:100%;
-    height: 30px;
-    border: none;
-    font-size: 16px;
-    text-align:center;
-    color: #777;
-  }
-  /* 객실 슬라이드 작업 */
+.tab_each .date-wrap{
+  display: block;
+  width: 100%;
+}
+.tab_each .date-wrap .btn_date{
+  display: block;
+  width: 240px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  /*   background-color: blue; */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.tab_each .date-wrap .btn_date .date-box{
+  text-align: center;
+  margin: 0 auto;
+  padding:0;
+  border:0;
+  box-sizing: border-box;
+}
+.tab_each .date-wrap .btn_date input{
+  width:100%;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  text-align:center;
+  color: #777;
+}
+/* 객실 슬라이드 작업 */
   .tab_each ul li .room-box .room-pic{
     width:100%;
     height:auto;
@@ -366,7 +334,18 @@ body{
     display:block;
     width:100%;
   }
-  
+.tab_each ul{
+  bottom: -30px;
+}
+#tab1 .slick-list{
+  background: rgba(0,0,0,0.05);
+}
+#tab1 .slick-slide img{
+  display:block;
+  width: 80%;
+  padding: 50px 0;
+  margin: 0 auto;
+}
   .tab_each ul li .room-box .room-pic .content img{
     width:100%;
     padding: 0 5px;
@@ -374,68 +353,126 @@ body{
     float:left;
   }
   /* 룸 설명 */
-  .tab_each ul li .room-box .room-select{
-    display:flex;
-  }
-  .tab_each ul li .room-box .room-text{
-    display:block;
-    width:50%;
-    /*   background:pink; */
-  }
-  .tab_each ul li .room-box .room-text .reserve:nth-child(1){
-      border-right: 1px solid #ddd;
-      box-sizing: border-box;
-  }
-  .tab_each ul li .room-box .room-text .reserve{
+.tab_each ul li .room-box .room-select{
+  display:flex;
+}
+.tab_each ul li .room-box .room-text{
+  display:block;
+  width:60%;
+  /*   background:pink; */
+}
+.tab_each ul li .room-box .room-text .reserve:nth-child(1){
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.tab_each ul li .room-box .room-text .reserve{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height:100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  /*   background:purple; */
+}
+.tab_each ul li .room-box .room-text .reserve h3{
+  margin-top: 10px;
+}
+.tab_each ul li .room-box .room-text .reserve .point{
+  display:block;
+}
+.tab_each ul li .room-box .room-text .reserve .point button{
+  width: 100px;
+  height: 30px;
+  box-sizing: border-box;
+  background: #ddd;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #555;
+  font-weight: bold;
+  border: 1px solid #777;
+}
+/* on */
+#tab1 .on{
+  display: none;
+}
+
+/* 방 */
+#tab1 .room-box-wrap{
+  margin-top: 30px;
+}
+#tab1 .slick-prev{
+  left: 30px;
+  z-index: 9;
+  
+}
+#tab1 .slick-slider {
+    margin-bottom: 0px;
+}
+#tab1 .slick-next{
+  right: 50px;
+  z-index: 9;
+  
+}
+
+#tab1 .slick-prev:before{
+  content: '<';
+  font-size: 60px;
+  color: #777;
+}
+
+#tab1 .slick-next:before{
+  content: '>';
+  font-size: 60px;
+  color: #777;
+}
+
+#tab1 .room-pic-box{
+  position: relative;
+}
+
+#tab1 .page-num{
+  width: 70px;
+  height: 30px;
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translatex(-50%);
+  z-index: 9;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  background:rgba(0,0,0,0.3);
+  border-radius: 6px;
+  padding: 3px 5px 0px 15px; 
+  box-sizing: border-box;
+  color: white;
+}
+
+
+  /*  크기 */
+@media screen and (max-width: 1024px) {
+  #content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 50%;
-    height:100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-    /*   background:purple; */
   }
-  .tab_each ul li .room-box .room-text .reserve h3{
-    margin-top: 10px;
+  #content #page{
+    width:100%;
   }
-  .tab_each ul li .room-box .room-text .reserve .point{
-    display:block;
-  }
-  .tab_each ul li .room-box .room-text .reserve .point button{
-    width: 100px;
-    height: 30px;
-    box-sizing: border-box;
-    background: #ddd;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #555;
-    font-weight: bold;
-    border: 1px solid #777;
+  .goods_impormation{
+    width: 100%;
   }
   
-  /*  크기 */
-  @media screen and (max-width: 1024px) {
-    #content {
-      display: flex;
-      flex-direction: column;
-    }
-    #content #page{
-      width:100%;
-    }
-    .goods_impormation{
-      width: 100%;
-    }
-    
-    .tab_each ul li .room-box .room-select {
-      display: flex;
-      flex-direction: column;
-    }
-    .tab_each ul li .room-box img{
-      width:100%;
-    }
-    .tab_each ul li .room-box .room-text{
-      width:100%;
-    }
+  .tab_each ul li .room-box .room-select {
+    display: flex;
+    flex-direction: column;
   }
+  .tab_each #tab1 .room .room-box .room-select img{
+    width:100%;
+  }
+  .tab_each ul li .room-box .room-text{
+    width:100%;
+  }
+ }

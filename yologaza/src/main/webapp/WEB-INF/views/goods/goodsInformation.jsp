@@ -29,7 +29,7 @@
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
     
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="${contextPath}/resources/css/goodsRoom.css">
     <script src="${contextPath}/resources/js/goodsRoom.js"></script>
     
@@ -45,15 +45,16 @@
 
     });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
     <script>
 	function fn_articleForm(isLogOn,articleForm,loginForm){
 	  if(isLogOn != '' && isLogOn != 'false'){
 	    location.href=articleForm;
 	  }else{
-	    alert("로그인 후 글쓰기가 가능합니다.")
-	    location.href=loginForm+'?action=/board/articleForm.do';
+		swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
 	  }
 	}
+	
 	</script>
 </head>
 <body>
@@ -116,91 +117,63 @@
               </div>
               <!-- 예약/숙소정보/리뷰  -->
               <div class="tab_each">
-                <ul id="tab1" class="active">
-                  <section class="date-wrap">
-                    <div class="btn_date">
-                      <tr class="date-box">
-                        <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
-                      </tr>
-                    </div>
-                  </section>
-                  <li class="room">
-                    <div class="room-box wrap">
-                      <div class="room-select">
-                        <img src="https://image.goodchoice.kr/resize_370x220/adimg_new/69041/403108/64fbb5b87e71214dfb7100bb28c08419.jpg" alt="룸 설정">
-                        <div class="room-text cell-r">
-                          <div class="reserve cell">
-                            <h2>객실 타이틀</h2>
-                            <h3>대실</h3>
-                            <br><br><br>
-                            <div class="price"><h2>35,000원</h2></div>
-                            <h3>마감시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;22시까지</h3>
-                            <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5시간</h3>
-                            <button type="button" onclick="location.href='${contextPath}/member/reservationForm.do' ">예약하기</button>
-                          </div>
-                          <div class="reserve cell">
-                            <h2>객실 타이틀</h2>
-                            <h3>숙박</h3>
-                            <br><br><br>
-                            <div class="price"><h2>35,000원</h2></div>
-                            <h3>입실시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;14시부터</h3>
-                            <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일12시</h3>
-                            <button type="button" onclick="location.href='${contextPath}/member/reservationForm.do' ">예약하기</button>
-                          </div>
-                        </div>
-                      </div>
-                      <input type="checkbox" class="room-search" id="room-1">
-                      <label for="room-1">객실 이미지 보기</label>
-                      <div class="room-pic" id="room-pic-1">
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="room">
-                    <div class="room-box wrap">
-                      <div class="room-select">
-                        <img src="https://image.goodchoice.kr/resize_370x220/adimg_new/69041/403108/64fbb5b87e71214dfb7100bb28c08419.jpg" alt="룸 설정">
-                        <div class="room-text cell-r">
-                          <div class="reserve cell">
-                            <h2>객실 타이틀</h2>
-                            <h3>대실</h3>
-                            <br><br><br>
-                            <div class="price"><h2>35,000원</h2></div>
-                            <h3>마감시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;22시까지</h3>
-                            <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5시간</h3>
-                            <button type="button" onclick="location.href='${contextPath}/member/reservationForm.do' ">예약하기</button>
-                          </div>
-                          <div class="reserve cell">
-                            <h2>객실 타이틀</h2>
-                            <h3>숙박</h3>
-                            <br><br><br>
-                            <div class="price"><h2>35,000원</h2></div>
-                            <h3>입실시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;14시부터</h3>
-                            <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일12시</h3>
-                            <button type="button" onclick="location.href='${contextPath}/member/reservationForm.do' ">예약하기</button>
-                          </div>
-                        </div>
-                      </div>
-                      <input type="checkbox" class="room-search" id="room-2">
-                      <label for="room-2">객실 이미지 보기</label>
-                      <div class="room-pic" id="room-pic-2">
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
-                        <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+				  <ul id="tab1" class="active">
+				  <section class="date-wrap">
+				    <div class="btn_date">
+				      <tr class="date-box">
+				        <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
+				      </tr>
+				    </div>
+				  </section>
+				  <li class="room">
+				    <div class="room-box">
+				      <div class="room-select">
+				        <img src="https://image.goodchoice.kr/resize_370x220/adimg_new/69041/403108/64fbb5b87e71214dfb7100bb28c08419.jpg" alt="룸 설정">
+				        <div class="room-text cell-r">
+				          <div class="reserve cell">
+				            <h2>객실 타이틀</h2>
+				            <h3>대실</h3>
+				            <br><br><br>
+				            <div class="price"><h2>35,000원</h2></div>
+				            <h3>마감시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				              &nbsp;&nbsp;&nbsp;22시까지</h3>
+				            <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
+				              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5시간</h3>
+				            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+				          </div>
+				          <div class="reserve cell">
+				            <h2>객실 타이틀</h2>
+				            <h3>숙박</h3>
+				            <br><br><br>
+				            <div class="price"><h2>35,000원</h2></div>
+				            <h3>입실시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				              &nbsp;&nbsp;&nbsp;14시부터</h3>
+				            <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
+				              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일12시</h3>
+				            <div class="point"><a href="#"><h3>예약하기</h3></a></div>
+				          </div>
+				        </div>
+				      </div>
+				      <input type="checkbox" class="room-search" id="room-1">
+				      <div class="room-box-wrap on">
+				        <div class="room-img-content slider-wrap">
+				          <div class="room-pic-box" id="room-pic">
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
+				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
+				          </div>
+				        </div>
+				        <div class="page-num row">
+				          <p class="current-txt cell"> 1 </p>
+				          <p class="all-txt cell">  &nbsp;/ 6 </p>
+				      </div>
+				      </div>
+				    </div>
+				  </li>
+				</ul>
                 <ul id="tab2">
                   <li>
                     <input type="checkbox" class="room-search" id="room-3">

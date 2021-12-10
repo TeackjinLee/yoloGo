@@ -30,12 +30,12 @@ public class MemberVO {
 		this.hp = hp;
 		this.auth = auth;
 	}
-	
+
 	public String getUid() {
 		return uid;
 	}
 
-	public void setUId(String uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 
@@ -70,7 +70,7 @@ public class MemberVO {
 	public void setEmail1(String email1) {
 		this.email1 = email1;
 	}
-	
+
 	public String getEmail2() {
 		return email2;
 	}
@@ -78,13 +78,15 @@ public class MemberVO {
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
-	public String gethp() {
+
+	public String getHp() {
 		return hp;
 	}
 
-	public void sethp(String hp) {
+	public void setHp(String hp) {
 		this.hp = hp;
 	}
+
 	public String getAuth() {
 		return auth;
 	}
@@ -100,5 +102,5 @@ public class MemberVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-
+	
 }

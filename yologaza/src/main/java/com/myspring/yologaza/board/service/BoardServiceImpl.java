@@ -21,6 +21,12 @@ public class BoardServiceImpl implements BoardService{
 		List<ArticleVO> articlesList = boardDAO.selectAllArticlesList();
 		return articlesList;
 	}
+	//답글
+	@Override
+	public int addReply(Map articleMap) throws Exception {
+		return boardDAO.insertNewReply(articleMap);
+	}
+	
 	//단일 이미지 추가하기
 	@Override
 	public int addNewArticle(Map articleMap) throws Exception{
@@ -41,8 +47,5 @@ public class BoardServiceImpl implements BoardService{
 	public void removeArticle(int articleNO) throws Exception {
 		boardDAO.deleteArticle(articleNO);
 	}
-	@Override
-	public int addReply(Map articleMap) throws Exception {
-		return boardDAO.insertNewReply(articleMap);
-	}
+	
 }
