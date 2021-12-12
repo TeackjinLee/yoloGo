@@ -1,7 +1,9 @@
 package com.myspring.yologaza.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -44,4 +46,17 @@ public class MemberDAOImpl implements MemberDAO{
 		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",id);
 		return result;
 	}
+
+	@Override
+	public List<MemberVO> findId(String hp) throws Exception {
+		List<MemberVO> result = sqlSession.selectList("mapper.member.findId", hp);
+		return result;
+	}
+
+	@Override
+	public int findIdCheck(String hp) throws Exception {
+		int result = sqlSession.selectOne("mapper.member.findIdCheck", hp);
+		return result;
+	}
+
 }

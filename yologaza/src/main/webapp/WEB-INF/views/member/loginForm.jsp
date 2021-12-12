@@ -44,7 +44,7 @@
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
 	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/member/login.do">
-	  <h3>회원로그인</h3><br>
+	  <h1>회원로그인</h1><br>
 	    <button type="button" id="kakao-login-btn" class="btn_start-btn_kakao" data-device-type="w">
 	      <span>
 	        <img class="icon-ic_login_kakao" src="${contextPath}/resources/image/ico-kakao.svg" alt="카카오 로고">
@@ -70,7 +70,7 @@
 	
 	    <a href="${contextPath}/member/agreeForm.do">회원가입</a>
 	    |
-	    <a href="${contextPath}/member/idFindForm.do">아이디찾기</a>
+	    <a href="${contextPath}/member/findIdView">아이디찾기</a>
 	    |
 	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br>
 	    <a href="${contextPath}/member/nonMemberForm.do">비회원 예약 내역 조회</a>

@@ -41,14 +41,14 @@
       <put-attribute name="body" value="/WEB-INF/views/member/join.jsp" />
    </definition>
    
-   <definition name="/member/idFindForm" extends="baseLayout">
+   <definition name="/member/findId" extends="baseLayout">
       <put-attribute name="title" value="아이디 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/idFindForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/findId.jsp" />
    </definition>
    
-   <definition name="/member/idFind2Form" extends="baseLayout">
+   <definition name="/member/findIdView" extends="baseLayout">
       <put-attribute name="title" value="아이디 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/idFind2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/findIdView.jsp" />
    </definition>
    
    <definition name="/member/pwdFindForm" extends="baseLayout">
