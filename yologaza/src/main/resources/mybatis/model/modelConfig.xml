@@ -8,5 +8,7 @@
 		<typeAlias type="com.myspring.yologaza.board.vo.ArticleVO"  alias="articleVO" />
 		<typeAlias type="com.myspring.yologaza.board.vo.ImageVO"  alias="imageVO" />
 		<typeAlias type="com.myspring.yologaza.CC.vo.Announce_VO"  alias="announce_VO" />
+		<typeAlias type="com.myspring.yologaza.goods.vo.GoodsVO"  alias="goodsVO" />
+		<typeAlias type="com.myspring.yologaza.goods.vo.ImageFileVO"  alias="imageFileVO" />
 	</typeAliases>
 </configuration>

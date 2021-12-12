@@ -280,7 +280,7 @@ function fn_overlapped(){
 					<td class="fixed_join">*이름</td>
 					<td><input id="name" name="name" type="text" /></td>
 				</tr>
-				<!-- 
+
 				<tr class="dot_line">
 					<td class="fixed_join">*휴대폰 번호</td>
 					<td>
@@ -290,7 +290,7 @@ function fn_overlapped(){
 						<input type="button"  id="hpA" value="인증 확인" onClick="" style="width:20%; float:right; cursor:pointer;"/>
 					</td>
 				</tr>
-				 -->
+
 				
 				
 				<tr class="dot_line">
