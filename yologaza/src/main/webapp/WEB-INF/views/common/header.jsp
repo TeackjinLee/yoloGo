@@ -99,7 +99,7 @@
 	              <div>고객센터</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="${contextPath}/CC/User_CCForm.do">공지사항</a></li>
+	                  <li><a href="${contextPath}/CC/announceList.do">공지사항</a></li>
 	                  <li><a href="${contextPath}/CC/Question1Form.do">자주 묻는 질문</a></li>
 	                  <li><a href="${contextPath}/CC/Question2Form.do">1:1 문의</a></li>
 	                </ul>

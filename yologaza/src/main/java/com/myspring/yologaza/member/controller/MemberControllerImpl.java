@@ -1,12 +1,13 @@
 package com.myspring.yologaza.member.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.maven.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -89,7 +91,7 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 			message += " </script>";
 			e.printStackTrace();
 		}
-		
+
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
@@ -114,21 +116,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		return mav;
 	}
 	
-	
-	// 아이디 찾기
-	@ResponseBody
-	@RequestMapping(value = "/member/idFind2.do", method = RequestMethod.GET)
-	public ModelAndView userIdSearch(@ModelAttribute("member") MemberVO member,
-			RedirectAttributes rAttr,
-			HttpServletRequest request, 
-			HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.idFind(member);
-		HttpSession session = request.getSession();
-		session.setAttribute("member", memberVO);
-		return mav;
-	}
-
 
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
@@ -173,7 +160,28 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-
+	
+	// 아이디 찾기
+	@RequestMapping(value="/member/findIdView", method=RequestMethod.GET)
+	public ModelAndView findIdView(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = getViewName(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value="/member/findId", method=RequestMethod.POST)
+	public String findId(MemberVO memberVO, Model model) throws Exception{
+		logger.info("hp"+memberVO.getHp());
+				
+		if(memberService.findIdCheck(memberVO.getHp())==0) {
+			model.addAttribute("msg", "핸드폰번호를 확인해주세요");
+			return "/member/findIdView";
+		}else {
+			model.addAttribute("member", memberService.findId(memberVO.getHp()));
+			return "/member/findId";
+		}
+	}
 	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
@@ -198,4 +206,16 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	// 핸드폰 인증
+	@RequestMapping(value="/hpCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public String sendSMS(@RequestParam("hp") String userhpNumber) throws Exception { // 뮨저 ㅂㅎ냐가
+
+        int randomNumber = (int)((Math.random() * (9999-1000+1)) + 1000);//난수 생성
+
+        memberService.certifiedhpNumber(userhpNumber, randomNumber);
+        
+        return Integer.toString(randomNumber);
+    }
 }

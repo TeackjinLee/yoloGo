@@ -295,7 +295,7 @@ p {
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/CC/User_CCForm.do">공지사항</a>
+              <a href="${contextPath}/CC/announceList.do">공지사항</a>
             </li>
             <li>
               <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>

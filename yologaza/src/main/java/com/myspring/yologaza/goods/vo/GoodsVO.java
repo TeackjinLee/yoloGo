@@ -6,41 +6,44 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
-	private String goodsEmail1;
-	private String goodsEmail2;
-	private String goodsHp;
-	private String goodsTel1;
-	private String goodsTel2;
-	private String goodsTel3;
+	private String goods_email;
+	private String goods_hp;
+	private String goods_tel1;
+	private String goods_tel2;
+	private String goods_tel3;
 	private String account_bank;
 	private String account_name;
 	private String account;
 	private String goods_homePage;
-	private String goodsName;
-	private String goodsAddress;
-	private String goodsDescription;
-	private Time goodsCheckIn;
-	private Time goodsCheckOut;
-	private char goodsAcess;
-	private Date goodsCreDate;
+	private String goods_name;
+	private String goods_address;
+	private String goods_description;
+	private String goods_around;
+	private Time   goods_checkIn;
+	private Time   goods_checkOut;
+	private char   goods_acess;
+	private Date   goods_creDate;
+	
 	// goods_detail
-	private String goodsRoom;
-	private String goodsRoomName;
-	private String goodsType;
-	private String goodsCapacity;
-	private String goodsIntroduce;
-	private int goodsPrice1;
-	private int goodsPrice2;
-	private Date goodsRoomCreDate;
+	private String goods_room;
+	private String goods_room_name;
+	private String goods_type;
+	private String goods_capacity;
+	private String goods_introduce;
+	private String goods_price1;
+	private String goods_price2;
+	private String goods_room_creDate;
+	
 	// goods_peak
-	private int peak_id;
+	private String peak_id;
 	private Date peak1;
 	private Date peak2;
 	private Date Mpeak1;
 	private Date Mpeak2;
+	
 	// goods_service
-	private String goodsService;
-
+	private String goods_service;
+	
 	public GoodsVO() {
 	}
 
@@ -52,52 +55,44 @@ public class GoodsVO {
 		this.goods_id = goods_id;
 	}
 
-	public String getGoodsEmail1() {
-		return goodsEmail1;
+	public String getGoods_email() {
+		return goods_email;
 	}
 
-	public void setGoodsEmail1(String goodsEmail1) {
-		this.goodsEmail1 = goodsEmail1;
+	public void setGoods_email(String goods_email) {
+		this.goods_email = goods_email;
 	}
 
-	public String getGoodsEmail2() {
-		return goodsEmail2;
+	public String getGoods_hp() {
+		return goods_hp;
 	}
 
-	public void setGoodsEmail2(String goodsEmail2) {
-		this.goodsEmail2 = goodsEmail2;
+	public void setGoods_hp(String goods_hp) {
+		this.goods_hp = goods_hp;
 	}
 
-	public String getGoodsHp() {
-		return goodsHp;
+	public String getGoods_tel1() {
+		return goods_tel1;
 	}
 
-	public void setGoodsHp(String goodsHp) {
-		this.goodsHp = goodsHp;
+	public void setGoods_tel1(String goods_tel1) {
+		this.goods_tel1 = goods_tel1;
 	}
 
-	public String getGoodsTel1() {
-		return goodsTel1;
+	public String getGoods_tel2() {
+		return goods_tel2;
 	}
 
-	public void setGoodsTel1(String goodsTel1) {
-		this.goodsTel1 = goodsTel1;
+	public void setGoods_tel2(String goods_tel2) {
+		this.goods_tel2 = goods_tel2;
 	}
 
-	public String getGoodsTel2() {
-		return goodsTel2;
+	public String getGoods_tel3() {
+		return goods_tel3;
 	}
 
-	public void setGoodsTel2(String goodsTel2) {
-		this.goodsTel2 = goodsTel2;
-	}
-
-	public String getGoodsTel3() {
-		return goodsTel3;
-	}
-
-	public void setGoodsTel3(String goodsTel3) {
-		this.goodsTel3 = goodsTel3;
+	public void setGoods_tel3(String goods_tel3) {
+		this.goods_tel3 = goods_tel3;
 	}
 
 	public String getAccount_bank() {
@@ -132,131 +127,139 @@ public class GoodsVO {
 		this.goods_homePage = goods_homePage;
 	}
 
-	public String getGoodsName() {
-		return goodsName;
+	public String getGoods_name() {
+		return goods_name;
 	}
 
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
 	}
 
-	public String getGoodsAddress() {
-		return goodsAddress;
+	public String getGoods_address() {
+		return goods_address;
 	}
 
-	public void setGoodsAddress(String goodsAddress) {
-		this.goodsAddress = goodsAddress;
+	public void setGoods_address(String goods_address) {
+		this.goods_address = goods_address;
 	}
 
-	public String getGoodsDescription() {
-		return goodsDescription;
+	public String getGoods_description() {
+		return goods_description;
 	}
 
-	public void setGoodsDescription(String goodsDescription) {
-		this.goodsDescription = goodsDescription;
+	public void setGoods_description(String goods_description) {
+		this.goods_description = goods_description;
 	}
 
-	public Time getGoodsCheckIn() {
-		return goodsCheckIn;
+	public String getGoods_around() {
+		return goods_around;
 	}
 
-	public void setGoodsCheckIn(Time goodsCheckIn) {
-		this.goodsCheckIn = goodsCheckIn;
+	public void setGoods_around(String goods_around) {
+		this.goods_around = goods_around;
 	}
 
-	public Time getGoodsCheckOut() {
-		return goodsCheckOut;
+	public Time getGoods_checkIn() {
+		return goods_checkIn;
 	}
 
-	public void setGoodsCheckOut(Time goodsCheckOut) {
-		this.goodsCheckOut = goodsCheckOut;
+	public void setGoods_checkIn(Time goods_checkIn) {
+		this.goods_checkIn = goods_checkIn;
 	}
 
-	public char getGoodsAcess() {
-		return goodsAcess;
+	public Time getGoods_checkOut() {
+		return goods_checkOut;
 	}
 
-	public void setGoodsAcess(char goodsAcess) {
-		this.goodsAcess = goodsAcess;
+	public void setGoods_checkOut(Time goods_checkOut) {
+		this.goods_checkOut = goods_checkOut;
 	}
 
-	public Date getGoodsCreDate() {
-		return goodsCreDate;
+	public char getGoods_acess() {
+		return goods_acess;
 	}
 
-	public void setGoodsCreDate(Date goodsCreDate) {
-		this.goodsCreDate = goodsCreDate;
+	public void setGoods_acess(char goods_acess) {
+		this.goods_acess = goods_acess;
 	}
 
-	public String getGoodsRoom() {
-		return goodsRoom;
+	public Date getGoods_creDate() {
+		return goods_creDate;
 	}
 
-	public void setGoodsRoom(String goodsRoom) {
-		this.goodsRoom = goodsRoom;
+	public void setGoods_creDate(Date goods_creDate) {
+		this.goods_creDate = goods_creDate;
 	}
 
-	public String getGoodsRoomName() {
-		return goodsRoomName;
+	public String getGoods_room() {
+		return goods_room;
 	}
 
-	public void setGoodsRoomName(String goodsRoomName) {
-		this.goodsRoomName = goodsRoomName;
+	public void setGoods_room(String goods_room) {
+		this.goods_room = goods_room;
 	}
 
-	public String getGoodsType() {
-		return goodsType;
+	public String getGoods_room_name() {
+		return goods_room_name;
 	}
 
-	public void setGoodsType(String goodsType) {
-		this.goodsType = goodsType;
+	public void setGoods_room_name(String goods_room_name) {
+		this.goods_room_name = goods_room_name;
 	}
 
-	public String getGoodsCapacity() {
-		return goodsCapacity;
+	public String getGoods_type() {
+		return goods_type;
 	}
 
-	public void setGoodsCapacity(String goodsCapacity) {
-		this.goodsCapacity = goodsCapacity;
+	public void setGoods_type(String goods_type) {
+		this.goods_type = goods_type;
 	}
 
-	public String getGoodsIntroduce() {
-		return goodsIntroduce;
+	public String getGoods_capacity() {
+		return goods_capacity;
 	}
 
-	public void setGoodsIntroduce(String goodsIntroduce) {
-		this.goodsIntroduce = goodsIntroduce;
+	public void setGoods_capacity(String goods_capacity) {
+		this.goods_capacity = goods_capacity;
 	}
 
-	public int getGoodsPrice1() {
-		return goodsPrice1;
+	public String getGoods_introduce() {
+		return goods_introduce;
 	}
 
-	public void setGoodsPrice1(int goodsPrice1) {
-		this.goodsPrice1 = goodsPrice1;
+	public void setGoods_introduce(String goods_introduce) {
+		this.goods_introduce = goods_introduce;
 	}
 
-	public int getGoodsPrice2() {
-		return goodsPrice2;
+	public String getGoods_price1() {
+		return goods_price1;
 	}
 
-	public void setGoodsPrice2(int goodsPrice2) {
-		this.goodsPrice2 = goodsPrice2;
+	public void setGoods_price1(String goods_price1) {
+		this.goods_price1 = goods_price1;
 	}
 
-	public Date getGoodsRoomCreDate() {
-		return goodsRoomCreDate;
+	public String getGoods_price2() {
+		return goods_price2;
 	}
 
-	public void setGoodsRoomCreDate(Date goodsRoomCreDate) {
-		this.goodsRoomCreDate = goodsRoomCreDate;
+	public void setGoods_price2(String goods_price2) {
+		this.goods_price2 = goods_price2;
 	}
 
-	public int getPeak_id() {
+	public String getGoods_room_creDate() {
+		return goods_room_creDate;
+	}
+
+	public void setGoods_room_creDate(String goods_room_creDate) {
+		this.goods_room_creDate = goods_room_creDate;
+	}
+
+	public String getPeak_id() {
 		return peak_id;
 	}
 
-	public void setPeak_id(int peak_id) {
+	public void setPeak_id(String peak_id) {
 		this.peak_id = peak_id;
 	}
 
@@ -292,12 +295,11 @@ public class GoodsVO {
 		Mpeak2 = mpeak2;
 	}
 
-	public String getGoodsService() {
-		return goodsService;
+	public String getGoods_service() {
+		return goods_service;
 	}
 
-	public void setGoodsService(String goodsService) {
-		this.goodsService = goodsService;
+	public void setGoods_service(String goods_service) {
+		this.goods_service = goods_service;
 	}
-	
 }

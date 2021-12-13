@@ -1,5 +1,5 @@
 package com.myspring.yologaza.goods.service;
 
-public class GoodsService {
+public interface GoodsService {
 
 }

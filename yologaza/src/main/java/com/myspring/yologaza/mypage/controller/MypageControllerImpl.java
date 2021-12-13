@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.service.CC_Service;
-import com.myspring.yologaza.CC.vo.CC_VO;
+import com.myspring.yologaza.CC.vo.Announce_VO;
 
 @Controller("mypage_Controller")
 public class MypageControllerImpl implements MypageController {
@@ -22,7 +22,7 @@ public class MypageControllerImpl implements MypageController {
 	@Autowired
 	private CC_Service cc_Service;
 	@Autowired
-	CC_VO cc_VO;
+	Announce_VO cc_VO;
 	
 	@RequestMapping(value="/mypage/*.do", method=RequestMethod.GET)
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
