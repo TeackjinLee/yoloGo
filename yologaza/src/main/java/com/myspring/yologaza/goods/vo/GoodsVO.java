@@ -6,7 +6,9 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
-	private String goods_email;
+	private String goods_type;
+	private String goods_email1;
+	private String goods_email2;
 	private String goods_hp;
 	private String goods_tel1;
 	private String goods_tel2;
@@ -27,7 +29,7 @@ public class GoodsVO {
 	// goods_detail
 	private String goods_room;
 	private String goods_room_name;
-	private String goods_type;
+	private String goods_room_type;
 	private String goods_capacity;
 	private String goods_introduce;
 	private String goods_price1;
@@ -55,12 +57,28 @@ public class GoodsVO {
 		this.goods_id = goods_id;
 	}
 
-	public String getGoods_email() {
-		return goods_email;
+	public String getGoods_type() {
+		return goods_type;
 	}
 
-	public void setGoods_email(String goods_email) {
-		this.goods_email = goods_email;
+	public void setGoods_type(String goods_type) {
+		this.goods_type = goods_type;
+	}
+
+	public String getGoods_email1() {
+		return goods_email1;
+	}
+
+	public void setGoods_email1(String goods_email1) {
+		this.goods_email1 = goods_email1;
+	}
+
+	public String getGoods_email2() {
+		return goods_email2;
+	}
+
+	public void setGoods_email2(String goods_email2) {
+		this.goods_email2 = goods_email2;
 	}
 
 	public String getGoods_hp() {
@@ -207,12 +225,12 @@ public class GoodsVO {
 		this.goods_room_name = goods_room_name;
 	}
 
-	public String getGoods_type() {
-		return goods_type;
+	public String getGoods_room_type() {
+		return goods_room_type;
 	}
 
-	public void setGoods_type(String goods_type) {
-		this.goods_type = goods_type;
+	public void setGoods_room_type(String goods_room_type) {
+		this.goods_room_type = goods_room_type;
 	}
 
 	public String getGoods_capacity() {
@@ -302,4 +320,5 @@ public class GoodsVO {
 	public void setGoods_service(String goods_service) {
 		this.goods_service = goods_service;
 	}
+
 }
