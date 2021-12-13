@@ -10,6 +10,55 @@
 <meta charset="utf-8">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="${contextPath}/resources/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function () {
+	//휴대폰 번호 인증
+	var code2 = "";
+	$("#hpChk").click(function(){
+	 alert("인증번호 발송이 완료되었습니다. \n 휴대폰에서 인증번호 확인을 해주십시오.");
+	 var hp = $("#hp").val();
+	 $ajax({
+	     type:"GET",
+	     url:"hpCheck?hp=" + hp,
+	     cache : false,
+	     success:function(data){
+	         if(data == "error"){
+	             alert("휴대폰 번호가 올바르지 않습니다.")
+	                 $(".successhpChk").text("유효한 번호를 입력해 주세요.");
+	                 $(".successhpChk").css("color", "red");
+	                 $("#hp").attr("autofocus", true);
+	         } else{
+	             $("#hp2").attr("disabled", false);
+	             $("#hpChk2").css("display", "inline-block");
+	             $("successhpChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+	             $(".successhpChk").css("color", "green");
+	             $("#hp").attr("readonly", true);
+	             code2 = data;
+	         }
+	     }
+	 })
+	});
+	
+	// 휴대폰 인증번호 대조
+	$("#hpChk2").click(function(){
+	    if($("#hp2").val() == code2){
+	        $(".successhpChk").text("인증번호가 일치합니다.");
+	        $(".successhpChk").css("color", "green");
+	        $("#hpDoubleChk").val("true");
+	        $("#hp2").attr("disabled", true);
+	    } else{
+	        $(".successhpChk").text("인증번호가 일치하지 않습니다. 확인해 주시기 바랍니다.");
+	        $(".successhpChk").css("color", "red");
+	        $("#hpDoubleChk").val("false");
+	        $(this).attr("autofocus", true);
+	    }
+	});
+});
+</script>
+
+
 <script>
 function fn_overlapped(){
     var _id=$("#_id").val();
@@ -66,6 +115,7 @@ function fn_overlapped(){
     margin-bottom: 10px;
 }
 </style>
+
 <script>
 	function check_id(){
 			var uid = document.getElementById('_id').value;
@@ -79,7 +129,7 @@ function fn_overlapped(){
 	}
 	function check_pw(){
 
-        var pw = document.getElementById('pwd').value;
+        var pw = document.getElementById('pwd1').value;
         var SC = ["!","@","#","$","%"];
         var check_SC = 0;
 
@@ -94,10 +144,10 @@ function fn_overlapped(){
         }
         if(check_SC == 0){
             window.swal ( "Oops" ,  "!,@,#,$,% 의 특수문자가 들어가 있지 않습니다." ,  "error" );
-            document.getElementById('pwd').value='';
+            document.getElementById('pwd1').value='';
         }
-        if(document.getElementById('pwd').value !='' && document.getElementById('pwd2').value!=''){
-            if(document.getElementById('pwd').value==document.getElementById('pwd2').value){
+        if(document.getElementById('pwd1').value !='' && document.getElementById('pwd').value!=''){
+            if(document.getElementById('pwd1').value==document.getElementById('pwd').value){
                 document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
                 document.getElementById('check').style.color='blue';
             }
@@ -117,8 +167,8 @@ function fn_overlapped(){
                 //------- 회원가입 입력란
                 $( "form" ).submit(function( event ) {
                     var uid = $('#id');
+                    var upwd1 = $('#pwd1');
                     var upwd = $('#pwd');
-                    var upwd2 = $('#pwd2');
                     var uname = $('#name');
                     var uhp = $('#hp');
                     
@@ -135,8 +185,20 @@ function fn_overlapped(){
                     }
                     
                     //패스워드 검사
-                    if($('#pwd').val()==""){
+                    if($('#pwd1').val()==""){
                         swal ( "Oops" , "패스워드를 입력하여 주시기 바랍니다." ,  "error" );
+                        upwd1.removeClass("has-success");
+                        upwd1.addClass("has-error");
+                        $('#pwd1').focus();
+                        return false;
+                    }else{
+                    	upwd1.removeClass("has-error");
+                    	upwd1.addClass("has-success");
+                    }
+                    
+                    //패스워드 확인
+                    if($('#pwd').val()==""){
+                        swal ( "Oops" , "패스워드 확인을 입력하여 주시기 바랍니다." ,  "error" );
                         upwd.removeClass("has-success");
                         upwd.addClass("has-error");
                         $('#pwd').focus();
@@ -146,16 +208,16 @@ function fn_overlapped(){
                     	upwd.addClass("has-success");
                     }
                     
-                    //패스워드 확인
-                    if($('#pwd2').val()==""){
-                        swal ( "Oops" , "패스워드 확인을 입력하여 주시기 바랍니다." ,  "error" );
-                        upwd2.removeClass("has-success");
-                        upwd2.addClass("has-error");
-                        $('#pwd2').focus();
+                    //패스워드 비교
+                    if($('#pwd1').val()!=$('#pwd').val() || $('#pwd').val()==""){
+                    	swal ( "Oops" , "패스워드가 일치하지 않습니다." ,  "error" );
+                        upwd.removeClass("has-success");
+                        upwd.addClass("has-error");
+                        $('#upwd').focus();
                         return false;
                     }else{
-                    	upwd2.removeClass("has-error");
-                    	upwd2.addClass("has-success");
+                    	upwd.removeClass("has-error");
+                    	upwd.addClass("has-success");
                     }
                     
                     //이름
@@ -208,16 +270,17 @@ function fn_overlapped(){
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">*비밀번호</td>
-					<td><input id="pwd" name="pwd" type="password" onchange="check_pw()" placeholder="6자리이상 16자리이하 특수기호 포함" /></td>
+					<td><input id="pwd1" name="pwd1" type="password" onchange="check_pw()" placeholder="6자리이상 16자리이하 특수기호 포함" /></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">*비밀번호 재확인</td>
-					<td><input id="pwd2" name="pwd2" type="password" onchange="check_pw()" />&nbsp;<span id="check"></span></td>
+					<td><input id="pwd" name="pwd" type="password" onchange="check_pw()" />&nbsp;<span id="check"></span></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">*이름</td>
 					<td><input id="name" name="name" type="text" /></td>
-				</tr>		
+				</tr>
+
 				<tr class="dot_line">
 					<td class="fixed_join">*휴대폰 번호</td>
 					<td>
@@ -227,6 +290,9 @@ function fn_overlapped(){
 						<input type="button"  id="hpA" value="인증 확인" onClick="" style="width:20%; float:right; cursor:pointer;"/>
 					</td>
 				</tr>
+
+				
+				
 				<tr class="dot_line">
 					<td class="fixed_join">이메일(e-mail)</td>
 					<td><input size="10px"   type="text" id="email1" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
@@ -255,5 +321,26 @@ function fn_overlapped(){
 		</table>
 		</div>	
 	</form>	
+	<tr class="mobileNo">
+	    <th>
+	        <label for="hp">*휴대폰 번호</label>
+	    </th>
+	    <td>
+	        <p>
+	            <input id="hp" type="text" name="hp" titile="전화번호 입력" required/>
+	            <span id="hpChk" class="doubleChk">인증번호 보내기</span><br/>
+	            <input id="hp2" type="text" name="hp2" title="인증번호 입력" disabled required/>
+	            
+	            
+	            <span id="hpChk2" class="doubleChk">본인인증</span>
+	            <span class="point successhpChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+	
+	            <input type="text" id="hpDoubleChk"/>
+	        </p>
+	        <p class="tip">
+	            최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해 주세요.)
+	        </p>
+	    </td>
+	</tr>
 </body>
 </html>

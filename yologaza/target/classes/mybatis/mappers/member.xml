@@ -31,6 +31,18 @@
       ]]>
 	</select>
 	
+	<select id="findId" resultMap="memResult">
+      <![CDATA[
+         select * from member where hp= #{hp}
+      ]]>
+	</select>
+	
+	<select id="findIdCheck" resultType="int">
+		<![CDATA[
+			select count(*) from member where hp= #{hp}
+		]]>
+	</select>
+	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select if(count(*),'true','false')
 	   from member

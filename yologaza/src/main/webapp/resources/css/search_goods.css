@@ -328,6 +328,7 @@ body{
   }
   .goods_list .goods_title{
     margin: 20px 0;
+    text-align: left;
   }
   .goods_list .goods_box{
     position: relative;
