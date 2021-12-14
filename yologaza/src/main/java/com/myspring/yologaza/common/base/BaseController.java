@@ -22,22 +22,22 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.myspring.yologaza.board.vo.ImageVO;
+import com.myspring.yologaza.goods.vo.ImageFileVO;
 
 public abstract class BaseController  {
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	
-	protected List<ImageVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
-		List<ImageVO> fileList= new ArrayList<ImageVO>();
+	protected List<ImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
+		List<ImageFileVO> fileList= new ArrayList<ImageFileVO>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while(fileNames.hasNext()){
-			ImageVO ImageVO =new ImageVO();
+			ImageFileVO imageFileVO =new ImageFileVO();
 			String fileName = fileNames.next();
-			ImageVO.setImageFileName(fileName);
+			imageFileVO.setFileType(fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			String originalFileName=mFile.getOriginalFilename();
-			ImageVO.setImageFileName(originalFileName);
-			fileList.add(ImageVO);
+			imageFileVO.setFileName(originalFileName);
+			fileList.add(imageFileVO);
 			
 			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);
 			if(mFile.getSize()!=0){ //File Null Check

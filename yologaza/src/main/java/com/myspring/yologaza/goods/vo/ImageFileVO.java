@@ -2,7 +2,7 @@ package com.myspring.yologaza.goods.vo;
 
 public class ImageFileVO {
 	private int goods_id;
-	private int goodsRoom;
+	private int goods_uroom;
 	private String fileName;
 	private String fileType;
 	
@@ -18,12 +18,12 @@ public class ImageFileVO {
 		this.goods_id = goods_id;
 	}
 
-	public int getGoodsRoom() {
-		return goodsRoom;
+	public int getGoods_uroom() {
+		return goods_uroom;
 	}
 
-	public void setGoodsRoom(int goodsRoom) {
-		this.goodsRoom = goodsRoom;
+	public void setGoods_uroom(int goods_uroom) {
+		this.goods_uroom = goods_uroom;
 	}
 
 	public String getFileName() {

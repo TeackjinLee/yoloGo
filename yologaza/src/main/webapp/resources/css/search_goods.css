@@ -341,7 +341,7 @@ body{
   .goods_list .goods_box a .goods_picture{
     display: block;
     position: absolute;
-    width: 180px;
+    width: 300px;
     height: 270px;
     background: #ddd;
     margin-top: 15px;
@@ -350,15 +350,15 @@ body{
   }
   .goods_list .goods_box a .goods_picture img{
     position: absolute;
-    top: 0 ;
-    left: -100%;
+    top: 0;
+    left: -30px;
     height: 100%;
   }
   .goods_list .goods_box a .goos_impormation .name p{
     margin-top: 5px;
   }
   .goods_list .goods_box a .goos_impormation{
-    padding: 16px 0 16px 210px;
+    padding: 16px 0 16px 330px;
     color: rgba(0,0,0,0.87);
     font-size: 18px;
     line-height: 21px;

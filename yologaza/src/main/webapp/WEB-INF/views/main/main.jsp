@@ -160,7 +160,7 @@
           <div class="community-name"><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;EVENT</p></div>
         </div>
         <div class="coupon-box">
-          <a href="${contextPath}/CC/User_CCForm.do"><img src="${contextPath}/resources/image/coupon.png" alt="고객센터 쿠폰이미지"></a>
+          <a href="${contextPath}/CC/announceList.do"><img src="${contextPath}/resources/image/coupon.png" alt="고객센터 쿠폰이미지"></a>
         </div>
       </div>
       <div class="business-box cell">

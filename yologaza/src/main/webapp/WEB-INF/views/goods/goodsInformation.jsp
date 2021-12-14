@@ -11,13 +11,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+	function fn_articleForm(isLogOn,articleForm,loginForm){
+	  if(isLogOn != '' && isLogOn != 'false'){
+	    location.href=articleForm;
+	  }else{
+		swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
+	    swal.location.href=loginForm+'?action=/board/articleForm.do';
+	  }
+	}
+	</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- 폰트어썸 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 	
-	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
     <!-- gsap 용 플러그인 -->
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick.css">
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick-theme.css">
@@ -45,17 +55,7 @@
 
     });
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-    <script>
-	function fn_articleForm(isLogOn,articleForm,loginForm){
-	  if(isLogOn != '' && isLogOn != 'false'){
-	    location.href=articleForm;
-	  }else{
-		swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
-	  }
-	}
-	
-	</script>
+    
 </head>
 <body>
 <!-- 객실 설명란 -->
@@ -234,9 +234,9 @@
 						          </c:otherwise>
 						        </c:choose>
 						  </td>
-					      <td>
+					      <td width="auto">
 						     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-						     <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="max-height:50px;"  /><br>
+						     <img src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
 						   </td> 
 						  <td  width="10%">${article.writeDate}</td> 
 						</tr>
@@ -244,7 +244,7 @@
 					     </c:when>
 					    </c:choose>
 					</table>
-					<a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', 
+					<a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
                                                     '${contextPath}/member/loginForm.do')"><p class="cls2" 
                                                     style="display: block;
 														    width: 100px;

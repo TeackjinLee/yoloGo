@@ -23,6 +23,8 @@ public class GoodsVO {
 	private String goods_around;
 	private Time   goods_checkIn;
 	private Time   goods_checkOut;
+	private int goods_price1;
+	private int goods_price2;
 	private char   goods_acess;
 	private Date   goods_creDate;
 	
@@ -32,8 +34,6 @@ public class GoodsVO {
 	private String goods_room_type;
 	private String goods_capacity;
 	private String goods_introduce;
-	private String goods_price1;
-	private String goods_price2;
 	private String goods_room_creDate;
 	
 	// goods_peak
@@ -45,6 +45,10 @@ public class GoodsVO {
 	
 	// goods_service
 	private String goods_service;
+	
+	// goods_img
+	private String fileName;
+	private String fileType;
 	
 	public GoodsVO() {
 	}
@@ -249,19 +253,19 @@ public class GoodsVO {
 		this.goods_introduce = goods_introduce;
 	}
 
-	public String getGoods_price1() {
+	public int getGoods_price1() {
 		return goods_price1;
 	}
 
-	public void setGoods_price1(String goods_price1) {
+	public void setGoods_price1(int goods_price1) {
 		this.goods_price1 = goods_price1;
 	}
 
-	public String getGoods_price2() {
+	public int getGoods_price2() {
 		return goods_price2;
 	}
 
-	public void setGoods_price2(String goods_price2) {
+	public void setGoods_price2(int goods_price2) {
 		this.goods_price2 = goods_price2;
 	}
 
@@ -319,6 +323,22 @@ public class GoodsVO {
 
 	public void setGoods_service(String goods_service) {
 		this.goods_service = goods_service;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
 }
