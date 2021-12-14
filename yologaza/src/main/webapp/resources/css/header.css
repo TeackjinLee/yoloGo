@@ -1,0 +1,196 @@
+body{
+  font-size: 14px;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 라이브러리 */
+.cell {
+    float: left;
+}
+
+.cell-r {
+    float: right;
+}
+
+.row::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.con {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+header{
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  height: auto;
+  transition:0.4s;
+  background:white;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  display:block;
+  font-size: 14px;
+  z-index: 99;
+}
+#head_link ul{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 0;
+    margin-bottom: 0;
+}
+#head_link ul li{
+  padding-left: 20px;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+  color: #777;
+}
+/* user/business header color */
+header #user_header{
+  background: rgb(112, 173, 71);
+}
+header #business_header{
+	background: rgb(52, 152, 219);
+}
+
+header section .menu{
+  position: relative;
+  height: 64px;
+  margin: 0 auto;
+}
+
+/* 검색 */
+header section .menu .menu-bar #search{
+  margin-top: 15px;
+}
+#toggleBtn{
+  display:none;
+}
+ #toggleBtnOn{
+  width: 0px;
+  border: none;
+  background-color: rgb(112, 173, 71);
+  transition: all 0.3s;
+}
+#toggleBtn:checked ~ #toggleBtnOn {
+    width: 420px;
+    transition: all 0.3s;
+}
+.toggleBtn{
+  border: none;
+  text-indent: -99px;
+  width: 28px;
+  height: 30px;
+  background: url(https://image.goodchoice.kr/images/web_v3/ico_srch_2.png) 50%;
+  background-size: 24px auto;
+  z-index:10;
+  cursor: pointer;
+}
+
+/* 로고 */
+header section .menu #logo a {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 96px;
+  height: 30px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  font-weight:bold;
+}
+header section .menu #logo a img{
+  width: 130%;
+}
+header section .menu .menu-bar{
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  height: 50px;
+  padding-left: 0px;
+}
+header section .menu .menu-bar > .btn_srch{
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: none;
+  text-indent: -9999px;
+  width: 28px;
+  height: 28px;
+  background: url(https://image.goodchoice.kr/images/web_v3/ico_srch_2.png) 50%;
+  background-size: 24px auto;
+  z-index:10;
+  cursor: pointer;
+}    
+header > section > .menu > .menu-bar > .gnb-list{
+  margin-top: 10px;
+  padding-left: 0;
+}
+header > section > .menu > .menu-bar > .gnb-list > li{
+  color: white;
+  font-size: 18px;
+  margin-left: 30px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.8);
+}
+header > section > .menu > .menu-bar > .gnb-list > li:hover{
+  color: white;
+  font-size: 18px;
+  margin-left: 30px;
+  cursor: pointer;
+  color: rgba(255,255,255);
+}
+
+header > section .menu > .menu-bar > .gnb-list > li > .sub-menu-box{
+	visibility: hidden;
+	position: absolute;
+	top: 50px;
+	width: 170px;
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 9px;
+	color: #777;
+	padding-top: 5px;
+}
+
+header > section .menu > .menu-bar > .gnb-list > li:hover > .sub-menu-box {
+  visibility: visible;
+}
+
+header > section .menu > .menu-bar > .gnb-list > li > .sub-menu-box ul{
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+header > section .menu > .menu-bar > .gnb-list > li > .sub-menu-box ul li{
+  padding-top: 2px;
+  text-align: left;
+  padding-bottom: 2px;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+   <definition name="/CC/announceList" extends="baseLayout">
+      <put-attribute name="title" value="공지사항" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/User_CCForm.jsp" />
+   </definition>
+   
+   <definition name="/CC/viewAnnounce" extends="baseLayout">
+      <put-attribute name="title" value="공지사항 세부" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
+   </definition>
+   
+   <definition name="/CC/Question1Form" extends="baseLayout">
+      <put-attribute name="title" value="자주 묻는 질문" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
+   </definition>
+
+   <definition name="/CC/Question2Form" extends="baseLayout">
+      <put-attribute name="title" value="1:1문의" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Question2Form.jsp" />
+   </definition>
+   
+   <definition name="/CC/Question3Form" extends="baseLayout">
+      <put-attribute name="title" value="문의 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Question3Form.jsp" />
+   </definition>
+</tiles-definitions>

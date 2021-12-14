@@ -1,0 +1,374 @@
+body{
+    font-size: 16px;
+    height:900px;
+  }
+  section{
+    box-sizing: border-box;
+  }
+  .wrap.show{
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .wrap{
+    width: 100%;
+    background:#fff;
+  }
+  
+  ul,
+  li {
+      list-style: none;
+  }
+  
+  a {
+      color: inherit;
+      text-decoration: none;
+  }
+  
+  /* 라이브러리 */
+  .cell {
+      float: left;
+  }
+  
+  .cell-r {
+      float: right;
+  }
+  
+  .row::after {
+      display: block;
+      clear: both;
+      content: "";
+  }
+  
+  .con {
+      max-width: 1024px;
+      margin: 0 auto;
+  }
+  
+  *{
+    padding:0;
+    margin:0;
+  }
+  /* head-bar */
+  .header-bar{
+    background:rgb(112, 173, 71); 
+    height:120px;
+  }
+  .header-bar .text-box{
+    position:relative;
+    height:100%;
+  }
+  .header-bar .text-box p{
+    position:absolute;
+    left:0;
+    bottom:20px;
+    color:white;
+    font-weight: 500;
+    font-size: 32px;
+  }
+  
+  /* 상세검색창 */
+  .detail-select .detail-select-box .top_menu{
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  .detail-select .detail-select-box .top_menu ul{
+    font-size:18px;
+    color: #999;
+  }
+  .detail-select .detail-select-box .top_menu ul li{
+    margin-right: 20px;
+  }
+  /* filter_wrap */
+  .filter_wrap{
+    display: block ;
+    float: left;
+    width: 30%;
+    /*   background: pink; */
+    border:1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 90px;
+  }
+  /* 달력 */
+  .detail-select .detail-select-box .filter_wrap .date-wrap{
+    display: block;
+    width: 100%;
+  }
+  .detail-select .detail-select-box .filter_wrap .date-wrap .btn_date{
+    display: block;
+    width: 240px;
+    margin-top:10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    /*   background-color: blue; */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .detail-select .detail-select-box .filter_wrap .date-wrap .btn_date .date-box{
+    text-align: center;
+    margin: 0 auto;
+    padding:0;
+    border:0;
+    box-sizing: border-box;
+  }
+  .detail-select .detail-select-box .filter_wrap .date-wrap .btn_date input{
+    width:100%;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+    text-align:center;
+    color: #777;
+  }
+  .detail-select .detail-select-box .filter_wrap .select-wrap{
+    display: block;
+    width: 100%;
+    /*   background: #555; */
+    padding-left: 20px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  .detail-select .detail-select-box .filter_wrap .select-wrap button{
+    width: 120px;
+    border: 1px solid rgb(112, 173, 71);
+    border-radius: 5px;
+    background: white;
+    color: #777;
+    font-size: 16px;
+    padding: 3px 0;
+    box-sizing: border-box;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .detail-select .detail-select-box .filter_wrap .select-wrap button:hover{
+    border: 1px solid rgb(112, 173, 71);
+    background: rgb(112, 173, 71);
+    color: white;
+    transition:0.5s;
+  }
+  
+  .detail-select .detail-select-box .filter_wrap section{
+    display: block;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+  }
+  /* 상세조건 */
+  .filter_wrap section {
+      border-bottom: none;
+  }
+  .filter_wrap section strong {
+      display: block;
+      position: relative;
+      margin-bottom: 21px;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(0,0,0,0.56);
+  }
+  .filter_wrap section .half {
+      overflow: hidden;
+  }
+  .filter_wrap section ul li {
+      margin-bottom: 16px;
+  }
+  .filter_wrap section .half li {
+      float: left;
+      width: 50%;
+  }
+  label.label_chk{
+    margin-left:5px;
+  }
+  
+  /* 가격 */
+  .slider_wrap {
+      position: relative;
+      height: 40px;
+      margin: 34px 24px 0 0;
+  }
+  .slider_align {
+      position: relative;
+      margin: 0 22px;
+  }
+  .price_val {
+      position: relative;
+      top: -1px;
+      border: none;
+      font-size: 14px;
+      margin-left: 10px;
+  }
+  .ui-slider .ui-slider-range {
+      position: absolute;
+      top: -1px !important;
+      z-index: 1;
+      display: block;
+      border: 0;
+      background-position: 0 0;
+      background: rgb(112, 173, 71);
+      height: 4px !important;
+  }
+  .ui-slider .ui-slider-handle {
+      position: absolute;
+      z-index: 2;
+      width: 28px;
+      height: 30px;
+      top: -14px !important;
+      cursor: pointer;
+  
+      touch-action: none;
+  }
+  .slider_wrap .ui-state-default {
+      background: url(../image/ico_price_point.png) 0 0 no-repeat;/*가격 이미지 첨부*/
+      background-size: 28px auto;
+  }
+  .ui-slider-handle.ui-state-default:last-child {
+      margin-left: -4px;
+  }
+  .slider_wrap .price_txt {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      font-size: 14px;
+      color: rgba(0,0,0,0.56);
+  }
+  .slider_wrap .price_txt:last-child {
+      position: absolute;
+      top: 16px;
+      right: 0;
+      font-size: 14px;
+      color: rgba(0,0,0,0.56);
+      text-align: right;
+  }
+  
+  /* list_wrap */
+  .detail-select .detail-select-box .list_wrap{
+    float: left;
+    width: 70%;
+  }
+  .search-menu{
+    overflow: hidden;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+    text-align: center;
+  }
+  .goods-wrap{
+    padding-left: 20px;
+  }
+  .goods-wrap .search-menu > .search-box{
+      overflow: hidden;
+      float: left;
+      width: 85%;
+      height: 40px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+  }
+  .search-menu .btn_map {
+      float: right;
+      display: block;
+      width: 13%;
+      margin-left: 8px;
+      padding: 0 12px 0 0;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 4px;
+      background: url("../image/ico_map.png") 8px 50% no-repeat;
+      background-size: 22px auto;
+      background-color: rgba(250,250,250,0.6);
+      text-align: right;
+    
+  }
+  .goods-wrap .search-menu > .search-box > button:nth-child(1) {
+      width: 34%;
+  }
+  .goods-wrap .search-menu > .search-box > button:nth-child(2) {
+    width: 33%;
+    border-right: 1px solid rgba(0,0,0,0.08);
+    border-left: 1px solid rgba(0,0,0,0.08);
+  }
+  .goods-wrap .search-menu > .search-box > button:nth-child(3) {
+      width: 33%;
+  }
+  .goods-wrap .search-menu > .search-box > button span {
+      display: inline-block;
+      position: relative;
+      top: -2px;
+  }
+  
+  .search-menu button {
+    float: left;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    background: rgba(250,250,250,0.6);
+    font-size: 16px;
+    line-height: 40px;
+    color: rgba(0,0,0,0.38);
+    cursor: pointer;
+  }
+  /* 클릭시 */
+  .goods-wrap .search-menu > .search-box .on{color:rgba(0,0,0,0.87)}
+  .goods-wrap .search-menu > .search-box .on span{padding:0 0 0 24px}
+  .goods-wrap .search-menu > .search-box .on span{display:inline-block;background-size:22px auto;color:rgb(112, 173, 71);font-weight: bold;}
+  .goods-wrap .search-menu > .search-box .on:nth-child(1) span{background:url('../image/select_work_1.png') -10px 50% no-repeat; background-size:contain;}
+  .goods-wrap .search-menu > .search-box .on:nth-child(2) span{background:url('../image/select_work_2.png') -10px 50% no-repeat; background-size:contain;}
+  .goods-wrap .search-menu > .search-box .on:nth-child(3) span{background:url('../image/select_work_3.png') -10px 50% no-repeat; background-size:contain;}
+
+  /* 숙소예약리스트 */
+  .goods_list{
+    display: block;
+    width:100%;
+    height: 1000px;
+  /*   background:blue; */
+  }
+  .goods_list .goods_title{
+    margin: 20px 0;
+    text-align: left;
+  }
+  .goods_list .goods_box{
+    position: relative;
+    width:100%;
+    height: 300px;
+    background: rgb(254,251,245);
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+  .goods_list .goods_box a .goods_picture{
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 270px;
+    background: #ddd;
+    margin-top: 15px;
+    margin-left: 15px;
+    overflow: hidden;
+  }
+  .goods_list .goods_box a .goods_picture img{
+    position: absolute;
+    top: 0;
+    left: -30px;
+    height: 100%;
+  }
+  .goods_list .goods_box a .goos_impormation .name p{
+    margin-top: 5px;
+  }
+  .goods_list .goods_box a .goos_impormation{
+    padding: 16px 0 16px 330px;
+    color: rgba(0,0,0,0.87);
+    font-size: 18px;
+    line-height: 21px;
+    text-align: left;
+  }
+  .goods_list .goods_box a .goos_impormation .price{
+    position: absolute;
+    right:15px;
+    bottom: 15px;
+  }
+  .goods_list .goods_box a .goos_impormation .price .map_html p{
+    margin-top: 10px;
+  }

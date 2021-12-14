@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.goods">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="goodsResult" type="goodsVO">
+		<result property="goods_id" column="goods_id" />
+		<result property="goods_type" column="goods_type" />
+		<result property="goods_email1" column="goods_email1" />
+		<result property="goods_email2" column="goods_email2" />
+		<result property="goods_hp" column="goods_hp" />		
+		<result property="goods_tel1" column="goods_tel1" />
+		<result property="goods_tel2" column="goods_tel2" />
+		<result property="goods_tel3" column="goods_tel3" />
+		<result property="account_bank" column="account_bank" />
+		<result property="account_name" column="account_name" />
+		<result property="account" column="account" />		
+		<result property="goods_homePage" column="goods_homePage" />
+		<result property="goods_name" column="goods_name" />
+		<result property="goods_address" column="goods_address" />		
+		<result property="goods_description" column="goods_description" />
+		<result property="goods_around" column="goods_around" />
+		<result property="goods_checkIn" column="goods_checkIn" />
+		<result property="goods_checkOut" column="goods_checkOut" />
+		<result property="goods_price1" column="goods_price1" />
+		<result property="goods_price2" column="goods_price2" />
+		<result property="goods_acess" column="goods_acess" />
+
+		<result property="goods_room" column="goods_room" />
+		<result property="goods_room_name" column="goods_room_name" />
+		<result property="goods_room_type" column="goods_room_type" />
+		<result property="goods_capacity" column="goods_capacity" />
+		<result property="goods_introduce" column="goods_introduce" />
+		
+	</resultMap>	
+
+	<resultMap id="imageResult" type="ImageFileVO">
+	   <result property="goods_id" column="goods_id" />
+	   <result property="goods_uroom" column="goods_uroom" />
+	   <result property="fileName" column="fileName" />
+	   <result property="fileType" column="fileType" />
+	</resultMap>
+	
+
+	
+   
+      <select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
+        <![CDATA[
+		select @ROWNUM:=@ROWNUM+1 ,t.*
+		          from(
+					select g.*,d.fileName from goods g, goods_img d
+		        	where g.goods_id=d.goods_id 
+		        	and d.filetype='goods'
+		            and goods_type=#{goods_type}
+		            group by goods_id
+		            order by g.goods_creDate desc)  t
+			             where (@ROWNUM:=0) < 16;
+		
+	    ]]>
+	</select>
+
+</mapper>

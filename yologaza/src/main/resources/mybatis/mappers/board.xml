@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+<resultMap id="articlesResult" type="articleVO">
+    <result property="level" column="level" />
+    <result property="articleNO" column="articleNO" />
+    <result property="parentNO" column="parentNO" />
+    <result property="title" column="title" />
+    <result property="content" column="content" />
+    <result property="writeDate" column="writeDate" />
+    <result property="imageFileName" column="imageFileName" />
+  </resultMap> 
+
+  <select id="selectAllArticlesList" resultMap="articlesResult"   >
+    <![CDATA[
+		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗'), tbd.TITLE)
+	                 ELSE tbd.TITLE
+	           END AS TITLE, content,imageFileName, writeDate,tbd.id
+		FROM
+		   (SELECT fnc_hierachi() AS articleNO, @level AS level
+		      FROM (SELECT @start_with:=0, @articleNO:=@start_with, @level:=0) vars
+		        JOIN board
+		       WHERE @articleNO IS NOT NULL) fnc
+		JOIN board tbd ON fnc.articleNO = tbd.articleNO;
+    ]]>
+  </select>
+  
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<![CDATA[
+			insert into board(articleNO, title, content, imageFileName, id)
+			values(#{articleNO}, #{title}, #{content}, #{imageFileName}, #{id})
+		]]>
+	</insert>
+	
+	<insert id="insertNewReply" parameterType="java.util.Map">
+		<![CDATA[
+			insert into board(articleNO, parentNO, title, content, imageFileName, id)
+			values(#{articleNO}, #{parentNO}, #{title}, #{content}, #{imageFileName}, #{id})
+		]]>
+	</insert>
+  
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(max(articleNO), 0) + 1 from board	
+		]]>
+	</select>
+	
+	<select id="selectArticle" resultType="articleVO"   parameterType="int">
+		<![CDATA[
+			SELECT * from board
+			where articleNO = #{articleNO}
+		]]>
+	</select>
+	
+	<update id="updateArticle"  parameterType="java.util.Map">
+			update board
+			set title=#{title},	 
+			content=#{content}
+			 <if test="imageFileName!='' and imageFileName!=null">
+			  , imageFileName=#{imageFileName}
+			</if>
+			where articleNO=#{articleNO}
+	</update>
+	
+	<delete id="deleteArticle"  parameterType="int">
+		<![CDATA[
+			delete from board
+			where articleNO=#{articleNO}
+		]]>      
+	</delete>
+  
+</mapper>

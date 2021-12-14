@@ -1,0 +1,256 @@
+body{
+  font-size: 16px;
+  height:900px;
+}
+section{
+  box-sizing: border-box;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 라이브러리 */
+.cell {
+    float: left;
+}
+
+.cell-r {
+    float: right;
+}
+
+.row::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.con {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+*{
+  padding:0;
+  margin:0;
+}
+
+/* #pay시작 */
+#pay .pay-box{
+  display: flex;
+  width:100%;
+  margin-top: 60px;
+  text-align: left;
+}
+/* 사용자 정보 */
+#pay .pay-box .pay_user_information{
+  width:60%;
+  height:100%;
+  padding: 0px 20px 0px 0px;
+  box-sizing:border-box;
+  
+}
+#pay .pay-box .pay_user_information .user_information_box h3{
+  margin-bottom:30px;
+}
+#pay .pay-box .pay_user_information .user_information_box div{
+  margin-top:20px;
+}
+#pay .pay-box .pay_user_information .user_information_box div div{
+  margin-top:5px;
+}
+#pay .pay-box .pay_user_information .user_information_box .name div input{
+  height: 50px;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  width: 100%;
+  padding:5px;
+  box-sizing: border-box;
+}
+#pay input{
+  height: 50px;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  width: calc(100% - 130px);
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 18px;
+  color: #777;
+}
+#pay button{
+  height: 50px;
+  border-radius: 5px;
+  width: 120px;
+  box-sizing: border-box;
+  cursor:pointer;
+  float:right;
+  color: white;
+  background:rgb(112, 173, 71);
+  font-size: 16px;
+  border:none;
+}
+
+/* 로그인시 혜택 창 */
+#pay .login-box{
+  position: relative;
+  margin-top:90px;
+  width: 100%;
+  height: 120px;
+  background:rgb(112, 173, 71);
+  overflow:hidden;
+}
+#pay .login-box p{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+#pay .login-box img{
+  width:100%;
+}
+
+/* 결제수단 선택 */
+#pay .pay_select{
+  margin-top: 30px;
+}
+.select_type_1{
+  margin-top:10px;
+}
+#payment-select{
+  height: 50px;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  width: 270px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 18px;
+  color:#777;
+}
+
+/* agree */
+#pay .agree .checkbox_group{
+  margin-top:30px;
+}
+#pay .agree .checkbox_group input{
+  margin-top: 7px;
+  float:left;
+  width:20px;
+  height: 20px;
+}
+#pay .agree .checkbox_group label{
+  margin-top:4px;
+  margin-left:10px;
+  float:left;
+  width:calc(100% - 40px);
+  height:30px;
+}
+#pay .agree .checkbox_group label span{
+  color: darkred;
+  padding-left:10px;
+  box-sizing:border-box;
+}
+/* 결제정보창 */
+#pay .pay-box .pay_payment{
+  width:40%;
+  height:100%;
+  background:rgba(0,0,0,0.05);
+}
+#pay .pay-box .pay_payment .payment_information .user_goods_information{
+  padding:20px;
+  box-sizing: border-box;
+}
+#pay .pay-box .pay_payment .payment_information .user_goods_information p{
+  color: #555;
+}
+#pay .pay-box .pay_payment .user_goods_cost{
+  box-sizing: border-box;
+}
+#pay .pay-box .pay_payment .user_goods_cost .text-box{
+  border-top: 1px solid #ddd;
+  padding:20px;
+  box-sizing: border-box;
+}
+
+#pay .pay-box .pay_payment .pay_result .next-button{
+  width:100%;
+  height:60px;
+  text-align: center;
+  color:white;
+  background: rgb(112, 173, 71);
+  font-size: 18px;
+  box-sizing: border-box;
+  border-radius:0;
+  border:none;
+}
+.next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.join_inner_float
+{
+  border: 5px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  width: 330px;
+  height: auto;
+  background-color: white;
+  margin: auto;
+  margin-bottom: 150px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.join_inner_float .input_line h1{
+  margin-top:0;
+}
+.join_inner_float form{
+	text-align: left;
+}
+
+
+/*  크기 */
+@media screen and (max-width: 1024px) {
+  #pay .pay-box {
+    display: flex;
+    flex-direction: column;
+  }
+  #pay .pay-box .pay_user_information{
+    width:100%;
+  }
+  .goods_impormation{
+    width: 100%;
+  }
+
+  .tab_each ul li .room-box .room-select {
+    display: flex;
+    flex-direction: column;
+  }
+  .tab_each ul li .room-box img{
+    width:100%;
+  }
+  .tab_each ul li .room-box .room-text{
+    width:100%;
+  }
+  #pay .pay-box .pay_payment{
+    width:100%;
+  }
+}
