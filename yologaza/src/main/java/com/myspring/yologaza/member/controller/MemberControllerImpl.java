@@ -199,16 +199,4 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
-	
-	// 핸드폰 인증
-	@RequestMapping(value="/hpCheck", method = RequestMethod.GET)
-    @ResponseBody
-    public String sendSMS(@RequestParam("hp") String userhpNumber) throws Exception { // 뮨저 ㅂㅎ냐가
-
-        int randomNumber = (int)((Math.random() * (9999-1000+1)) + 1000);//난수 생성
-
-        memberService.certifiedhpNumber(userhpNumber, randomNumber);
-        
-        return Integer.toString(randomNumber);
-    }
 }
