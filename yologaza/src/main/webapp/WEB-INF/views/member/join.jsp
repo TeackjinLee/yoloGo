@@ -13,51 +13,79 @@
 <script src="${contextPath}/resources/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
 
 <script>
-$(document).ready(function () {
-	//휴대폰 번호 인증
-	var code2 = "";
-	$("#hpChk").click(function(){
-	 alert("인증번호 발송이 완료되었습니다. \n 휴대폰에서 인증번호 확인을 해주십시오.");
-	 var hp = $("#hp").val();
-	 $ajax({
-	     type:"GET",
-	     url:"hpCheck?hp=" + hp,
-	     cache : false,
-	     success:function(data){
-	         if(data == "error"){
-	             alert("휴대폰 번호가 올바르지 않습니다.")
-	                 $(".successhpChk").text("유효한 번호를 입력해 주세요.");
-	                 $(".successhpChk").css("color", "red");
-	                 $("#hp").attr("autofocus", true);
-	         } else{
-	             $("#hp2").attr("disabled", false);
-	             $("#hpChk2").css("display", "inline-block");
-	             $("successhpChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-	             $(".successhpChk").css("color", "green");
-	             $("#hp").attr("readonly", true);
-	             code2 = data;
-	         }
-	     }
-	 })
-	});
-	
-	// 휴대폰 인증번호 대조
-	$("#hpChk2").click(function(){
-	    if($("#hp2").val() == code2){
-	        $(".successhpChk").text("인증번호가 일치합니다.");
-	        $(".successhpChk").css("color", "green");
-	        $("#hpDoubleChk").val("true");
-	        $("#hp2").attr("disabled", true);
-	    } else{
-	        $(".successhpChk").text("인증번호가 일치하지 않습니다. 확인해 주시기 바랍니다.");
-	        $(".successhpChk").css("color", "red");
-	        $("#hpDoubleChk").val("false");
-	        $(this).attr("autofocus", true);
-	    }
-	});
-});
-</script>
+  var count = 0; /* 문자 중복을 막기 위한 인증번호 */
+   
+ $(document).ready(function() {
 
+    $("#send").click(function() {
+       
+       var number = Math.floor(Math.random() * 100000) + 100000;
+          if(number>100000){
+             number = number - 10000;
+          }
+
+          $("#text").val(number);      /* 난수로 생성된 인증번호를 hidden name : text 에 숨긴다 */
+       
+       var to = $("#to").val();
+       
+       if(to == "" || to == null){
+          alert("빈칸이나 공백을 채워주세요");
+       }
+       
+       else {
+       var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");   /* 문자를 보낼껀지 물어본다 */
+          
+          if(con_test == true){
+               
+             if(count < 3){      /* 추후 데이터베이스에 컬럼 값을 확인하여 count 값을 비교 할 예정 */
+                 
+               $.ajax({
+                   url:"sendSms.do",
+                   type:"post",
+                   data:{to: $("#to").val(),
+                        text: $("#text").val()
+                        },
+                 success:function(){
+                   alert("해당 휴대폰으로 인증번호를 발송했습니다");
+                   count++;
+                   
+                   alert(count);
+                   },
+                   error(){
+                      
+                   }
+                   
+                });
+             } else {
+                alert("휴대폰 인증 그만하세요")
+             }
+          
+          }
+             else if(con_test == false){
+                
+             }
+         }   
+    })
+    $("#enterBtn").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
+       alert($("#text").val());
+       var userNum = $("#userNum").val();
+       
+       var sysNum = $("#text").val();         
+       
+       if(userNum == null || userNum == ""){
+          alert("휴대폰으로 발송된 인증번호를 입력해주세요");
+       }     
+       else{     
+          if(userNum.trim() == sysNum.trim()){
+              alert("성공");
+           }
+           else {
+              alert("실패");
+           }          
+       }
+    });
+  });
+  </script>
 
 <script>
 function fn_overlapped(){
@@ -321,26 +349,27 @@ function fn_overlapped(){
 		</table>
 		</div>	
 	</form>	
-	<tr class="mobileNo">
-	    <th>
-	        <label for="hp">*휴대폰 번호</label>
-	    </th>
-	    <td>
-	        <p>
-	            <input id="hp" type="text" name="hp" titile="전화번호 입력" required/>
-	            <span id="hpChk" class="doubleChk">인증번호 보내기</span><br/>
-	            <input id="hp2" type="text" name="hp2" title="인증번호 입력" disabled required/>
-	            
-	            
-	            <span id="hpChk2" class="doubleChk">본인인증</span>
-	            <span class="point successhpChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
 	
-	            <input type="text" id="hpDoubleChk"/>
-	        </p>
-	        <p class="tip">
-	            최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해 주세요.)
-	        </p>
-	    </td>
-	</tr>
+	
+	
+	
+	<div id="contents"> 
+<form action="#" method="post">
+      받는사람 : <input type="text" id="to" name="to"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+    <input type="button" id="send" value="전송"/><br> <!-- 문자보내는 전송버튼 -->
+     인증번호 :    <input type="text" id="userNum">   <!-- 인증번호 입력창 -->
+  <input type="button" id="enterBtn" value="확인">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+  
+  
+  <input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+ 
+</form>  
+    </div>
+  
+
+
+	
+	
+	
 </body>
 </html>

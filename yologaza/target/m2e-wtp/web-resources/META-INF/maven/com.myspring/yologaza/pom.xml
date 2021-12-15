@@ -32,6 +32,36 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- 썸내일 기능 -->
+        <dependency>
+         <groupId>net.coobird</groupId> 
+         <artifactId>thumbnailator</artifactId> 
+         <version>0.4.8</version> 
+        </dependency>
+        
+        <!-- jquery 라이브러리 --> 
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>jquery</artifactId>
+        <version>3.6.0</version>
+      </dependency>
+      
+        <!-- json -->
+        <dependency>
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib</artifactId>
+		    <version>2.4</version>
+		    <classifier>jdk15</classifier>    
+		</dependency>
+		
+		
+		<!-- AOP -->
+		<dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-aop</artifactId>
+		  <version>${org.springframework-version}</version>
+	  </dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -177,11 +207,11 @@
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+		<!-- 핸드폰 인증 -->
 		<dependency>
-			<groupId>net.nurigo</groupId>
-			<artifactId>javaSDK</artifactId>
-			<version>2.2</version>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
 		</dependency>
 		<!-- oauth2 login -->
 	    <dependency>

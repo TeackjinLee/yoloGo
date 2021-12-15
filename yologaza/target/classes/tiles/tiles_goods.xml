@@ -10,10 +10,10 @@
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
-
-   <definition name="main" extends="baseLayout">
-      <put-attribute name="title" value="메인페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
+   
+   <definition name="searchGoods" extends="baseLayout">
+      <put-attribute name="title" value="상세검색페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/goods/searchGoods.jsp" />
    </definition>
    
 </tiles-definitions>

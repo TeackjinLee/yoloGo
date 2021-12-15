@@ -23,7 +23,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 
 @Controller("mainController")
 @EnableAspectJAutoProxy
-public class MainController extends BaseController {
+public class MainController{
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
 	@Autowired
 	private MemberService memberService;

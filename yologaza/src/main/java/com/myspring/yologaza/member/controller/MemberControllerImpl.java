@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.scribejava.core.model.Response;
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -36,14 +37,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	@Autowired
 	MemberVO memberVO;
 
-	@RequestMapping(value = {"/searchGoods"}, method = RequestMethod.GET)
-	private ModelAndView searchGoods(HttpServletRequest request,
-								HttpServletResponse response) throws Exception{
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
 	@RequestMapping(value = {"/goodsRoom.do"}, method = RequestMethod.GET)
 	private ModelAndView goodsRoom(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
@@ -77,8 +70,8 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		
 		try {
+			
 			memberService.addMember(_memberVO);
 			message = "<script>";
 			message += " alert('YOLO가자!에 오신것을 환영합니다.');";
@@ -206,16 +199,4 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
-	
-	// 핸드폰 인증
-	@RequestMapping(value="/hpCheck", method = RequestMethod.GET)
-    @ResponseBody
-    public String sendSMS(@RequestParam("hp") String userhpNumber) throws Exception { // 뮨저 ㅂㅎ냐가
-
-        int randomNumber = (int)((Math.random() * (9999-1000+1)) + 1000);//난수 생성
-
-        memberService.certifiedhpNumber(userhpNumber, randomNumber);
-        
-        return Integer.toString(randomNumber);
-    }
 }

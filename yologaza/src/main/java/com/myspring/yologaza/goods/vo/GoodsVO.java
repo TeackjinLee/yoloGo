@@ -6,7 +6,9 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
-	private String goods_email;
+	private String goods_type;
+	private String goods_email1;
+	private String goods_email2;
 	private String goods_hp;
 	private String goods_tel1;
 	private String goods_tel2;
@@ -21,17 +23,17 @@ public class GoodsVO {
 	private String goods_around;
 	private Time   goods_checkIn;
 	private Time   goods_checkOut;
+	private int goods_price1;
+	private int goods_price2;
 	private char   goods_acess;
 	private Date   goods_creDate;
 	
 	// goods_detail
 	private String goods_room;
 	private String goods_room_name;
-	private String goods_type;
+	private String goods_room_type;
 	private String goods_capacity;
 	private String goods_introduce;
-	private String goods_price1;
-	private String goods_price2;
 	private String goods_room_creDate;
 	
 	// goods_peak
@@ -44,6 +46,10 @@ public class GoodsVO {
 	// goods_service
 	private String goods_service;
 	
+	// goods_img
+	private String fileName;
+	private String fileType;
+	
 	public GoodsVO() {
 	}
 
@@ -55,12 +61,28 @@ public class GoodsVO {
 		this.goods_id = goods_id;
 	}
 
-	public String getGoods_email() {
-		return goods_email;
+	public String getGoods_type() {
+		return goods_type;
 	}
 
-	public void setGoods_email(String goods_email) {
-		this.goods_email = goods_email;
+	public void setGoods_type(String goods_type) {
+		this.goods_type = goods_type;
+	}
+
+	public String getGoods_email1() {
+		return goods_email1;
+	}
+
+	public void setGoods_email1(String goods_email1) {
+		this.goods_email1 = goods_email1;
+	}
+
+	public String getGoods_email2() {
+		return goods_email2;
+	}
+
+	public void setGoods_email2(String goods_email2) {
+		this.goods_email2 = goods_email2;
 	}
 
 	public String getGoods_hp() {
@@ -207,12 +229,12 @@ public class GoodsVO {
 		this.goods_room_name = goods_room_name;
 	}
 
-	public String getGoods_type() {
-		return goods_type;
+	public String getGoods_room_type() {
+		return goods_room_type;
 	}
 
-	public void setGoods_type(String goods_type) {
-		this.goods_type = goods_type;
+	public void setGoods_room_type(String goods_room_type) {
+		this.goods_room_type = goods_room_type;
 	}
 
 	public String getGoods_capacity() {
@@ -231,19 +253,19 @@ public class GoodsVO {
 		this.goods_introduce = goods_introduce;
 	}
 
-	public String getGoods_price1() {
+	public int getGoods_price1() {
 		return goods_price1;
 	}
 
-	public void setGoods_price1(String goods_price1) {
+	public void setGoods_price1(int goods_price1) {
 		this.goods_price1 = goods_price1;
 	}
 
-	public String getGoods_price2() {
+	public int getGoods_price2() {
 		return goods_price2;
 	}
 
-	public void setGoods_price2(String goods_price2) {
+	public void setGoods_price2(int goods_price2) {
 		this.goods_price2 = goods_price2;
 	}
 
@@ -302,4 +324,21 @@ public class GoodsVO {
 	public void setGoods_service(String goods_service) {
 		this.goods_service = goods_service;
 	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
 }
