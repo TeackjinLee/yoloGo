@@ -351,7 +351,7 @@ body{
   .goods_list .goods_box a .goods_picture img{
     position: absolute;
     top: 0;
-    left: -30px;
+    left: -50px;
     height: 100%;
   }
   .goods_list .goods_box a .goos_impormation .name p{
