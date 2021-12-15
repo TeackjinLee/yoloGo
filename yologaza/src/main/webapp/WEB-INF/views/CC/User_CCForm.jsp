@@ -226,6 +226,7 @@ p {
     font-size: 13px;
     line-height: 1.5;
     text-align: center;
+    cursor:pointer;
 }
 
 .paging .on{
@@ -279,14 +280,22 @@ p {
               </ul>
               <div id="notice_pagination">
                 <div class="paging">
-                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
-                  <button class="on">1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                  <button>6</button>
-                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
+                <c:if test="${pagination.startPage > 1}">
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/CC/announceList.do?pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                </c:if>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                	<c:choose>
+                		<c:when test="${i == pagination.page}">
+                  			<button class="on" onclick="location.href='${contextPath}/CC/announceList.do?pages=${i}'">${i}</button>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<button onclick="location.href='${contextPath}/CC/announceList.do?pages=${i}'">${i}</button>
+                  		</c:otherwise>
+                  	</c:choose>
+                </c:forEach>
+                <c:if test="${pagination.endPage < pagination.totalPage}">
+                  <button type="button" class="next" onclick="location.href='${contextPath}/CC/announceList.do?pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                </c:if>
                 </div>
               </div>
             </div>

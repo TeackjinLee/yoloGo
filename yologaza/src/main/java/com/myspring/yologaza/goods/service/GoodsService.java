@@ -7,4 +7,5 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 
 public interface GoodsService {
 	public Map<String,List<GoodsVO>> listGoods() throws Exception;
+	public Map goodsDetail(String goods_id) throws Exception;
 }
