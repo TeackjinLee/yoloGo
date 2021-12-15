@@ -14,10 +14,10 @@
     <result property="writeDate" column="writeDate" />
   </resultMap> 
 
-  <select id="selectAllAnnounceList" resultMap="announceResult">
+  <select id="selectAnnounceList" resultMap="announceResult">
     <![CDATA[
 		
-         select * from announce	order by writeDate asc 	
+         select SQL_CALC_FOUND_ROWS * from announce	order by writeDate asc limit #{offset},#{count}
     ]]>
   </select>
   <select id="selectAnnounce" resultType="announce_VO"   parameterType="int">
@@ -25,5 +25,8 @@
       SELECT * from announce
       where articleNo = #{articleNo}		
     ]]>
+  </select>
+  <select id="countAnnounce" resultType="int">
+  	select FOUND_ROWS();
   </select>
 </mapper>

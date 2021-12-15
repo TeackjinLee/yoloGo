@@ -17,22 +17,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.service.CC_Service;
 import com.myspring.yologaza.CC.vo.Announce_VO;
+import com.myspring.yologaza.common.file.Pagination;
 
 @Controller("cc_Controller")
 public class CC_ControllerImpl implements CC_Controller {
 	private static final Logger logger = LoggerFactory.getLogger(CC_ControllerImpl.class);
 	@Autowired
 	private CC_Service cc_Service;
-	@Autowired
 	Announce_VO announce_VO;
 	
 	@Override
 	@RequestMapping(value= "/CC/announceList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//pagination
+		Pagination pagination = new Pagination();
+		pagination.setPage(1);
+		pagination.setCountList(5);
+		pagination.setCountPage(6);
+		pagination.setTotalCount(cc_Service.getCC_DAO().getTotalCount());
+		if(request.getParameter("pages") != null)
+			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
+		int offset = (pagination.getPage()-1)*pagination.getCountList();
+		pagination.Paging();
 		String viewName = (String)request.getAttribute("viewName");
-		List announceList = cc_Service.listAnnounce();
+		List announceList = cc_Service.listAnnounce(offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("announceList", announceList);
+		mav.addObject(pagination);
 		return mav;
 	}
 	

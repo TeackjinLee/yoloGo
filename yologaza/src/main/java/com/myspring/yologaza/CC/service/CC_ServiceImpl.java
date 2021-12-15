@@ -14,11 +14,15 @@ import com.myspring.yologaza.CC.vo.Announce_VO;
 @Transactional(propagation = Propagation.REQUIRED)
 public class CC_ServiceImpl implements CC_Service{
 	@Autowired
-	private CC_DAO cc_DAO;
+	CC_DAO cc_DAO;
 	
-	public List<Announce_VO> listAnnounce() throws Exception{
-		List<Announce_VO> announceList =  cc_DAO.selectAllAnnounceList();
-        return announceList;
+	public CC_DAO getCC_DAO() {
+		return cc_DAO;
+	}
+	
+	public List<Announce_VO> listAnnounce(int offset, int count) throws Exception{
+		return cc_DAO.selectAnnounceList(offset, count);
+
 	}
 	
 	@Override
