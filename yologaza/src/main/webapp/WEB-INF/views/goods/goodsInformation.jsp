@@ -65,22 +65,14 @@
       <div class="slide-wrap row">
         <div class="column small-11 small-centered">
           <div class="slider slider-single">
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/406084/ad5465aea207609c304a996455543d56.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403110/012ad3728ae06ff3c5e9d2590c2112ae.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/785c73a4e4166bc0460f32cc77528e0a.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/f7b8c8f5f015ae73e7c330c655c122d3.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/9549b94d54d4cd1e20da85199a1b6727.jpg" alt="숙박정보 사진"></li>
+          	<c:forEach var="item" items="${goodsMap.imageList}" >
+          		<li class="pic"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
+			</c:forEach>
           </div>
           <div class="slider slider-nav">
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/406084/ad5465aea207609c304a996455543d56.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403110/012ad3728ae06ff3c5e9d2590c2112ae.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/785c73a4e4166bc0460f32cc77528e0a.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/f7b8c8f5f015ae73e7c330c655c122d3.jpg" alt="숙박정보 사진"></li>
-            <li class="pic"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/9549b94d54d4cd1e20da85199a1b6727.jpg" alt="숙박정보 사진"></li>
+            <c:forEach var="item" items="${goodsMap.imageList}" >
+          		<li class="pic"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
+			</c:forEach>
           </div>
         </div>
       </div>
@@ -162,12 +154,9 @@
 				      <div class="room-box-wrap on">
 				        <div class="room-img-content slider-wrap">
 				          <div class="room-pic-box" id="room-pic">
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/dffb419e594eecd8990e207f1a045801.jpg" alt="객실 이미지"></div>
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/18413407346f1a8ea4a96f6c53b6f952.jpg" alt="객실 이미지"></div>
-				            <div class="content cell"><img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/403109/bf5d1b07fc7c413f53af1de59c57a941.jpg" alt="객실 이미지"></div>
+				          	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
+				          		<div class="content cell"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
+							</c:forEach>
 				          </div>
 				        </div>
 				        <div class="page-num row">

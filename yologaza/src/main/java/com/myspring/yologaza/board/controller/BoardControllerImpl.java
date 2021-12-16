@@ -37,16 +37,7 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	ArticleVO articleVO;
 	
-	@Override
-	@RequestMapping(value="/board/goodsInformation.do",
-							method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		List articlesList = boardService.listArticles();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articlesList", articlesList);
-		return mav;
-	}
+
 	
 	@Override
 	@RequestMapping(value={"/board/addNewArticle.do"}, method = RequestMethod.POST)

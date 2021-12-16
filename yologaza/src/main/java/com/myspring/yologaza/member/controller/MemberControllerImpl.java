@@ -28,6 +28,7 @@ import com.github.scribejava.core.model.Response;
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
+import com.myspring.yologaza.sms.service.certificationService;
 
 @Controller("memberController")
 public class MemberControllerImpl extends ViewNameInterceptor implements MemberController {
@@ -198,5 +199,15 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		String result = memberService.overlapped(id);
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
+	}
+	
+
+	@Override
+	@RequestMapping(value = "/member/phoneCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendSMS(@RequestParam("phone") String userPhoneNumber) {
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
+		certificationService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+		return Integer.toString(randomNumber);
 	}
 }

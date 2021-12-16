@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.yologaza.goods.dao.GoodsDAO;
 import com.myspring.yologaza.goods.vo.GoodsVO;
+import com.myspring.yologaza.goods.vo.ImageFileVO;
 
 	@Service("goodsService")
 	@Transactional(propagation=Propagation.REQUIRED)
@@ -23,20 +24,31 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 			Map<String,List<GoodsVO>> goodsMap=new HashMap<String,List<GoodsVO>>();
 			List<GoodsVO> goodsList=goodsDAO.selectGoodsList("hotel");
 			goodsMap.put("hotel",goodsList);
-//			goodsList=goodsDAO.selectGoodsList("motel");
-//			goodsMap.put("motel",goodsList);
-//			
-//			goodsList=goodsDAO.selectGoodsList("hotel");
-//			goodsMap.put("hotel",goodsList);
-//			
-//			goodsList=goodsDAO.selectGoodsList("hotel");
-//			goodsMap.put("hotel",goodsList);
-//			
-//			goodsList=goodsDAO.selectGoodsList("guestHouse");
-//			goodsMap.put("guestHouse",goodsList);
-//			
-//			goodsList=goodsDAO.selectGoodsList("hanok");
-//			goodsMap.put("hanok",goodsList);
+			goodsList=goodsDAO.selectGoodsList("motel");
+			goodsMap.put("motel",goodsList);
+			
+			goodsList=goodsDAO.selectGoodsList("hotel");
+			goodsMap.put("hotel",goodsList);
+			
+			goodsList=goodsDAO.selectGoodsList("hotel");
+			goodsMap.put("hotel",goodsList);
+			
+			goodsList=goodsDAO.selectGoodsList("guestHouse");
+			goodsMap.put("guestHouse",goodsList);
+			
+			goodsList=goodsDAO.selectGoodsList("hanok");
+			goodsMap.put("hanok",goodsList);
+			return goodsMap;
+		}
+		@Override
+		public Map goodsDetail(String goods_id) throws Exception {
+			Map goodsMap=new HashMap();
+			GoodsVO goodsVO = goodsDAO.selectGoodsDetail(goods_id);
+			goodsMap.put("goodsVO", goodsVO);
+			List<ImageFileVO> imageList =goodsDAO.selectGoodsDetailImage(goods_id);
+			goodsMap.put("imageList", imageList);
+			List<ImageFileVO> imageListRoom =goodsDAO.selectGoodsDetailImageRoom(goods_id);
+			goodsMap.put("imageListRoom", imageListRoom);
 			return goodsMap;
 		}
 }

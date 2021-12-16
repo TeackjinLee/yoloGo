@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.yologaza.goods.vo.GoodsVO;
+import com.myspring.yologaza.goods.vo.ImageFileVO;
 
 @Repository("goodsDAO")
 public class GoodsDAOImpl implements GoodsDAO {
@@ -19,5 +20,22 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsVO> selectGoodsList(String goods_type) throws DataAccessException {
 		List<GoodsVO> goodsList=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsList", goods_type);
 		return goodsList;
+	}
+
+	@Override
+	public GoodsVO selectGoodsDetail(String goods_id) throws DataAccessException {
+		GoodsVO goodsVO=(GoodsVO)sqlSession.selectOne("mapper.goods.selectGoodsDetail",goods_id);
+		return goodsVO;
+	}
+
+	@Override
+	public List<ImageFileVO> selectGoodsDetailImage(String goods_id) throws DataAccessException {
+		List<ImageFileVO> imageList=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsDetailImage",goods_id);
+		return imageList;
+	}
+	@Override
+	public List<ImageFileVO> selectGoodsDetailImageRoom(String goods_id) throws DataAccessException {
+		List<ImageFileVO> imageListRoom=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsDetailImageRoom",goods_id);
+		return imageListRoom;
 	}
 }

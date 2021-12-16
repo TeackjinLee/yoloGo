@@ -45,20 +45,93 @@
 	
 
 	
-   
-      <select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
-        <![CDATA[
-		select @ROWNUM:=@ROWNUM+1 ,t.*
-		          from(
-					select g.*,d.fileName from goods g, goods_img d
-		        	where g.goods_id=d.goods_id 
-		        	and d.filetype='goods'
-		            and goods_type=#{goods_type}
-		            group by goods_id
-		            order by g.goods_creDate desc)  t
-			             where (@ROWNUM:=0) < 16;
-		
-	    ]]>
+    
+	<select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
+		<![CDATA[
+			select @ROWNUM:=@ROWNUM+1 ,t.*
+			          from(
+						select g.*,d.fileName from goods g, goods_img d
+			        	where g.goods_id=d.goods_id 
+			        	and d.filetype='goods'
+			            and goods_type=#{goods_type}
+			            group by goods_id
+			            order by g.goods_creDate desc)  t
+				             where (@ROWNUM:=0) < 16;
+			
+		]]>
+	</select>
+	
+	<select id="selectGoodsListnewest" parameterType="String" resultMap="goodsResult"   >
+		<![CDATA[
+			select @ROWNUM:=@ROWNUM+1 ,t.*
+			          from(
+						select g.*,d.fileName from goods g, goods_img d
+			        	where g.goods_id=d.goods_id 
+			        	and d.filetype='goods'
+			            and goods_type=#{goods_type}
+			            group by goods_id
+			            order by g.goods_creDate desc)  t
+				             where (@ROWNUM:=0) < 16
+				             order by goods_creDate desc;
+		]]>
+	</select>
+	
+	<select id="selectGoodsListhightPrice" parameterType="String" resultMap="goodsResult"   >
+		<![CDATA[
+			select @ROWNUM:=@ROWNUM+1 ,t.*
+			          from(
+						select g.*,d.fileName from goods g, goods_img d
+			        	where g.goods_id=d.goods_id 
+			        	and d.filetype='goods'
+			            and goods_type=#{goods_type}
+			            group by goods_id
+			            order by g.goods_creDate desc)  t
+				             where (@ROWNUM:=0) < 16
+				             order by goods_price1 desc;
+		]]>
+	</select>
+	
+	<select id="selectGoodsListlowerPrice" parameterType="String" resultMap="goodsResult"   >
+		<![CDATA[
+			select @ROWNUM:=@ROWNUM+1 ,t.*
+			          from(
+						select g.*,d.fileName from goods g, goods_img d
+			        	where g.goods_id=d.goods_id 
+			        	and d.filetype='goods'
+			            and goods_type=#{goods_type}
+			            group by goods_id
+			            order by g.goods_creDate desc)  t
+				             where (@ROWNUM:=0) < 16
+				             order by goods_price1 asc;
+		]]>
+	</select>
+	
+	<select id="selectGoodsDetail" resultMap="goodsResult"   parameterType="String"  >
+	    <![CDATA[
+	        select g.*,d.fileName from goods g, goods_img d
+	        where g.goods_id=d.goods_id
+	        and d.filetype='goods'
+	        and g.goods_id=#{goods_id}
+	        group by goods_id
+	        order by g.goods_id;
+    	]]>
+	</select>
+	
+	<select id="selectGoodsDetailImage" resultMap="imageResult"   parameterType="String"  >
+	    <![CDATA[
+				select * from  goods_img
+		    	where  fileType='goods'
+				and goods_id=#{goods_id};
+    	]]>
+	</select>
+	
+	<select id="selectGoodsDetailImageRoom" resultMap="imageResult"   parameterType="String"  >
+	    <![CDATA[
+				select * from  goods_img
+		    	where  fileType='room'
+				and goods_id=#{goods_id}
+				and goods_uroom_detail=#{goods_uroom_detail};
+    	]]>
 	</select>
 
 </mapper>
