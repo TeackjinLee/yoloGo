@@ -399,7 +399,7 @@ a {
 	width: 100%;
 }
 /* on */
-#tab1 .on{
+#tab1 .on .room-box-wrap{
   display: none;
 }
 

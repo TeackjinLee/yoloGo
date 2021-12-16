@@ -47,6 +47,15 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
+	@RequestMapping(value= "/CC/frequentList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		List frequentList = cc_Service.listFrequent();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("frequentList", frequentList);
+		return mav;
+	}
+	
 	@RequestMapping(value="/CC/*Form.do", method=RequestMethod.GET)
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
 							@RequestParam(value= "action", required=false) String action,

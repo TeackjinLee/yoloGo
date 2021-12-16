@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface CC_Controller {
 	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView viewAnnounce(@RequestParam("articleNo") int articleNo,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
