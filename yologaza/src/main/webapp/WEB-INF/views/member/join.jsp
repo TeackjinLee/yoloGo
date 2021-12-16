@@ -1,4 +1,5 @@
 <!-- 기여도: 이택진70% / 윤진30% -->
+<!-- 2차기여도: 이택진100% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 	isELIgnored="false"%>
@@ -124,6 +125,7 @@ function fn_overlapped(){
                     var upwd = $('#pwd');
                     var uname = $('#name');
                     var uhp = $('#hp');
+                    var uphoneDoubleChk = $('#phoneDoubleChk');
                     
                     //아이디 검사
                     if($('#id').val()==""){
@@ -190,11 +192,23 @@ function fn_overlapped(){
                     	swal ( "Oops" ,  "휴대폰 번호를 입력하여 주시기 바랍니다." ,  "error" );
                         uhp.removeClass("has-success");
                         uhp.addClass("has-error");
-                        $('#phoneNumber').focus();
+                        $('#phone').focus();
                         return false;
                     }else{
                     	uhp.removeClass("has-error");
                     	uhp.addClass("has-success");
+                    }
+                    
+                  //휴대폰 인증
+                    if($('#phoneDoubleChk').val()=="" || $('#phoneDoubleChk').val()=="false"){
+                    	swal ( "Oops" ,  "휴대폰 인증을 확인해 주시기 바랍니다." ,  "error" );
+                    	uphoneDoubleChk.removeClass("has-success");
+                        uphoneDoubleChk.addClass("has-error");
+                        $('#phone').focus();
+                        return false;
+                    }else{
+                    	uphoneDoubleChk.removeClass("has-error");
+                    	uphoneDoubleChk.addClass("has-success");
                     }
                 });
                 
@@ -233,7 +247,7 @@ function fn_overlapped(){
 					<td class="fixed_join">*이름</td>
 					<td><input id="name" name="name" type="text" /></td>
 				</tr>
-
+				<!--  
 				<tr class="dot_line">
 					<td class="fixed_join">*휴대폰 번호</td>
 					<td>
@@ -242,6 +256,19 @@ function fn_overlapped(){
 						<input type="text" name="hpA" style="width:78%;"/>
 						<input type="button"  id="hpA" value="인증 확인" onClick="" style="width:20%; float:right; cursor:pointer;"/>
 					</td>
+				</tr>
+				-->
+				<tr class="mobileNo dot_line"> 
+					<td class="fixed_join"> 
+					<label for="phone">*휴대폰 번호</label> 
+					</td> 
+					<td> <p> <input id="phone" type="text" name="hp" style="width:78%; margin-bottom:10px;" title="전화번호 입력" required/> 
+					<input type="button" id="phoneChk" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="인증전송" />
+					<input id="phone2" type="text" name="phone2" style="width:78%;" title="인증번호 입력" disabled required/> 
+					<input type="button" id="phoneChk2" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="본인인증" />
+					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span> 
+					<input type="text" id="phoneDoubleChk"/> </p> 
+					</td> 
 				</tr>
 
 				
@@ -278,19 +305,7 @@ function fn_overlapped(){
 	
 	
 	
-<tr class="mobileNo"> 
-	<th> 
-	<label for="phone">휴대폰 번호</label> 
-	</th> 
-	<td> <p> <input id="phone" type="text" name="phone" title="전화번호 입력" required/> 
-	<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/> 
-	<input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required/> 
-	<span id="phoneChk2" class="doubleChk">본인인증</span> 
-	<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span> 
-	<input type="hidden" id="phoneDoubleChk"/> </p> 
-	<p class="tip"> 최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.) </p> 
-	</td> 
-</tr>
+
 <script>
 
 		//휴대폰 번호 인증

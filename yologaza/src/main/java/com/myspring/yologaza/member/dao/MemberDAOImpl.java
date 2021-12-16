@@ -1,5 +1,6 @@
 package com.myspring.yologaza.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,22 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public int findIdCheck(String hp) throws Exception {
 		int result = sqlSession.selectOne("mapper.member.findIdCheck", hp);
+		return result;
+	}
+	
+	@Override
+	public int findPwCheck(MemberVO memberVO) throws Exception {
+		int result = sqlSession.selectOne("mapper.member.findPwCheck", memberVO);
+		return result;
+	}
+	
+	@Override
+	public int findPw(String pwd, String hp, String id) throws Exception {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("hp", hp);
+		map.put("id", id);
+		map.put("pwd", pwd);
+		int result = sqlSession.update("memberMapper.findPw", map);
 		return result;
 	}
 

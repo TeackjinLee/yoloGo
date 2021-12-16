@@ -31,18 +31,35 @@
       ]]>
 	</select>
 	
+	<!-- 아이디 찾기 -->
 	<select id="findId" resultMap="memResult">
       <![CDATA[
          select * from member where hp= #{hp}
       ]]>
 	</select>
 	
+	<!-- 아이디 개수 -->
 	<select id="findIdCheck" resultType="int">
 		<![CDATA[
 			select count(*) from member where hp= #{hp}
 		]]>
 	</select>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="findPw" parameterType="memberVO">
+		<![CDATA[
+			update member set pwd = #{pwd} where hp = #{hp} and id = #{id}
+		]]>
+	</update>
+	
+	<!-- 비밀번호 찾기 조건 -->
+	<select id="findPwCheck" resultType="int">
+		<![CDATA[
+			select count(*) from member where hp = #{hp} and id = #{id}
+		]]>
+	</select>
+	
+	<!-- 회원가입 중복성 검사 -->
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select if(count(*),'true','false')
 	   from member
@@ -93,7 +110,7 @@
 		]]>      
    </insert>
    
-   <update id="updateMember"  parameterType="memberVO">
+   <update id="updateMember" parameterType="memberVO">
      <![CDATA[
 	     update member
 	     set pwd=#{pwd}, name=#{name}, email=#{email}
