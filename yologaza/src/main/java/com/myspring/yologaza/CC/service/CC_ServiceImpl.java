@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.yologaza.CC.dao.CC_DAO;
 import com.myspring.yologaza.CC.vo.Announce_VO;
+import com.myspring.yologaza.CC.vo.Frequent_VO;
 
 @Service("cc_Service")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -22,6 +23,11 @@ public class CC_ServiceImpl implements CC_Service{
 	
 	public List<Announce_VO> listAnnounce(int offset, int count) throws Exception{
 		return cc_DAO.selectAnnounceList(offset, count);
+
+	}
+	
+	public List<Frequent_VO> listFrequent() throws Exception{
+		return cc_DAO.selectFrequentList();
 
 	}
 	

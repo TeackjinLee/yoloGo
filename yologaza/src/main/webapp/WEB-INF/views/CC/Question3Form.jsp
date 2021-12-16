@@ -378,7 +378,7 @@ window.onload=()=>{
               <a href="${contextPath}/CC/announceList.do">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/frequentList.do">자주묻는 질문</a>
             </li>
             <li>
               <a href="${contextPath}/CC/Question2Form.do" class="active">1:1문의</a>
