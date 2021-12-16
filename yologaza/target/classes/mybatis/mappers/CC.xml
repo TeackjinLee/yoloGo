@@ -13,6 +13,16 @@
     <result property="auth" column="auth" />
     <result property="writeDate" column="writeDate" />
   </resultMap> 
+  <resultMap id="frequentResult" type="frequent_VO">
+    <result property="articleNo" column="articleNo" />
+    <result property="title" column="title" />
+    <result property="id" column="id" />
+    <result property="name" column="name" />
+    <result property="content" column="content" />
+    <result property="auth" column="auth" />
+    <result property="type" column="type" />
+    <result property="writeDate" column="writeDate" />
+  </resultMap> 
 
   <select id="selectAnnounceList" resultMap="announceResult">
     <![CDATA[
@@ -28,5 +38,11 @@
   </select>
   <select id="countAnnounce" resultType="int">
   	select FOUND_ROWS();
+  </select>
+  <select id="selectFrequentList" resultMap="frequentResult">
+    <![CDATA[
+		
+         select * from frequent_question	order by writeDate asc 
+    ]]>
   </select>
 </mapper>

@@ -14,7 +14,7 @@
       <put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
    </definition>
    
-   <definition name="/CC/Question1Form" extends="baseLayout">
+   <definition name="/CC/frequentList" extends="baseLayout">
       <put-attribute name="title" value="자주 묻는 질문" />
       <put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
    </definition>

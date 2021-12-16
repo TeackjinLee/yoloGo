@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.yologaza.CC.vo.Announce_VO;
+import com.myspring.yologaza.CC.vo.Frequent_VO;
 
 @Repository("cc_DAO")
 public class CC_DAOImpl implements CC_DAO{
@@ -50,6 +51,12 @@ public class CC_DAOImpl implements CC_DAO{
 			session.close();
 		}
 		return announceList;
+	}
+	
+	@Override
+	public List<Frequent_VO> selectFrequentList() throws DataAccessException{
+		List<Frequent_VO> frequentList = sqlSession.selectList("mapper.CC.selectFrequentList");
+		return frequentList;
 	}
 	
 	@Override
