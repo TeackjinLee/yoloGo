@@ -6,6 +6,7 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
+	private int goods_uroom;
 	private String goods_type;
 	private String goods_email1;
 	private String goods_email2;
@@ -34,6 +35,8 @@ public class GoodsVO {
 	private String goods_room_type;
 	private String goods_capacity;
 	private String goods_introduce;
+	private int goods_room_price1;
+	private int goods_room_price2;
 	private String goods_room_creDate;
 	
 	// goods_peak
@@ -59,6 +62,14 @@ public class GoodsVO {
 
 	public void setGoods_id(int goods_id) {
 		this.goods_id = goods_id;
+	}
+
+	public int getGoods_uroom() {
+		return goods_uroom;
+	}
+
+	public void setGoods_uroom(int goods_uroom) {
+		this.goods_uroom = goods_uroom;
 	}
 
 	public String getGoods_type() {
@@ -171,6 +182,22 @@ public class GoodsVO {
 
 	public void setGoods_description(String goods_description) {
 		this.goods_description = goods_description;
+	}
+	
+	public int getGoods_room_price1() {
+		return goods_room_price1;
+	}
+
+	public void setGoods_room_price1(int goods_room_price1) {
+		this.goods_room_price1 = goods_room_price1;
+	}
+
+	public int getGoods_room_price2() {
+		return goods_room_price2;
+	}
+
+	public void setGoods_room_price2(int goods_room_price2) {
+		this.goods_room_price2 = goods_room_price2;
 	}
 
 	public String getGoods_around() {

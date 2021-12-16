@@ -47,6 +47,8 @@ import com.myspring.yologaza.goods.vo.ImageFileVO;
 			goodsMap.put("goodsVO", goodsVO);
 			List<ImageFileVO> imageList =goodsDAO.selectGoodsDetailImage(goods_id);
 			goodsMap.put("imageList", imageList);
+			List<GoodsVO> RoomList =goodsDAO.selectGoodsDetailRoom(goods_id);
+			goodsMap.put("RoomList", RoomList);
 			List<ImageFileVO> imageListRoom =goodsDAO.selectGoodsDetailImageRoom(goods_id);
 			goodsMap.put("imageListRoom", imageListRoom);
 			return goodsMap;
