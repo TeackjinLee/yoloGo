@@ -37,7 +37,7 @@
           </a>
         </div>
         <div class="slider-contents" test="모      텔">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab1">
             <img src="${contextPath}/resources/image/main_motel.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -45,7 +45,7 @@
           </a>
         </div>
         <div class="slider-contents" test="호      텔">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab2">
             <img src="${contextPath}/resources/image/main_hotel.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -53,7 +53,7 @@
           </a>
         </div>
         <div class="slider-contents" test="펜      션">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab3">
             <img src="${contextPath}/resources/image/main_penction.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -61,7 +61,7 @@
           </a>
         </div>
         <div class="slider-contents" test="리  조  트">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab4">
             <img src="${contextPath}/resources/image/main_resort.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -69,7 +69,7 @@
           </a>
         </div>
         <div class="slider-contents" test="게스트하우스">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab5">
             <img src="${contextPath}/resources/image/main_guesthouse.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -77,7 +77,7 @@
           </a>
         </div>
         <div class="slider-contents" test="캠핑/글램핑">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab6">
             <img src="${contextPath}/resources/image/main_glamping.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -85,7 +85,7 @@
           </a>
         </div>
         <div class="slider-contents" test="한      옥">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do#tab7">
             <img src="${contextPath}/resources/image/main_khouse.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>

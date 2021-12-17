@@ -21,14 +21,21 @@
 		<result property="goods_name" column="goods_name" />
 		<result property="goods_address" column="goods_address" />		
 		<result property="goods_description" column="goods_description" />
-		<result property="goods_around" column="goods_around" />
+		<result property="goods_room_price1" column="goods_room_price1" />
+		<result property="goods_room_price2" column="goods_room_price2" />
+		<result property="goods_baseImpormation" column="goods_baseImpormation" />
+		<result property="goods_chargeImpormation" column="goods_chargeImpormation" />
 		<result property="goods_checkIn" column="goods_checkIn" />
 		<result property="goods_checkOut" column="goods_checkOut" />
+		<result property="goods_motel_endtime" column="goods_motel_endtime" />
+		<result property="goods_motel_usetime" column="goods_motel_usetime" />
 		<result property="goods_price1" column="goods_price1" />
 		<result property="goods_price2" column="goods_price2" />
 		<result property="goods_acess" column="goods_acess" />
 
 		<result property="goods_room" column="goods_room" />
+		<result property="goods_room_num" column="goods_room_num" />
+		<result property="goods_uroom_detail" column="goods_uroom_detail" />
 		<result property="goods_room_name" column="goods_room_name" />
 		<result property="goods_room_type" column="goods_room_type" />
 		<result property="goods_capacity" column="goods_capacity" />
@@ -42,10 +49,7 @@
 	   <result property="fileName" column="fileName" />
 	   <result property="fileType" column="fileType" />
 	</resultMap>
-	
 
-	
-    
 	<select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
 		<![CDATA[
 			select @ROWNUM:=@ROWNUM+1 ,t.*
@@ -58,51 +62,6 @@
 			            order by g.goods_creDate desc)  t
 				             where (@ROWNUM:=0) < 16;
 			
-		]]>
-	</select>
-	
-	<select id="selectGoodsListnewest" parameterType="String" resultMap="goodsResult"   >
-		<![CDATA[
-			select @ROWNUM:=@ROWNUM+1 ,t.*
-			          from(
-						select g.*,d.fileName from goods g, goods_img d
-			        	where g.goods_id=d.goods_id 
-			        	and d.filetype='goods'
-			            and goods_type=#{goods_type}
-			            group by goods_id
-			            order by g.goods_creDate desc)  t
-				             where (@ROWNUM:=0) < 16
-				             order by goods_creDate desc;
-		]]>
-	</select>
-	
-	<select id="selectGoodsListhightPrice" parameterType="String" resultMap="goodsResult"   >
-		<![CDATA[
-			select @ROWNUM:=@ROWNUM+1 ,t.*
-			          from(
-						select g.*,d.fileName from goods g, goods_img d
-			        	where g.goods_id=d.goods_id 
-			        	and d.filetype='goods'
-			            and goods_type=#{goods_type}
-			            group by goods_id
-			            order by g.goods_creDate desc)  t
-				             where (@ROWNUM:=0) < 16
-				             order by goods_price1 desc;
-		]]>
-	</select>
-	
-	<select id="selectGoodsListlowerPrice" parameterType="String" resultMap="goodsResult"   >
-		<![CDATA[
-			select @ROWNUM:=@ROWNUM+1 ,t.*
-			          from(
-						select g.*,d.fileName from goods g, goods_img d
-			        	where g.goods_id=d.goods_id 
-			        	and d.filetype='goods'
-			            and goods_type=#{goods_type}
-			            group by goods_id
-			            order by g.goods_creDate desc)  t
-				             where (@ROWNUM:=0) < 16
-				             order by goods_price1 asc;
 		]]>
 	</select>
 	
@@ -125,12 +84,36 @@
     	]]>
 	</select>
 	
+	<select id="selectGoodsDetailRoom" resultMap="goodsResult"  parameterType="String"  >
+	    <![CDATA[              
+				select t.* from
+				(select d.*,i.fileName,
+					hour(g.goods_checkIn) 
+					goods_checkIn, 
+					hour(g.goods_checkOut) 
+					goods_checkOut, 
+					hour(g.goods_motel_endtime) goods_motel_endtime, 
+					hour(g.goods_motel_usetime) goods_motel_usetime 
+					from goods g, goods_detail d, goods_img i
+				where i.goods_uroom = d.goods_uroom
+				and i.filetype='room'
+				and d.goods_id=#{goods_id}
+				group by goods_uroom) t;
+    	]]>
+	</select>
+	
+	
 	<select id="selectGoodsDetailImageRoom" resultMap="imageResult"   parameterType="String"  >
 	    <![CDATA[
-				select * from  goods_img
-		    	where  fileType='room'
-				and goods_id=#{goods_id}
-				and goods_uroom_detail=#{goods_uroom_detail};
+				select t.*
+					from(
+					select g.goods_room_num ,d.* from goods_detail g, goods_img d
+					where g.goods_uroom=d.goods_uroom 
+				    and d.fileType='room'
+				    and d.goods_id=#{goods_id}
+				    and g.goods_room_num=#{goods_room_num})  t
+				
+				
     	]]>
 	</select>
 

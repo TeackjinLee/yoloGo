@@ -6,6 +6,7 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
+	private int goods_uroom;
 	private String goods_type;
 	private String goods_email1;
 	private String goods_email2;
@@ -20,9 +21,14 @@ public class GoodsVO {
 	private String goods_name;
 	private String goods_address;
 	private String goods_description;
+	private String goods_baseImpormation;
+	private String goods_chargeImpormation;
 	private String goods_around;
-	private Time   goods_checkIn;
-	private Time   goods_checkOut;
+	private String   goods_checkIn;
+	private String   goods_checkOut;
+	private String goods_motel_endtime;
+	private String goods_motel_usetime;
+	
 	private int goods_price1;
 	private int goods_price2;
 	private char   goods_acess;
@@ -34,6 +40,10 @@ public class GoodsVO {
 	private String goods_room_type;
 	private String goods_capacity;
 	private String goods_introduce;
+	private int goods_room_price1;
+	private int goods_room_price2;
+	private int goods_room_num;
+	private int goods_room_detail;
 	private String goods_room_creDate;
 	
 	// goods_peak
@@ -59,6 +69,14 @@ public class GoodsVO {
 
 	public void setGoods_id(int goods_id) {
 		this.goods_id = goods_id;
+	}
+
+	public int getGoods_uroom() {
+		return goods_uroom;
+	}
+
+	public void setGoods_uroom(int goods_uroom) {
+		this.goods_uroom = goods_uroom;
 	}
 
 	public String getGoods_type() {
@@ -172,6 +190,53 @@ public class GoodsVO {
 	public void setGoods_description(String goods_description) {
 		this.goods_description = goods_description;
 	}
+	
+	public String getGoods_baseImpormation() {
+		return goods_baseImpormation;
+	}
+
+	public void setGoods_baseImpormation(String goods_baseImpormation) {
+		this.goods_baseImpormation = goods_baseImpormation;
+	}
+
+	public String getGoods_chargeImpormation() {
+		return goods_chargeImpormation;
+	}
+
+	public void setGoods_chargeImpormation(String goods_chargeImpormation) {
+		this.goods_chargeImpormation = goods_chargeImpormation;
+	}
+
+	public int getGoods_room_price1() {
+		return goods_room_price1;
+	}
+
+	public void setGoods_room_price1(int goods_room_price1) {
+		this.goods_room_price1 = goods_room_price1;
+	}
+
+	public int getGoods_room_price2() {
+		return goods_room_price2;
+	}
+
+	public void setGoods_room_price2(int goods_room_price2) {
+		this.goods_room_price2 = goods_room_price2;
+	}
+	public int getGoods_room_num() {
+		return goods_room_num;
+	}
+
+	public void setGoods_room_num(int goods_room_num) {
+		this.goods_room_num = goods_room_num;
+	}
+
+	public int getGoods_room_detail() {
+		return goods_room_detail;
+	}
+
+	public void setGoods_room_detail(int goods_room_detail) {
+		this.goods_room_detail = goods_room_detail;
+	}
 
 	public String getGoods_around() {
 		return goods_around;
@@ -180,21 +245,37 @@ public class GoodsVO {
 	public void setGoods_around(String goods_around) {
 		this.goods_around = goods_around;
 	}
-
-	public Time getGoods_checkIn() {
+	
+	public String getGoods_checkIn() {
 		return goods_checkIn;
 	}
 
-	public void setGoods_checkIn(Time goods_checkIn) {
+	public void setGoods_checkIn(String goods_checkIn) {
 		this.goods_checkIn = goods_checkIn;
 	}
 
-	public Time getGoods_checkOut() {
+	public String getGoods_checkOut() {
 		return goods_checkOut;
 	}
 
-	public void setGoods_checkOut(Time goods_checkOut) {
+	public void setGoods_checkOut(String goods_checkOut) {
 		this.goods_checkOut = goods_checkOut;
+	}
+	
+	public String getGoods_motel_endtime() {
+		return goods_motel_endtime;
+	}
+
+	public void setGoods_motel_endtime(String goods_motel_endtime) {
+		this.goods_motel_endtime = goods_motel_endtime;
+	}
+
+	public String getGoods_motel_usetime() {
+		return goods_motel_usetime;
+	}
+
+	public void setGoods_motel_usetime(String goods_motel_usetime) {
+		this.goods_motel_usetime = goods_motel_usetime;
 	}
 
 	public char getGoods_acess() {

@@ -66,13 +66,13 @@
 	              <div>숙박종류</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="${contextPath}/searchGoods.do">모텔</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">호텔</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">펜션</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">리조트</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">게스트하우스</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">캠핑/글램핑</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">한옥</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab1">모텔</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab2">호텔</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab3">펜션</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab4">리조트</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab5">게스트하우스</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab6">캠핑/글램핑</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do#tab7">한옥</a></li>
 	                  <li><a href="${contextPath}/searchGoods.do">내주변</a></li>
 	                </ul>
 	              </div>  

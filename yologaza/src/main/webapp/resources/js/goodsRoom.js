@@ -97,11 +97,7 @@ for(var i = 0; i < tabList.length; i++){
     autoplaySpeed: 1000 
   });
   
-  $('.room-pic-box').on('afterChange', function(event, slick, currentSlide, nextSlide){
-    $(".page-num > .current-txt").text(currentSlide + 1);
-    console.log(currentSlide)
-    
-   });
+  
   
   
   // on 실행
@@ -109,21 +105,17 @@ for(var i = 0; i < tabList.length; i++){
     
     var indexNum = $(this).index();
     console.log(indexNum);
-    if($("#tab1 .room-box-wrap").hasClass("on")){
-      $("#tab1 .room-box-wrap").removeClass("on");
+    if($(".tab_each #tab1 .room").hasClass("on")){
+      $(".tab_each #tab1 .room").removeClass("on");
 
-      
-      
     } else{
-      
-      $("#tab1 .room-box-wrap").removeClass("on");
-      $("#tab1 .room-box-wrap").eq(indexNum).addClass("on");   
-
+      $(".tab_each #tab1 .room").removeClass("on");
+      $(".tab_each #tab1 .room").addClass("on");
     }
  
   });
   
-  var indexNum=0 ;
+
   
 });
 
