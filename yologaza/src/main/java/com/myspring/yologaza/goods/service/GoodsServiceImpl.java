@@ -27,14 +27,17 @@ import com.myspring.yologaza.goods.vo.ImageFileVO;
 			goodsList=goodsDAO.selectGoodsList("motel");
 			goodsMap.put("motel",goodsList);
 			
-			goodsList=goodsDAO.selectGoodsList("hotel");
-			goodsMap.put("hotel",goodsList);
+			goodsList=goodsDAO.selectGoodsList("pension");
+			goodsMap.put("pension",goodsList);
 			
-			goodsList=goodsDAO.selectGoodsList("hotel");
-			goodsMap.put("hotel",goodsList);
+			goodsList=goodsDAO.selectGoodsList("resort");
+			goodsMap.put("resort",goodsList);
 			
 			goodsList=goodsDAO.selectGoodsList("guestHouse");
 			goodsMap.put("guestHouse",goodsList);
+			
+			goodsList=goodsDAO.selectGoodsList("camping");
+			goodsMap.put("camping",goodsList);
 			
 			goodsList=goodsDAO.selectGoodsList("hanok");
 			goodsMap.put("hanok",goodsList);

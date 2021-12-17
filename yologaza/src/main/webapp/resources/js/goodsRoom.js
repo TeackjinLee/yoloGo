@@ -97,11 +97,7 @@ for(var i = 0; i < tabList.length; i++){
     autoplaySpeed: 1000 
   });
   
-  $('.room-pic-box').on('afterChange', function(event, slick, currentSlide, nextSlide){
-    $(".page-num > .current-txt").text(currentSlide + 1);
-    console.log(currentSlide)
-    
-   });
+  
   
   
   // on 실행
