@@ -23,6 +23,17 @@
     <result property="type" column="type" />
     <result property="writeDate" column="writeDate" />
   </resultMap> 
+  <resultMap id="questionResult" type="question_VO">
+    <result property="articleNo" column="articleNo" />
+    <result property="parentNo" column="parentNo" />
+    <result property="id" column="id" />
+    <result property="content" column="content" />
+    <result property="hp" column="hp" />
+    <result property="email" column="email" />
+    <result property="auth" column="auth" />
+    <result property="type" column="type" />
+    <result property="writeDate" column="writeDate" />
+  </resultMap> 
 
   <select id="selectAnnounceList" resultMap="announceResult">
     <![CDATA[
@@ -36,13 +47,44 @@
       where articleNo = #{articleNo}		
     ]]>
   </select>
+  
   <select id="countAnnounce" resultType="int">
   	select FOUND_ROWS();
   </select>
+  
   <select id="selectFrequentList" resultMap="frequentResult">
     <![CDATA[
 		
          select * from frequent_question	order by writeDate asc 
     ]]>
   </select>
+  
+  <select id="selectInPersonQuestion" resultMap="questionResult">
+    <![CDATA[
+		
+         select SQL_CALC_FOUND_ROWS * from question_in_person	where id = "${id}" order by writeDate asc limit #{offset},#{count}
+    ]]>
+  </select>
+  <select id="countInPersonQuestion" resultType="int">
+  	select FOUND_ROWS();
+  </select>
+  <select id="selectInPersonReply" resultMap="questionResult" parameterType="int">
+  <![CDATA[
+		
+         select * from question_in_person	where parentNo = ${articleNo} order by writeDate asc
+    ]]>
+  </select>
+  
+  <insert id="insertNewQuestion" parameterType="java.util.Map">
+		<![CDATA[
+			insert into question_in_person(articleNO, content, id, type, hp, email, auth)
+			values(#{articleNO}, #{content}, #{id}, #{type}, #{hp}, #{email}, #{auth})
+		]]>
+	</insert>
+	
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(max(articleNO), 0) + 1 from question_in_person	
+		]]>
+	</select>
 </mapper>

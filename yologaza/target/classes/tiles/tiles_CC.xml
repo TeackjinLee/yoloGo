@@ -19,12 +19,12 @@
       <put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
    </definition>
 
-   <definition name="/CC/Question2Form" extends="baseLayout">
+   <definition name="/CC/inPersonQuestion" extends="baseLayout">
       <put-attribute name="title" value="1:1문의" />
       <put-attribute name="body" value="/WEB-INF/views/CC/Question2Form.jsp" />
    </definition>
    
-   <definition name="/CC/Question3Form" extends="baseLayout">
+   <definition name="/CC/questionForm" extends="baseLayout">
       <put-attribute name="title" value="문의 작성" />
       <put-attribute name="body" value="/WEB-INF/views/CC/Question3Form.jsp" />
    </definition>

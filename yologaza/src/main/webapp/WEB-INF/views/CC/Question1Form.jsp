@@ -320,7 +320,7 @@ for(var i = 0; i < tabList.length; i++){
               <a href="${contextPath}/CC/frequentList.do" class="active">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question2Form.do">1:1문의</a>
+              <a href="${contextPath}/CC/inPersonQuestion.do">1:1문의</a>
             </li>
           </ul>
         </nav>

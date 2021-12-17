@@ -324,6 +324,22 @@ p {
 }
 </style>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$('.type').click(function(){
+		$('#selType').val($('.dropbtn_content').text());
+	})});
+	
+function check(){
+	  if(questionForm.content.value == ""){
+		  alert("문의내용을 입력해 주세요")
+		  return false;
+	  }else if(questionForm.type.value == ""){
+		  alert("문의유형을 선택해 주세요")
+		  return false;
+	  }else return true;
+	}
+	
 window.onload=()=>{
       document.querySelector('.dropbtn').onclick = ()=>{
         dropdown();
@@ -365,6 +381,7 @@ window.onload=()=>{
 </script>
 </head>
 <body class="pc">
+  <form name="questionForm" method="post" action="${contextPath}/CC/addQuestion.do" enctype="multipart/form-data" onsubmit="return check(${isLogOn})">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
@@ -381,7 +398,7 @@ window.onload=()=>{
               <a href="${contextPath}/CC/frequentList.do">자주묻는 질문</a>
             </li>
             <li>
-              <a href="${contextPath}/CC/Question2Form.do" class="active">1:1문의</a>
+              <a href="${contextPath}/CC/inPersonQuestion.do" class="active">1:1문의</a>
             </li>
           </ul>
         </nav>
@@ -391,8 +408,8 @@ window.onload=()=>{
             <div class="tab">
               <div class="tab_btn">
                 <ul>
-                  <li><a href="${contextPath}/CC/Question2Form.do">내 문의내역</a></li>
-                  <li class="active"><a href="${contextPath}/CC/Question3Form.do">문의작성</a></li>
+                  <li><a href="${contextPath}/CC/inPersonQuestion.do">내 문의내역</a></li>
+                  <li class="active"><a href="${contextPath}/CC/questionForm.do">문의작성</a></li>
                 </ul>
               </div>
             </div>
@@ -406,13 +423,14 @@ window.onload=()=>{
                 </li>
                 <li>
                   <div class="dropdown">
-                    <button class="dropbtn" onclick="dropdown()">
+                    <button type="button" class="dropbtn" onclick="dropdown()">
                       <span class="dropbtn_content">문의 유형을 선택하세요</span>
                     </button>
+                    <input type="hidden" name="type" id="selType" />
                     <div class="dropdown-content">
-                      <div class="type"                 onclick="showMenu(this.innerText)">이벤트</div>
-                      <div class="type"                 onclick="showMenu(this.innerText)">예약/결제</div>
-                      <div class="type"                 onclick="showMenu(this.innerText)">취소/환불</div>
+                      <div class="type" onclick="showMenu(this.innerText)">이벤트</div>
+                      <div class="type" onclick="showMenu(this.innerText)">예약/결제</div>
+                      <div class="type" onclick="showMenu(this.innerText)">취소/환불</div>
                       <div class="type" onclick="showMenu(this.innerText)">기타</div>
                     </div>
                   </div>
@@ -423,7 +441,7 @@ window.onload=()=>{
                   휴대폰 번호
                 </li>
                 <li>
-                  <input type="text" class="phone" placeholder="선택사항 입니다.">
+                  <input type="text" class="phone" name="hp" placeholder="선택사항 입니다.">
                 </li>
               </ul>
               <ul>
@@ -431,7 +449,7 @@ window.onload=()=>{
                   이메일
                 </li>
                 <li>
-                  <input type="text" class="mail" placeholder="선택사항 입니다.">
+                  <input type="text" class="mail" name="email" placeholder="선택사항 입니다.">
                 </li>
               </ul>
               <ul>
@@ -439,7 +457,7 @@ window.onload=()=>{
                   문의 내용
                 </li>
                 <li>
-                  <textarea class="asking" placeholder="내용을 입력해주세요." ></textarea>
+                  <textarea class="asking" name="content" placeholder="내용을 입력해주세요." ></textarea>
                 </li>
               </ul>
               <input type="submit" class="submit" value="작성 완료">
@@ -448,5 +466,6 @@ window.onload=()=>{
         </div>
       </div>
     </div>
+  </form>
 </body>
 </html>
