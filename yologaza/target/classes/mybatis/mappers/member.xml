@@ -46,14 +46,14 @@
 	</select>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="findPw" parameterType="memberVO">
+	<update id="findPwd" parameterType="memberVO">
 		<![CDATA[
 			update member set pwd = #{pwd} where hp = #{hp} and id = #{id}
 		]]>
 	</update>
 	
 	<!-- 비밀번호 찾기 조건 -->
-	<select id="findPwCheck" resultType="int">
+	<select id="findPwdCheck" resultType="int">
 		<![CDATA[
 			select count(*) from member where hp = #{hp} and id = #{id}
 		]]>

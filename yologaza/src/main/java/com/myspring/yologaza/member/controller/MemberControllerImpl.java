@@ -177,6 +177,29 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		}
 	}
 	
+	// 비밀번호 재설정
+		@RequestMapping(value="/member/findPwdView", method=RequestMethod.GET)
+		public ModelAndView findPwdView(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			String viewName = getViewName(request);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			return mav;
+		}
+		
+		@RequestMapping(value="/member/findPwd", method=RequestMethod.GET)
+		public String findPwd(MemberVO memberVO, Model model) throws Exception{
+			logger.info("pwd"+memberVO.getPwd());
+				
+			if(memberService.findPwdCheck(memberVO)==0) {
+				logger.info("memberPwdCheck");
+				model.addAttribute("msg", "아이디와 연락처를 확인해 주세요");
+				return "/member/findPwdView";
+			}else {
+							
+				return"/member/findPwd";
+			}
+		}
+	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
 							@RequestParam(value= "action", required=false) String action,
