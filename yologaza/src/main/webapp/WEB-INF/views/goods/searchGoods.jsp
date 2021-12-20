@@ -14,19 +14,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-
-    <!-- 디버그용 인디케이터, 실전에선 필요없음 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"></script>
-
-    <!-- gsap 용 플러그인 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"></script>
+	
+	<script src="${contextPath}/resources/jquery/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="${contextPath}/resources/jquery/stickysidebar.jquery.js" type="text/javascript"></script>
+	<script src="${contextPath}/resources/jquery/basic-jquery-slider.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="${contextPath}/resources/css/search_goods.css">
+	<script src="${contextPath}/resources/js/search_goods.js"></script>
     <!-- 달력링크 -->
     <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/search_goods.css">
-    <script src="${contextPath}/resources/js/search_goods.js"></script>
+    
+    
     <!--  달력js -->
     <script>
     $(function() {
@@ -39,6 +38,35 @@
 
     });
     </script>
+    <script>
+		$(document).ready(function(){
+			
+			// 객실 선택 뷰
+		  const tabList = document.querySelectorAll('.tab_btn ul li');
+		  const contents = document.querySelectorAll('.tab_each ul');
+		  let activeCont = "";// 현재 활성화 된 컨텐츠
+		
+		  for(var i = 0; i < tabList.length; i++){
+		      tabList[i].querySelector('.tab_btn ul li a').addEventListener('click', function(e){
+		        e.preventDefault();
+		        for(var j = 0; j < tabList.length; j++){
+		          // 나머지 버튼 클래스 제거
+		          tabList[j].classList.remove('active');
+		
+		          // 나머지 컨텐츠 display:none 처리
+		          contents[j].style.display = 'none';
+		        };
+		
+		        // 버튼 관련 이벤트
+		        this.parentNode.classList.add('active');
+		
+		        // 버튼 클릭시 컨텐츠 전환
+		        activeCont = this.getAttribute('href');
+		        document.querySelector(activeCont).style.display = 'block';
+		      });
+		    }
+		});
+	</script>
 	<style>
 		.detail-select .detail-select-box .top_menu ul .active {
 			font-weight:bold;
@@ -181,7 +209,7 @@
             </div>
             <button type="button" class="btn_map" onclick="pop_map_pc();">지도</button>
           </div>
-          <div class="goods_list">
+          <div class="tab_each goods_list">
             <div class="goods_title"><h3>상품 리스트</h3></div>
             <ul id = "tab1" class="active">
             	<h3 style ="text-align:left">모텔</h3>
@@ -357,9 +385,7 @@
       </div>
     </div>	
   </div>
- 
-   
-
+	
 
 </body>
 </html>

@@ -19,8 +19,10 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService{
+	private static final MemberVO String = null;
 	@Autowired
 	private MemberDAO memberDAO;
+	private MemberVO memberVO;
 	
 	@Override
 	public List listMembers() throws DataAccessException {
@@ -51,6 +53,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int findIdCheck(String hp) throws Exception {
 		return  memberDAO.findIdCheck(hp);
+	}
+	
+	@Override
+	public int findPwdCheck(MemberVO memberVO)throws Exception{
+		return memberDAO.findPwdCheck(memberVO);
+	}
+	
+	@Override
+	public MemberVO findPwd(String id) throws Exception {
+		return memberDAO.selectMyDetailInfo(id);
 	}
 
 }

@@ -26,7 +26,7 @@
 	</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>방검색</title>
     <!-- 폰트어썸 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 	
@@ -34,8 +34,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick.css">
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick-theme.css">
     <script src="${contextPath}/resources/slick/slick.min.js"></script>
-    <!-- gsap 용 플러그인 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"></script>
+
     <!-- 달력링크 -->
     <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>

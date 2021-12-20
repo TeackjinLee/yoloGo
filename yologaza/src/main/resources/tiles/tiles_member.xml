@@ -6,7 +6,6 @@
    <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
       <put-attribute name="title" value="" />
       <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
@@ -51,14 +50,15 @@
       <put-attribute name="body" value="/WEB-INF/views/member/findIdView.jsp" />
    </definition>
    
-   <definition name="/member/pwdFindForm" extends="baseLayout">
+
+   <definition name="/member/findPwd" extends="baseLayout">
       <put-attribute name="title" value="비밀번호 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/pwdFindForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/findPwd.jsp" />
    </definition>
    
-   <definition name="/member/pwdFind2Form" extends="baseLayout">
+   <definition name="/member/findPwdView" extends="baseLayout">
       <put-attribute name="title" value="비밀번호 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/pwdFind2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/findPwdView.jsp" />
    </definition>
    
    <definition name="/member/reservationForm" extends="baseLayout">

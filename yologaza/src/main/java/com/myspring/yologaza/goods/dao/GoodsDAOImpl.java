@@ -44,4 +44,5 @@ public class GoodsDAOImpl implements GoodsDAO {
 		List<ImageFileVO> imageListRoom=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsDetailImageRoom",goods_id);
 		return imageListRoom;
 	}
+	
 }
