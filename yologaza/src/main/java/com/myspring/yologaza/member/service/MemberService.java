@@ -1,6 +1,7 @@
 package com.myspring.yologaza.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -14,5 +15,6 @@ public interface MemberService {
 	public String overlapped(String id) throws Exception;
 	public List<MemberVO> findId(String hp)throws Exception;
 	public int findIdCheck(String hp)throws Exception;
-	
+	public MemberVO  modifyMyInfo(Map memberMap) throws Exception;
+	public MemberVO myDetailInfo(String id) throws Exception;
 }

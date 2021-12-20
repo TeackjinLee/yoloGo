@@ -1,5 +1,6 @@
 package com.myspring.yologaza.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -186,19 +187,39 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 			return mav;
 		}
 		
-		@RequestMapping(value ="/modify", method = RequestMethod.GET)
-		public void modifyGET() throws Exception {
-			logger.info("modifyGET");
-		}
+		@Override
+		@RequestMapping(value="/myDetailInfo.do" ,method = RequestMethod.GET)
+		public ModelAndView myDetailInfo(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+			String viewName=(String)request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			return mav;
+		}	
 		
-		
-		@RequestMapping(value ="/modify", method = RequestMethod.POST)
-		public String modifyPOST(HttpSession session, MemberVO memberVO, RedirectAttributes ra) throws Exception {
-			logger.info("modifyPOST");		
-			memberService.pwdUpdate(memberVO);
-			session.invalidate();
-			ra.addFlashAttribute("result", "updateOK");
-			return "redirect:/";
+		@Override
+		@RequestMapping(value="/modifyMyInfo.do" ,method = RequestMethod.POST)
+		public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
+				                 @RequestParam("value")  String value,
+				               HttpServletRequest request, HttpServletResponse response)  throws Exception {
+			Map<String,String> memberMap=new HashMap<String,String>();
+			String val[]=null;
+			HttpSession session=request.getSession();
+			memberVO=(MemberVO)session.getAttribute("memberInfo");
+			String id=memberVO.getId();
+			
+			memberMap.put(attribute,value);	
+			memberMap.put("id", id);
+			
+			//수정된 회원 정보를 다시 세션에 저장한다.
+			memberVO=(MemberVO)memberService.modifyMyInfo(memberMap);
+			session.removeAttribute("memberInfo");
+			session.setAttribute("memberInfo", memberVO);
+			
+			String message = null;
+			ResponseEntity resEntity = null;
+			HttpHeaders responseHeaders = new HttpHeaders();
+			message  = "mod_success";
+			resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+			return resEntity;
 		}
 	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
