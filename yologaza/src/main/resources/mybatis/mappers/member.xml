@@ -45,19 +45,25 @@
 		]]>
 	</select>
 	
-	<!-- 비밀번호 변경 -->
-	<update id="findPwd" parameterType="memberVO">
-		<![CDATA[
-			update member set pwd = #{pwd} where hp = #{hp} and id = #{id}
-		]]>
-	</update>
-	
 	<!-- 비밀번호 찾기 조건 -->
-	<select id="findPwdCheck" resultType="int">
+	<select id="selectMyDetailInfo" resultType="memberVO"   parameterType="String" >
 		<![CDATA[
-			select count(*) from member where hp = #{hp} and id = #{id}
+			select count(*) from member where id = #{id}
 		]]>
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updateMyInfo" parameterType="java.util.HashMap">
+		
+		update member 
+			<set>
+				<if test="pwd !='' and pwd !=null">
+					pwd = #{pwd}
+				</if>
+			</set>
+			where
+			id = #{id}
+	</update>
 	
 	<!-- 회원가입 중복성 검사 -->
 	<select id="selectOverlappedID" parameterType="String" resultType="String">

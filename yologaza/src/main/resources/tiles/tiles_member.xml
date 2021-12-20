@@ -51,14 +51,14 @@
    </definition>
    
 
-   <definition name="/member/findPwd" extends="baseLayout">
+   <definition name="/member/pwdCheckView" extends="baseLayout">
       <put-attribute name="title" value="비밀번호 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/findPwd.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/pwdCheck.jsp" />
    </definition>
    
-   <definition name="/member/findPwdView" extends="baseLayout">
+   <definition name="/member/pwdUpdateView" extends="baseLayout">
       <put-attribute name="title" value="비밀번호 찾기" />
-      <put-attribute name="body" value="/WEB-INF/views/member/findPwdView.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/pwdUpdateView.jsp" />
    </definition>
    
    <definition name="/member/reservationForm" extends="baseLayout">

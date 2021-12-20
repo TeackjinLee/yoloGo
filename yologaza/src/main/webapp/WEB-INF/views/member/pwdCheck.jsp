@@ -5,6 +5,9 @@
 	isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%
+  request.setCharacterEncoding("UTF-8");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +61,7 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form  class="join_inner_float" action="${contextPath}/member/findPwd" method="GET">
+	<form  class="join_inner_float" action="${contextPath}/member/pwdUpdateView" method="GET">
 	  <div class="input_line">
 	    <h1 class="join_minisub">비밀번호찾기</h1>
 	  </div>
@@ -71,7 +74,7 @@
 	    <tr class="dot_line">
 	      <td class="fixed_join">휴대폰 번호</td>
 	      <td>
-	        <input type="text" name="hp" style="width:70%; margin-bottom:10px;"/>
+	        <input type="text" style="width:70%; margin-bottom:10px;"/>
 	        <input type="button"  id="hp" value="인증 전송" onClick="" style="width:28%; float:right; cursor:pointer;"/>
 	        <input type="text" id="hpA" style="width:70%;"/>
 	        <input type="button"  id="hpA_b" value="인증 확인" onClick="" style="width:28%; float:right; cursor:pointer;"/>
