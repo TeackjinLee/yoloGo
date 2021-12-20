@@ -6,13 +6,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
-  request.setCharacterEncoding("UTF-8");
-%>    
+ request.setCharacterEncoding("UTF-8");
+    String id = request.getParameter("id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>비밀번호찾기</title>
+<script src="${contextPath}/resources/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
 <style>
   .join_inner_float
 		{
@@ -50,40 +52,17 @@
     }
 
 </style>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		var msg = "${msg}";
-			 
-			if (msg != "") {
-				swal ( "Oops" ,  msg ,  "error" );
-			}
-	</script>
+
+
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form  class="join_inner_float" action="${contextPath}/member/pwdUpdateView" method="GET">
-	  <div class="input_line">
-	    <h1 class="join_minisub">비밀번호찾기</h1>
-	  </div>
-	  <table>
-	  <tbody>
-	    <tr>
-	      <td> 아이디 </td>
-	      <td> <input type="text" name="id" placeholder="아이디를 입력하세요"></td>
-	    </tr>
-	    <tr class="dot_line">
-	      <td class="fixed_join">휴대폰 번호</td>
-	      <td>
-	        <input type="text" style="width:70%; margin-bottom:10px;"/>
-	        <input type="button"  id="hp" value="인증 전송" onClick="" style="width:28%; float:right; cursor:pointer;"/>
-	        <input type="text" id="hpA" style="width:70%;"/>
-	        <input type="button"  id="hpA_b" value="인증 확인" onClick="" style="width:28%; float:right; cursor:pointer;"/>
-	      </td>
-	    </tr>
-	    </tbody>
-	  </table>
-	  <button type="submit">비밀번호 재설정</button>
-	  <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
-	</form>
+	<form  class="join_inner_float">
+      <div class="input_line">
+        <h1 class="join_minisub">비밀번호 변경 완료</h1>
+      </div>
+      <button type="button" onclick="location.href='${contextPath}/main.do' ">메인화면으로 가기</button>
+      <button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
+    </form>
 </body>
 </html>

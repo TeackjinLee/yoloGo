@@ -18,6 +18,6 @@ public interface MemberDAO {
 	public List<MemberVO> findId(String hp)throws Exception;
 	public int findIdCheck(String hp)throws Exception;
 	
-	public void updateMyInfo(Map memberMap) throws DataAccessException;
-	public MemberVO selectMyDetailInfo(String id) throws DataAccessException;
+	public int findPwCheck(MemberVO memberVO)throws Exception; 
+	public void findPw(String hp,String id,String pwd)throws Exception;
 }

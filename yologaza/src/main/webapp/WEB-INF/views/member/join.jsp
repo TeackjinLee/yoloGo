@@ -267,7 +267,7 @@ function fn_overlapped(){
 					<input id="phone2" type="text" name="phone2" style="width:78%;" title="인증번호 입력" disabled required/> 
 					<input type="button" id="phoneChk2" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="본인인증" />
 					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span> 
-					<input type="text" id="phoneDoubleChk"/> </p> 
+					<input type="hidden" id="phoneDoubleChk"/> </p> 
 					</td> 
 				</tr>
 

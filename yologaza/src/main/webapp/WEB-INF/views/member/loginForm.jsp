@@ -73,7 +73,7 @@
 	    |
 	    <a href="${contextPath}/member/findIdView">아이디찾기</a>
 	    |
-	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br>
+	    <a href="${contextPath}/member/findPwView">비밀번호찾기</a><br>
 	    <a href="${contextPath}/member/nonMemberForm.do">비회원 예약 내역 조회</a>
 	</form>
 </body>

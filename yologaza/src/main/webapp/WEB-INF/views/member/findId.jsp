@@ -70,7 +70,7 @@
 			</c:forEach>
 		</ul>
 		<h3> 입니다. </h3>
-		<button type="button" onclick="location.href='${contextPath}/member/pwdFindForm.do' ">비밀번호찾기</button>
+		<button type="button" onclick="location.href='${contextPath}/member/findPwView' ">비밀번호찾기</button>
 		<button type="button" onclick="location.href='${contextPath}/member/loginForm.do' ">회원로그인</button>
 		</br>
 	</form>

@@ -179,48 +179,45 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	}
 	
 	// 비밀번호 재설정
-		@RequestMapping(value="/member/pwdCheckView", method=RequestMethod.GET)
-		public ModelAndView pwdCheck(HttpServletRequest request, HttpServletResponse response) throws Exception{
-			String viewName = getViewName(request);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName(viewName);
-			return mav;
-		}
+	@RequestMapping(value="/member/findPwView" , method=RequestMethod.GET)
+	public ModelAndView findPwView(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = getViewName(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
 		
-		@Override
-		@RequestMapping(value="/myDetailInfo.do" ,method = RequestMethod.GET)
-		public ModelAndView myDetailInfo(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-			String viewName=(String)request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-			return mav;
-		}	
+	@RequestMapping(value="/member/findPw", method=RequestMethod.GET)
+	public String findPw(MemberVO memberVO,Model model) throws Exception{
+		logger.info("memberPw"+memberVO.getId());
 		
-		@Override
-		@RequestMapping(value="/modifyMyInfo.do" ,method = RequestMethod.POST)
-		public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
-				                 @RequestParam("value")  String value,
-				               HttpServletRequest request, HttpServletResponse response)  throws Exception {
-			Map<String,String> memberMap=new HashMap<String,String>();
-			String val[]=null;
-			HttpSession session=request.getSession();
-			memberVO=(MemberVO)session.getAttribute("memberInfo");
-			String id=memberVO.getId();
+		if(memberService.findPwCheck(memberVO)==0) {
+			logger.info("memberPWCheck");
+			model.addAttribute("msg", "아이디와 연락처를 확인해주세요");
 			
-			memberMap.put(attribute,value);	
-			memberMap.put("id", id);
+			return "/member/findPwView";
+		}else {
+		memberService.findPw(memberVO.getHp(),memberVO.getId(),memberVO.getPwd());
+		return"/member/findPw";
+		} 
+	}
+	/*
+	@RequestMapping(value="/member/findPw", method=RequestMethod.GET)
+	public String findPw(MemberVO memberVO,Model model) throws Exception{
+		logger.info("memberPw"+memberVO.getId());
+		
+		if(memberService.findPwCheck(memberVO)==0) {
+			logger.info("memberPWCheck");
+			model.addAttribute("msg", "아이디와 연락처를 확인해주세요");
 			
-			//수정된 회원 정보를 다시 세션에 저장한다.
-			memberVO=(MemberVO)memberService.modifyMyInfo(memberMap);
-			session.removeAttribute("memberInfo");
-			session.setAttribute("memberInfo", memberVO);
+			return "/member/findPwView";
+		}else {
+			memberService.findPw(memberVO.getHp(),memberVO.getId(),memberVO.getPwd());
 			
-			String message = null;
-			ResponseEntity resEntity = null;
-			HttpHeaders responseHeaders = new HttpHeaders();
-			message  = "mod_success";
-			resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-			return resEntity;
+		return"/member/findPw";
 		}
+	}*/
+	
 	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,

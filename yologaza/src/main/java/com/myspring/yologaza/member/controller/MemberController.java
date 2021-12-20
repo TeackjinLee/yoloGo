@@ -20,8 +20,4 @@ public interface MemberController {
 	ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String sendSMS(String userPhoneNumber);
-	public ModelAndView myDetailInfo(HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
-					            @RequestParam("value")  String value,
-					            HttpServletRequest request, HttpServletResponse response)  throws Exception;
 }

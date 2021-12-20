@@ -57,15 +57,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public MemberVO  modifyMyInfo(Map memberMap) throws Exception{
-		 String id=(String)memberMap.get("id");
-		 memberDAO.updateMyInfo(memberMap);
-		 return memberDAO.selectMyDetailInfo(id);
+	public int findPwCheck(MemberVO memberVO)throws Exception{
+		return memberDAO.findPwCheck(memberVO);
 	}
-	
-	@Override
-	public MemberVO myDetailInfo(String id) throws Exception{
-		return memberDAO.selectMyDetailInfo(id);
+    
+    @Override
+	public void findPw(String hp,String id, String pwd)throws Exception{
+    	memberDAO.findPw(hp, id, pwd);
 	}
 
 }
