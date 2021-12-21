@@ -67,6 +67,7 @@ function fn_overlapped(){
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    border: 1px solid #d8d8d8;
 }
 </style>
 
@@ -276,7 +277,7 @@ function fn_overlapped(){
 				<tr class="dot_line">
 					<td class="fixed_join">이메일(e-mail)</td>
 					<td><input size="10px"   type="text" id="email1" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
-						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right;">
+						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right; border:1px solid #d8d8d8;">
 									<option value="">직접입력</option>
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="naver.com">naver.com</option>

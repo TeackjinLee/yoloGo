@@ -1,11 +1,18 @@
 <%-- 송상우 100% --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"
-    isELIgnored="false"    
-    %>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+	pageEncoding="utf-8"
+	isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="myCartList"  value="${cartMap.myCartList}"  />
+<c:set var="myGoodsList"  value="${cartMap.myGoodsList}"  />
+
+<c:set  var="totalGoodsNum" value="0" />  <!--예약 개수 -->
+<c:set  var="totalDeliveryPrice" value="0" /> <!-- 총 예약비 --> 
+<c:set  var="totalDiscountedPrice" value="0" /> <!-- 총 할인금액 -->
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <html>
 <head>
@@ -235,6 +242,7 @@ div {
 
 </style>
 <script type="text/javascript">
+
 // 참조 https://kuzuro.blogspot.com/2018/10/22.html
 // 전체선택
 $(document).ready(function() {
@@ -258,7 +266,7 @@ $(document).ready(function() {
   
   if(confirm_val) {
    var checkArr = new Array();
-   
+  }
    $("input[name='roomchk']:checked").each(function(){
     checkArr.push($(this).attr("data-cartNum"));
    });

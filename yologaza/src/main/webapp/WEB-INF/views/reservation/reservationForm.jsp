@@ -5,6 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
+<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -16,6 +18,52 @@
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
     <script src="${contextPath}/resources/js/orderGoodsForm.js"></script>
+    
+    </script>
+    <style>
+    	#tab1 .fa-shopping-cart:before {
+		    content: "\f004";
+		}
+		#tab1 .fas {
+		    font-weight: 100;
+		}
+		#tab1 .fa-shopping-cart:hover {
+		    color:rgb(192, 57, 43);
+		    transition:1s;
+		}
+		#tab1 .fas:hover {
+		    font-weight: 900;
+		}
+    </style>
+    <script type="text/javascript">
+	    function add_cart(goods_uroom) {
+			$.ajax({
+				type : "post",
+				async : false, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/cart/addGoodsInCart.do",
+				data : {
+					goods_uroom:goods_uroom
+					
+				},
+				success : function(data, textStatus) {
+					//alert(data);
+				//	$('#message').append(data);
+					if(data.trim()=='add_success'){
+						imagePopup('open', '.layer01');	
+					}else if(data.trim()=='already_existed'){
+						alert("이미 카트에 등록된 상품입니다.");	
+					}
+					
+				},
+				error : function(data, textStatus) {
+					alert("에러가 발생했습니다."+data);
+				},
+				complete : function(data, textStatus) {
+					//alert("작업을완료 했습니다");
+				}
+			}); //end ajax	
+		}
+    </script>
 </head>
 <body>
 	<div id="pay" class="wrap">
@@ -133,6 +181,7 @@
 		         </div>
 		         <div class="pay_result">
 		           <button type="submit" class="next-button" disabled>결제하기</button>
+		           <a href="javascript:add_cart('${goods.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a>
 		         </div>
 		       </div>
 		     </div>
