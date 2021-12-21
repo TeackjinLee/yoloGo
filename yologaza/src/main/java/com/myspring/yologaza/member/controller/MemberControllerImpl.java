@@ -38,15 +38,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
-
-	@RequestMapping(value = {"/goodsRoom.do"}, method = RequestMethod.GET)
-	private ModelAndView goodsRoom(HttpServletRequest request,
-								HttpServletResponse response) throws Exception{
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
 	
 	@Override
 	@RequestMapping(value="/member/listMembers.do", method=RequestMethod.GET)
