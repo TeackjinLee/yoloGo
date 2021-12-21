@@ -215,11 +215,8 @@
 	    </tbody>
 	  </table>
 	  
-	   <div class="input_line">
-        <h1 class="join_minisub">비밀번호 변경</h1>
-      </div>
       <table>
-    
+      
       <tbody>
       	<tr class="dot_line">
 			<td class="fixed_join">변경할 비밀번호</td>
