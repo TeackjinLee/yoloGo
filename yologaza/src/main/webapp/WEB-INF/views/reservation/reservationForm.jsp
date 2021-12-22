@@ -181,7 +181,6 @@
 		         </div>
 		         <div class="pay_result">
 		           <button type="submit" class="next-button" disabled>결제하기</button>
-		           <a href="javascript:add_cart('${goods.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a>
 		         </div>
 		       </div>
 		     </div>

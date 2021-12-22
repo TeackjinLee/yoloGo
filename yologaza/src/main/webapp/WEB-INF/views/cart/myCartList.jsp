@@ -191,7 +191,19 @@ div {
   vertical-align:top;
   font-size:16px;
 }
-
+.tab_each .reservation .descript .delete{
+	float: right;
+	padding: 3px 5px;
+	border: 1px solid #777;
+	border-radius: 5px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+.tab_each .reservation .descript .delete:hover{
+	color:white;
+	background:rgb(112,173,71);
+	border: 1px solid #ddd;
+}
 .tab_each .reservation .descript a1{
   font-size:24px;
 }
@@ -207,8 +219,9 @@ div {
 }
 
 .tab_each .reservation .descript a3{
-  margin-top:10px;
-  display:block;
+	margin-top: 10px;
+	display: block;
+	margin-bottom: 70px;
 }
 
 .tab_each .reservation .descript a4{
@@ -217,15 +230,13 @@ div {
 }
 
 .tab_each .reservation .descript .detail{
-  position:absolute;
-  display:block;
-  width:60%;
-  height:60px;
-  bottom:0px;
-  right:0px;
-  font-size:24px;
-  text-align:right;
-  padding-right:50px;
+	position: absolute;
+	display: block;
+	width: 60%;
+	bottom: 60px;
+	right: 10px;
+	font-size: 24px;
+	text-align: right;
 }
 
 .detail #type{
@@ -241,48 +252,7 @@ div {
 }
 
 </style>
-<script type="text/javascript">
 
-// 참조 https://kuzuro.blogspot.com/2018/10/22.html
-// 전체선택
-$(document).ready(function() {
-	$("#allsel").click(function() {
-		if($("#allsel").is(":checked")) $("input[name=roomchk]").prop("checked", true);
-		else $("input[name=roomchk]").prop("checked", false);
-	});
-
-	$("input[name=roomchk]").click(function() {
-		var total = $("input[name=roomchk]").length;
-		var checked = $("input[name=roomchk]:checked").length;
-
-		if(total != checked) $("#allsel").prop("checked", false);
-		else $("#allsel").prop("checked", true); 
-	});
-	
-
-	// 선택삭제
- $("#seldelete").click(function(){
-  var confirm_val = confirm("정말 삭제하시겠습니까?");
-  
-  if(confirm_val) {
-   var checkArr = new Array();
-  }
-   $("input[name='roomchk']:checked").each(function(){
-    checkArr.push($(this).attr("data-cartNum"));
-   });
-    
-   $.ajax({
-    url : "/wishListForm/deleteCart",
-    type : "GET",
-    data : { roomchk : checkArr },
-    success : function(){
-     location.href = "/wishListForm";
-    }
-   });
-  } 
- });
-
-</script>
 
 <script type="text/javascript">
 function calcGoodsPrice(bookPrice,obj){
@@ -381,7 +351,7 @@ function delete_cart_goods(cart_uid){
     formObj.submit();
 }
 
-function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
+function fn_order_each_goods(goods_uroom,goods_title,goods_room_price1,fileName){
 	var total_price,final_total_price,_goods_qty;
 	var cart_goods_qty=document.getElementById("cart_goods_qty");
 	
@@ -389,25 +359,25 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 	var formObj=document.createElement("form");
 	var i_goods_id = document.createElement("input"); 
     var i_goods_title = document.createElement("input");
-    var i_goods_sales_price=document.createElement("input");
+    var i_goods_room_price1=document.createElement("input");
     var i_fileName=document.createElement("input");
     var i_order_goods_qty=document.createElement("input");
     
-    i_goods_id.name="goods_id";
+    i_goods_id.name="goods_uroom";
     i_goods_title.name="goods_title";
-    i_goods_sales_price.name="goods_sales_price";
+    i_goods_room_price1.name="goods_room_price1";
     i_fileName.name="goods_fileName";
     i_order_goods_qty.name="order_goods_qty";
     
-    i_goods_id.value=goods_id;
+    i_goods_id.value=goods_uroom;
     i_order_goods_qty.value=_order_goods_qty;
     i_goods_title.value=goods_title;
-    i_goods_sales_price.value=goods_sales_price;
+    i_goods_room_price1.value=goods_room_price1;
     i_fileName.value=fileName;
     
     formObj.appendChild(i_goods_id);
     formObj.appendChild(i_goods_title);
-    formObj.appendChild(i_goods_sales_price);
+    formObj.appendChild(i_goods_room_price1);
     formObj.appendChild(i_fileName);
     formObj.appendChild(i_order_goods_qty);
 
@@ -480,6 +450,8 @@ function fn_order_all_cart_goods(){
             <form name="frm_order_all_cart">
 	            <ul class="tab_each" >
 		            <c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
+		            <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
+				    <c:set var="cart_uid" value="${myCartList[cnt.count-1].cart_uid}" />
 			            <li class="reservation" style="margin-bottom: 20px;">
 			              <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
 			              <div class="descript">
@@ -487,70 +459,78 @@ function fn_order_all_cart_goods(){
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
 			                <a2>${item.goods_address}</a2>
 			                <a3>${item.goods_room_name}</a3>
+			                
+			                
 			                <div class="detail">
-			                  <span id="type">숙박</span>
-			                  <span id="price">${item.goods_room_price1}원</span>
+								<span id="type">숙박</span>
+								<span id="price">${item.goods_room_price1}원</span>
 			                </div>
-			                <a href="javascript:delete_cart_goods('${cart_id}');"> 
-							   삭제하기
-						   </a>
+			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
+								삭제하기
+							</a>
+							<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}'> 
+								예약하기
+							</a>
+			                
 			              </div>
 			            </li>
+			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_room_price1 }" />
+						<c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
 		            </c:forEach>
 		        </ul>
           	</form>
           	
-          	<table  width=80%   class="list_view" style="background:#cacaff">
-	<tbody>
-	     <tr  align=center  class="fixed" >
-	       <td class="fixed">총 예약 수 </td>
-	       <td>총 예약 금액</td>
-	       <td>  </td>
-	       <td>총 배송비</td>
-	       <td>  </td>
-	       <td>총 할인 금액 </td>
-	       <td>  </td>
-	       <td>최종 결제금액</td>
-	     </tr>
-		<tr cellpadding=40  align=center >
-			<td id="">
-			  <p id="p_totalGoodsNum">${totalGoodsNum}개 </p>
-			  <input id="h_totalGoodsNum"type="hidden" value="${totalGoodsNum}"  />
-			</td>
-	       <td>
-	          <p id="p_totalGoodsPrice">
-	          <fmt:formatNumber  value="${totalGoodsPrice}" type="number" var="total_goods_price" />
-				         ${total_goods_price}원
-	          </p>
-	          <input id="h_totalGoodsPrice"type="hidden" value="${totalGoodsPrice}" />
-	       </td>
-	       <td> 
-	          + 
-	       </td>
-	       <td>
-	         <p id="p_totalDeliveryPrice">${totalDeliveryPrice }원  </p>
-	         <input id="h_totalDeliveryPrice"type="hidden" value="${totalDeliveryPrice}" />
-	       </td>
-	       <td> 
-	         -
-	       </td>
-	       <td>  
-	         <p id="p_totalSalesPrice"> 
-				         ${totalDiscountedPrice}원
-	         </p>
-	         <input id="h_totalSalesPrice"type="hidden" value="${totalSalesPrice}" />
-	       </td>
-	       <td>  
-	         =
-	       </td>
-	       <td>
-	          <p id="p_final_totalPrice">
-	          <fmt:formatNumber  value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" type="number" var="total_price" />
-	            ${total_price}원
-	          </p>
-	          <input id="h_final_totalPrice" type="hidden" value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
-	       </td>
-		</tr>
+	<table  width=99%  class="list_view" style="font-size:18px; box-sizing: border-box; border-top:1px solid #ddd; border-bottom:1px solid #ddd; margin-top:30px;">
+		<tbody>
+		     <tr  align=center  class="fixed" >
+		       <td class="fixed">총 예약 건수 </td>
+		       <td>총 예약 금액</td>
+		       <td>  </td>
+		       <td>옵션 비용</td>
+		       <td>  </td>
+		       <td>총 할인 금액 </td>
+		       <td>  </td>
+		       <td>최종 결제금액</td>
+		     </tr>
+			<tr cellpadding=40  align=center >
+				<td id="">
+				  <p id="p_totalGoodsNum">${totalGoodsNum}개 </p>
+				  <input id="h_totalGoodsNum"type="hidden" value="${totalGoodsNum}"  />
+				</td>
+		       <td>
+		          <p id="p_totalGoodsPrice">
+		          <fmt:formatNumber  value="${totalGoodsPrice}" type="number" var="total_goods_price" />
+					         ${total_goods_price}원
+		          </p>
+		          <input id="h_totalGoodsPrice"type="hidden" value="${totalGoodsPrice}" />
+		       </td>
+		       <td> 
+		          + 
+		       </td>
+		       <td>
+		         <p id="p_totalDeliveryPrice">${totalDeliveryPrice }원  </p>
+		         <input id="h_totalDeliveryPrice"type="hidden" value="${totalDeliveryPrice}" />
+		       </td>
+		       <td> 
+		         -
+		       </td>
+		       <td>  
+		         <p id="p_totalSalesPrice"> 
+					         ${totalDiscountedPrice}원
+		         </p>
+		         <input id="h_totalSalesPrice"type="hidden" value="${totalSalesPrice}" />
+		       </td>
+		       <td>  
+		         =
+		       </td>
+		       <td>
+		          <p id="p_final_totalPrice" style="font-weight:bold; color:rgb(192, 57, 43)">
+		          <fmt:formatNumber  value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" type="number" var="total_price" />
+		            ${total_price}원
+		          </p>
+		          <input id="h_final_totalPrice" type="hidden" value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
+		       </td>
+			</tr>
 		</tbody>
 	</table>
 	<center>
