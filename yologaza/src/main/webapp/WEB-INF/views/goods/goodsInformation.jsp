@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<script>
@@ -61,24 +60,76 @@
     });
     </script>
     <style>
+    
+    	
     	#tab1 .fa-shopping-cart:before {
 		    content: "\f004";
 		}
 		#tab1 .fas {
 		    font-weight: 100;
+		    text-align:center;
+		    margin-right:5px;
 		}
 		#tab1 .fa-shopping-cart:hover {
 		    color:rgb(192, 57, 43);
-		    transition:1s;
+		    transition:0.5s;
+		    
 		}
 		#tab1 .fas:hover {
-		    font-weight: 900;
+			font-size:30px;
+			text-align:center;
+			margin-right:0px;
+			font-weight:500;
+		}
+		
+		<!-- 장바구니 팝업 -->
+		#layer {
+			z-index: 2;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+		}
+		
+		#popup {
+			z-index: 3;
+			position: fixed;
+			text-align: center;
+			left: 50%;
+			top: 45%;
+			width: 300px;
+			height: 180px;
+			background-color: white;
+			border: 3px solid #87cb42;
+		}
+		#popup a{
+			float: right;
+    		margin-right: 10px;
+		}
+		#popup font{
+			    margin: 20px 0px;
+			    display: block;
+			    font-weight: bold;
+		}
+		
+		#popup form input{
+			background: rgb(112, 173, 71);
+		    color: white;
+		    font-size: 16px;
+		    padding: 5px 30px;
+		    border-radius: 5px;
+		    cursor:pointer;
+		}
+		
+		#close {
+			z-index: 4;
+			float: right;
 		}
     </style>
     <script type="text/javascript">
 	    function add_cart(goods_uroom) {
 			$.ajax({
-				type : "post",
+				type : "POST",
 				async : false, //false인 경우 동기식으로 처리한다.
 				url : "${contextPath}/cart/addGoodsInCart.do",
 				data : {
@@ -102,6 +153,22 @@
 					//alert("작업을완료 했습니다");
 				}
 			}); //end ajax	
+		}
+	    
+	    function imagePopup(type) {
+			if (type == 'open') {
+				// 팝업창을 연다.
+				jQuery('#layer').attr('style', 'visibility:visible');
+
+				// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
+				jQuery('#layer').height(jQuery(document).height());
+			}
+
+			else if (type == 'close') {
+
+				// 팝업창을 닫는다.
+				jQuery('#layer').attr('style', 'visibility:hidden');
+			}
 		}
     </script>
 </head>
@@ -174,7 +241,7 @@
 				        <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
 				        <div class="room-text cell-r">
 				          <div class="reserve cell">
-				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${goods.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 				            <h3>대실</h3>
 				            <br><br><br>
 				            <div class="price"><h2>${item.goods_room_price2}원</h2></div>
@@ -187,7 +254,7 @@
 				            </div>
 				          </div>
 				          <div class="reserve cell">
-				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${goods.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 				            <h3>숙박</h3>
 				            <br><br><br>
 				            <div class="price"><h2>${item.goods_room_price1}원</h2></div>
@@ -228,7 +295,7 @@
 						      <div class="room-text cell-r">
 						        
 						        <div class="reserve cell" style="width:100%; border-right:none;">
-						          <h2>${item.goods_room_name}<a href="javascript:add_cart('${goods.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+						          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 						          <h3>숙박</h3>
 						          <br><br><br>
 						          <div class="price"><h2>${item.goods_room_price1}원</h2></div>
@@ -346,7 +413,18 @@
             </div>
           </div>
         </div>
-  </div>
-  </div>
+        <div id="layer" style="visibility: hidden">
+			<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
+			<div id="popup">
+					<!-- 팝업창 닫기 버튼 -->
+					<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> x
+					</a> <br /> <font size="5" id="contents">장바구니에 담았습니다.</font><br>
+				<form   action='${contextPath}/cart/myCartList.do'  >				
+						<input  type="submit" value="장바구니 보기">
+				</form>	
+				</div>
+			</div>
+		  </div>
+	  </div>
 </body>
 </html>

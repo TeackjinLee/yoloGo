@@ -30,7 +30,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	@Autowired
 	private MemberVO memberVO;
 	
-	@RequestMapping(value="/myCartList.do" ,method = RequestMethod.GET)
+	@RequestMapping(value="/myCartList.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
