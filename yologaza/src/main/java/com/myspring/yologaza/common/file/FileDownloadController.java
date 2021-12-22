@@ -55,7 +55,7 @@ public class FileDownloadController {
 	
 private static String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	
-	@RequestMapping("/goods_download")
+	@RequestMapping("/goods_download.do")
 	protected void goods_download(@RequestParam("fileName") String fileName,
 		                 	@RequestParam("goods_id") String goods_id,
 			                 HttpServletResponse response) throws Exception {

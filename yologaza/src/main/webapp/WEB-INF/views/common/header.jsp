@@ -24,8 +24,8 @@
 	      <ul class = "row">
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
-	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do">마이페이지</a></li>
-	      			<li class = cell-r><a href="${contextPath}/member/cartForm.do">장바구니</a></li>
+	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do"><i class="far fa-user" style="color: black;"></i>&nbsp;마이페이지</a></li>
+	      			<li class = cell-r><a href="${contextPath}/cart/myCartList.do"><i class="far fa-heart" style="color: rgb(192, 57, 43);"></i>&nbsp;찜하기</a></li>
 	        		<li class = cell-r><a href="${contextPath}/member/logout.do">로그아웃</a></li>
 	      		</c:when>
 	      		<c:otherwise>

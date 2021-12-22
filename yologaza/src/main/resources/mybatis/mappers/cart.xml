@@ -68,8 +68,9 @@
 	
 	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
 		<![CDATA[
-			select g.*,d.fileName from goods_detail g, goods_img d
+			select g.*,d.fileName, s.goods_name, s.goods_address from goods_detail g, goods_img d, goods s
 			where g.goods_uroom=d.goods_uroom
+            and g.goods_id = s.goods_id
 			and d.filetype='room'
 			and g.goods_uroom in
 		]]>
@@ -77,7 +78,8 @@
 			#{item.goods_uroom}
 		</foreach>
 		<![CDATA[
-		order by g.goods_room_creDate desc
+			group by goods_uroom
+			order by g.goods_room_creDate desc
 		]]>
 	</select>
 	

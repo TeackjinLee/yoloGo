@@ -1,4 +1,5 @@
-<%-- 송상우 100% --%>
+<%-- 1차 송상우 100% --%>
+<%-- 2차 이택진 100% --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 	isELIgnored="false" %>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <html>
 <head>
-<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+
 <style>
 body{
   font-size: 14px;
@@ -172,10 +173,6 @@ div {
   position:relative;
 }
 
-.tab_each{
-  height:500px;
-}
-
 .tab_each .reservation img{
   width:30%;
   height:220px;
@@ -232,12 +229,15 @@ div {
 }
 
 .detail #type{
-  position:absolute;
-  right:200px;
-}
+   		    background: rgb(112,173,71);
+		    color: white;
+		    font-weight: bold;
+		    padding: 1px 10px;
+		    font-size: 18px;
+    	}
 
 #price{
-  color:red;
+  font-weight:bold;
 }
 
 </style>
@@ -273,7 +273,7 @@ $(document).ready(function() {
     
    $.ajax({
     url : "/wishListForm/deleteCart",
-    type : "post",
+    type : "GET",
     data : { roomchk : checkArr },
     success : function(){
      location.href = "/wishListForm";
@@ -283,12 +283,184 @@ $(document).ready(function() {
  });
 
 </script>
+
+<script type="text/javascript">
+function calcGoodsPrice(bookPrice,obj){
+	var totalPrice,final_total_price,totalNum;
+	var goods_qty=document.getElementById("select_goods_qty");
+	//alert("총 상품금액"+goods_qty.value);
+	var p_totalNum=document.getElementById("p_totalNum");
+	var p_totalPrice=document.getElementById("p_totalPrice");
+	var p_final_totalPrice=document.getElementById("p_final_totalPrice");
+	var h_totalNum=document.getElementById("h_totalNum");
+	var h_totalPrice=document.getElementById("h_totalPrice");
+	var h_totalDelivery=document.getElementById("h_totalDelivery");
+	var h_final_total_price=document.getElementById("h_final_totalPrice");
+	if(obj.checked==true){
+	//	alert("체크 했음")
+		
+		totalNum=Number(h_totalNum.value)+Number(goods_qty.value);
+		//alert("totalNum:"+totalNum);
+		totalPrice=Number(h_totalPrice.value)+Number(goods_qty.value*bookPrice);
+		//alert("totalPrice:"+totalPrice);
+		final_total_price=totalPrice+Number(h_totalDelivery.value);
+		//alert("final_total_price:"+final_total_price);
+
+	}else{
+	//	alert("h_totalNum.value:"+h_totalNum.value);
+		totalNum=Number(h_totalNum.value)-Number(goods_qty.value);
+	//	alert("totalNum:"+ totalNum);
+		totalPrice=Number(h_totalPrice.value)-Number(goods_qty.value)*bookPrice;
+	//	alert("totalPrice="+totalPrice);
+		final_total_price=totalPrice-Number(h_totalDelivery.value);
+	//	alert("final_total_price:"+final_total_price);
+	}
+	
+	h_totalNum.value=totalNum;
+	
+	h_totalPrice.value=totalPrice;
+	h_final_total_price.value=final_total_price;
+	
+	p_totalNum.innerHTML=totalNum;
+	p_totalPrice.innerHTML=totalPrice;
+	p_final_totalPrice.innerHTML=final_total_price;
+}
+
+function modify_cart_qty(goods_id,bookPrice,index){
+	//alert(index);
+   var length=document.frm_order_all_cart.cart_goods_qty.length;
+   var _cart_goods_qty=0;
+	if(length>1){ //카트에 제품이 한개인 경우와 여러개인 경우 나누어서 처리한다.
+		_cart_goods_qty=document.frm_order_all_cart.cart_goods_qty[index].value;		
+	}else{
+		_cart_goods_qty=document.frm_order_all_cart.cart_goods_qty.value;
+	}
+		
+	var cart_goods_qty=Number(_cart_goods_qty);
+	//alert("cart_goods_qty:"+cart_goods_qty);
+	//console.log(cart_goods_qty);
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/cart/modifyCartQty.do",
+		data : {
+			goods_id:goods_id,
+			cart_goods_qty:cart_goods_qty
+		},
+		
+		success : function(data, textStatus) {
+			//alert(data);
+			if(data.trim()=='modify_success'){
+				alert("수량을 변경했습니다!!");	
+			}else{
+				alert("다시 시도해 주세요!!");	
+			}
+			
+		},
+		error : function(data, textStatus) {
+			alert("에러가 발생했습니다."+data);
+		},
+		complete : function(data, textStatus) {
+			//alert("작업을완료 했습니다");
+			
+		}
+	}); //end ajax	
+}
+
+function delete_cart_goods(cart_uid){
+	var cart_uid=Number(cart_uid);
+	var formObj=document.createElement("form");
+	var i_cart = document.createElement("input");
+	i_cart.name="cart_uid";
+	i_cart.value=cart_uid;
+	
+	formObj.appendChild(i_cart);
+    document.body.appendChild(formObj); 
+    formObj.method="post";
+    formObj.action="${contextPath}/cart/removeCartGoods.do";
+    formObj.submit();
+}
+
+function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
+	var total_price,final_total_price,_goods_qty;
+	var cart_goods_qty=document.getElementById("cart_goods_qty");
+	
+	_order_goods_qty=cart_goods_qty.value; //장바구니에 담긴 개수 만큼 주문한다.
+	var formObj=document.createElement("form");
+	var i_goods_id = document.createElement("input"); 
+    var i_goods_title = document.createElement("input");
+    var i_goods_sales_price=document.createElement("input");
+    var i_fileName=document.createElement("input");
+    var i_order_goods_qty=document.createElement("input");
+    
+    i_goods_id.name="goods_id";
+    i_goods_title.name="goods_title";
+    i_goods_sales_price.name="goods_sales_price";
+    i_fileName.name="goods_fileName";
+    i_order_goods_qty.name="order_goods_qty";
+    
+    i_goods_id.value=goods_id;
+    i_order_goods_qty.value=_order_goods_qty;
+    i_goods_title.value=goods_title;
+    i_goods_sales_price.value=goods_sales_price;
+    i_fileName.value=fileName;
+    
+    formObj.appendChild(i_goods_id);
+    formObj.appendChild(i_goods_title);
+    formObj.appendChild(i_goods_sales_price);
+    formObj.appendChild(i_fileName);
+    formObj.appendChild(i_order_goods_qty);
+
+    document.body.appendChild(formObj); 
+    formObj.method="post";
+    formObj.action="${contextPath}/order/orderEachGoods.do";
+    formObj.submit();
+}
+
+function fn_order_all_cart_goods(){
+//	alert("모두 주문하기");
+	var order_goods_qty;
+	var order_goods_id;
+	var objForm=document.frm_order_all_cart;
+	var cart_goods_qty=objForm.cart_goods_qty;
+	var h_order_each_goods_qty=objForm.h_order_each_goods_qty;
+	var checked_goods=objForm.checked_goods;
+	var length=checked_goods.length;
+	
+	
+	//alert(length);
+	if(length>1){
+		for(var i=0; i<length;i++){
+			if(checked_goods[i].checked==true){
+				order_goods_id=checked_goods[i].value;
+				order_goods_qty=cart_goods_qty[i].value;
+				cart_goods_qty[i].value="";
+				cart_goods_qty[i].value=order_goods_id+":"+order_goods_qty;
+				//alert(select_goods_qty[i].value);
+				console.log(cart_goods_qty[i].value);
+			}
+		}	
+	}else{
+		order_goods_id=checked_goods.value;
+		order_goods_qty=cart_goods_qty.value;
+		cart_goods_qty.value=order_goods_id+":"+order_goods_qty;
+		//alert(select_goods_qty.value);
+	}
+		
+ 	objForm.method="post";
+ 	objForm.action="${contextPath}/order/orderAllCartGoods.do";
+	objForm.submit();
+}
+
+</script>
+
+
 </head>
-<body class="pc">
+<body >
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a><i class="fas fa-shopping-cart"></i> 장바구니</a>
+          <a><i class="far fa-heart"></i> 장바구니</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
@@ -305,22 +477,92 @@ $(document).ready(function() {
                 </ul>
               </div>
             </div>
-            <div class="tab_each">
-              <div class="reservation">
-                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg">
-                <div class="descript">
-                  <a1>숙소명</a1>
-                  <input type="checkbox" name="roomchk">
-                  <a2>주소</a2>
-                  <a3>선택한 방 종류</a3>
-                  <a4>체크인</a4>~<a4>체크아웃</a4>
-                  <div class="detail">
-                    <span id="type">숙박</span>
-                    <span id="price">100,000원</span>
-                  </div>
-                </div>
-              </div>
-          </div>
+            <form name="frm_order_all_cart">
+	            <ul class="tab_each" >
+		            <c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
+			            <li class="reservation" style="margin-bottom: 20px;">
+			              <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
+			              <div class="descript">
+			                <a1 style= "font-weight:bold;">${item.goods_name}</a1>
+			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
+			                <a2>${item.goods_address}</a2>
+			                <a3>${item.goods_room_name}</a3>
+			                <div class="detail">
+			                  <span id="type">숙박</span>
+			                  <span id="price">${item.goods_room_price1}원</span>
+			                </div>
+			                <a href="javascript:delete_cart_goods('${cart_id}');"> 
+							   삭제하기
+						   </a>
+			              </div>
+			            </li>
+		            </c:forEach>
+		        </ul>
+          	</form>
+          	
+          	<table  width=80%   class="list_view" style="background:#cacaff">
+	<tbody>
+	     <tr  align=center  class="fixed" >
+	       <td class="fixed">총 예약 수 </td>
+	       <td>총 예약 금액</td>
+	       <td>  </td>
+	       <td>총 배송비</td>
+	       <td>  </td>
+	       <td>총 할인 금액 </td>
+	       <td>  </td>
+	       <td>최종 결제금액</td>
+	     </tr>
+		<tr cellpadding=40  align=center >
+			<td id="">
+			  <p id="p_totalGoodsNum">${totalGoodsNum}개 </p>
+			  <input id="h_totalGoodsNum"type="hidden" value="${totalGoodsNum}"  />
+			</td>
+	       <td>
+	          <p id="p_totalGoodsPrice">
+	          <fmt:formatNumber  value="${totalGoodsPrice}" type="number" var="total_goods_price" />
+				         ${total_goods_price}원
+	          </p>
+	          <input id="h_totalGoodsPrice"type="hidden" value="${totalGoodsPrice}" />
+	       </td>
+	       <td> 
+	          + 
+	       </td>
+	       <td>
+	         <p id="p_totalDeliveryPrice">${totalDeliveryPrice }원  </p>
+	         <input id="h_totalDeliveryPrice"type="hidden" value="${totalDeliveryPrice}" />
+	       </td>
+	       <td> 
+	         -
+	       </td>
+	       <td>  
+	         <p id="p_totalSalesPrice"> 
+				         ${totalDiscountedPrice}원
+	         </p>
+	         <input id="h_totalSalesPrice"type="hidden" value="${totalSalesPrice}" />
+	       </td>
+	       <td>  
+	         =
+	       </td>
+	       <td>
+	          <p id="p_final_totalPrice">
+	          <fmt:formatNumber  value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" type="number" var="total_price" />
+	            ${total_price}원
+	          </p>
+	          <input id="h_final_totalPrice" type="hidden" value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
+	       </td>
+		</tr>
+		</tbody>
+	</table>
+	<center>
+    <br><br>	
+		 <a href="javascript:fn_order_all_cart_goods()">
+		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_order_final.jpg">
+		 </a>
+		 <a href="#">
+		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
+		 </a>
+	<center>
+          	
         </div>
       </div>
     </div>
