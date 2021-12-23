@@ -24,12 +24,46 @@
      #tr_btn_modify{
        display:none;
      }
+     #board{
+		width: 1050px;
+		margin: 0 auto;
+		background: white;
+		margin-top:20px;
+		padding: 5px 30px;
+    	box-sizing: border-box;
+    	border-radius: 15px;
+    	box-shadow: 10px 10px 10px #ddd;
+     }
+     #board_head{
+     	margin: 0 auto;
+     	width: 1050px;
+     	height: 50px;
+     	text-align: left;
+     	margin-top: 10px;
+     }
+     #board_head .member_img{
+     	float:left;
+     	width:40px;
+     	height:40px;
+     	border-radius: 20px;
+     	overflow: hidden;
+     }
+     #board_head .member_img img{
+     	height:100%;
+     }
+     #board_head .board_box{
+     	float:left;
+     	margin-left:10px;
+     }
+     #board_head .board_box .board_id{
+		font-weight: bold;
+     }
    
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
      function backToList(obj){
-	    obj.action="${contextPath}/board/listArticles.do";
+	    obj.action="${contextPath}/goods/goodsInformation.do?goods_id=${article.goods_id }";
 	    obj.submit();
      }
  
@@ -87,40 +121,60 @@
 	 }  
  </script>
 </head>
-<body>
-  <form name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
-  <table  border=0  align="center">
+<body style="background:rgb(240,242,245);">
+  <form id="board" name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+  <table  border=0  align="center" style="margin:0 auto; width:100%;">
+	<div id="board_head">
+		<div class="member_img"><img src="https://www.topdaily.kr/news/photo/202104/103107_75319_2949.jpg" alt="사용자 사진"	/></div>
+		<div class="board_box">
+			<div class="board_id">${article.id }</div>
+			<div class="board_date">${article.writeDate}</div>
+		</div>
+	</div>  
+	<c:choose> 
+		<c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
+		   <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+		   <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:100%; margin:0 auto" /><br>
+		 <tr>
+		   <td style="float:right; width:180px;">
+		      <input  type="hidden"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
+		   </td>
+		 </tr> 
+		</c:when>
+		<c:otherwise>
+		   <tr  id="tr_file_upload" >
+		    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
+		      이미지
+		    </td>
+		    <td>
+		      <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+		    </td>
+		   </tr>
+		<tr>
+			<td style="float:right; width:180px;">
+				<img id="preview"  /><br>
+				<input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"	/>
+			</td>
+		</tr>
+		</c:otherwise>
+	</c:choose>
   <tr>
-   <td width=150 align="center" bgcolor=#FF9933>
-      글번호
-   </td>
+   
    <td >
-    <input type="text"  value="${article.articleNO }"  disabled />
+    <input type="hidden"  value="${article.articleNO }"  disabled />
     <input type="hidden" name="articleNO" value="${article.articleNO}"  />
+    <input type="hidden"  value="${article.goods_id }"  disabled />
    </td>
   </tr>
+  
   <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      작성자 아이디
-   </td>
-   <td >
-    <input type=text value="${article.id }" name="writer"  disabled />
-   </td>
-  </tr>
-  <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      제목 
-   </td>
    <td>
-    <input type=text value="${article.title }"  name="title"  id="i_title" disabled />
+    <input type=text value="${article.title }"  name="title"  id="i_title" style="width:100%; float:left; margin-bottom:10px; font-weight:bold; font-size:18px; padding:5px; box-sizing:border-box;" disabled />
    </td>   
   </tr>
   <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      내용
-   </td>
    <td>
-    <textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${article.content }</textarea>
+    <textarea rows="20" cols="141" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
    </td>  
   </tr>
  <%-- 
@@ -144,62 +198,20 @@
  </c:if>
  	 --%>    
  	 
-  <c:choose> 
-	  <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
-	   	<tr>
-		    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-		      이미지
-		   </td>
-		   <td>
-		     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  /><br>
-		   </td>   
-		  </tr>  
-		  <tr>
-		    <td ></td>
-		    <td>
-		       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-		    </td>
-		  </tr> 
-		 </c:when>
-		 <c:otherwise>
-		    <tr  id="tr_file_upload" >
-				    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-				      이미지
-				    </td>
-				    <td>
-				      <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-				    </td>
-			    </tr>
-			    <tr>
-				    <td ></td>
-				    <td>
-				       <img id="preview"  /><br>
-				       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-				    </td>
-			  </tr>
-		 </c:otherwise>
-	 </c:choose>
-  <tr>
-	   <td width="150" align="center" bgcolor="#FF9933">
-	      등록일자
-	   </td>
-	   <td>
-	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
-	   </td>   
-  </tr>
+  
+  
   <tr   id="tr_btn_modify"  align="center"  >
-	   <td colspan="2"   >
+	   <td colspan="2">
 	       <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
            <input type=button value="취소"  onClick="backToList(frmArticle)">
 	   </td>   
   </tr>
     
   <tr  id="tr_btn"    >
-   <td colspan="2" align="center">
+   <td colspan="2" align="center" style="padding: 20px; box-sizing: border-box;">
        <c:if test="${member.id == article.id }">
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
+	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO},${article.goods_id})">
 	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
 	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">

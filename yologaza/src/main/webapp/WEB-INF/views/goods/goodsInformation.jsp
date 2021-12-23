@@ -125,6 +125,18 @@
 			z-index: 4;
 			float: right;
 		}
+		#board_head .member_img{
+	     	float:right;
+	     	width:60px;
+	     	height:60px;
+	     	border-radius: 30px;
+	     	margin-top:10px;
+	     	margin-left:10px;
+	     	overflow: hidden;
+	     }
+	     #board_head .member_img img{
+	     	height:100%;
+	     }
     </style>
     <script type="text/javascript">
 	    function add_cart(goods_uroom) {
@@ -350,11 +362,7 @@
                 <ul id="tab3">
                   <table align="center" width="100%" style="margin-top:20px;"  >
 					  <tr height="10" align="center" style="height:30px; color:white; font-weight:bold; background-color:rgb(112, 173, 71);">
-					     <td >글번호</td>
-					     <td >작성자</td>              
-					     <td >제목</td>
-					     <td >사진</td>
-					     <td >작성일</td>
+
 					  </tr>
 					<c:choose>
 					  <c:when test="${articlesList ==null }" >
@@ -372,8 +380,11 @@
 					    <c:forEach  var="article" items="${articlesList}" varStatus="articleNum" >
 						    <c:choose>
 							    <c:when test="${article.goods_id == goods.goods_id}" >
-								    <tr align="center" style="background-color:rgba(0, 0, 0, 0.03); height:50px;">
-									<td width="5%">${articleNum.count}</td>
+								    <tr align="center" style=" height:80px; box-shadow: 3px 3px 3px #ddd;">
+									<td id="board_head">
+										<div class="member_img"><img src="https://www.topdaily.kr/news/photo/202104/103107_75319_2949.jpg" alt="사용자 사진"	/></div>
+									</td>
+									<td style="visibility: hidden;" width="0%">${articleNum.count}</td>
 									<td width="10%">${article.id }</td>
 									<td align='left'  width="60%">
 									  <span style="padding-right:30px"></span>
@@ -402,18 +413,21 @@
 					    </c:when>
 					    </c:choose>
 					</table>
-					<a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
-                                                    '${contextPath}/member/loginForm.do')"><p class="cls2" 
-                                                    style="display: block;
-														    width: 100px;
-														    background: rgba(0,0,0,0.05);
-														    margin: 0 auto;
-														    text-align: center;
-														    padding: 5px;
-														    box-sizing: border-box;
-														    border-radius: 5px;
-														    margin-top: 20px;
-														    border: 1px solid #ddd;">글쓰기</p></a>
+					<form>
+						<a type=submit  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
+	                                                    '${contextPath}/member/loginForm.do')"><p class="cls2" 
+	                                                    style="display: block;
+															    width: 100px;
+															    background: rgba(0,0,0,0.05);
+															    margin: 0 auto;
+															    text-align: center;
+															    padding: 5px;
+															    box-sizing: border-box;
+															    border-radius: 5px;
+															    margin-top: 20px;
+															    border: 1px solid #ddd;">글쓰기</p>
+						</a>
+					</form>
                 </ul>
               </div>
             </div>

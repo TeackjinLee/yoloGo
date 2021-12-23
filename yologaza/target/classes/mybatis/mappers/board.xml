@@ -17,7 +17,7 @@
 
   <select id="selectAllArticlesList" resultMap="articlesResult" parameterType="String"  >
     <![CDATA[
-		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗'), tbd.TITLE)
+		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗ '), tbd.TITLE)
 	                 ELSE tbd.TITLE
 	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id
 		FROM
