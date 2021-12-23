@@ -29,7 +29,7 @@
 	</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>방검색</title>
+    <title>방 검색</title>
     <!-- 폰트어썸 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 	
@@ -142,12 +142,12 @@
 					if(data.trim()=='add_success'){
 						imagePopup('open', '.layer01');	
 					}else if(data.trim()=='already_existed'){
-						alert("이미 카트에 등록된 상품입니다.");	
+						swal ( "Oops" ,  "이미 카트에 등록된 상품입니다." +data  ,  "error");
 					}
 					
 				},
 				error : function(data, textStatus) {
-					alert("에러가 발생했습니다."+data);
+					swal ( "Oops" ,  "로그인후 사용 가능합니다." +data  ,  "error");
 				},
 				complete : function(data, textStatus) {
 					//alert("작업을완료 했습니다");
@@ -366,34 +366,40 @@
 					      </td>  
 					    </tr>
 					  </c:when>
+					  
 					  <c:when test="${articlesList !=null }" >
-					    <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
-					     <tr align="center" style="background-color:rgba(0, 0, 0, 0.03); height:50px;">
-						<td width="5%">${articleNum.count}</td>
-						<td width="10%">${article.id }</td>
-						<td align='left'  width="60%">
-						  <span style="padding-right:30px"></span>
-						   <c:choose>
-						      <c:when test='${article.level > 1 }'>  
-						         <c:forEach begin="1" end="${article.level }" step="1">
-						              <span style="padding-left:20px"></span>    
-						         </c:forEach>
-						         <span style="font-size:12px;">[답변]</span>
-					                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
-						          </c:when>
-						          <c:otherwise>
-						            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
-						          </c:otherwise>
-						        </c:choose>
-						  </td>
-					      <td width="auto">
-						     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-						     <img src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
-						   </td> 
-						  <td  width="10%">${article.writeDate}</td> 
-						</tr>
+					  	
+					    <c:forEach  var="article" items="${articlesList}" varStatus="articleNum" >
+						    <c:choose>
+							    <c:when test="${article.goods_id == goods.goods_id}" >
+								    <tr align="center" style="background-color:rgba(0, 0, 0, 0.03); height:50px;">
+									<td width="5%">${articleNum.count}</td>
+									<td width="10%">${article.id }</td>
+									<td align='left'  width="60%">
+									  <span style="padding-right:30px"></span>
+									   <c:choose>
+									      <c:when test='${article.level > 1 }'>  
+									         <c:forEach begin="1" end="${article.level }" step="1">
+									              <span style="padding-left:20px"></span>    
+									         </c:forEach>
+									         <span style="font-size:12px;">[답변]</span>
+								                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+									          </c:when>
+									          <c:otherwise>
+									            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
+									          </c:otherwise>
+									        </c:choose>
+									  </td>
+								      <td width="auto">
+									     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+									     <img src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
+									   </td> 
+									  <td  width="10%">${article.writeDate}</td>
+									</tr>
+								</c:when>
+							</c:choose>
 					    </c:forEach>
-					     </c:when>
+					    </c:when>
 					    </c:choose>
 					</table>
 					<a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',

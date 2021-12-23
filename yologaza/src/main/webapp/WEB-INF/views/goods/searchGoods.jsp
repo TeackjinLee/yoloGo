@@ -1,4 +1,5 @@
 <!-- 기여도 : 이택진100% -->
+<!-- 2차기여도 : 이택진100% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"	isELIgnored="false"
 	%>
@@ -215,7 +216,7 @@
             	<h3 style ="text-align:left">모텔</h3>
 	            <c:forEach var="item" items="${goodsMap.motel}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -239,7 +240,7 @@
             	<h3 style ="text-align:left">호텔</h3>
 	            <c:forEach var="item" items="${goodsMap.hotel}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -263,7 +264,7 @@
 				<h3 style ="text-align:left">펜션</h3>
 	            <c:forEach var="item" items="${goodsMap.pension}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -287,7 +288,7 @@
 				<h3 style ="text-align:left">리조트</h3>
 	            <c:forEach var="item" items="${goodsMap.resort}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -311,7 +312,7 @@
 				<h3 style ="text-align:left">게스트하우스</h3>
 	            <c:forEach var="item" items="${goodsMap.guestHouse}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -335,7 +336,7 @@
 				<h3 style ="text-align:left">캠핑/글램핑</h3>
 	            <c:forEach var="item" items="${goodsMap.camping}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -359,7 +360,7 @@
 				<h3 style ="text-align:left">한옥</h3>
 	            <c:forEach var="item" items="${goodsMap.hanok}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>

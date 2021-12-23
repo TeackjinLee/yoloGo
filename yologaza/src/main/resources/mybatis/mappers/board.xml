@@ -10,15 +10,16 @@
     <result property="parentNO" column="parentNO" />
     <result property="title" column="title" />
     <result property="content" column="content" />
+    <result property="goods_id" column="goods_id" />
     <result property="writeDate" column="writeDate" />
     <result property="imageFileName" column="imageFileName" />
   </resultMap> 
 
-  <select id="selectAllArticlesList" resultMap="articlesResult"   >
+  <select id="selectAllArticlesList" resultMap="articlesResult" parameterType="String"  >
     <![CDATA[
 		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗'), tbd.TITLE)
 	                 ELSE tbd.TITLE
-	           END AS TITLE, content,imageFileName, writeDate,tbd.id
+	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id
 		FROM
 		   (SELECT fnc_hierachi() AS articleNO, @level AS level
 		      FROM (SELECT @start_with:=0, @articleNO:=@start_with, @level:=0) vars
