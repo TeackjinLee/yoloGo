@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${contextPath}/resources/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
 

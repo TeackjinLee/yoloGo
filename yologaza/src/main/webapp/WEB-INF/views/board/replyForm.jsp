@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -39,7 +40,11 @@
     <table style="margin:0 auto;">
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>
-			<td><input type="text" size="20" maxlength="100"  name="writer"></input> </td>
+			<td><input type="text" size="20" maxlength="100" value="${member.name}"  readonly></input> </td>
+		</tr>
+		<tr>
+			<td align="right"> 상품 번호</td>
+		  	<td colspan=2  align="left"><input name="goods_id" type="text" size="20" maxlength="100"  value="${goods.goods_id}" readonly/> </td>
 		</tr>
 		<tr>
 			<td align="right">제목:&nbsp;  </td>

@@ -31,15 +31,15 @@
   
 	<insert id="insertNewArticle" parameterType="java.util.Map">
 		<![CDATA[
-			insert into board(articleNO, title, content, imageFileName, id)
-			values(#{articleNO}, #{title}, #{content}, #{imageFileName}, #{id})
+			insert into board(articleNO, title, content, imageFileName, id, goods_id)
+			values(#{articleNO}, #{title}, #{content}, #{imageFileName}, #{id}, #{goods_id})
 		]]>
 	</insert>
 	
 	<insert id="insertNewReply" parameterType="java.util.Map">
 		<![CDATA[
-			insert into board(articleNO, parentNO, title, content, imageFileName, id)
-			values(#{articleNO}, #{parentNO}, #{title}, #{content}, #{imageFileName}, #{id})
+			insert into board(articleNO, parentNO, title, content, imageFileName, id, goods_id)
+			values(#{articleNO}, #{parentNO}, #{title}, #{content}, #{imageFileName}, #{id}, #{goods_id})
 		]]>
 	</insert>
   

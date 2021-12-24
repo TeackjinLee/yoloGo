@@ -12,19 +12,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 <title>헤더</title>
-<link href="${contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" media="screen">
+	<style>
+		#board_head .member_img{
+		     	float:right;
+		     	width:42px;
+		     	height:42px;
+		     	border-radius: 21px;
+
+		     	overflow: hidden;
+		     }
+		     #board_head .member_img img{
+		     	height:100%;
+		     }
+	</style>
 </head>
 <body>
 	<div class="wrap main_wrap show">
 	  <!-- Header -->
 	  <header>
-	    <div id="head_link" class="con">
+	    <div id="head_link" class="con" style="height:60px;">
 	      <ul class = "row">
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
-	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do"><i class="far fa-user" style="color: black;"></i>&nbsp;마이페이지</a></li>
+	      			<li class = cell-r><a href="${contextPath}/mypage/Mypage1.do"><div id="board_head">
+																					<div class="member_img"><img src="https://www.topdaily.kr/news/photo/202104/103107_75319_2949.jpg" alt="사용자 사진"	/></div>
+																					<div style="float:left;">마이페이지&nbsp;&nbsp;</div>
+																				</div></a></li>
 	      			<li class = cell-r><a href="${contextPath}/cart/myCartList.do"><i class="far fa-heart" style="color: rgb(192, 57, 43);"></i>&nbsp;찜하기</a></li>
 	        		<li class = cell-r><a href="${contextPath}/member/logout.do">로그아웃</a></li>
 	      		</c:when>

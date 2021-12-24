@@ -391,7 +391,7 @@
 									   <c:choose>
 									      <c:when test='${article.level > 1 }'>  
 									         <c:forEach begin="1" end="${article.level }" step="1">
-									              <span style="padding-left:20px"></span>    
+									              <span style="padding-left:5px"></span>    
 									         </c:forEach>
 									         <span style="font-size:12px;">[답변]</span>
 								                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
@@ -413,9 +413,9 @@
 					    </c:when>
 					    </c:choose>
 					</table>
-					<form>
-						<a type=submit  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
-	                                                    '${contextPath}/member/loginForm.do')"><p class="cls2" 
+
+						<a type="submit"  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?goods_id=${goods.goods_id}','${contextPath}/member/loginForm.do')">
+														<p class="cls2" 
 	                                                    style="display: block;
 															    width: 100px;
 															    background: rgba(0,0,0,0.05);
@@ -427,7 +427,7 @@
 															    margin-top: 20px;
 															    border: 1px solid #ddd;">글쓰기</p>
 						</a>
-					</form>
+
                 </ul>
               </div>
             </div>

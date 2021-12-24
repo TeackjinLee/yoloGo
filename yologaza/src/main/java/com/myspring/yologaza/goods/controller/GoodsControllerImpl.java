@@ -34,8 +34,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	ArticleVO articleVO;
 	
 	@Override
-	@RequestMapping(value="/goods/goodsInformation.do",
-							method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/goods/goodsInformation.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(@RequestParam("goods_id") String goods_id,
 					HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
