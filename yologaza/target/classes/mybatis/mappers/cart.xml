@@ -60,9 +60,10 @@
 
 	<select id="selectCartList"  parameterType="cartVO"  resultMap="cartResult"  >
 		<![CDATA[
-			select cart_uid, goods_uroom, id, cart_goods_qty, creaDatetime
-			from yolo_cart
-			where id=#{id} ;
+			select c.*, d.goods_room_price1, d.goods_room_price2
+			from yolo_cart c, goods_detail d
+			where id=#{id} 
+            and c.goods_uroom = d.goods_uroom;
 		]]>
 	</select>
 	

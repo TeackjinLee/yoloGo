@@ -161,7 +161,7 @@
    <td >
     <input type="hidden"  value="${article.articleNO }"  disabled />
     <input type="hidden" name="articleNO" value="${article.articleNO}"  />
-    <input type="text" name="goods_id" value="${article.goods_id }"  disabled />
+    <input type="hidden" name="goods_id" value="${article.goods_id }"  disabled />
    </td>
   </tr>
   
@@ -172,7 +172,7 @@
   </tr>
   <tr>
    <td>
-    <textarea rows="20" cols="141" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
+    <textarea rows="20" cols="136" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
    </td>  
   </tr>
  <%-- 

@@ -19,237 +19,237 @@
 <head>
 
 <style>
-body{
-  font-size: 14px;
-}
-.wrap.show{
-  opacity: 1;
-  visibility: visible;
-}
-
-.wrap{
-  width: 100%;
-  background:#fff;
-}
-
-
-ul,
-li {
-    list-style: none;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-}
-
-.sub_wrap .align_rt {
-    float: left;
-    width: 1024px;
-  margin-bottom:100px;
-}
-
-.wrap{
-  width:100%;
-  background:#fff;
-}
-
-.sub_top_wrap{
-  height: 120px;
-  background:rgb(112,173,71);
-}
-
-.sub_top{
-	position:relative;
-  width:1024px;
-  height:120px;
-  margin:0 auto;
-  border-radius:0;
-	text-align:left;
-}
-
-.sub_top a{
-	position: absolute;
-    color: white;
-    font-weight: 500;
-    font-size: 32px;
-    bottom:20px;
-}
-
-
-.content{
-  overflow:hidden;
-}
-
-.sub_wrap{
-  width: 1024px;
-  margin:0 auto 0 auto;
-  padding-top:54px;
-  padding-bottom:54px;
-}
-
-.tab_each {
-    border-top: none;
-}
-
-.tab_each {
-    clear: both;
-    display:block;
-  padding-top:8px;
-    text-align:left;
-}
-
-div {
-    display: block;
-}
-
-
-.wrap.show, footer.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.wrap {
-    width: 100%;
-    background: #fff;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.tab{
-	text-align:left;
-}
-.tab .tab_btn ul li{
-  display:inline-block;
-}
-.tab .tab_btn ul li a{
-  color:black;
-  font-size:20px;
-  font-weight:500;
-  margin-left:4px;
-  bottom:0px;
-  position:absolute;
-}
-
-.tab .tab_btn ul li #allsel{
-  display:none;
-}
-
-.tab .tab_btn ul li label{
-  border : 3px solid rgba(0,0,0,0.2);
-  border-radius : 4px;
-  width:20px;
-  height:20px;
-  cursor:pointer;
-  display: inline-block;
-}
-
-.tab .tab_btn ul li #allsel:checked + label::after{
-  content:"\f00c";
-  font-family:"Font Awesome 5 Free";
-  font-weight: 600;
-  bottom:5px;
-  position:absolute;
-}
-
-.tab .tab_btn ul #seldelete{
-  position:absolute;
-  right:0px;
-  border:0px;
-  background:#fff;
-  color:rgb(112,173,71);
-  font-size:18px;
-  cursor:pointer;
-}
-
-.tab .tab_btn ul{
-  position:relative;
-}
-
-.tab_each .reservation img{
-  width:30%;
-  height:220px;
-  border:1px solid rgba(0,0,0,0.2);
-  display:inline-block;
-}
-
-.tab_each .reservation .descript{
-  width:69%;
-  height:220px;
-  border:1px solid rgba(0,0,0,0.2);
-  display:inline-block;
-  position:relative;
-  right:6px;
-  padding:10px 10px 10px 15px;
-  vertical-align:top;
-  font-size:16px;
-}
-.tab_each .reservation .descript .delete{
-	float: right;
-	padding: 3px 5px;
-	border: 1px solid #777;
-	border-radius: 5px;
-	font-weight: bold;
-	margin-left: 10px;
-}
-.tab_each .reservation .descript .delete:hover{
-	color:white;
-	background:rgb(112,173,71);
-	border: 1px solid #ddd;
-}
-.tab_each .reservation .descript a1{
-  font-size:24px;
-}
-
-.tab_each .reservation .descript input{
-  float:right;
-  cursor:pointer;
-}
-
-.tab_each .reservation .descript a2{
-  margin-top:5px;
-  display:block;
-}
-
-.tab_each .reservation .descript a3{
-	margin-top: 10px;
-	display: block;
-	margin-bottom: 70px;
-}
-
-.tab_each .reservation .descript a4{
-  display:inline-block;
-  margin-top:10px;
-}
-
-.tab_each .reservation .descript .detail{
-	position: absolute;
-	display: block;
-	width: 60%;
-	bottom: 60px;
-	right: 10px;
-	font-size: 24px;
-	text-align: right;
-}
-
-.detail #type{
-   		    background: rgb(112,173,71);
-		    color: white;
-		    font-weight: bold;
-		    padding: 1px 10px;
-		    font-size: 18px;
-    	}
-
-#price{
-  font-weight:bold;
-}
+	body{
+	  font-size: 14px;
+	}
+	.wrap.show{
+	  opacity: 1;
+	  visibility: visible;
+	}
+	
+	.wrap{
+	  width: 100%;
+	  background:#fff;
+	}
+	
+	
+	ul,
+	li {
+	    list-style: none;
+	}
+	
+	a {
+	    color: inherit;
+	    text-decoration: none;
+	}
+	
+	html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	    margin: 0;
+	    padding: 0;
+	    border: 0;
+	    box-sizing: border-box;
+	}
+	
+	.sub_wrap .align_rt {
+	    float: left;
+	    width: 1024px;
+	  margin-bottom:100px;
+	}
+	
+	.wrap{
+	  width:100%;
+	  background:#fff;
+	}
+	
+	.sub_top_wrap{
+	  height: 120px;
+	  background:rgb(112,173,71);
+	}
+	
+	.sub_top{
+		position:relative;
+	  width:1024px;
+	  height:120px;
+	  margin:0 auto;
+	  border-radius:0;
+		text-align:left;
+	}
+	
+	.sub_top a{
+		position: absolute;
+	    color: white;
+	    font-weight: 500;
+	    font-size: 32px;
+	    bottom:20px;
+	}
+	
+	
+	.content{
+	  overflow:hidden;
+	}
+	
+	.sub_wrap{
+	  width: 1024px;
+	  margin:0 auto 0 auto;
+	  padding-top:54px;
+	  padding-bottom:54px;
+	}
+	
+	.tab_each {
+	    border-top: none;
+	}
+	
+	.tab_each {
+	    clear: both;
+	    display:block;
+	  padding-top:8px;
+	    text-align:left;
+	}
+	
+	div {
+	    display: block;
+	}
+	
+	
+	.wrap.show, footer.show {
+	    opacity: 1;
+	    visibility: visible;
+	}
+	
+	.wrap {
+	    width: 100%;
+	    background: #fff;
+	    opacity: 0;
+	    visibility: hidden;
+	}
+	
+	.tab{
+		text-align:left;
+	}
+	.tab .tab_btn ul li{
+	  display:inline-block;
+	}
+	.tab .tab_btn ul li a{
+	  color:black;
+	  font-size:20px;
+	  font-weight:500;
+	  margin-left:4px;
+	  bottom:0px;
+	  position:absolute;
+	}
+	
+	.tab .tab_btn ul li #allsel{
+	  display:none;
+	}
+	
+	.tab .tab_btn ul li label{
+	  border : 3px solid rgba(0,0,0,0.2);
+	  border-radius : 4px;
+	  width:20px;
+	  height:20px;
+	  cursor:pointer;
+	  display: inline-block;
+	}
+	
+	.tab .tab_btn ul li #allsel:checked + label::after{
+	  content:"\f00c";
+	  font-family:"Font Awesome 5 Free";
+	  font-weight: 600;
+	  bottom:5px;
+	  position:absolute;
+	}
+	
+	.tab .tab_btn ul #seldelete{
+	  position:absolute;
+	  right:0px;
+	  border:0px;
+	  background:#fff;
+	  color:rgb(112,173,71);
+	  font-size:18px;
+	  cursor:pointer;
+	}
+	
+	.tab .tab_btn ul{
+	  position:relative;
+	}
+	
+	.tab_each .reservation img{
+	  width:30%;
+	  height:220px;
+	  border:1px solid rgba(0,0,0,0.2);
+	  display:inline-block;
+	}
+	
+	.tab_each .reservation .descript{
+	  width:69%;
+	  height:220px;
+	  border:1px solid rgba(0,0,0,0.2);
+	  display:inline-block;
+	  position:relative;
+	  right:6px;
+	  padding:10px 10px 10px 15px;
+	  vertical-align:top;
+	  font-size:16px;
+	}
+	.tab_each .reservation .descript .delete{
+		float: right;
+		padding: 3px 5px;
+		border: 1px solid #777;
+		border-radius: 5px;
+		font-weight: bold;
+		margin-left: 10px;
+	}
+	.tab_each .reservation .descript .delete:hover{
+		color:white;
+		background:rgb(112,173,71);
+		border: 1px solid #ddd;
+	}
+	.tab_each .reservation .descript a1{
+	  font-size:24px;
+	}
+	
+	.tab_each .reservation .descript input{
+	  float:right;
+	  cursor:pointer;
+	}
+	
+	.tab_each .reservation .descript a2{
+	  margin-top:5px;
+	  display:block;
+	}
+	
+	.tab_each .reservation .descript a3{
+		margin-top: 10px;
+		display: block;
+		margin-bottom: 70px;
+	}
+	
+	.tab_each .reservation .descript a4{
+	  display:inline-block;
+	  margin-top:10px;
+	}
+	
+	.tab_each .reservation .descript .detail{
+		position: absolute;
+		display: block;
+		width: 60%;
+		bottom: 60px;
+		right: 10px;
+		font-size: 24px;
+		text-align: right;
+	}
+	
+	.detail #type{
+	   		    background: rgb(112,173,71);
+			    color: white;
+			    font-weight: bold;
+			    padding: 1px 10px;
+			    font-size: 18px;
+	    	}
+	
+	#price{
+	  font-weight:bold;
+	}
 
 </style>
 
@@ -468,10 +468,18 @@ function fn_order_all_cart_goods(){
 			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
 								삭제하기
 							</a>
-							<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}'> 
-								예약하기
-							</a>
-			                
+							<c:choose>
+								<c:when test="${item.goods_room_price2 != null}">
+									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
+										예약하기
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
+										예약하기
+									</a>
+								</c:otherwise>
+							</c:choose>
 			              </div>
 			            </li>
 			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_room_price1 }" />

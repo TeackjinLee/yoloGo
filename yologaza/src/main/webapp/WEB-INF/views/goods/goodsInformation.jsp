@@ -11,7 +11,11 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>
-
+<style>
+	.tab_each ul li .room-box .room-text .reserve div{
+		font-weight:bold;
+	}
+</style>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,7 +56,7 @@
     $(function() {
         $('input[name="daterange"]').daterangepicker({
         opens: 'left',
-        timePicker: true
+        showDropdowns: true
         }, function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
@@ -60,7 +64,12 @@
     });
     </script>
     <style>
-    
+    	#tab1 .room-pic-box .slick-list .slick-track{
+    		width: 6720px;
+    	}
+    	#tab1 .room-pic-box .slick-list .slick-track .slick-slide{
+    		width: 960px;
+    	}
     	
     	#tab1 .fa-shopping-cart:before {
 		    content: "\f004";
@@ -237,109 +246,105 @@
               <div class="tab_each">
 				  <ul id="tab1" class="active">
 				  
-				  <section class="date-wrap">
-				    <div class="btn_date">
-				      <tr class="date-box">
-				        <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
-				      </tr>
-				    </div>
-				  </section>
-				<c:choose>
+					<section class="date-wrap">
+					  <div class="btn_date">
+					    <tr class="date-box">
+					      <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
+					    </tr>
+					  </div>
+					</section>
+					<c:choose>
 					<c:when test="${goods.goods_type=='motel'}">
 						<c:forEach var="item" items="${goodsMap.RoomList}" >
-				  <li class="room on">
-				    <div class="room-box">
-				      <div class="room-select">
-				        <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
-				        <div class="room-text cell-r">
-				          <div class="reserve cell">
-				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
-				            <h3>대실</h3>
-				            <br><br><br>
-				            <div class="price"><h2>${item.goods_room_price2}원</h2></div>
-				            <h3>마감시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				              &nbsp;&nbsp;&nbsp;${item.goods_motel_endtime}시까지</h3>
-				            <h3>이용시간최대 &nbsp;&nbsp;&nbsp;  
-				              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${item.goods_motel_usetime}시간</h3>
-				            <div class="point">
-				            	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}' ">예약하기</button>
-				            </div>
-				          </div>
-				          <div class="reserve cell">
-				            <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
-				            <h3>숙박</h3>
-				            <br><br><br>
-				            <div class="price"><h2>${item.goods_room_price1}원</h2></div>
-				            <h3>입실시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				              &nbsp;&nbsp;&nbsp;${item.goods_checkIn}시부터</h3>
-				            <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
-				              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일${item.goods_checkOut}시</h3>
-				            <div class="point">
-				            	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}' ">예약하기</button>
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-				      <input type="checkbox" class="room-search" id="room-1">
-				      <div class="room-box-wrap">
-				        <div class="room-img-content slider-wrap">
-				          <div class="room-pic-box" id="room-pic">
-				          	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
-				          		<div class="content cell"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
+							<li class="room on">
+							  <div class="room-box">
+							    <div class="room-select">
+							      <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
+							      <div class="room-text cell-r">
+							        <div class="reserve cell">
+							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+							          <h3>대실</h3>
+							          <br><br><br>
+							          <div class="price"><h2>${item.goods_room_price2}원</h2></div>
+							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
+							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${item.goods_motel_usetime}시간</span></div>
+							          <div class="point">
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}' ">예약하기</button>
+							          </div>
+							        </div>
+							        <div class="reserve cell">
+							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom}')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+							          <h3>숙박</h3>
+							          <br><br><br>
+							          <div class="price"><h2>${item.goods_room_price1}원/1박</h2></div>
+							          <div><span style="float: left">입실시간</span>
+							            <span style="float: right">${item.goods_checkIn}시부터</span></div>
+							          <div><span style="float: left">퇴실시간</span>
+							            <span style="float: right">익일${item.goods_checkOut}시</span></div>
+							          <div class="point">
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>
+							          </div>
+							        </div>
+							      </div>
+							    </div>
+							    <input type="checkbox" class="room-search" id="room-1">
+							    <div class="room-box-wrap">
+							      <div class="room-img-content slider-wrap">
+							        <div class="room-pic-box" id="room-pic">
+							        	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
+							        		<div class="content cell" style="width: 960px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
+								</c:forEach>
+							        </div>
+							      </div>
+							      <div class="page-num row">
+							        <p class="current-txt cell"> 1 </p>
+							        <p class="all-txt cell">  &nbsp;/ 6 </p>
+							    </div>
+							    </div>
+							  </div>
+							</li>
 							</c:forEach>
-				          </div>
-				        </div>
-				        <div class="page-num row">
-				          <p class="current-txt cell"> 1 </p>
-				          <p class="all-txt cell">  &nbsp;/ 6 </p>
-				      </div>
-				      </div>
-				    </div>
-				  </li>
-				  </c:forEach>
-					</c:when>
-					<c:otherwise>
-					<c:forEach var="item" items="${goodsMap.RoomList}" >
-						<li class="room on">
-						  <div class="room-box">
-						    <div class="room-select">
-						      <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
-						      <div class="room-text cell-r">
-						        
-						        <div class="reserve cell" style="width:100%; border-right:none;">
-						          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
-						          <h3>숙박</h3>
-						          <br><br><br>
-						          <div class="price"><h2>${item.goods_room_price1}원</h2></div>
-						          <h3>입실시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						            &nbsp;&nbsp;&nbsp;${item.goods_checkIn}시부터</h3>
-						          <h3>퇴실시간 &nbsp;&nbsp;&nbsp;&nbsp;  
-						            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;익일${item.goods_checkOut}시</h3>
-						          <div class="point">
-						          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}' ">예약하기</button>
-						          </div>
-						        </div>
-						      </div>
-						    </div>
-						    <input type="checkbox" class="room-search" id="room-1">
-						    <div class="room-box-wrap">
-						      <div class="room-img-content slider-wrap">
-						        <div class="room-pic-box" id="room-pic">
-						        	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
-						        		<div class="content cell"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
-									</c:forEach>
-						        </div>
-						      </div>
-						      <div class="page-num row">
-						        <p class="current-txt cell"> 1 </p>
-						        <p class="all-txt cell">  &nbsp;/ 6 </p>
-						    </div>
-						    </div>
-						  </div>
-						</li>
-				    </c:forEach>
-					</c:otherwise>
-				</c:choose>
+						</c:when>
+						<c:otherwise>
+						<c:forEach var="item" items="${goodsMap.RoomList}" >
+							<li class="room on">
+							  <div class="room-box">
+							    <div class="room-select">
+							      <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
+							      <div class="room-text cell-r">
+							        
+							        <div class="reserve cell" style="width:100%; border-right:none;">
+							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+							          <h3>숙박</h3>
+							          <br><br><br>
+							          <div class="price"><h2>${item.goods_room_price1}원/1박</h2></div>
+							          <div><span style="float: left">입실시간</span> <span style="float: right">${item.goods_checkIn}시부터</span></div>
+							          <div><span style="float: left">퇴실시간</span> <span style="float: right">익일${item.goods_checkOut}시</span></div>
+							          <div class="point">
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>
+							          </div>
+							        </div>
+							      </div>
+							    </div>
+							    <input type="checkbox" class="room-search" id="room-1">
+							    <div class="room-box-wrap">
+							      <div class="room-img-content slider-wrap">
+							        <div class="room-pic-box" id="room-pic" >
+							        	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
+							        		<div class="content cell" style="width:960px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
+										</c:forEach>
+							        </div>
+							      </div>
+							      <div class="page-num row">
+							        <p class="current-txt cell"> 1 </p>
+							        <p class="all-txt cell">  &nbsp;/ 6 </p>
+							    </div>
+							    </div>
+							  </div>
+							</li>
+					    </c:forEach>
+						</c:otherwise>
+					</c:choose>
 				  
 				</ul>
                 <ul id="tab2">
@@ -382,7 +387,7 @@
 							    <c:when test="${article.goods_id == goods.goods_id}" >
 								    <tr align="center" style=" height:80px; box-shadow: 3px 3px 3px #ddd;">
 									<td id="board_head">
-										<div class="member_img"><img src="https://www.topdaily.kr/news/photo/202104/103107_75319_2949.jpg" alt="사용자 사진"	/></div>
+										<div class="member_img"><img src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" alt="사용자 사진"	/></div>
 									</td>
 									<td style="visibility: hidden;" width="0%">${articleNum.count}</td>
 									<td width="10%">${article.id }</td>

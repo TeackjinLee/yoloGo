@@ -19,13 +19,15 @@
     <![CDATA[
 		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗ '), tbd.TITLE)
 	                 ELSE tbd.TITLE
-	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id
+	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id,m.memFileName,m.uid
 		FROM
 		   (SELECT fnc_hierachi() AS articleNO, @level AS level
 		      FROM (SELECT @start_with:=0, @articleNO:=@start_with, @level:=0) vars
 		        JOIN board
 		       WHERE @articleNO IS NOT NULL) fnc
-		JOIN board tbd ON fnc.articleNO = tbd.articleNO;
+		JOIN board tbd ON fnc.articleNO = tbd.articleNO, member m
+        where
+        tbd.id=m.id;
     ]]>
   </select>
   
