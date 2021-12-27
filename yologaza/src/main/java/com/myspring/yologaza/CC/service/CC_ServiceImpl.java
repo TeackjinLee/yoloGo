@@ -40,9 +40,8 @@ public class CC_ServiceImpl implements CC_Service{
 	}
 	
 	@Override
-	public Question_VO listReply(int articleNo) throws Exception{
-		Question_VO question_VO = cc_DAO.selectReply(articleNo);
-		return question_VO;
+	public List<Question_VO> listReply(List<Question_VO> questionList) throws Exception{
+		return cc_DAO.selectInPersonReply(questionList);
 	}
 	
 	@Override
