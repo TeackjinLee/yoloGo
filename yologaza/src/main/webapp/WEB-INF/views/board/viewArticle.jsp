@@ -50,7 +50,7 @@
      	overflow: hidden;
      }
      #board_head .member_img img{
-     	height:100%;
+     	width:100%;
      }
      #board_head .board_box{
      	float:left;
@@ -126,7 +126,7 @@
   <form id="board" name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
   <table  border=0  align="center" style="margin:0 auto; width:100%;">
 	<div id="board_head">
-		<div class="member_img"><img src="https://www.topdaily.kr/news/photo/202104/103107_75319_2949.jpg" alt="사용자 사진"	/></div>
+		<div class="member_img"><img src="${contextPath}/mem_download.do?uid=${article.uid}&memFileName=${article.memFileName}" alt="리뷰 사진"	/></div>
 		<div class="board_box">
 			<div class="board_id">${article.id }</div>
 			<div class="board_date">${article.writeDate}</div>
@@ -135,7 +135,7 @@
 	<c:choose> 
 		<c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
 		   <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		   <img onerror="this.src='${contextPath}/resources/image/dog_trip.jpg'" src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:100%; margin:0 auto" /><br>
+		   <img onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:100%; margin:0 auto" /><br>
 		 <tr>
 		   <td style="float:right; width:180px;">
 		      <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
@@ -172,7 +172,7 @@
   </tr>
   <tr>
    <td>
-    <textarea rows="20" cols="136" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
+    <textarea rows="20" cols="140" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
    </td>  
   </tr>
  <%-- 

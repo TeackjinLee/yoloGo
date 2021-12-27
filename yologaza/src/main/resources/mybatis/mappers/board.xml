@@ -11,23 +11,27 @@
     <result property="title" column="title" />
     <result property="content" column="content" />
     <result property="goods_id" column="goods_id" />
+    <result property="goods_name" column="goods_name" />
     <result property="writeDate" column="writeDate" />
     <result property="imageFileName" column="imageFileName" />
+    <result property="uid" column="uid" />
+    <result property="memFileName" column="memFileName" />
   </resultMap> 
 
   <select id="selectAllArticlesList" resultMap="articlesResult" parameterType="String"  >
     <![CDATA[
 		SELECT level, tbd.articleNO, tbd.parentNO, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗ '), tbd.TITLE)
 	                 ELSE tbd.TITLE
-	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id,m.memFileName,m.uid
+	           END AS TITLE, content,imageFileName, writeDate,tbd.id,tbd.goods_id,g.goods_name,m.memFileName,m.uid
 		FROM
 		   (SELECT fnc_hierachi() AS articleNO, @level AS level
 		      FROM (SELECT @start_with:=0, @articleNO:=@start_with, @level:=0) vars
 		        JOIN board
-		       WHERE @articleNO IS NOT NULL) fnc
-		JOIN board tbd ON fnc.articleNO = tbd.articleNO, member m
+		      WHERE @articleNO IS NOT NULL) fnc
+		JOIN board tbd ON fnc.articleNO = tbd.articleNO, member m, goods g
         where
-        tbd.id=m.id;
+        tbd.id=m.id
+        and tbd.goods_id = g.goods_id; 
     ]]>
   </select>
   
@@ -53,8 +57,9 @@
 	
 	<select id="selectArticle" resultType="articleVO"   parameterType="int">
 		<![CDATA[
-			SELECT * from board
+			SELECT b.*, m.uid, m.memFileName from board b, member m
 			where articleNO = #{articleNO}
+            and m.id = b.id
 		]]>
 	</select>
 	
