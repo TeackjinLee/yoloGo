@@ -209,5 +209,38 @@
          where id = #{id} and pwd = #{pwd} and (auth="1" or auth="2" or auth="3")
       ]]>
     </select>
+    
+    <update id="updateMyInfo" parameterType="java.util.HashMap">
+	   update member
+			   <set>
+			      <if test=" pwd != '' and pwd != null">
+			        pwd=#{pwd},
+			      </if>
+			      <if test=" hp != '' and hp != null">
+			         hp=#{hp},
+			      </if>
+			      <if test=" smssts_yn !='' and smssts_yn != null">
+			         smssts_yn=#{smssts_yn},
+			      </if>
+			      <if test=" email1 != '' and email1 != null">
+			         email1=#{email1},
+			      </if>
+			      <if test=" email2 != '' and email2 != null">
+			         email2=#{email2},
+			      </if>
+			      <if test=" emailsts_yn != '' and emailsts_yn != null">
+			         emailsts_yn=#{emailsts_yn},
+			      </if>
+			   </set>
+		where 
+		id=#{id}
+	</update>
+	
+	<select id="selectMyDetailInfo" resultType="memberVO"   parameterType="String"  >
+	    <![CDATA[
+			select * from member 
+			where id=#{id}
+    	]]>
+	</select>	
 
 </mapper>

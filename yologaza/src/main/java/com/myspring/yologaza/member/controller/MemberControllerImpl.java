@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.github.scribejava.core.model.Response;
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
@@ -226,6 +225,8 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		certificationService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		return Integer.toString(randomNumber);
 	}
+	
+
 	
 	
 }
