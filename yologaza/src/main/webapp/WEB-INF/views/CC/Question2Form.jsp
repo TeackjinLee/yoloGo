@@ -5,6 +5,7 @@
     %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
@@ -347,7 +348,12 @@ p {
                 <li>
                   <input type="checkbox" class="question" id="que-${stat.count}">
                   <label for="que-${stat.count}">
+                  <c:if test="${fn:length(question.content) <= 10}">
                     ${question.type} / ${question.content}
+                  </c:if>
+                  <c:if test="${fn:length(question.content) > 10}">
+                    ${question.type} / ${fn:substring(question.content,0,10)}...
+                  </c:if>
                   </label>
                   <c:choose>
                   	<c:when test="${reply.parentNo == question.articleNo}">
