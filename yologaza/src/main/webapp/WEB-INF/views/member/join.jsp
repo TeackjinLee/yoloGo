@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${contextPath}/resources/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
 
@@ -67,6 +67,7 @@ function fn_overlapped(){
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    border: 1px solid #d8d8d8;
 }
 </style>
 
@@ -267,7 +268,7 @@ function fn_overlapped(){
 					<input id="phone2" type="text" name="phone2" style="width:78%;" title="인증번호 입력" disabled required/> 
 					<input type="button" id="phoneChk2" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="본인인증" />
 					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span> 
-					<input type="text" id="phoneDoubleChk"/> </p> 
+					<input type="hidden" id="phoneDoubleChk"/> </p> 
 					</td> 
 				</tr>
 
@@ -276,7 +277,7 @@ function fn_overlapped(){
 				<tr class="dot_line">
 					<td class="fixed_join">이메일(e-mail)</td>
 					<td><input size="10px"   type="text" id="email1" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
-						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right;">
+						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right; border:1px solid #d8d8d8;">
 									<option value="">직접입력</option>
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="naver.com">naver.com</option>

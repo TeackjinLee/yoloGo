@@ -13,6 +13,7 @@ public class ArticleVO {
 	private String content;
 	private String imageFileName;
 	private String id;
+	private int goods_id;
 	private Date writeDate;
 	
 	public ArticleVO() {
@@ -88,6 +89,14 @@ public class ArticleVO {
 		this.id = id;
 	}
 	
+	public int getGoods_id() {
+		return goods_id;
+	}
+
+	public void setGoods_id(int goods_id) {
+		this.goods_id = goods_id;
+	}
+
 	public Date getWriteDate() {
 		return writeDate;
 	}

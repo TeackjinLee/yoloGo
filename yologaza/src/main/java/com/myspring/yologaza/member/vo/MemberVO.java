@@ -14,6 +14,7 @@ public class MemberVO {
 	private String email2;
 	private String hp;
 	private String auth;
+	private String memFileName;
 	private Date joinDate;
 	
 	public MemberVO() {
@@ -93,6 +94,14 @@ public class MemberVO {
 
 	public void setAuth(String auth) {
 		this.auth = auth;
+	}
+
+	public String getMemFileName() {
+		return memFileName;
+	}
+
+	public void setMemFileName(String memFileName) {
+		this.memFileName = memFileName;
 	}
 
 	public Date getJoinDate() {

@@ -13,6 +13,7 @@
         <result property="email2" column="email2" />
         <result property="hp" column="hp" />
         <result property="auth" column="auth" />
+        <result property="memFileName" column="memFileName" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
 	<!-- 
@@ -46,10 +47,10 @@
 	</select>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="findPwd" parameterType="memberVO">
+	<update id="findPwd">
 		<![CDATA[
 			update member set pwd = #{pwd} where hp = #{hp} and id = #{id}
-		]]>
+		]]>	
 	</update>
 	
 	<!-- 비밀번호 찾기 조건 -->
@@ -205,7 +206,7 @@
 	<select id="loginById" resultType="memberVO"  parameterType="memberVO" >
       <![CDATA[
          select * from member
-         where id = #{id} and pwd = #{pwd}
+         where id = #{id} and pwd = #{pwd} and (auth="1" or auth="2" or auth="3")
       ]]>
     </select>
 

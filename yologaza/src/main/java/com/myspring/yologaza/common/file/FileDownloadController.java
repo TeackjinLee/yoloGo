@@ -52,10 +52,47 @@ public class FileDownloadController {
 		out.close();
 	}
 	
+	private static final String MEMBER_IMAGE_REPO = "C:\\member\\member_image";
+	@RequestMapping("/mem_download.do")
+	protected void mem_download(@RequestParam("memFileName") String memFileName,
+							@RequestParam("uid") String uid,
+							HttpServletResponse response)throws Exception {
+		OutputStream out = response.getOutputStream();
+		String downFile = MEMBER_IMAGE_REPO + "\\" +uid+"\\"+ memFileName;
+		File file = new File(downFile);
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachment; fileName=" + memFileName);
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024 * 8];
+		while (true) {
+			int count = in.read(buffer); 
+			if (count == -1) 
+			break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
+	}
 	
-private static String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	@RequestMapping("/mem_thumbnails.do")
+	protected void mem_thumbnails(@RequestParam("memFileName") String memFileName,
+                            	@RequestParam("uid") String uid,
+			                 HttpServletResponse response) throws Exception {
+		OutputStream out = response.getOutputStream();
+		String downFile=MEMBER_IMAGE_REPO + "\\" +uid+"\\"+ memFileName;
+		File file = new File(downFile);
+		
+		if (file.exists()) { 
+			Thumbnails.of(file).size(50,50).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
 	
-	@RequestMapping("/goods_download")
+	private static String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	
+	@RequestMapping("/goods_download.do")
 	protected void goods_download(@RequestParam("fileName") String fileName,
 		                 	@RequestParam("goods_id") String goods_id,
 			                 HttpServletResponse response) throws Exception {

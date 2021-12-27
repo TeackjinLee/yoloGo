@@ -1,5 +1,6 @@
 package com.myspring.yologaza.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.Response;
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
+import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.sms.service.certificationService;
@@ -37,15 +39,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
-
-	@RequestMapping(value = {"/goodsRoom.do"}, method = RequestMethod.GET)
-	private ModelAndView goodsRoom(HttpServletRequest request,
-								HttpServletResponse response) throws Exception{
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
 	
 	@Override
 	@RequestMapping(value="/member/listMembers.do", method=RequestMethod.GET)
@@ -130,7 +123,7 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 			} else {
 				mav.setViewName("redirect:/main.do");
 			}
-		} else if(member.getId() == null || member.getId() == "" ) {
+		} else if(member.getId() == null || member.getId() == "") {
 			rAttr.addAttribute("result", "idFailed");
 			mav.setViewName("redirect:/member/loginForm.do");
 		} else if(member.getPwd() == null || member.getPwd() == "" ) {
@@ -178,27 +171,28 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	}
 	
 	// 비밀번호 재설정
-		@RequestMapping(value="/member/findPwdView", method=RequestMethod.GET)
-		public ModelAndView findPwdView(HttpServletRequest request, HttpServletResponse response) throws Exception{
-			String viewName = getViewName(request);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName(viewName);
-			return mav;
-		}
+	@RequestMapping(value="/member/findPwView" , method=RequestMethod.GET)
+	public ModelAndView findPwView(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = getViewName(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
 		
-		@RequestMapping(value="/member/findPwd", method=RequestMethod.GET)
-		public String findPwd(MemberVO memberVO, Model model) throws Exception{
-			logger.info("pwd"+memberVO.getPwd());
-				
-			if(memberService.findPwdCheck(memberVO)==0) {
-				logger.info("memberPwdCheck");
-				model.addAttribute("msg", "아이디와 연락처를 확인해 주세요");
-				return "/member/findPwdView";
-			}else {
-							
-				return"/member/findPwd";
-			}
-		}
+	@RequestMapping(value="/member/findPw", method=RequestMethod.GET)
+	public String findPw(MemberVO memberVO,Model model) throws Exception{
+		logger.info("memberPw"+memberVO.getId());
+		
+		if(memberService.findPwCheck(memberVO)==0) {
+			logger.info("memberPWCheck");
+			model.addAttribute("msg", "아이디와 연락처를 확인해주세요");
+			
+			return "/member/findPwView";
+		}else {
+		memberService.findPw(memberVO.getHp(),memberVO.getId(),memberVO.getPwd());
+		return"/member/findPw";
+		} 
+	}
 	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
@@ -223,7 +217,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
-	
 
 	@Override
 	@RequestMapping(value = "/member/phoneCheck", method = RequestMethod.GET)
@@ -233,4 +226,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		certificationService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		return Integer.toString(randomNumber);
 	}
+	
+	
 }

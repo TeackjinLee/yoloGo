@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cart">
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="cartResult" type="CartVO">
+		<result property="id" column="id" />
+		<result property="goods_uroom" column="goods_uroom" />
+		<result property="cart_uid" column="cart_uid" />
+		<result property="cart_goods_qty" column="cart_goods_qty" />
+		<result property="creaDatetime" column="creaDatetime" />
+	</resultMap>
+		
+	<resultMap id="goodsResult" type="goodsVO">
+		<result property="goods_id" column="goods_id" />
+		<result property="goods_type" column="goods_type" />
+		<result property="goods_email1" column="goods_email1" />
+		<result property="goods_email2" column="goods_email2" />
+		<result property="goods_hp" column="goods_hp" />		
+		<result property="goods_tel1" column="goods_tel1" />
+		<result property="goods_tel2" column="goods_tel2" />
+		<result property="goods_tel3" column="goods_tel3" />
+		<result property="account_bank" column="account_bank" />
+		<result property="account_name" column="account_name" />
+		<result property="account" column="account" />		
+		<result property="goods_homePage" column="goods_homePage" />
+		<result property="goods_name" column="goods_name" />
+		<result property="goods_address" column="goods_address" />		
+		<result property="goods_description" column="goods_description" />
+		<result property="goods_room_price1" column="goods_room_price1" />
+		<result property="goods_room_price2" column="goods_room_price2" />
+		<result property="goods_baseImpormation" column="goods_baseImpormation" />
+		<result property="goods_chargeImpormation" column="goods_chargeImpormation" />
+		<result property="goods_checkIn" column="goods_checkIn" />
+		<result property="goods_checkOut" column="goods_checkOut" />
+		<result property="goods_motel_endtime" column="goods_motel_endtime" />
+		<result property="goods_motel_usetime" column="goods_motel_usetime" />
+		<result property="goods_price1" column="goods_price1" />
+		<result property="goods_price2" column="goods_price2" />
+		<result property="goods_acess" column="goods_acess" />
+
+		<result property="goods_room" column="goods_room" />
+		<result property="goods_room_num" column="goods_room_num" />
+		<result property="goods_uroom_detail" column="goods_uroom_detail" />
+		<result property="goods_room_name" column="goods_room_name" />
+		<result property="goods_room_type" column="goods_room_type" />
+		<result property="goods_capacity" column="goods_capacity" />
+		<result property="goods_introduce" column="goods_introduce" />
+		
+	</resultMap>	
+	
+	<resultMap id="imageResult" type="ImageFileVO">
+	   <result property="goods_id" column="goods_id" />
+	   <result property="goods_uroom" column="goods_uroom" />
+	   <result property="fileName" column="fileName" />
+	   <result property="fileType" column="fileType" />
+	</resultMap>
+
+	<select id="selectCartList"  parameterType="cartVO"  resultMap="cartResult"  >
+		<![CDATA[
+			select c.*, d.goods_room_price1, d.goods_room_price2
+			from yolo_cart c, goods_detail d
+			where id=#{id} 
+            and c.goods_uroom = d.goods_uroom;
+		]]>
+	</select>
+	
+	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
+		<![CDATA[
+			select g.*,d.fileName, s.goods_name, s.goods_address from goods_detail g, goods_img d, goods s
+			where g.goods_uroom=d.goods_uroom
+            and g.goods_id = s.goods_id
+			and d.filetype='room'
+			and g.goods_uroom in
+		]]>
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item.goods_uroom}
+		</foreach>
+		<![CDATA[
+			group by goods_uroom
+			order by g.goods_room_creDate desc
+		]]>
+	</select>
+	
+
+	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
+	    <![CDATA[
+		    select if(count(*)=0, 'false', 'true') from yolo_cart
+			where goods_uroom=#{goods_uroom}
+			and id=#{id} 
+    	]]>
+	</select>
+	
+	<insert id="insertGoodsInCart" parameterType="cartVO">
+	    <![CDATA[
+		    	insert into yolo_cart(cart_uid,
+		    	                           goods_uroom,
+		    	                           id)
+		        				 values(#{cart_uid},
+    							        #{goods_uroom},
+    							        #{id})
+    	]]>
+	</insert>
+	
+	<update id="updateCartGoodsQty" parameterType="cartVO">
+	    <![CDATA[
+			update yolo_cart
+			       set cart_goods_qty=#{cart_goods_qty}
+		 	       where id=#{id}
+			        and goods_uroom=#{goods_uroom}
+    	]]>
+	</update>
+	
+	<delete id="deleteCartGoods" parameterType="int">
+	    <![CDATA[
+	      delete from yolo_cart
+	      where cart_uid=#{cart_uid}
+    	]]>
+	</delete>
+	
+	<select id="selectMaxCartId" resultType="int">
+	    <![CDATA[
+			select ifnull(max(cart_uid), 0) + 1 from yolo_cart 
+    	]]>
+	</select>
+	
+</mapper>

@@ -2,6 +2,7 @@ package com.myspring.yologaza.member.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +57,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int findPwdCheck(MemberVO memberVO)throws Exception{
-		return memberDAO.findPwdCheck(memberVO);
+	public int findPwCheck(MemberVO memberVO)throws Exception{
+		return memberDAO.findPwCheck(memberVO);
 	}
-	
-	@Override
-	public MemberVO findPwd(String id) throws Exception {
-		return memberDAO.selectMyDetailInfo(id);
+    
+    @Override
+	public void findPw(String hp,String id, String pwd)throws Exception{
+    	memberDAO.findPw(hp, id, pwd);
 	}
 
 }

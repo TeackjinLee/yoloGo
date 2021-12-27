@@ -12,5 +12,6 @@
 		<typeAlias type="com.myspring.yologaza.CC.vo.Question_VO"  alias="question_VO" />
 		<typeAlias type="com.myspring.yologaza.goods.vo.GoodsVO"  alias="goodsVO" />
 		<typeAlias type="com.myspring.yologaza.goods.vo.ImageFileVO"  alias="imageFileVO" />
+		<typeAlias type="com.myspring.yologaza.cart.vo.CartVO"  alias="cartVO" />
 	</typeAliases>
 </configuration>

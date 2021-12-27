@@ -61,15 +61,18 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public int findPwdCheck(MemberVO memberVO) throws Exception {
-		int result = sqlSession.selectOne("mapper.member.findPwdCheck", memberVO);
-		return result;
+	public int findPwCheck(MemberVO memberVO)throws Exception{
+	return sqlSession.selectOne("mapper.member.findPwdCheck", memberVO);	
 	}
-	
-	public MemberVO selectMyDetailInfo(String id) throws DataAccessException{
-		MemberVO memberVO=(MemberVO)sqlSession.selectOne("mapper.member.selectMyDetailInfo", id);
-		return memberVO;
-		
+
+
+	@Override
+	public void findPw(String hp,String id,String pwd)throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("hp", hp);
+		map.put("id", id);
+		map.put("pwd", pwd);
+		sqlSession.update("mapper.member.findPwd", map);
 	}
 
 }

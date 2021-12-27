@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,8 +36,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	ArticleVO articleVO;
 	
 	@Override
-	@RequestMapping(value="/board/goodsInformation.do",
-							method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/goods/goodsInformation.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(@RequestParam("goods_id") String goods_id,
 					HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");

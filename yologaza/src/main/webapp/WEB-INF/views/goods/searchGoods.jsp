@@ -1,4 +1,5 @@
 <!-- 기여도 : 이택진100% -->
+<!-- 2차기여도 : 이택진100% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"	isELIgnored="false"
 	%>
@@ -31,7 +32,7 @@
     $(function() {
         $('input[name="daterange"]').daterangepicker({
         opens: 'left',
-        timePicker: true
+        showDropdowns: true
         }, function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
@@ -39,6 +40,23 @@
     });
     </script>
     <script>
+	    
+		var pricelistdesc = function(url){
+		
+			$.ajax({
+				type: 'get',
+				url: "../PricelistDesc",
+				data: "",
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+				success: function(data) {
+					$('#product_list').html(data);
+				},
+				error: function(request, status, error) {
+					alert(error);
+				}
+			});
+		};
+    
 		$(document).ready(function(){
 			
 			// 객실 선택 뷰
@@ -85,7 +103,7 @@
     <div class="detail-select-box con">
       <div class="top_menu tab_btn">
 	      <ul class="row">
-	        <li class="cell active"><a href="#tab1">모텔</a></li>
+	        <li class="cell"><a href="#tab1">모텔</a></li>
 	        <li class="cell"><a href="#tab2">호텔</a></li>
 	        <li class="cell"><a href="#tab3">펜션</a></li>
 	        <li class="cell"><a href="#tab4">리조트</a></li>
@@ -200,12 +218,12 @@
          </section>
       </div>
       <div class="list_wrap">
-        <div class="goods-wrap">
+        <div class="goods-wrap">  
           <div class="search-menu">
             <div class="search-box">
-             <button type="button" data-sort="newest" id="goods_newest" name="goods_newest"><span>최신순</span></button>
-             <button type="button" data-sort="lowprice" id="hightPrice" name="hightPrice"><span>높은 가격 순</span></button>
-             <button type="button" data-sort="highprice" id="lowerPrice" name="lowerPrice"><span>낮은 가격 순</span></button>
+             <button type="text" id="goods_newest" ><span><a href="javascript:search_Goods_Price('newest')">최신순</a></span></button>
+             <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc()">높은 가격 순</a></span></button>
+             <button type="text" id="lowerPrice" ><span><a href="javascript:search_Goods_Price('lowerPrice')">낮은 가격 순</a></span></button>
             </div>
             <button type="button" class="btn_map" onclick="pop_map_pc();">지도</button>
           </div>
@@ -215,7 +233,7 @@
             	<h3 style ="text-align:left">모텔</h3>
 	            <c:forEach var="item" items="${goodsMap.motel}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -239,7 +257,7 @@
             	<h3 style ="text-align:left">호텔</h3>
 	            <c:forEach var="item" items="${goodsMap.hotel}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -263,7 +281,7 @@
 				<h3 style ="text-align:left">펜션</h3>
 	            <c:forEach var="item" items="${goodsMap.pension}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -287,7 +305,7 @@
 				<h3 style ="text-align:left">리조트</h3>
 	            <c:forEach var="item" items="${goodsMap.resort}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -311,7 +329,7 @@
 				<h3 style ="text-align:left">게스트하우스</h3>
 	            <c:forEach var="item" items="${goodsMap.guestHouse}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -335,7 +353,7 @@
 				<h3 style ="text-align:left">캠핑/글램핑</h3>
 	            <c:forEach var="item" items="${goodsMap.camping}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -359,7 +377,7 @@
 				<h3 style ="text-align:left">한옥</h3>
 	            <c:forEach var="item" items="${goodsMap.hanok}" >     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/board/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>

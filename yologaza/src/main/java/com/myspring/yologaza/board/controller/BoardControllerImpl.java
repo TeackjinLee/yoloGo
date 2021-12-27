@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.board.service.BoardService;
 import com.myspring.yologaza.board.vo.ArticleVO;
+import com.myspring.yologaza.goods.service.GoodsService;
 import com.myspring.yologaza.member.vo.MemberVO;
 
 @Controller("boardController")
@@ -36,13 +37,15 @@ public class BoardControllerImpl implements BoardController {
 	BoardService boardService;
 	@Autowired
 	ArticleVO articleVO;
+	@Autowired
+	private GoodsService goodsService;
 	
 
 	
 	@Override
 	@RequestMapping(value={"/board/addNewArticle.do"}, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,
+	public ResponseEntity addNewArticle(@RequestParam("goods_id") String goods_id, MultipartHttpServletRequest multipartRequest,
 										HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String,Object> articleMap = new HashMap<String, Object>();
@@ -55,6 +58,7 @@ public class BoardControllerImpl implements BoardController {
 		String imageFileName= upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		ArticleVO aritcleVO = (ArticleVO) session.getAttribute("article");
 		String id = memberVO.getId();
 		articleMap.put("parentNO", 0);
 		articleMap.put("id", id);
@@ -73,8 +77,7 @@ public class BoardControllerImpl implements BoardController {
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
 			}
 				message = "<script>";
-				message += " alert('새글을 추가했습니다.');";
-				message += "location.href='"+multipartRequest.getContextPath()+"/board/goodsInformation.do'; ";
+				message += "location.href='"+multipartRequest.getContextPath()+"/goods/goodsInformation.do?goods_id=" + goods_id + "';";
 				message +=" </script>";
 				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			}catch(Exception e) {
@@ -94,7 +97,7 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@RequestMapping(value={"/board/addReply.do"}, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest,
+	public ResponseEntity addReply(@RequestParam("goods_id") String goods_id, MultipartHttpServletRequest multipartRequest,
 										HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String,Object> articleMap = new HashMap<String, Object>();
@@ -107,6 +110,7 @@ public class BoardControllerImpl implements BoardController {
 		String imageFileName= upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		ArticleVO aritcleVO = (ArticleVO) session.getAttribute("article");
 		String id = memberVO.getId();
 		int articleNO1 = articleVO.getArticleNO();
 		articleMap.put("parentNO", articleNO1);
@@ -127,7 +131,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 				message = "<script>";
 				message += " alert('댓글 추가했습니다.');";
-				message += "location.href='"+multipartRequest.getContextPath()+"/board/goodsInformation.do'; ";
+				message += "location.href='"+multipartRequest.getContextPath()+"/goods/goodsInformation.do?goods_id=" + goods_id + "';";
 				message +=" </script>";
 				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			}catch(Exception e) {
@@ -143,9 +147,31 @@ public class BoardControllerImpl implements BoardController {
 			}
 			return resEnt;
 	}
+	@RequestMapping(value = "/board/articleForm.do", method= {RequestMethod.POST, RequestMethod.GET})
+	private ModelAndView articleForm(@RequestParam("goods_id") String goods_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		Map goodsMap=goodsService.goodsDetail(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("goodsMap", goodsMap);
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/board/replyForm.do", method= {RequestMethod.POST, RequestMethod.GET})
+	private ModelAndView replyForm(@RequestParam("goods_id") String goods_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		Map goodsMap=goodsService.goodsDetail(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("goodsMap", goodsMap);
+		mav.setViewName(viewName);
+		return mav;
+	}
 
 	@RequestMapping(value = "/board/*Form.do", method= {RequestMethod.POST, RequestMethod.GET})
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
@@ -256,13 +282,13 @@ public class BoardControllerImpl implements BoardController {
 			FileUtils.deleteDirectory(destDir);
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='"+request.getContextPath()+"/board/goodsInformation.do';";
+			message += " location.href='"+request.getContextPath()+"/main.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch(Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='"+request.getContextPath()+"/board/goodsInformation.do';";
+			message += " location.href='"+request.getContextPath()+"/main.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
