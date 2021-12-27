@@ -86,8 +86,9 @@ public class CC_DAOImpl implements CC_DAO{
 	}
 	
 	@Override
-	public Question_VO selectReply(int articleNo) throws DataAccessException {
-		return sqlSession.selectOne("mapper.CC.selectReply", articleNo);
+	public List<Question_VO> selectInPersonReply(List<Question_VO> questionList) throws DataAccessException {
+		List<Question_VO> replyList = sqlSession.selectList("mapper.CC.selectInPersonReply", questionList);
+		return replyList;
 	}
 	
 	@Override
@@ -97,13 +98,13 @@ public class CC_DAOImpl implements CC_DAO{
 	
 	@Override
 	public int insertNewQuestion(Map questionMap) throws DataAccessException {
-		int articleNO = selectNewArticleNO();
-		questionMap.put("articleNO", articleNO);
+		int articleNo = selectNewArticleNo();
+		questionMap.put("articleNo", articleNo);
 		sqlSession.insert("mapper.CC.insertNewQuestion",questionMap);
-		return articleNO;
+		return articleNo;
 	}
 	
-	private int selectNewArticleNO() throws DataAccessException {
-		return sqlSession.selectOne("mapper.CC.selectNewArticleNO");
+	private int selectNewArticleNo() throws DataAccessException {
+		return sqlSession.selectOne("mapper.CC.selectNewArticleNo");
 	}
 }

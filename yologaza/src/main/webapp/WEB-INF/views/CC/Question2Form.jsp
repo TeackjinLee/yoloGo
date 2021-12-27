@@ -342,69 +342,47 @@ p {
             <!-- 공지사항  -->
             <div class="tab_each">
               <ul id="tab1">
-              <c:if test="${pagination.totalCount>=5}">
-              <c:forEach var="i" begin="1" end="${pagination.countList}" step="1">
+              <c:forEach var="question" items="${questionList}" varStatus="stat">
+              <c:forEach var="reply" items="${replyList}" >
                 <li>
-                  <input type="checkbox" class="question" id="que-${i}">
-                  <label for="que-${i}">
-                    ${questionList.type} / ${questionList.content}
+                  <input type="checkbox" class="question" id="que-${stat.count}">
+                  <label for="que-${stat.count}">
+                    ${question.type} / ${question.content}
                   </label>
                   <c:choose>
-                  	<c:when test="">
+                  	<c:when test="${reply.parentNo == question.articleNo}">
                   		<input type="text" class="ans" value="답변 완료" readonly>
                   	</c:when>
                   	<c:otherwise>
                   		<input type="text" class="ans" value="답변 대기" readonly>
                   	</c:otherwise>
                   </c:choose>
-                  <div class="ask">[문의] 작성일 ${questionList.writeDate}<br>${questionList.content}</div>
-                  <c:if test="">
-                  <div class="answer">[답변] 작성일 ${questionList.writeDate}<br>${questionList.content}</div>
+                  <div class="ask">[문의] 작성일 ${question.writeDate}<br>${question.content}</div>
+                  <c:if test="${reply.parentNo == question.articleNo}">
+                  <div class="answer">[답변] 작성일 ${reply.writeDate}<br>${reply.content}</div>
                   </c:if>
                 </li>
               </c:forEach>
-              </c:if>
-              <c:if test="${pagination.totalCount<5}">
-              <c:forEach var="i" begin="1" end="${pagination.totalCount}" step="1">
-                <li>
-                  <input type="checkbox" class="question" id="que-${i}">
-                  <label for="que-${i}">
-                    ${questionList.type} / ${questionList.content}
-                  </label>
-                  <c:choose>
-                  	<c:when test="">
-                  		<input type="text" class="ans" value="답변 완료" readonly>
-                  	</c:when>
-                  	<c:otherwise>
-                  		<input type="text" class="ans" value="답변 대기" readonly>
-                  	</c:otherwise>
-                  </c:choose>
-                  <div class="ask">[문의] 작성일 ${questionList.writeDate}<br>${questionList.content}</div>
-                  <c:if test="">
-                  <div class="answer">[답변] 작성일 ${questionList.writeDate}<br>${questionList.content}</div>
-                  </c:if>
-                </li>
-                </c:forEach>
-                </c:if>
+              </c:forEach>
               </ul>
             </div>
             <div id="notice_pagination">
                 <div class="paging">
                 <c:if test="${pagination.startPage > 1}">
-                  <button type="button" class="prev" onclick="location.href='${contextPath}/CC/announceList.do?pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/CC/inPersonQuestion.do?pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
                 </c:if>
                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                 	<c:choose>
                 		<c:when test="${i == pagination.page}">
-                  			<button class="on" onclick="location.href='${contextPath}/CC/announceList.do?pages=${i}'">${i}</button>
+                  			<button class="on" onclick="location.href='${contextPath}/CC/inPersonQuestion.do?pages=${i}'">${i}</button>
                   		</c:when>
                   		<c:otherwise>
-                  			<button onclick="location.href='${contextPath}/CC/announceList.do?pages=${i}'">${i}</button>
+                  			<button onclick="location.href='${contextPath}/CC/inPersonQuestion.do?pages=${i}'">${i}</button>
                   		</c:otherwise>
                   	</c:choose>
                 </c:forEach>
                 <c:if test="${pagination.endPage < pagination.totalPage}">
-                  <button type="button" class="next" onclick="location.href='${contextPath}/CC/announceList.do?pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                  <button type="button" class="next" onclick="location.href='${contextPath}/CC/inPersonQuestion.do?pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
                 </c:if>
                 </div>
               </div>
