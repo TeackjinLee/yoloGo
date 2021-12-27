@@ -144,7 +144,7 @@
 	     	overflow: hidden;
 	     }
 	     #board_head .member_img img{
-	     	height:100%;
+	     	width:100%;
 	     }
     </style>
     <script type="text/javascript">
@@ -381,34 +381,35 @@
 					  </c:when>
 					  
 					  <c:when test="${articlesList !=null }" >
-					  	
 					    <c:forEach  var="article" items="${articlesList}" varStatus="articleNum" >
 						    <c:choose>
 							    <c:when test="${article.goods_id == goods.goods_id}" >
 								    <tr align="center" style=" height:80px; box-shadow: 3px 3px 3px #ddd;">
 									<td id="board_head">
-										<div class="member_img"><img src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" alt="사용자 사진"	/></div>
+										<div class="member_img"><img src="${contextPath}/mem_download.do?uid=${article.uid}&memFileName=${article.memFileName}" alt="리뷰 사진"	/></div>
 									</td>
 									<td style="visibility: hidden;" width="0%">${articleNum.count}</td>
 									<td width="10%">${article.id }</td>
 									<td align='left'  width="60%">
 									  <span style="padding-right:30px"></span>
 									   <c:choose>
-									      <c:when test='${article.level > 1 }'>  
+									      <c:when test='${article.level > 1 }'>
+									     	
 									         <c:forEach begin="1" end="${article.level }" step="1">
-									              <span style="padding-left:5px"></span>    
+									              <span style="padding-left:5px"></span>
 									         </c:forEach>
 									         <span style="font-size:12px;">[답변]</span>
 								                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
 									          </c:when>
 									          <c:otherwise>
+									            
 									            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
 									          </c:otherwise>
 									        </c:choose>
 									  </td>
 								      <td width="auto">
 									     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-									     <img src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
+									     <img onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
 									   </td> 
 									  <td  width="10%">${article.writeDate}</td>
 									</tr>

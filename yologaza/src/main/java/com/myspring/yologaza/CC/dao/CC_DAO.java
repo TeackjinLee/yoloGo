@@ -17,5 +17,5 @@ public interface CC_DAO {
 	public Announce_VO selectAnnounce(int articleNo) throws DataAccessException;
 	public int insertNewQuestion(Map questionMap) throws DataAccessException;
 	public List<Question_VO> selectInPersonQuestion(int offset, int count, String id) throws DataAccessException;
-	public Question_VO selectReply(int articleNo) throws DataAccessException;
+	public List<Question_VO> selectInPersonReply(List<Question_VO> questionList) throws DataAccessException;
 }

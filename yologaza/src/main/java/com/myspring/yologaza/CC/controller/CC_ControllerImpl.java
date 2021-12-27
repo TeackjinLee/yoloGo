@@ -82,11 +82,13 @@ public class CC_ControllerImpl implements CC_Controller {
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String id = memberVO.getId();
 		String viewName = (String)Request.getAttribute("viewName");
-		List questionList = cc_Service.listQuestion(offset, pagination.getCountList(), id);
+		List<Question_VO> questionList = cc_Service.listQuestion(offset, pagination.getCountList(), id);
+		List<Question_VO> replyList = cc_Service.listReply(questionList);
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("questionList", questionList);
 		mav.addObject(pagination);
+		mav.addObject("replyList", replyList);
 		return mav;
 	}
 	

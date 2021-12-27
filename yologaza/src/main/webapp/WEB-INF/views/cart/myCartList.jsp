@@ -462,20 +462,34 @@ function fn_order_all_cart_goods(){
 			                
 			                
 			                <div class="detail">
-								<span id="type">숙박</span>
-								<span id="price">${item.goods_room_price1}원</span>
+								
+								<c:choose>
+									<c:when test="${item.goods_room_price2 != 0}">
+										<span id="type">대실</span>
+										<span id="price2" style="padding-right:10px; box-sizing: border-box;">${item.goods_room_price2}원</span>
+										<span id="type">숙박</span>
+										<span id="price1">${item.goods_room_price1}원</span>
+									</c:when>
+									<c:otherwise>
+										<span id="type">숙박</span>
+										<span id="price1">${item.goods_room_price1}원</span>
+									</c:otherwise>
+								</c:choose>
 			                </div>
 			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
 								삭제하기
 							</a>
 							<c:choose>
-								<c:when test="${item.goods_room_price2 != null}">
+								<c:when test="${item.goods_room_price2 != 0}">
 									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
-										예약하기
+										숙박 예약하기
+									</a>
+									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
+										대실 예약하기
 									</a>
 								</c:when>
 								<c:otherwise>
-									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
+									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
 										예약하기
 									</a>
 								</c:otherwise>
@@ -489,6 +503,7 @@ function fn_order_all_cart_goods(){
           	</form>
           	
 	<table  width=99%  class="list_view" style="font-size:18px; box-sizing: border-box; border-top:1px solid #ddd; border-bottom:1px solid #ddd; margin-top:30px;">
+		<h3 style="color:rgb(192, 57, 43); margin-top:90px;">총 예약 금액은 숙박금액으로만 계산 됩니다. 대실은 제외 금액이오니 대실은 따로 예약 바랍니다.</h3>
 		<tbody>
 		     <tr  align=center  class="fixed" >
 		       <td class="fixed">총 예약 건수 </td>

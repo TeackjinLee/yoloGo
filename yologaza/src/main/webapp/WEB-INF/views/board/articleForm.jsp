@@ -47,7 +47,7 @@
 			<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${member.name}" readonly/> </td>
 						
 		</tr>
-		<tr>
+		<tr style="display:none;">
 			<td align="right"> 상품 번호</td>
 		  	<td colspan=2  align="left"><input name="goods_id" type="text" size="20" maxlength="100"  value="${goods.goods_id}" readonly/> </td>
 		</tr>
@@ -60,14 +60,13 @@
 			<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
 		  </tr>
 		<tr>
-		  <td align="right">이미지파일 첨부:  </td>
-		  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-		  <td><img  id="preview" src="#"   width=200 height=200/></td> 
+			<td align="right">이미지파일 첨부:  </td>
+			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
+			<td><img  id="preview" src="#"   width=200 height=200/></td> 
 		  
 		  
-		  <td align="right">이미지파일 첨부</td>
+			<td align="right">이미지파일 첨부</td>
 			<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-		
 		
 		</tr>
 	  
