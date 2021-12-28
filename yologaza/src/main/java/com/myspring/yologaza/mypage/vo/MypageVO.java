@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
-@Component("mypage_VO")
+@Component("mypageVO")
 public class MypageVO {
 	private String id;
 	private String pwd;

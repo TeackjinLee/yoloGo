@@ -10,6 +10,7 @@ public class MemberVO {
 	private String id;
 	private String pwd;
 	private String name;
+	private String nickName;
 	private String email1;
 	private String email2;
 	private String hp;
@@ -62,6 +63,14 @@ public class MemberVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getEmail1() {
