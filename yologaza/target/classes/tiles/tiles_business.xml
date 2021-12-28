@@ -19,5 +19,10 @@
       <put-attribute name="title" value="비지니스 로그인 페이지" />
       <put-attribute name="body" value="/WEB-INF/views/business/member/business_loginForm.jsp" />
    </definition>
+   
+   <definition name="/business/goods/businessGoodsMain.do" extends="BusinessLayout">
+      <put-attribute name="title" value="상세검색페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/business/goods/businessGoodsMain.jsp" />
+   </definition>
 
 </tiles-definitions>

@@ -210,6 +210,13 @@
       ]]>
     </select>
     
+    <select id="BusinessloginById" resultType="memberVO"  parameterType="memberVO" >
+      <![CDATA[
+         select * from member
+         where id = #{id} and pwd = #{pwd} and (auth="2" or auth="3")
+      ]]>
+    </select>
+    
     <update id="updateMyInfo" parameterType="java.util.HashMap">
 	   update member
 			   <set>

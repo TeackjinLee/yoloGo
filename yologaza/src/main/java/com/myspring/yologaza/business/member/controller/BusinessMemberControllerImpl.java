@@ -125,22 +125,6 @@ public class BusinessMemberControllerImpl implements BusinessMemberController {
 		}
 		return viewName;
 	}
-	@Override
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public ModelAndView addMember(MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public ModelAndView removeMember(String id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 }

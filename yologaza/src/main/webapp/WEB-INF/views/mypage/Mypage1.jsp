@@ -12,6 +12,7 @@
 <head>
 <meta charset="utf-8">
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 body{
   font-size: 14px;
@@ -327,14 +328,14 @@ p {
 				},
 				success : function(data, textStatus) {
 					if(data.trim()=='mod_success'){
-						alert("회원 정보를 수정했습니다.");
+						swal("Good job!", "회원 정보를 수정했습니다.", "success");
 					}else if(data.trim()=='failed'){
-						alert("다시 시도해 주세요.");	
+						swal ( "Oops" ,  "다시 시도해 주세요." ,  "error");
 					}
 					
 				},
 				error : function(data, textStatus) {
-					alert("에러가 발생했습니다."+data);
+					swal ( "Oops" ,  "에러가 발생했습니다." +data  ,  "error");
 				},
 				complete : function(data, textStatus) {
 					//alert("작업을완료 했습니다");
