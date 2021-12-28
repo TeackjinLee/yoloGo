@@ -16,12 +16,15 @@ public class MypageServiceImpl implements MypageService{
 	@Autowired
 	private MypageDAO mypageDAO;
 	
-	@Override
 	public MemberVO  modifyMyInfo(Map memberMap) throws Exception{
 		 String id=(String)memberMap.get("id");
 		 mypageDAO.updateMyInfo(memberMap);
 		 return mypageDAO.selectMyDetailInfo(id);
 	}
 	
+	public MemberVO myDetailInfo(String id) throws Exception{
+		return mypageDAO.selectMyDetailInfo(id);
+	}
+
 	
 }

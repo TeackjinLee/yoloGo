@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface MypageController {
 
-	public ModelAndView Mypage1(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView Mypage1(HttpServletRequest request, HttpServletResponse response) throws Exception;	
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
             @RequestParam("value")  String value,
             HttpServletRequest request, HttpServletResponse response)  throws Exception;

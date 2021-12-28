@@ -18,12 +18,12 @@ public class MypageDAOImpl implements MypageDAO{
 	public void updateMyInfo(Map memberMap) throws DataAccessException{
 		sqlSession.update("mapper.member.updateMyInfo",memberMap);
 	}
-
 	@Override
 	public MemberVO selectMyDetailInfo(String id) throws DataAccessException{
 		MemberVO memberVO=(MemberVO)sqlSession.selectOne("mapper.member.selectMyDetailInfo",id);
 		return memberVO;
 		
 	}
+
 	
 }

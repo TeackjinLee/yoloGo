@@ -216,6 +216,9 @@
 			      <if test=" pwd != '' and pwd != null">
 			        pwd=#{pwd},
 			      </if>
+			      <if test=" name != '' and name != null">
+			         name=#{name},
+			      </if>
 			      <if test=" hp != '' and hp != null">
 			         hp=#{hp},
 			      </if>
@@ -228,9 +231,6 @@
 			      <if test=" email2 != '' and email2 != null">
 			         email2=#{email2},
 			      </if>
-			      <if test=" emailsts_yn != '' and emailsts_yn != null">
-			         emailsts_yn=#{emailsts_yn},
-			      </if>
 			   </set>
 		where 
 		id=#{id}
@@ -242,5 +242,7 @@
 			where id=#{id}
     	]]>
 	</select>	
+	
+	
 
 </mapper>
