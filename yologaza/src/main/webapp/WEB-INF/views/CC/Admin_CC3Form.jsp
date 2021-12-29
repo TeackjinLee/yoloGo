@@ -1,0 +1,468 @@
+<%-- 송상우 100% --%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"
+    isELIgnored="false"    
+    %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+
+
+<html>
+<head>
+<style>
+body{
+  font-size: 14px;
+}
+.wrap.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrap{
+  width: 100%;
+  background:#fff;
+}
+
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+
+.sub_wrap .align_rt {
+    float: right;
+    width: 750px;
+    margin-right: 31px;
+  margin-top:20px;
+}
+
+.sub_wrap nav {
+    display: block;
+    float: left;
+    width: 238px;
+  padding-top:32px;
+}
+
+.wrap{
+  width:100%;
+  background:#fff;
+}
+
+.sub_top_wrap{
+  height: 120px;
+  background:rgb(192, 57, 43);
+}
+
+.sub_top{
+	position:relative;
+  width:1024px;
+  height:120px;
+  margin:0 auto;
+  border-radius:0;
+	text-align:left;
+}
+
+.sub_top a{
+	position: absolute;
+    color: white;
+    font-weight: 500;
+    font-size: 32px;
+    bottom:20px;
+}
+
+
+.content{
+  overflow:hidden;
+}
+
+.sub_wrap{
+  width: 1024px;
+  margin:0 auto 0 auto;
+  padding-top:54px;
+  padding-bottom:54px;
+}
+
+.show_list li .list_que span {
+    font-size: 16px;
+    color: black;
+}
+
+.show_list li{
+    display: block;
+    position: relative;
+    height: auto;
+    margin-bottom: 0;
+    padding: 0px 24px 0px 0px;
+    border-radius: 0;
+    background: #fff;
+    font-size: 18px;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.show_list li .list_que p {
+    padding-bottom: 0px;
+    overflow: visible;
+    white-space: normal;
+    text-overflow: initial;
+    line-height: normal;
+    word-wrap: break-word;
+}
+
+.show_list li a p {
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color:black;
+}
+
+
+.tab_each {
+    clear: both;
+    display:block;
+  padding-top:8px;
+    text-align:left;
+    border-top:1px solid black;
+}
+
+div {
+    display: block;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.show_list {
+    margin-bottom: 0;
+    padding: 0 0;
+}
+
+.sub_wrap nav ul li a{
+  display:block;
+  font-size:20px;
+  color:black;
+}
+
+.sub_wrap nav{
+	padding-right:20px;
+	text-align:left;
+}
+
+.sub_wrap nav ul li a.active{
+  font-size:20px;
+  color:rgb(192, 57, 43);
+  font-weight:bold;
+}
+
+.wrap.show, footer.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wrap {
+    width: 100%;
+    background: #fff;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sub_wrap nav ul li {
+    margin-bottom: 26px;
+}
+
+.tab{
+	text-align:left;
+}
+.tab span.tab_btn {
+    display: inline-block;
+    float: none;
+    position: relative;
+    width: auto;
+    height: 30px;
+    margin-right: 22px;
+    font-size: 20px;
+    line-height: normal;
+    color: black;
+    text-align: left;
+    cursor: pointer;
+    font-weight:bold;
+    padding-left:5px;
+}
+
+textarea{
+  width:650px;
+  height:250px;
+  border-radius:7px;
+  margin-top:10px;
+  resize:none; 
+  outline:none;
+}
+
+.tab_each ul li{
+    display: inline-block;
+}
+
+.tab_each ul .title{
+	height:36px;
+}
+
+.tab_each ul li span{
+  position:relative;
+  font-size:18px;
+  font-weight:bold;
+  top:3px;
+}
+
+.tab_each ul li input{
+  width:70px;
+  border-radius:4px;
+  height:18px;
+  margin-top:0px;
+  outline:none;
+}
+
+.tab_each ul li .input2{
+  width:120px;
+}
+
+.tab_each ul li .input3{
+	width:588px;
+	border-width:2px;
+	border-color:rgba(118, 118, 118, 0.3);
+	margin-top:20px;
+	height:30px;
+	margin-left:18px;
+	font-size:16px;
+	line-height:30px;
+}
+
+.write{
+	float:right;
+	width:100px;
+	height:36px;
+	font-size:16px;
+	border-radius:4px;
+	border-width:1px;
+	border-color:rgba(0,0,0,0.15);
+	margin-right:94px;
+	cursor:pointer;
+}
+
+.div_bot{
+	margin-top:15px;
+	height:50px;
+}
+
+.div_bot .dropdown button::before{
+  content: "\f078";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 600;
+  display: block;
+  color: black;
+  float: right;
+  cursor:pointer;
+  position:relative;
+  top:3px;
+}
+
+.div_bot .dropdown button {
+  border : 1px solid rgba(0,0,0,0.2);
+  border-radius : 4px;
+  background-color: #fff;
+  font-weight: 400;
+  color : black;
+  padding : 4px;
+  width : 240px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 16px;
+  position : relative;
+  box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.6);
+  z-index:1;
+}
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+  float : left;
+}
+
+.dropdown-content{
+  display : none;
+  font-weight: 400;
+  background-color: #fff;
+  min-width : 240px;
+  border-radius: 8px;
+  height : 90px;
+  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+  position:absolute;
+  z-index:99;
+}
+
+.dropdown-content div{
+  display : block;
+  text-decoration : none;
+  color : black;
+  font-size: 16px;
+  padding : 12px 10px;
+}
+.dropdown-content div:hover{
+  background-color: rgb(226, 226, 226);
+}
+
+.dropdown-content.show{
+  display : block;
+}
+</style>
+<script type="text/javascript">
+
+$('#auth1').val(1);
+$('#auth2').val(2);
+
+$(document).ready(function() {
+	$('#auth1').click(function(){
+		$('#selAuth').val(1);
+	})
+	$('#auth2').click(function(){
+		$('#selAuth').val(2);
+	})});
+window.onload=()=>{
+      document.querySelector('.dropbtn').onclick = ()=>{
+        dropdown();
+      }
+      document.getElementsByClassName('type').onclick = ()=>{
+        showMenu(value);
+      };
+      dropdown = () => {
+        var v = document.querySelector('.dropdown-content');
+        var dropbtn = document.querySelector('.dropbtn')
+        v.classList.toggle('show');
+        dropbtn.style.borderColor = 'rgba(0,0,0,0.2)';
+      }
+
+      showMenu=(value)=>{
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        dropbtn_content.innerText = value;
+        dropbtn_content.style.color = '#252525';
+      }
+    }
+    window.onclick= (e)=>{
+      if(!e.target.matches('.dropbtn')){
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    
+</script>
+</head>
+<body class="pc">
+  <form name="frmAnnounce" method="post"  action="${contextPath}/CC/admin_addAnnounce.do"  enctype="multipart/form-data">
+    <div class="wrap show">
+      <div class="sub_top_wrap">
+        <div class="sub_top">
+          <a><i class="fas fa-phone-alt fa-lg"></i> 고객센터</a>
+        </div>
+      </div>
+      <div id="content" class="sub_wrap">
+        <nav>
+          <ul>
+            <li>
+              <a href="${contextPath}/CC/admin_announceList.do" class="active">공지사항</a>
+            </li>
+            <li>
+              <a href="${contextPath}/CC/admin_frequentList.do">자주묻는 질문</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="align_rt">
+          <div class="notice">
+            <!-- Tab -->
+            <div class="tab">
+              <span class="tab_btn">
+                공지사항
+              </span>
+            </div>
+            <!-- 공지사항  -->
+            <div class="tab_each">
+              <ul>
+                <li>
+                  <span>작성자</span>
+                </li>
+                <li>
+                  <input type="text" class="input1" name="id" value="${id}" disabled/>
+                </li>
+                <li>
+                  &nbsp&nbsp<span>작성일</span>
+                </li>
+                <li>
+                  <input type="text" class="input2" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/>" disabled/>
+                </li>
+              </ul>
+              <ul>
+              	<li class="title">
+              		<span>제목</span>
+              	</li>
+              	<li>
+              		<input type="text" name="title" class="input3"/>
+              	</li>
+              </ul>
+              <div>
+                <textarea placeholder="공지를 작성해주세요." name="content"></textarea>
+              </div>
+              <div class="div_bot">
+                <div class="dropdown">
+                    <button type="button" class="dropbtn" onclick="dropdown()">
+                      <span class="dropbtn_content">사용자 공지사항 조회</span>
+                    </button>
+                    <input type="hidden" name="auth" id="selAuth" />
+                    <div class="dropdown-content">
+                      <div class="type" id="auth1" onclick="showMenu(this.innerText)">사용자 공지사항 조회</div>
+                      <div class="type" id="auth2" onclick="showMenu(this.innerText)">사업자 공지사항 조회</div>
+                  	</div>
+                  </div>
+              	<input class="write" type="submit" value="공지 등록">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+</body>
+</html>

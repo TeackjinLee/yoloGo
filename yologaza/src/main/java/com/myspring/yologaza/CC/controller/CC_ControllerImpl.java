@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.service.CC_Service;
 import com.myspring.yologaza.CC.vo.Announce_VO;
+import com.myspring.yologaza.CC.vo.Frequent_VO;
 import com.myspring.yologaza.CC.vo.Question_VO;
 import com.myspring.yologaza.common.file.Pagination;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -38,8 +39,9 @@ public class CC_ControllerImpl implements CC_Controller {
 	Question_VO question_VO;
 	
 	@Override
-	@RequestMapping(value= "/CC/announceList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= {"/CC/announceList.do", "/CC/admin_announceList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int auth = 1;
 		//pagination
 		Pagination pagination = new Pagination();
 		pagination.setPage(1);
@@ -48,20 +50,27 @@ public class CC_ControllerImpl implements CC_Controller {
 		pagination.setTotalCount(cc_Service.getCC_DAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
+		if(request.getParameter("auth") != null)
+			auth = Integer.parseInt(request.getParameter("auth"));
+		request.setAttribute("auth", auth);
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
 		pagination.Paging();
 		String viewName = (String)request.getAttribute("viewName");
-		List announceList = cc_Service.listAnnounce(offset, pagination.getCountList());
+		List<Announce_VO> announceList = cc_Service.listAnnounce(auth, offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("announceList", announceList);
 		mav.addObject(pagination);
 		return mav;
 	}
 	
-	@RequestMapping(value= "/CC/frequentList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= {"/CC/frequentList.do", "/CC/admin_frequentList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		List frequentList = cc_Service.listFrequent();
+		int auth = 1;
+		if(request.getParameter("auth") != null)
+			auth = Integer.parseInt(request.getParameter("auth"));
+		request.setAttribute("auth", auth);
+		List<Frequent_VO> frequentList = cc_Service.listFrequent(auth);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("frequentList", frequentList);
 		return mav;
@@ -100,6 +109,9 @@ public class CC_ControllerImpl implements CC_Controller {
 		//String viewName = getViewName(request);
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		session.setAttribute("id", id);
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
@@ -107,7 +119,7 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
-	@RequestMapping(value="/CC/viewAnnounce.do" ,method = RequestMethod.GET)
+	@RequestMapping(value={"/CC/viewAnnounce.do","/CC/admin_viewAnnounce.do"} ,method = RequestMethod.GET)
 	public ModelAndView viewAnnounce(@RequestParam("articleNo") int articleNo,
                                     HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
@@ -116,6 +128,47 @@ public class CC_ControllerImpl implements CC_Controller {
 		mav.setViewName(viewName);
 		mav.addObject("announce", announce_VO);
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value={"/CC/admin_addAnnounce.do"}, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addAnnounce(MultipartHttpServletRequest multipartRequest,
+										HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			articleMap.put(name,value);
+		}
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		String name = memberVO.getName();
+		articleMap.put("id", id);
+		articleMap.put("name", name);
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+				cc_Service.addAnnounce(articleMap);
+				message = "<script>";
+				message += " alert('새글을 추가했습니다.');";
+				message += "location.href='"+multipartRequest.getContextPath()+"/CC/admin_announceList.do'; ";
+				message +=" </script>";
+				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			}catch(Exception e) {
+				message = " <script>";
+				message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+				message +=" location.href='"+multipartRequest.getContextPath()+"/CC/admin_announceForm.do'; ";
+				message +=" </script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				e.printStackTrace();
+			}
+			return resEnt;
 	}
 	
 	@Override
