@@ -38,18 +38,17 @@
   <select id="selectAnnounceList" resultMap="announceResult">
     <![CDATA[
 		
-         select SQL_CALC_FOUND_ROWS * from announce	order by writeDate asc limit #{offset},#{count}
+         select SQL_CALC_FOUND_ROWS * from announce	where auth = #{auth} order by writeDate asc limit #{offset},#{count}
     ]]>
+  </select>
+  <select id="countAnnounce" resultType="int">
+  	select FOUND_ROWS();
   </select>
   <select id="selectAnnounce" resultType="announce_VO"   parameterType="int">
     <![CDATA[
       SELECT * from announce
       where articleNo = #{articleNo}		
     ]]>
-  </select>
-  
-  <select id="countAnnounce" resultType="int">
-  	select FOUND_ROWS();
   </select>
   
   <select id="selectFrequentList" resultMap="frequentResult">
@@ -89,9 +88,21 @@
 		]]>
 	</insert>
 	
-	<select id="selectNewArticleNo" resultType="int">
+  <insert id="insertNewAnnounce" parameterType="java.util.Map">
+		<![CDATA[
+			insert into announce(articleNo, content, title, id, name, auth)
+			values(#{articleNo}, #{content}, #{title}, #{id}, #{name}, #{auth})
+		]]>
+	</insert>
+	
+	<select id="selectNewArticleNoQuestion" resultType="int">
 		<![CDATA[
 			SELECT IFNULL(max(articleNo), 0) + 1 from question_in_person	
+		]]>
+	</select>
+	<select id="selectNewArticleNoAnnounce" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(max(articleNo), 0) + 1 from announce	
 		]]>
 	</select>
 </mapper>

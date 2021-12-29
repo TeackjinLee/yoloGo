@@ -12,10 +12,11 @@ import com.myspring.yologaza.CC.vo.Question_VO;
 public interface CC_DAO {
 	public int getTotalCount();
 	public int getCountPerId();
-	public List selectAnnounceList(int offset, int count) throws DataAccessException;
+	public List<Announce_VO> selectAnnounceList(int auth, int offset, int count) throws DataAccessException;
 	public List<Frequent_VO> selectFrequentList() throws DataAccessException;
 	public Announce_VO selectAnnounce(int articleNo) throws DataAccessException;
 	public int insertNewQuestion(Map questionMap) throws DataAccessException;
+	public int insertNewAnnounce(Map announceMap) throws DataAccessException;
 	public List<Question_VO> selectInPersonQuestion(int offset, int count, String id) throws DataAccessException;
 	public List<Question_VO> selectInPersonReply(List<Question_VO> questionList) throws DataAccessException;
 }

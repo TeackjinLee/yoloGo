@@ -8,10 +8,23 @@
       <put-attribute name="title" value="공지사항" />
       <put-attribute name="body" value="/WEB-INF/views/CC/User_CCForm.jsp" />
    </definition>
+   <definition name="/CC/admin_announceList" extends="AdminLayout">
+      <put-attribute name="title" value="관리자 공지사항" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CCForm.jsp" />
+   </definition>
    
    <definition name="/CC/viewAnnounce" extends="baseLayout">
       <put-attribute name="title" value="공지사항 세부" />
       <put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
+   </definition>
+   <definition name="/CC/admin_viewAnnounce" extends="AdminLayout">
+      <put-attribute name="title" value="관리자 공지사항 세부" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CC2Form.jsp" />
+   </definition>
+   
+   <definition name="/CC/admin_announceForm" extends="AdminLayout">
+      <put-attribute name="title" value="공지사항 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CC3Form.jsp" />
    </definition>
    
    <definition name="/CC/frequentList" extends="baseLayout">

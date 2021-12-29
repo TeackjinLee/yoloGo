@@ -43,13 +43,14 @@ public class CC_DAOImpl implements CC_DAO{
 	}
 	
 	@Override
-	public List<Announce_VO> selectAnnounceList(int offset, int count) throws DataAccessException {
+	public List<Announce_VO> selectAnnounceList(int auth, int offset, int count) throws DataAccessException {
 		List<Announce_VO> announceList = new ArrayList<Announce_VO>();
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", offset);
 		params.put("count", count);
+		params.put("auth", auth);
 		
 		try {
 			announceList = session.selectList("mapper.CC.selectAnnounceList",params);
@@ -98,13 +99,25 @@ public class CC_DAOImpl implements CC_DAO{
 	
 	@Override
 	public int insertNewQuestion(Map questionMap) throws DataAccessException {
-		int articleNo = selectNewArticleNo();
+		int articleNo = selectNewArticleNoQuestion();
 		questionMap.put("articleNo", articleNo);
 		sqlSession.insert("mapper.CC.insertNewQuestion",questionMap);
 		return articleNo;
 	}
 	
-	private int selectNewArticleNo() throws DataAccessException {
-		return sqlSession.selectOne("mapper.CC.selectNewArticleNo");
+	@Override
+	public int insertNewAnnounce(Map announceMap) throws DataAccessException {
+		int articleNo = selectNewArticleNoAnnounce();
+		announceMap.put("articleNo", articleNo);
+		sqlSession.insert("mapper.CC.insertNewAnnounce",announceMap);
+		return articleNo;
+	}
+	
+	private int selectNewArticleNoQuestion() throws DataAccessException {
+		return sqlSession.selectOne("mapper.CC.selectNewArticleNoQuestion");
+	}
+	
+	private int selectNewArticleNoAnnounce() throws DataAccessException {
+		return sqlSession.selectOne("mapper.CC.selectNewArticleNoAnnounce");
 	}
 }
