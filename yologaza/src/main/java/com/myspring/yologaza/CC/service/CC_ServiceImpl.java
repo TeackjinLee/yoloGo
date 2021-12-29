@@ -30,8 +30,8 @@ public class CC_ServiceImpl implements CC_Service{
 	}
 	
 	@Override
-	public List<Frequent_VO> listFrequent() throws Exception{
-		return cc_DAO.selectFrequentList();
+	public List<Frequent_VO> listFrequent(int auth) throws Exception{
+		return cc_DAO.selectFrequentList(auth);
 	}
 	
 	@Override

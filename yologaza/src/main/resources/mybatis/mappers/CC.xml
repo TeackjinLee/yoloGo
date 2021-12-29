@@ -54,7 +54,7 @@
   <select id="selectFrequentList" resultMap="frequentResult">
     <![CDATA[
 		
-         select * from frequent_question	order by writeDate asc 
+         select * from frequent_question where auth = #{auth}	order by writeDate asc 
     ]]>
   </select>
   

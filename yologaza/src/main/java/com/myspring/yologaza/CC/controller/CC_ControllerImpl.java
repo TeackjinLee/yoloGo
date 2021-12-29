@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.CC.service.CC_Service;
 import com.myspring.yologaza.CC.vo.Announce_VO;
+import com.myspring.yologaza.CC.vo.Frequent_VO;
 import com.myspring.yologaza.CC.vo.Question_VO;
 import com.myspring.yologaza.common.file.Pagination;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -62,10 +63,14 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
-	@RequestMapping(value= "/CC/frequentList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= {"/CC/frequentList.do", "/CC/admin_frequentList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		List frequentList = cc_Service.listFrequent();
+		int auth = 1;
+		if(request.getParameter("auth") != null)
+			auth = Integer.parseInt(request.getParameter("auth"));
+		request.setAttribute("auth", auth);
+		List<Frequent_VO> frequentList = cc_Service.listFrequent(auth);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("frequentList", frequentList);
 		return mav;

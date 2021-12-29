@@ -62,8 +62,8 @@ public class CC_DAOImpl implements CC_DAO{
 	}
 	
 	@Override
-	public List<Frequent_VO> selectFrequentList() throws DataAccessException{
-		List<Frequent_VO> frequentList = sqlSession.selectList("mapper.CC.selectFrequentList");
+	public List<Frequent_VO> selectFrequentList(int auth) throws DataAccessException{
+		List<Frequent_VO> frequentList = sqlSession.selectList("mapper.CC.selectFrequentList", auth);
 		return frequentList;
 	}
 	

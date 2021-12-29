@@ -13,7 +13,7 @@ public interface CC_DAO {
 	public int getTotalCount();
 	public int getCountPerId();
 	public List<Announce_VO> selectAnnounceList(int auth, int offset, int count) throws DataAccessException;
-	public List<Frequent_VO> selectFrequentList() throws DataAccessException;
+	public List<Frequent_VO> selectFrequentList(int auth) throws DataAccessException;
 	public Announce_VO selectAnnounce(int articleNo) throws DataAccessException;
 	public int insertNewQuestion(Map questionMap) throws DataAccessException;
 	public int insertNewAnnounce(Map announceMap) throws DataAccessException;
