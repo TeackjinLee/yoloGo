@@ -14,7 +14,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<title> 회원가입 | 약관동의 </title>
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">

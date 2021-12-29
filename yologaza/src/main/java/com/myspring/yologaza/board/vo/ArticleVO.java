@@ -14,6 +14,9 @@ public class ArticleVO {
 	private String imageFileName;
 	private String id;
 	private int goods_id;
+	private String goods_name;
+	private int uid;
+	private String memFileName;
 	private Date writeDate;
 	
 	public ArticleVO() {
@@ -89,12 +92,36 @@ public class ArticleVO {
 		this.id = id;
 	}
 	
+	public String getGoods_name() {
+		return goods_name;
+	}
+
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
+	}
+
 	public int getGoods_id() {
 		return goods_id;
 	}
 
 	public void setGoods_id(int goods_id) {
 		this.goods_id = goods_id;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	public String getMemFileName() {
+		return memFileName;
+	}
+
+	public void setMemFileName(String memFileName) {
+		this.memFileName = memFileName;
 	}
 
 	public Date getWriteDate() {

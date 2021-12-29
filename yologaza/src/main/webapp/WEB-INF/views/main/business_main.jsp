@@ -30,9 +30,9 @@
 	      <div class="img_box">
 	        <a href="${contextPath}/main.do">
 	          <img src="${contextPath}/resources/image/business_trip.jpg" alt="user_main 이미지" style="width:100%;">
-	          <div class="text-box"><h2>사용자 메인화면 이동 ></h2></div>
 	        </a>
 	      </div>
+	      <div class="text-box" style="position: absolute;bottom: 20px;right: 20px;color: black;"><h2>사용자 메인화면 이동 ></h2></div>
 	    </div>
 	    <div class="goodsRoom_sell">
 	      <div class="text-box">

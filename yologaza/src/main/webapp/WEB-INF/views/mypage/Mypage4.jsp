@@ -1,4 +1,5 @@
 <%-- 송상우 100% --%>
+<%-- 2차 작업 이택진30% --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"
     isELIgnored="false"    
@@ -6,6 +7,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
+<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 <html>
@@ -270,6 +273,64 @@ p {
   position:relative;
   margin-top:30px;
 }
+
+<!-- 장바구니 팝업 -->
+		#layer {
+			z-index: 2;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+		}
+		
+		#popup {
+			z-index: 3;
+			position: fixed;
+			text-align: center;
+			left: 50%;
+			top: 45%;
+			width: 300px;
+			height: 180px;
+			background-color: white;
+			border: 3px solid #87cb42;
+		}
+		#popup a{
+			float: right;
+    		margin-right: 10px;
+		}
+		#popup font{
+			    margin: 20px 0px;
+			    display: block;
+			    font-weight: bold;
+		}
+		
+		#popup form input{
+			background: rgb(112, 173, 71);
+		    color: white;
+		    font-size: 16px;
+		    padding: 5px 30px;
+		    border-radius: 5px;
+		    cursor:pointer;
+		}
+		
+		#close {
+			z-index: 4;
+			float: right;
+		}
+		#board_head .member_img{
+	     	float:right;
+	     	width:60px;
+	     	height:60px;
+	     	border-radius: 30px;
+	     	margin-top:10px;
+	     	margin-left:10px;
+	     	overflow: hidden;
+	     }
+	     #board_head .member_img img{
+	     	width:100%;
+	     }
+
+
 </style>
 </head>
 <body class="pc">
@@ -296,44 +357,64 @@ p {
             </li>
           </ul>
         </nav>
-        <div class="align_rt">
-          <div class="notice">
-            <!-- Tab -->
-            <div class="tab">
-              <div class="tab_btn">
-                <ul>
-                  <li><a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a></li>
+        <ul id="tab3" style="width:785px; float:right;">
+                  <table align="center" width="100%" style="margin-top:20px;"  >
+					  <tr height="10" align="center" style="height:30px; color:white; font-weight:bold; background-color:rgb(112, 173, 71);">
+
+					  </tr>
+					<c:choose>
+					  <c:when test="${articlesList ==null }" >
+					    <tr  height="10">
+					      <td>
+					         <p align="center">
+					            <b><span style="font-size:9pt;">등록한 리뷰가 없습니다.</span></b>
+					        </p>
+					      </td>  
+					    </tr>
+					  </c:when>
+					  
+					  <c:when test="${articlesList !=null}" >
+					    <c:forEach  var="article" items="${articlesList}" varStatus="articleNum" >
+									<c:choose>
+					  					<c:when test="${article.id == member.id }" >
+										    <tr align="center" style=" height:80px; box-shadow: 3px 3px 3px #ddd;">
+											<td style="visibility: visible;" width="3%">${articleNum.count}</td>
+											<td width="8%" id="board_head">
+												<div class="member_img"><img src="${contextPath}/mem_download.do?uid=${article.uid}&memFileName=${article.memFileName}" alt="리뷰 사진"	/></div>
+											</td>
+											<td width="7%">${article.id }</td>
+											<td width="10%"><a href="${contextPath}/goods/goodsInformation.do?goods_id=${article.goods_id }">${article.goods_name }</a></td>
+											
+											<td align='left'  width="40%">
+											  <span style="padding-right:30px"></span>
+											   <c:choose>
+											      <c:when test='${article.level > 1 }'>
+											     	
+											         <c:forEach begin="1" end="${article.level }" step="1">
+											              <span style="padding-left:5px"></span>
+											         </c:forEach>
+											         <span style="font-size:12px;">[답변]</span>
+										                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+											          </c:when>
+											          <c:otherwise>
+											            
+											            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
+											          </c:otherwise>
+											        </c:choose>
+											  </td>
+										      <td width="auto">
+											     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+											     <img onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/thumbnails.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"   /><br>
+											   </td> 
+											  <td  width="15%">${article.writeDate}</td>
+											</tr>
+											</c:when>
+								    </c:choose>
+							    </c:forEach>
+					    	</c:when>
+					    </c:choose>
+					</table>
                 </ul>
-              </div>
-            </div>
-            <div class="tab_each">
-              <div class="reservation">
-                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg">
-                <div class="descript">
-                  <a1>숙소명</a1>
-                  <input type="text" class="reviewdate" value="2011. 11. 11" readonly>
-                  <a2>선택한 방 종류</a2>
-                  <a3>닉네임</a3><a3>평점 4.5</a3>
-                  <div class="reviewtxt">
-                    리뷰 내용
-                  </div>
-                </div>
-              </div>
-              <div class="reservation">
-                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/68065/381552/536f3a7ee6b4bba14b3c710645062570.jpg">
-                <div class="descript">
-                  <a1>숙소명</a1>
-                  <input type="text" class="reviewdate" value="2011. 11. 11" readonly>
-                  <a2>선택한 방 종류</a2>
-                  <a3>닉네임</a3><a3>평점 4.5</a3>
-                  <div class="reviewtxt">
-                    리뷰 내용
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 </body>

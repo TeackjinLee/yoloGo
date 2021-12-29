@@ -10,7 +10,9 @@
 
 <html>
 <head>
+<meta charset="utf-8">
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 body{
   font-size: 14px;
@@ -240,16 +242,27 @@ p {
   padding-top:4px;
 }
 
-.tab_each ul li div input{
+#detail_table input{
   width:150px;
   font-size:16px;
   border:0px;
 }
-
-.tab_each ul li .modify{
+#detail_table .dot_line{
+	font-size:18px;
+	font-weight:bold;
+	color:#777;
+	height:50px;
+}
+#detail_table .dot_line td{
+	padding-top:20px;
+}
+#detail_table .dot_line input{
+	font-weight:bold;
+	color:#777;
+}
+#detail_table .modify{
   width:130px;
   height:32px;
-  margin-top:20px;
   border : 1px solid rgba(0,0,0,0.2);
   border-radius : 4px;
   background-color: #fff;
@@ -269,20 +282,71 @@ p {
 }
 
 </style>
-<script type="text/javascript">
-$(function() {
-  $('.modify').val('수정')
-  $('.modify').click( function() {
-  var idx = $(".modify").index(this)
-    if( $(this).val() == '수정' ) {
-      $(this).replaceWith('<input type="submit" class="modify" value="변경"></input>');
-      $('.mod').eq(idx).attr("readonly", false);
-      $('.mod').eq(idx).css({'border':'1px solid rgba(0,0,0,0.2)','border-radius':'4px;', 'width':'150px', 'box-shadow': '0px 0px 1px 1px rgba(190, 190, 190, 0.6)','height':'28px','border-radius':'4px'});
-    }
-  });
-});
 
-</script>
+<script type="text/javascript">
+	
+
+	  
+	  <!--        -->
+
+
+	 
+
+	   
+	
+
+
+	function fn_modify_member_info(attribute){
+		var value;
+		// alert(id);
+		// alert("mod_type:"+mod_type);
+			var frm_mod_member=document.frm_mod_member;
+			if(attribute=='name'){
+				value=frm_mod_member.name.value;
+				//alert("name:"+value);
+			}else if(attribute=='hp'){
+				value=frm_mod_member.hp.value;
+				//alert("name:"+value);
+			}else if(attribute=='email'){
+				var email1=frm_mod_member.email1;
+				var email2=frm_mod_member.email2;
+				
+				value_email1=email1.value;
+				value_email2=email2.value;
+				value=value_email1+","+value_email2;
+				//alert(value);
+			}
+			console.log(attribute);
+		 
+			$.ajax({
+				type : "post",
+				async : false, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/mypage/modifyMyInfo.do",
+				data : {
+					attribute:attribute,
+					value:value,
+				},
+				success : function(data, textStatus) {
+					if(data.trim()=='mod_success'){
+						swal("Good job!", "회원 정보를 수정했습니다.", "success");
+					}else if(data.trim()=='failed'){
+						swal ( "Oops" ,  "다시 시도해 주세요." ,  "error");
+					}
+					
+				},
+				error : function(data, textStatus) {
+					swal ( "Oops" ,  "에러가 발생했습니다." +data  ,  "error");
+				},
+				complete : function(data, textStatus) {
+					//alert("작업을완료 했습니다");
+					
+				}
+			}); //end ajax
+	}
+
+ </script>
+
+
 </head>
 <body class="pc">
     <div class="wrap show">
@@ -314,55 +378,103 @@ $(function() {
             <div class="tab">
               <div class="tab_btn">
                 <ul>
-                  <li><a href="#">회원정보 수정</a></li>
+                  <li><strong>회원정보 수정</strong></li>
                 </ul>
               </div>
             </div>
             <div class="tab_each">
-              <ul>
-                <li>
-                  <div>
-                    <span>닉네임</span>
-                    <input type="text" class="mod" value="#" readonly>
-                  </div>
-                </li>
-                <li>
-                  <input type="button" class="modify">
-                  </input>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <div>
-                    <span>예약자 성함</span>
-                    <input type="text" class="mod" value="#" readonly>
-                  </div>
-                </li>
-                <li>
-                  <input type="button" class="modify">
-                  </input>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <div>
-                    <span>휴대폰 번호</span>
-                    <input type="text" class="mod" value="#" readonly>
-                  </div>
-                </li>
-                <li>
-                  <a>개인정보 보호를 위해 내 정보는 모두 안전하게 암호화됩니다.</a>
-                </li>
-                <li>
-                  <input type="button" class="modify">
-                  </input>
-                </li>
-              </ul>
-            </div>
-            <a href="${contextPath}/member/QuitForm.do" class="withdrawal">회원 탈퇴</a>
+            	
+            	<form name="frm_mod_member">	
+					<div id="detail_table">
+						<table>
+							<tbody>
+								<tr class="dot_line">
+									<td class="fixed_join">아이디</td>
+									<td>
+										<input style="background:white;" name="id" type="text" size="20" value="${member.id }"  disabled/>
+									</td>
+								</tr>
+								<tr class="dot_line">
+									<td class="fixed_join">이름</td>
+									<td>
+									  <input name="name" type="text" size="20" value="${member.name }" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+									  <input class="modify" type="button" value="수정하기" onClick="fn_modify_member_info('name')" />
+									</td>
+								</tr>
+								<tr class="dot_line">
+									<td class="fixed_join">휴대폰번호</td>
+									<td>
+									  <input name="hp" type="text" size="20" value="${member.hp }" />
+									</td>
+									
+								</tr>
+								<tr>
+									<td>
+									  <input class="modify" type="button" value="수정하기" onClick="fn_modify_member_info('hp')" />
+									</td>
+								</tr>
+								<tr class="dot_line">
+									<td class="fixed_join">이메일</td>
+									<td>
+									   <input style="width:auto;" type="text" name="email1" size=5 value="${member.email1 }" /> @ <input style="width:auto;" type="text" size=7 name="email2" value="${member.email2 }" /> 
+									
+									</td>
+									
+								</tr>
+								<tr>
+									<td>
+									  <input class="modify" type="button" value="수정하기" onClick="fn_modify_member_info('email')" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+						<div class="clear">
+						<br><br>
+						<table align=center>
+					</table>
+					</div>
+				
+				</form>	
+            	
+             
           </div>
         </div>
       </div>
     </div>
+
+	<form name="articleForm" method="GET"   action=""   enctype="multipart/form-data">
+    <table border="0" align="center">
+		 
+		<tr>
+			<td align="right">이미지파일 첨부:  </td>
+			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
+			<td><img  id="preview" src="#"   width=200 height=200/></td> 
+		  
+		  
+			<td align="right">이미지파일 첨부</td>
+			<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
+		
+		</tr>
+	  
+	   <tr>
+	      <td colspan="4"><div id="d_file"></div></td>
+	   </tr>
+	    <tr>
+	      <td align="right"> </td>
+	      <td colspan="2">
+	       <input type="submit" value="이미지 등록하기" />
+	      </td>
+     </tr>
+    </table>
+  </form>
+
+	<h3>내 상세 정보</h3>
+
+
 </body>
 </html>
