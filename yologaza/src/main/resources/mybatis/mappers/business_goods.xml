@@ -44,10 +44,12 @@
 	</resultMap>
 
 	<resultMap id="imageResult" type="ImageFileVO">
+		<result property="goods_uimg" column="goods_uimg" />
 	   <result property="goods_id" column="goods_id" />
 	   <result property="fileName" column="fileName" />
 	   <result property="image_id" column="image_id" />
 	   <result property="fileType" column="fileType" />
+	   <result property="auth" column="auth" />
 	</resultMap>
 	
 	<select id="selectNewGoodsList" resultMap="goodsResult"   parameterType="java.util.Map"  >
@@ -77,4 +79,89 @@
 						recNum between (#{section}-1)*100+ (#{pageNum}-1)*10+1 and (#{section}-1)*100+(#{pageNum})*10	        
     	]]>
 	</select>
+	
+	<insert id="insertNewGoods" parameterType="java.util.Map"   >
+		<selectKey resultType="String" keyProperty="goods_id" order="BEFORE">
+	    	<!-- select seq_goods_id.nextval from dual -->
+	    	select nextval('SEQ_GOODS_ID') from dual
+	    </selectKey>
+	    
+	    <![CDATA[
+		   insert into goods(
+						                goods_id, 
+						                goods_type,
+					                    goods_email1,
+					                    goods_email2,
+					                    goods_hp,
+										goods_tel1,
+										goods_tel2,
+										goods_tel3,
+										account_bank,
+										account_name,
+										account,
+										goods_homePage,
+										goods_name,
+										goods_address,
+										goods_description,
+										goods_baseImpormation,
+										goods_chargeImpormation
+										goods_checkIn,
+										goods_checkOut,
+										goods_motel_endtime,
+										goods_motel_usetime,
+										goods_price1,
+										goods_price2)
+										
+					  			values(
+					  			      #{goods_id},
+					  			      #{goods_type},
+					  			      #{goods_email1},
+					  			      #{goods_email2},
+					  			     
+					  			      #{goods_hp },
+					  			      #{goods_tel1},
+					  			      #{goods_tel2},
+					  			      #{goods_tel3},
+					  			      #{account_bank},
+					  			      
+					  			      #{account_name},
+					  			      #{account },
+					  			      #{goods_name },
+					  			      #{goods_address },
+					  			      #{goods_description },
+					  			      #{goods_baseImpormation},
+											
+									  #{goods_chargeImpormation},
+					  			      #{goods_checkIn },
+					  			      #{goods_checkOut },	
+					  			      #{goods_motel_endtime}
+					  			      #{goods_motel_usetime},
+					  			      #{goods_price1 },
+					  			      #{goods_price2 }
+					 			 )
+		]]>
+	</insert>
+	
+	<insert id="insertGoodsImageFile" parameterType="imageFileVO"   >
+		<selectKey resultType="int" keyProperty="image_id" order="BEFORE">
+	    	select nextval('SEQ_IMAGE_ID') from dual
+	    </selectKey>
+	    <![CDATA[
+		   insert into goods_img (goods_uimg,
+                                 goods_id,
+								 goods_uroom,
+								 goods_uroom_detail,
+								 fileName,
+								 fileType,
+								 auth)
+   						values(#{goods_uimg},
+   					 			 #{goods_id},
+   							 	 #{goods_uroom},
+   								 #{goods_uroom_detail},
+   								 #{fileName},
+   								 #{fileType},
+   								 #{auth} )
+		]]>
+	</insert> 
+	
 </mapper>
