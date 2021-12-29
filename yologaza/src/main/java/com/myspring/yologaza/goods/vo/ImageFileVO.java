@@ -1,15 +1,27 @@
 package com.myspring.yologaza.goods.vo;
 
 public class ImageFileVO {
+	private int goods_uimg;
 	private int goods_id;
 	private int goods_uroom;
 	private int goods_uroom_detail;
 	private String fileName;
 	private String fileType;
+	private String auth;
 	
 	public ImageFileVO() {
 		super();
 	}
+
+	public int getGoods_uimg() {
+		return goods_uimg;
+	}
+
+
+	public void setGoods_uimg(int goods_uimg) {
+		this.goods_uimg = goods_uimg;
+	}
+
 
 	public int getGoods_id() {
 		return goods_id;
@@ -49,5 +61,13 @@ public class ImageFileVO {
 
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+
+	public String getAuth() {
+		return auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 }
