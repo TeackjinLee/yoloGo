@@ -90,7 +90,7 @@ public class FileDownloadController {
 		out.close();
 	}
 	
-	private static String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	
 	@RequestMapping("/goods_download.do")
 	protected void goods_download(@RequestParam("fileName") String fileName,

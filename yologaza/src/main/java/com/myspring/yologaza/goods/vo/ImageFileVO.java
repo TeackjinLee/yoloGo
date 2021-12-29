@@ -7,7 +7,7 @@ public class ImageFileVO {
 	private int goods_uroom_detail;
 	private String fileName;
 	private String fileType;
-	private String auth;
+	private String reg_id;
 	
 	public ImageFileVO() {
 		super();
@@ -63,11 +63,12 @@ public class ImageFileVO {
 		this.fileType = fileType;
 	}
 
-	public String getAuth() {
-		return auth;
+	public String getReg_id() {
+		return reg_id;
 	}
 
-	public void setAuth(String auth) {
-		this.auth = auth;
+	public void setReg_id(String reg_id) {
+		this.reg_id = reg_id;
 	}
+
 }

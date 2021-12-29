@@ -35,8 +35,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	@Autowired
 	private BusinessGoodsService businessGoodsService;
-	@Autowired
-	private MemberVO memberVO;
+	
 	
 	@RequestMapping(value="/businessGoodsMain.do" ,method=RequestMethod.POST)
 	public ModelAndView businessGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -102,13 +101,13 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
+		String reg_id = memberVO.getId();
 		
 		
 		List<ImageFileVO> imageFileList =upload(multipartRequest);
 		if(imageFileList!= null && imageFileList.size()!=0) {
 			for(ImageFileVO imageFileVO : imageFileList) {
-				imageFileVO.setAuth(id);
+				imageFileVO.setReg_id(reg_id);
 			}
 			newGoodsMap.put("imageFileList", imageFileList);
 		}
