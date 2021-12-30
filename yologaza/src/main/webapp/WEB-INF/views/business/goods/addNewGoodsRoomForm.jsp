@@ -2,9 +2,13 @@
 	pageEncoding="utf-8"
 	isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
-<!DOCTYPE html>
-<meta charset="utf-8">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
+<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
+<%
+  request.setCharacterEncoding("UTF-8");
+%>
 <head>
 <script type="text/javascript">
   var cnt=0;
@@ -51,13 +55,17 @@
 				<div class="tab_content" id="tab1">
 				<table >
 					<tr >
+						<td >숙박번호</td>
+						<td><input name="goods_id" type="text" size="40" /></td>
+					</tr>
+					<tr >
 						<td >객실명</td>
 						<td><input name="goods_room_name" type="text" size="40" /></td>
 					</tr>
 					<tr>
 						<td >객실 유형</td>
 						<td>
-						<select name="goods_room">
+						<select name="goods_room_type">
 						  <option value="도미토리 혼성"  >도미토리(혼성)</option>
 						  <option value="도미토리(남자)" >도미토리(남자)</option>
 						  <option value="도미토리(여자)" >도미토리(여자)</option>
