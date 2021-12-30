@@ -16,6 +16,7 @@ public interface CC_Service {
 	public Announce_VO viewAnnounce(int articleNo) throws Exception;
 	public int addQuestion(Map questionMap) throws Exception;
 	public int addAnnounce(Map announceMap) throws Exception;
+	public int addFrequent(Map frequentMap) throws Exception;
 	public List<Question_VO> listQuestion(int offset, int count, String id) throws Exception;
 	public List<Question_VO> listReply(List<Question_VO> questionList) throws Exception;
 }

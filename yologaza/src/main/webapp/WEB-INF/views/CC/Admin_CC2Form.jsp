@@ -288,7 +288,7 @@ textarea{
                 </li>
               </ul>
               <div>
-                <textarea disabled>${announce.content}</textarea>
+                <textarea style="resize: none;" disabled>${announce.content}</textarea>
               </div>
             </div>
           </div>

@@ -172,6 +172,47 @@ public class CC_ControllerImpl implements CC_Controller {
 	}
 	
 	@Override
+	@RequestMapping(value={"/CC/admin_addFrequent.do"}, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addFrequent(MultipartHttpServletRequest multipartRequest,
+										HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			articleMap.put(name,value);
+		}
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		String name = memberVO.getName();
+		articleMap.put("id", id);
+		articleMap.put("name", name);
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+				cc_Service.addFrequent(articleMap);
+				message = "<script>";
+				message += " alert('새글을 추가했습니다.');";
+				message += "location.href='"+multipartRequest.getContextPath()+"/CC/admin_frequentList.do'; ";
+				message +=" </script>";
+				 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			}catch(Exception e) {
+				message = " <script>";
+				message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+				message +=" location.href='"+multipartRequest.getContextPath()+"/CC/admin_frequentForm.do'; ";
+				message +=" </script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				e.printStackTrace();
+			}
+			return resEnt;
+	}
+	
+	@Override
 	@RequestMapping(value={"/CC/addQuestion.do"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addQuestion(MultipartHttpServletRequest multipartRequest,

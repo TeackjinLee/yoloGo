@@ -312,45 +312,17 @@ p {
 
 </style>
 <script type="text/javascript">
-window.onload=()=>{
-      document.querySelector('.dropbtn').onclick = ()=>{
-        dropdown();
-      }
-      document.getElementsByClassName('type').onclick = ()=>{
-        showMenu(value);
-      };
-      dropdown = () => {
-        var v = document.querySelector('.dropdown-content');
-        var dropbtn = document.querySelector('.dropbtn')
-        v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgba(0,0,0,0.2)';
-      }
+$(function(){
+	$('.dropbtn').click(function(){
+		$(this).parent().find('.dropdown-content').toggle();
+	});
+	
+	$('.type').click(function(){
+		$(this).parent().parent().find('.dropbtn_content').text($(this).text());
+		$(this).parent('.dropdown-content').toggle();
+	});
+	});
 
-      showMenu=(value)=>{
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        dropbtn_content.innerText = value;
-        dropbtn_content.style.color = '#252525';
-      }
-    }
-    window.onclick= (e)=>{
-      if(!e.target.matches('.dropbtn')){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-    
 </script>
 </head>
 <body class="pc">
@@ -384,7 +356,7 @@ window.onload=()=>{
               <ul id="notices" class="show_list">
               <li>
                 <div class="dropdown">
-                    <button class="dropbtn" onclick="dropdown()">
+                    <button class="dropbtn">
                     <c:choose>
                     <c:when test="${auth==2}">
                       <span class="dropbtn_content">사업자 공지사항 조회</span>
@@ -395,8 +367,8 @@ window.onload=()=>{
                     </c:choose>
                     </button>
                     <div class="dropdown-content">
-                      <div class="type" onclick='showMenu(this.innerText); location.href="${contextPath}/CC/admin_announceList.do?pages=1&auth=1";'>사용자 공지사항 조회</div>
-                      <div class="type" onclick='showMenu(this.innerText); location.href="${contextPath}/CC/admin_announceList.do?pages=1&auth=2";'>사업자 공지사항 조회</div>
+                      <div class="type" onclick='location.href="${contextPath}/CC/admin_announceList.do?pages=1&auth=1";'>사용자 공지사항 조회</div>
+                      <div class="type" onclick='location.href="${contextPath}/CC/admin_announceList.do?pages=1&auth=2";'>사업자 공지사항 조회</div>
                   </div>
                   </div>
                   </li>

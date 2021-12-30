@@ -339,55 +339,22 @@ textarea{
 }
 </style>
 <script type="text/javascript">
+$(function(){
+	$('.type').click(function(){
+		var cnt = $('.type').index(this) + 1
+		$('#selAuth').val(cnt);
+	});
+	
+	$('.dropbtn').click(function(){
+		$(this).parent().find('.dropdown-content').toggle();
+	});
+	
+	$('.type').click(function(){
+		$(this).parent().parent().find('.dropbtn_content').text($(this).text());
+		$(this).parent('.dropdown-content').toggle();
+	});
+	});
 
-$('#auth1').val(1);
-$('#auth2').val(2);
-
-$(document).ready(function() {
-	$('#auth1').click(function(){
-		$('#selAuth').val(1);
-	})
-	$('#auth2').click(function(){
-		$('#selAuth').val(2);
-	})});
-window.onload=()=>{
-      document.querySelector('.dropbtn').onclick = ()=>{
-        dropdown();
-      }
-      document.getElementsByClassName('type').onclick = ()=>{
-        showMenu(value);
-      };
-      dropdown = () => {
-        var v = document.querySelector('.dropdown-content');
-        var dropbtn = document.querySelector('.dropbtn')
-        v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgba(0,0,0,0.2)';
-      }
-
-      showMenu=(value)=>{
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        dropbtn_content.innerText = value;
-        dropbtn_content.style.color = '#252525';
-      }
-    }
-    window.onclick= (e)=>{
-      if(!e.target.matches('.dropbtn')){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
     
 </script>
 </head>
@@ -447,13 +414,13 @@ window.onload=()=>{
               </div>
               <div class="div_bot">
                 <div class="dropdown">
-                    <button type="button" class="dropbtn" onclick="dropdown()">
+                    <button type="button" class="dropbtn">
                       <span class="dropbtn_content">사용자 공지사항 조회</span>
                     </button>
-                    <input type="hidden" name="auth" id="selAuth" />
+                    <input type="hidden" name="auth" id="selAuth" value="1"/>
                     <div class="dropdown-content">
-                      <div class="type" id="auth1" onclick="showMenu(this.innerText)">사용자 공지사항 조회</div>
-                      <div class="type" id="auth2" onclick="showMenu(this.innerText)">사업자 공지사항 조회</div>
+                      <div class="type">사용자 공지사항 조회</div>
+                      <div class="type">사업자 공지사항 조회</div>
                   	</div>
                   </div>
               	<input class="write" type="submit" value="공지 등록">

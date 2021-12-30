@@ -34,8 +34,13 @@
       <put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
    </definition>
    <definition name="/CC/admin_frequentList" extends="AdminLayout">
-      <put-attribute name="title" value="자주 묻는 질문" />
+      <put-attribute name="title" value="관리자 자주 묻는 질문" />
       <put-attribute name="body" value="/WEB-INF/views/CC/AdminQuestion1Form.jsp" />
+   </definition>
+   
+   <definition name="/CC/admin_frequentForm" extends="AdminLayout">
+      <put-attribute name="title" value="자주 묻는 질문 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/AdminQuestion2Form.jsp" />
    </definition>
 
    <definition name="/CC/inPersonQuestion" extends="baseLayout">
