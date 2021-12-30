@@ -24,9 +24,9 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
-	public int insertNewGoodsRoom(Map newGoodsMap) throws DataAccessException {
-		sqlSession.insert("mapper.business.goods.insertNewGoodsRoom",newGoodsMap);
-		return Integer.parseInt((String)newGoodsMap.get("goods_id"));
+	public int insertNewGoodsRoom(Map newGoodsRoomMap) throws DataAccessException {
+		sqlSession.insert("mapper.business.goods.insertNewGoodsRoom",newGoodsRoomMap);
+		return Integer.parseInt((String)newGoodsRoomMap.get("goods_uroom"));
 	}
 	
 	@Override

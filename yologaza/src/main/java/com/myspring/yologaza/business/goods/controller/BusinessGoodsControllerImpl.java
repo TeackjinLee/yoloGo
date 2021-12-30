@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -128,7 +129,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			}
 			message= "<script>";
 			message += " alert('새상품을 추가했습니다.');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsForm.do';";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do?goods_id="+goods_id+"';";
 			message +=("</script>");
 		}catch(Exception e) {
 			if(imageFileList!=null && imageFileList.size()!=0) {
@@ -148,7 +149,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
-	
+
+	@Override
 	@RequestMapping(value="/addNewGoodsRoom.do" ,method={RequestMethod.POST})
 	public ResponseEntity addNewGoodsRoom(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
@@ -162,7 +164,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			String value=multipartRequest.getParameter(name);
 			newGoodsRoomMap.put(name,value);
 		}
-		
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String reg_id = memberVO.getId();
