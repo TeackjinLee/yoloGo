@@ -42,6 +42,7 @@
 	<mvc:interceptors>
     	<mvc:interceptor>
 	      <mvc:mapping path="/*/*.do"/>
+	      <mvc:mapping path="/*/*/*.do"/> 
 	   <beans:bean class="com.myspring.yologaza.common.interceptor.ViewNameInterceptor" />
 	</mvc:interceptor>
 	</mvc:interceptors>
