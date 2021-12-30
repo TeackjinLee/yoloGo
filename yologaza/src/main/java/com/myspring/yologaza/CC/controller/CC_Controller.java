@@ -17,5 +17,8 @@ public interface CC_Controller {
 			HttpServletResponse response) throws Exception;
 	public ResponseEntity addAnnounce(MultipartHttpServletRequest multipartRequest,
 			HttpServletResponse response) throws Exception;
+	public ResponseEntity addFrequent(MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception;
 	public ModelAndView questionList(HttpServletRequest Request, HttpServletResponse response) throws Exception;
+	
 }

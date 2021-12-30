@@ -95,6 +95,13 @@
 		]]>
 	</insert>
 	
+	<insert id="insertNewFrequent" parameterType="java.util.Map">
+		<![CDATA[
+			insert into frequent_question(articleNo, title, id, name, content, auth, type)
+			values(#{articleNo}, #{title}, #{id}, #{name}, #{content}, #{auth}, #{type})
+		]]>
+	</insert>
+	
 	<select id="selectNewArticleNoQuestion" resultType="int">
 		<![CDATA[
 			SELECT IFNULL(max(articleNo), 0) + 1 from question_in_person	
@@ -103,6 +110,11 @@
 	<select id="selectNewArticleNoAnnounce" resultType="int">
 		<![CDATA[
 			SELECT IFNULL(max(articleNo), 0) + 1 from announce	
+		]]>
+	</select>
+	<select id="selectNewArticleNoFrequent" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(max(articleNo), 0) + 1 from frequent_question	
 		]]>
 	</select>
 </mapper>

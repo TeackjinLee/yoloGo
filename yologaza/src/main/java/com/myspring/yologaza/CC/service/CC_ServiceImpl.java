@@ -59,4 +59,9 @@ public class CC_ServiceImpl implements CC_Service{
 	public int addAnnounce(Map announceMap) throws Exception{
 		return cc_DAO.insertNewAnnounce(announceMap);
 	}
+	
+	@Override
+	public int addFrequent(Map frequentMap) throws Exception{
+		return cc_DAO.insertNewFrequent(frequentMap);
+	}
 }
