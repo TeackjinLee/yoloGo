@@ -12,7 +12,7 @@
 	  if(cnt == 0){
 		  $("#d_file").append("<br>"+"<input  type='file' name='goods' id='f_goods' />");	  
 	  }else{
-		  $("#d_file").append("<br>"+"<input  type='file' name='room"+cnt+"' />");
+		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' />");
 	  }
   	
   	cnt++;
@@ -63,6 +63,10 @@
 						  <option value="hanok" >한옥</option>
 						</select>
 						</td>
+					</tr>
+					<tr style= "display:none;">
+						<td >상품 작성자 번호</td>
+						<td><input name="uid" type="text" value="${member.uid}" size="40" /></td>
 					</tr>
 					<tr >
 						<td >숙소이름</td>
@@ -129,27 +133,27 @@
 							<div class="checkIn">
 								<span>체크인 가능시간</span>
 								<select name="goods_checkIn">
-									<option value="13" selected>오후 01:00</option>
-									<option value="14">오후 02:00</option>
-									<option value="15">오후 03:00</option>
-									<option value="16">오후 04:00</option>
-									<option value="17">오후 05:00</option>
-									<option value="18">오후 06:00</option>
-									<option value="19">오후 07:00</option>
-									<option value="20">오후 08:00</option>
+									<option value="13:00" selected>오후 01:00</option>
+									<option value="14:00">오후 02:00</option>
+									<option value="15:00">오후 03:00</option>
+									<option value="16:00">오후 04:00</option>
+									<option value="17:00">오후 05:00</option>
+									<option value="18:00">오후 06:00</option>
+									<option value="19:00">오후 07:00</option>
+									<option value="20:00">오후 08:00</option>
 								</select>
 							</div>
 							<div class="checkOut">
 								<span>체크아웃 가능시간</span>
 								<select name="goods_checkOut">
-									<option value="10" selected>오전 10:00</option>
-									<option value="11">오전 11:00</option>
-									<option value="12">오후 12:00</option>
-									<option value="13">오후 01:00</option>
-									<option value="14">오후 02:00</option>
-									<option value="15">오후 03:00</option>
-									<option value="16">오후 04:00</option>
-									<option value="17">오후 05:00</option>
+									<option value="10:00" selected>오전 10:00</option>
+									<option value="11:00">오전 11:00</option>
+									<option value="12:00">오후 12:00</option>
+									<option value="13:00">오후 01:00</option>
+									<option value="14:00">오후 02:00</option>
+									<option value="15:00">오후 03:00</option>
+									<option value="16:00">오후 04:00</option>
+									<option value="17:00">오후 05:00</option>
 								</select>
 							</div>
 						</td>

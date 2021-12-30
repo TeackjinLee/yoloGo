@@ -6,6 +6,7 @@ import java.sql.Time;
 public class GoodsVO {
 	// goods
 	private int goods_id;
+	private int uid;
 	private int goods_uroom;
 	private String goods_type;
 	private String goods_email1;
@@ -69,6 +70,14 @@ public class GoodsVO {
 
 	public void setGoods_id(int goods_id) {
 		this.goods_id = goods_id;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
 	public int getGoods_uroom() {

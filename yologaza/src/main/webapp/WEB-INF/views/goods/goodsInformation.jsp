@@ -15,6 +15,12 @@
 	.tab_each ul li .room-box .room-text .reserve div{
 		font-weight:bold;
 	}
+	.slider-single img{
+		width: 100%;
+	    position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
 </style>
 <!DOCTYPE html>
 <html lang="ko">
@@ -202,7 +208,7 @@
         <div class="column small-11 small-centered">
           <div class="slider slider-single">
           	<c:forEach var="item" items="${goodsMap.imageList}" >
-          		<li class="pic"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
+          		<li class="pic" style="width: 511px;height: 360px;overflow: hidden;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
 			</c:forEach>
           </div>
           <div class="slider slider-nav">
