@@ -113,11 +113,23 @@ public class CC_DAOImpl implements CC_DAO{
 		return articleNo;
 	}
 	
+	@Override
+	public int insertNewFrequent(Map frequentMap) throws DataAccessException {
+		int articleNo = selectNewArticleNoFrequent();
+		frequentMap.put("articleNo", articleNo);
+		sqlSession.insert("mapper.CC.insertNewFrequent",frequentMap);
+		return articleNo;
+	}
+	
 	private int selectNewArticleNoQuestion() throws DataAccessException {
 		return sqlSession.selectOne("mapper.CC.selectNewArticleNoQuestion");
 	}
 	
 	private int selectNewArticleNoAnnounce() throws DataAccessException {
 		return sqlSession.selectOne("mapper.CC.selectNewArticleNoAnnounce");
+	}
+	
+	private int selectNewArticleNoFrequent() throws DataAccessException {
+		return sqlSession.selectOne("mapper.CC.selectNewArticleNoFrequent");
 	}
 }
