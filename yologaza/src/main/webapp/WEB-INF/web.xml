@@ -29,7 +29,10 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>	
 	
-	
+	<error-page>
+  	<error-code>500</error-code>
+  	<location>/WEB-INF/views/Error/500error.jsp</location>
+    </error-page>
 	
 	<filter>
 	<filter-name>encodingFilter</filter-name>

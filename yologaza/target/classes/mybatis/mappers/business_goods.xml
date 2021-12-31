@@ -207,7 +207,6 @@
 		   insert into goods_img (goods_uimg,
                                  goods_id,
 								 goods_uroom,
-								 goods_uroom_detail,
 								 reg_id,
 								 fileName,
 								 fileType
@@ -215,7 +214,6 @@
    						values(#{goods_uimg},
    					 			 #{goods_id},
    					 			 #{goods_uroom},
-   								 #{goods_uroom_detail},
    								 #{reg_id},
    								 #{fileName},
    								 #{fileType}

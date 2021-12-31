@@ -32,13 +32,13 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	
 	@Override
 	public int addNewGoodsRoom(Map newGoodsRoomMap) throws Exception{
-		int goods_uroom = businessGoodsDAO.insertNewGoodsRoom(newGoodsRoomMap);
+		int goods_id = businessGoodsDAO.insertNewGoodsRoom(newGoodsRoomMap);
 		ArrayList<ImageFileVO> imageFileList = (ArrayList)newGoodsRoomMap.get("imageFileList");
 		for(ImageFileVO imageFileVO : imageFileList) {
-			imageFileVO.setGoods_uroom(goods_uroom);
+			imageFileVO.setGoods_id(goods_id);
 		}
 		businessGoodsDAO.insertGoodsRoomImageFile(imageFileList);
-		return goods_uroom;
+		return goods_id;
 	}
 	
 	@Override

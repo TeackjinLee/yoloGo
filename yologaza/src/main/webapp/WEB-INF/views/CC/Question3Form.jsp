@@ -306,10 +306,6 @@ p {
   background-color: rgb(226, 226, 226);
 }
 
-.dropdown-content.show{
-  display : block;
-}
-
 .submit{
   background:rgb(112,173,71);
   color:#fff;
@@ -325,63 +321,29 @@ p {
 </style>
 <script type="text/javascript">
 
-$(document).ready(function() {
+$(function(){
 	$('.type').click(function(){
-		$('#selType').val($('.dropbtn_content').text());
-	})});
-	
-function check(){
-	  if(questionForm.content.value == ""){
-		  alert("문의내용을 입력해 주세요")
-		  return false;
-	  }else if(questionForm.type.value == ""){
-		  alert("문의유형을 선택해 주세요")
-		  return false;
-	  }else return true;
-	}
-	
-window.onload=()=>{
-      document.querySelector('.dropbtn').onclick = ()=>{
-        dropdown();
-      }
-      document.getElementsByClassName('type').onclick = ()=>{
-        showMenu(value);
-      };
-      dropdown = () => {
-        var v = document.querySelector('.dropdown-content');
-        var dropbtn = document.querySelector('.dropbtn')
-        v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgba(0,0,0,0.2)';
-      }
+		$('#selType').val($(this).text());
+	});
 
-      showMenu=(value)=>{
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
+	$('.dropbtn').click(function(){
+		$(this).parent().find('.dropdown-content').toggle();
+	});
 
-        dropbtn_content.innerText = value;
-        dropbtn_content.style.color = '#252525';
-      }
-    }
-    window.onclick= (e)=>{
-      if(!e.target.matches('.dropbtn')){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
+	$('.type').click(function(){
+		$(this).parent().parent().find('.dropbtn_content').text($(this).text());
+		$(this).parent('.dropdown-content').toggle();
+	});
 
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn = document.querySelector('.dropbtn');
+});
 
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
+
+
+
 </script>
 </head>
 <body class="pc">
-  <form name="questionForm" method="post" action="${contextPath}/CC/addQuestion.do" enctype="multipart/form-data" onsubmit="return check(${isLogOn})">
+  <form name="questionForm" method="post" action="${contextPath}/CC/addQuestion.do" enctype="multipart/form-data" onsubmit="return check()">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
@@ -423,15 +385,15 @@ window.onload=()=>{
                 </li>
                 <li>
                   <div class="dropdown">
-                    <button type="button" class="dropbtn" onclick="dropdown()">
+                    <button type="button" class="dropbtn">
                       <span class="dropbtn_content">문의 유형을 선택하세요</span>
                     </button>
                     <input type="hidden" name="type" id="selType" />
                     <div class="dropdown-content">
-                      <div class="type" onclick="showMenu(this.innerText)">이벤트</div>
-                      <div class="type" onclick="showMenu(this.innerText)">예약/결제</div>
-                      <div class="type" onclick="showMenu(this.innerText)">취소/환불</div>
-                      <div class="type" onclick="showMenu(this.innerText)">기타</div>
+                      <div class="type">이벤트</div>
+                      <div class="type">예약/결제</div>
+                      <div class="type">취소/환불</div>
+                      <div class="type">기타</div>
                     </div>
                   </div>
                 </li>

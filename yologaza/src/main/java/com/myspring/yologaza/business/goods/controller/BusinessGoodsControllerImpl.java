@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.business.goods.service.BusinessGoodsService;
 import com.myspring.yologaza.common.base.BaseController;
+import com.myspring.yologaza.goods.service.GoodsService;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.goods.vo.ImageFileVO;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -36,7 +37,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	@Autowired
 	private BusinessGoodsService businessGoodsService;
-	
+	@Autowired
+	private GoodsService goodsService;
 	
 	@RequestMapping(value="/businessGoodsMain.do" ,method=RequestMethod.POST)
 	public ModelAndView businessGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -152,7 +154,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 
 	@Override
 	@RequestMapping(value="/addNewGoodsRoom.do" ,method={RequestMethod.POST})
-	public ResponseEntity addNewGoodsRoom(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+	public ResponseEntity addNewGoodsRoom(MultipartHttpServletRequest multipartRequest, 
+											 HttpServletResponse response)  throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String fileName=null;
@@ -193,7 +196,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			}
 			message= "<script>";
 			message += " alert('새상품을 추가했습니다.');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do';";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do?goods_id="+goods_id+"';";
 			message +=("</script>");
 		}catch(Exception e) {
 			if(imageFileList!=null && imageFileList.size()!=0) {
@@ -203,13 +206,13 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 					srcFile.delete();
 				}
 			}
-			
 			message= "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do';";
 			message +=("</script>");
 			e.printStackTrace();
 		}
+		
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}

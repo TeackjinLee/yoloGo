@@ -307,6 +307,14 @@ p {
   color:#fff;
 }
 </style>
+<script type="text/javascript">
+	var msg = '${msg}';
+	var url = '${url}';
+	if(msg != '' && msg != null && url != '' && url != null){
+		alert(msg);
+		document.location.href = url;
+	}
+</script>
 </head>
 <body class="pc">
     <div class="wrap show">
@@ -344,7 +352,9 @@ p {
             <div class="tab_each">
               <ul id="tab1">
               <c:forEach var="question" items="${questionList}" varStatus="stat">
-              <c:forEach var="reply" items="${replyList}" >
+              	<c:choose>
+              	<c:when test="${!empty replyList}">
+              	<c:forEach var="reply" items="${replyList}" >
                 <li>
                   <input type="checkbox" class="question" id="que-${stat.count}">
                   <label for="que-${stat.count}">
@@ -368,7 +378,24 @@ p {
                   <div class="answer">[답변] 작성일 ${reply.writeDate}<br>${reply.content}</div>
                   </c:if>
                 </li>
-              </c:forEach>
+             	</c:forEach>
+             	</c:when>
+             	<c:otherwise>
+             	<li>
+                  <input type="checkbox" class="question" id="que-${stat.count}">
+                  <label for="que-${stat.count}">
+                  <c:if test="${fn:length(question.content) <= 10}">
+                    ${question.type} / ${question.content}
+                  </c:if>
+                  <c:if test="${fn:length(question.content) > 10}">
+                    ${question.type} / ${fn:substring(question.content,0,10)}...
+                  </c:if>
+                  </label>
+                  	<input type="text" class="ans" value="답변 대기" readonly>
+                  <div class="ask">[문의] 작성일 ${question.writeDate}<br>${question.content}</div>
+                </li>	
+             	</c:otherwise>
+             	</c:choose>
               </c:forEach>
               </ul>
             </div>
