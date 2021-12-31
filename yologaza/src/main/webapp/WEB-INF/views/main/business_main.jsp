@@ -24,7 +24,7 @@
 	      <div class="text-box">
 	        <h3>숙소관리 메뉴에서 객실을 등록해 주세요.</h3>
 	      </div>
-	      <button type="button" onclick="location.href='#' "><h3>숙소 등록하기 ></h3> </button>
+	      <button type="button" onclick="location.href='${contextPath}/business/goods/addNewGoodsForm.do' "><h3>숙소 등록하기 ></h3> </button>
 	    </div>
 	    <div class="main_box">
 	      <div class="img_box">

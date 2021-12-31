@@ -29,5 +29,10 @@
        <put-attribute name="title" value="새 상품 추가 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/business/goods/addNewGoodsForm.jsp" />
     </definition>
+    
+    <definition name="/business/goods/addNewGoodsRoomForm" extends="BusinessLayout">
+       <put-attribute name="title" value="새 상품 추가 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/addNewGoodsRoomForm.jsp" />
+    </definition>
 
 </tiles-definitions>

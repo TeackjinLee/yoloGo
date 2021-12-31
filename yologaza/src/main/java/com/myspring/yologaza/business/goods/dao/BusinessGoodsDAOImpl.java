@@ -24,10 +24,16 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
+	public int insertNewGoodsRoom(Map newGoodsRoomMap) throws DataAccessException {
+		sqlSession.insert("mapper.business.goods.insertNewGoodsRoom",newGoodsRoomMap);
+		return Integer.parseInt((String)newGoodsRoomMap.get("goods_id"));
+	}
+	
+	@Override
 	public void insertGoodsImageFile(List fileList)  throws DataAccessException {
 		for(int i=0; i<fileList.size();i++){
 			ImageFileVO imageFileVO=(ImageFileVO)fileList.get(i);
-			sqlSession.insert("mapper.admin.goods.insertGoodsImageFile",imageFileVO);
+			sqlSession.insert("mapper.business.goods.insertGoodsImageFile",imageFileVO);
 		}
 	}
 	
@@ -35,6 +41,14 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	public List<GoodsVO>selectNewGoodsList(Map condMap) throws DataAccessException {
 		ArrayList goodsList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectNewGoodsList", condMap);
 		return goodsList;
+	}
+	
+	@Override
+	public void insertGoodsRoomImageFile(List fileList)  throws DataAccessException {
+		for(int i=0; i<fileList.size();i++){
+			ImageFileVO imageFileVO=(ImageFileVO)fileList.get(i);
+			sqlSession.insert("mapper.business.goods.insertGoodsRoomImageFile",imageFileVO);
+		}
 	}
 	
 }
