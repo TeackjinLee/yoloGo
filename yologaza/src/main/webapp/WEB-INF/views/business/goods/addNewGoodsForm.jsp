@@ -64,9 +64,9 @@
 						</select>
 						</td>
 					</tr>
-					<tr style= "display:none;">
+					<tr>
 						<td >상품 작성자 번호</td>
-						<td><input name="uid" type="text" value="${member.uid}" size="40" /></td>
+						<td><input name="uid" type="text" value="${member.uid}" size="40" readonly/></td>
 					</tr>
 					<tr >
 						<td >숙소이름</td>

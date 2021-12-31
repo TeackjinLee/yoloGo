@@ -9,9 +9,15 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+<%
+
+String goods_id = request.getParameter("goods_id");
+System.out.println("goods_id :"+goods_id);
+
+%>
 <head>
 <script type="text/javascript">
-  var cnt=0;
+  var cnt=0;goods_uroom_detail
   function fn_addFile(){
 	  if(cnt == 0){
 		  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");	  
@@ -25,7 +31,7 @@
   
   function fn_add_new_room(obj){
 		 fileName = $('#f_room').val();
-		 if(fileName != null && fileName != undefined){
+		 if(fileName != null && fileName != ""){
 			 obj.submit();
 		 }else{
 			 alert("메인 이미지는 반드시 첨부해야 합니다.");
@@ -54,13 +60,10 @@
 			<div class="tab_container">
 				<div class="tab_content" id="tab1">
 				<table >
+					
 					<tr >
 						<td >숙박번호</td>
-						<td><input name="goods_id" type="text" size="40" /></td>
-					</tr>
-					<tr >
-						<td >객실명</td>
-						<td><input name="goods_room_name" type="text" size="40" /></td>
+						<td><input name="goods_id" value="<%=goods_id %>" type="text" size="40" readonly/></td>
 					</tr>
 					<tr>
 						<td >객실 유형</td>
