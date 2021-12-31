@@ -464,7 +464,7 @@ for(var i = 0; i < tabList.length; i++){
         	<ul>
         	<li>
         	<div class="dropdown">
-            	<button class="dropbtn" onclick=>
+            	<button class="dropbtn">
                 	<c:choose>
                     <c:when test="${auth==2}">
                       <span class="dropbtn_content">사업자 공지사항 조회</span>

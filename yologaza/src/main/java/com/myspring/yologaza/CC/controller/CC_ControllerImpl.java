@@ -78,6 +78,8 @@ public class CC_ControllerImpl implements CC_Controller {
 	
 	@RequestMapping(value= "/CC/inPersonQuestion.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView questionList(HttpServletRequest Request, HttpServletResponse response) throws Exception {
+		String viewName = (String)Request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		Pagination pagination = new Pagination();
 		pagination.setPage(1);
 		pagination.setCountList(5);
@@ -89,15 +91,18 @@ public class CC_ControllerImpl implements CC_Controller {
 		pagination.Paging();
 		HttpSession session = Request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
-		String viewName = (String)Request.getAttribute("viewName");
-		List<Question_VO> questionList = cc_Service.listQuestion(offset, pagination.getCountList(), id);
-		List<Question_VO> replyList = cc_Service.listReply(questionList);
-		
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("questionList", questionList);
-		mav.addObject(pagination);
-		mav.addObject("replyList", replyList);
+		if(memberVO != null) {
+			String id = memberVO.getId();
+			List<Question_VO> questionList = cc_Service.listQuestion(offset, pagination.getCountList(), id);
+			List<Question_VO> replyList = cc_Service.listReply(questionList);
+			
+			mav.addObject("questionList", questionList);
+			mav.addObject(pagination);
+			mav.addObject("replyList", replyList);
+		}else {
+			mav.addObject("msg", "로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+			mav.addObject("url", "/yologaza/member/loginForm.do");
+		}
 		return mav;
 	}
 	

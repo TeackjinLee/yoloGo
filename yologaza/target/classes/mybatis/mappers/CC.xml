@@ -61,24 +61,18 @@
   <select id="selectInPersonQuestion" resultMap="questionResult">
     <![CDATA[
 		
-         select SQL_CALC_FOUND_ROWS * from question_in_person	where id = #{id} order by writeDate asc limit #{offset},#{count}
+         select SQL_CALC_FOUND_ROWS * from question_in_person	where id = #{id} order by writeDate desc limit #{offset},#{count}
     ]]>
   </select>
   <select id="countInPersonQuestion" resultType="int">
   	select FOUND_ROWS();
-  </select>
-  <select id="selectArticleNo" resultMap="questionResult">
-    <![CDATA[
-		
-         select articleNo from question_in_person	where id = #{id} order by writeDate asc limit #{offset},#{count}
-    ]]>
   </select>
   <select id="selectInPersonReply" resultType="question_VO">
   		select * from question_in_person where parentNo in
          <foreach collection="list" item="item" open="(" close=")" separator=",">
              		 #{item.articleNo}
          </foreach>
-         order by writeDate asc
+         order by writeDate desc
   </select>
   
   <insert id="insertNewQuestion" parameterType="java.util.Map">
