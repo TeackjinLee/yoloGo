@@ -63,7 +63,7 @@
 						          goods_name,
 						          goods_address,
 						          goods_checkIn,
-			                      goods_checkIn,
+			                      goods_checkOut,
 						          date_format(goods_creDate,'%Y-%m-%d') as goods_creDate
 						       from (
 						             select  goods_id,
@@ -177,8 +177,6 @@
 		   insert into goods_detail(
 						                goods_uroom, 
 						                goods_id,
-					                    goods_room_num,
-					                    goods_room_name,
 										goods_room_type,
 										goods_capacity,
 										goods_room_price1,
@@ -188,8 +186,6 @@
 					  			values(
 					  			      #{goods_uroom},
 					  			      #{goods_id},
-					  			      #{goods_room_num},
-					  			      #{goods_room_name},
 					  			      #{goods_room_type},
 					  			      #{goods_capacity},
 					  			      #{goods_room_price1},

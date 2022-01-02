@@ -88,7 +88,7 @@
 	<select id="selectGoodsDetailRoom" resultMap="goodsResult"  parameterType="String"  >
 	    <![CDATA[              
 				select t.* from
-				(select d.*,i.fileName,
+				(select d.*,i.fileName,i.fileType,
 					hour(g.goods_checkIn) 
 					goods_checkIn, 
 					hour(g.goods_checkOut) 
@@ -113,7 +113,7 @@
 					where g.goods_uroom=d.goods_uroom 
 				    and d.fileType like 'room%'
 				    and d.goods_id=#{goods_id}
-				    and g.goods_room_num=#{goods_room_num}
+				    and g.goods_uroom
 				    ) t	
     	]]>
 	</select>

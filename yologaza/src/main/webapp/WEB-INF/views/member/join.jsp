@@ -201,7 +201,7 @@ function fn_overlapped(){
                     }
                     
                   //휴대폰 인증
-                    if($('#phoneDoubleChk').val()=="" || $('#phoneDoubleChk').val()=="false"){
+                    if($('#phoneDoubleChk').val()== null || $('#phoneDoubleChk').val()=="" || $('#phoneDoubleChk').val()=="false"){
                     	swal ( "Oops" ,  "휴대폰 인증을 확인해 주시기 바랍니다." ,  "error" );
                     	uphoneDoubleChk.removeClass("has-success");
                         uphoneDoubleChk.addClass("has-error");
@@ -276,21 +276,7 @@ function fn_overlapped(){
 				
 				<tr class="dot_line">
 					<td class="fixed_join">이메일(e-mail)</td>
-					<td><input size="10px"   type="text" id="email1" name="email1" style="width:33%;"/> @ <input  size="10px"  type="text"name="email2" style="width:33%;"/> 
-						  <select id="email2" name="email2" onChange=""	title="직접입력" style="width:27%; height:30px; float:right; border:1px solid #d8d8d8;">
-									<option value="">직접입력</option>
-									<option value="hanmail.net">hanmail.net</option>
-									<option value="naver.com">naver.com</option>
-									<option value="yahoo.co.kr">yahoo.co.kr</option>
-									<option value="hotmail.com">hotmail.com</option>
-									<option value="paran.com">paran.com</option>
-									<option value="nate.com">nate.com</option>
-									<option value="google.com">google.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="empal.com">empal.com</option>
-									<option value="korea.com">korea.com</option>
-									<option value="freechal.com">freechal.com</option>
-							</select></td>
+					<td><input size="10px"   type="text" id="email1" name="email1" style="width:45%;"/> @ <input  size="10px"  type="text"name="email2" style="width:45%;"/> </td>
 				</tr>
 				<tr >
 					<td style="text-align: center;">
@@ -339,7 +325,7 @@ function fn_overlapped(){
 		
 		//휴대폰 인증번호 대조
 		$("#phoneChk2").click(function(){ 
-			if($("#phone2").val() == code2){ 
+			if($("#phone2").val() == code2 && $("#phone2").val() != ""){ 
 				$(".successPhoneChk").text("인증번호가 일치합니다."); 
 				$(".successPhoneChk").css("color","green"); 
 				$("#phoneDoubleChk").val("true"); 

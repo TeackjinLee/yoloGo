@@ -4,8 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="goods"  value="${goodsMap.goodsVO}"  />
-<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -20,18 +19,17 @@ System.out.println("goods_id :"+goods_id);
   var cnt=0;goods_uroom_detail
   function fn_addFile(){
 	  if(cnt == 0){
-		  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");	  
+		  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");
 	  }else{
 		  $("#d_file").append("<br>"+"<input  type='file' name='room"+cnt+"' />");
 	  }
-  	
   	cnt++;
   }
   
   
   function fn_add_new_room(obj){
 		 fileName = $('#f_room').val();
-		 if(fileName != null && fileName != ""){
+		 if(fileName != null && fileName != undefined){
 			 obj.submit();
 		 }else{
 			 alert("메인 이미지는 반드시 첨부해야 합니다.");
@@ -43,7 +41,7 @@ System.out.println("goods_id :"+goods_id);
 </head>
 
 <body>
-	<form action="${contextPath}/business/goods/addNewGoodsRoom.do" method="post"  enctype="multipart/form-data">
+	<form action="${contextPath}/business/goods/addNewGoodsRoom.do?goods_id=<%=goods_id%>" method="post"  enctype="multipart/form-data">
 	<h1>새상품 등록창</h1>
 	<div class="tab_container">
 		<!-- 내용 들어 가는 곳 -->
@@ -60,10 +58,9 @@ System.out.println("goods_id :"+goods_id);
 			<div class="tab_container">
 				<div class="tab_content" id="tab1">
 				<table >
-					
 					<tr >
 						<td >숙박번호</td>
-						<td><input name="goods_id" value="<%=goods_id %>" type="text" size="40" readonly/></td>
+						<td><input name="goods_id" value="<%=goods_id%>" type="text" size="40" readonly/></td>
 					</tr>
 					<tr>
 						<td >객실 유형</td>
@@ -172,12 +169,12 @@ System.out.println("goods_id :"+goods_id);
 		<div class="clear"></div>
 	<center>	
 		 <table>
-		 <tr>
-				  <td align=center>
-					<!--   <input  type="submit" value="상품 등록하기"> --> 
-					  <input  type="button" value="상품 등록하기"  onClick="fn_add_new_room(this.form)">
-				  </td>
-				</tr>
+	 		<tr>
+			  <td align=center>
+				<!--   <input  type="submit" value="상품 등록하기"> --> 
+				  <input  type="button" value="상품 등록하기"  onClick="fn_add_new_room(this.form)">
+			  </td>
+			</tr>
 		 </table>
 	</center>	 
 	</div>

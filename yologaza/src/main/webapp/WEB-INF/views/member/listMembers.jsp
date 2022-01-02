@@ -40,7 +40,7 @@
       <td>${member.email1}@${member.email2}</td>
       <td>${member.auth}</td>
       <td>${member.joinDate}</td>
-      <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
+      <td><a href="${contextPath}/admin/member/removeAdminMember.do?id=${member.id }">삭제하기</a></td>
     </tr>
   </c:forEach>   
 </table>

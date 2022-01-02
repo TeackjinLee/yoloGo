@@ -25,10 +25,16 @@
       <result property="joinDate" column="joinDate" />
    </resultMap> -->
 
-
+	<!-- 관리자 회원 관리 -->
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from member	order by joinDate asc 	
+         select * from member	order by uid asc	
+      ]]>
+	</select>
+	<!-- 관리자 탈퇴 회원 관리 -->
+	<select id="selectAllDeleteMemberList" resultMap="memResult">
+      <![CDATA[
+         select * from deletemember	order by uid asc	
       ]]>
 	</select>
 	
@@ -125,6 +131,7 @@
 	   delete from  member
 	   where
 	   id=#{id}
+	   
 	]]>      
   </delete>
 	
@@ -206,7 +213,7 @@
 	<select id="loginById" resultType="memberVO"  parameterType="memberVO" >
       <![CDATA[
          select * from member
-         where id = #{id} and pwd = #{pwd} and (auth="1" or auth="2" or auth="3")
+         where id = #{id} and pwd = #{pwd}
       ]]>
     </select>
     
@@ -214,6 +221,13 @@
       <![CDATA[
          select * from member
          where id = #{id} and pwd = #{pwd} and (auth="2" or auth="3")
+      ]]>
+    </select>
+    
+    <select id="AdminloginById" resultType="memberVO"  parameterType="memberVO" >
+      <![CDATA[
+         select * from member
+         where id = #{id} and pwd = #{pwd} and auth="3"
       ]]>
     </select>
     

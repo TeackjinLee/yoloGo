@@ -11,13 +11,15 @@
    </definition>
 
    <definition name="admin_main" extends="AdminLayout">
-      <put-attribute name="title" value="비지니스메인페이지" />
+      <put-attribute name="title" value="관리자메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/main/admin_main.jsp" />
    </definition>
    
-   <definition name="/adminMember/admin_loginForm" extends="AdminLayout">
+   <definition name="/admin/member/admin_loginForm" extends="AdminLayout">
       <put-attribute name="title" value="비지니스메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/admin/member/admin_loginForm.jsp" />
    </definition>
+   
+   
 
 </tiles-definitions>

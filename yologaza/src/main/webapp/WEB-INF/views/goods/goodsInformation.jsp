@@ -213,7 +213,7 @@
           </div>
           <div class="slider slider-nav">
             <c:forEach var="item" items="${goodsMap.imageList}" >
-          		<li class="pic"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
+          		<li class="pic" style="width: 158px;height: 95px;overflow: hidden;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
 			</c:forEach>
           </div>
         </div>
@@ -265,7 +265,9 @@
 							<li class="room on">
 							  <div class="room-box">
 							    <div class="room-select">
-							      <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
+							      <div class="room_img_box" style="width: 40%;overflow: hidden;">
+							      	<img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="룸 사진">
+							      </div>
 							      <div class="room-text cell-r">
 							        <div class="reserve cell">
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
@@ -297,9 +299,13 @@
 							    <div class="room-box-wrap">
 							      <div class="room-img-content slider-wrap">
 							        <div class="room-pic-box" id="room-pic">
-							        	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
-							        		<div class="content cell" style="width: 960px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
-								</c:forEach>
+							        	<c:forEach var="itemRoom" items="${goodsMap.imageListRoom}" >
+							        		<c:choose>
+								        		<c:when test="${item.goods_uroom == itemRoom.goods_uroom}">
+								        			<div class="content cell" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;"><img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지"></div>
+												</c:when>
+											</c:choose>
+										</c:forEach>
 							        </div>
 							      </div>
 							      <div class="page-num row">
@@ -316,7 +322,9 @@
 							<li class="room on">
 							  <div class="room-box">
 							    <div class="room-select">
-							      <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="룸 사진">
+							      <div class="room_img_box" style="width: 40%;overflow: hidden;">
+							      	<img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="룸 사진">
+							      </div>
 							      <div class="room-text cell-r">
 							        
 							        <div class="reserve cell" style="width:100%; border-right:none;">
@@ -336,8 +344,12 @@
 							    <div class="room-box-wrap">
 							      <div class="room-img-content slider-wrap">
 							        <div class="room-pic-box" id="room-pic" >
-							        	<c:forEach var="item" items="${goodsMap.imageListRoom}" >
-							        		<div class="content cell" style="width:960px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="객실 이미지"></div>
+							        	<c:forEach var="itemRoom" items="${goodsMap.imageListRoom}" >
+							        		<c:choose>
+								        		<c:when test="${item.goods_uroom == itemRoom.goods_uroom}">
+								        			<div class="content cell" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;"><img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지"></div>
+												</c:when>
+											</c:choose>
 										</c:forEach>
 							        </div>
 							      </div>
