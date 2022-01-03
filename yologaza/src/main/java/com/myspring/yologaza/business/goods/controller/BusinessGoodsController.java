@@ -13,7 +13,7 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 public interface BusinessGoodsController {
 	public ResponseEntity addNewGoods(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception;
 
-	public ResponseEntity addNewGoodsRoom(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception;
+	public ResponseEntity addNewGoodsRoom(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception;
 
 }

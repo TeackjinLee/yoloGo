@@ -52,7 +52,6 @@
 	          <tr align="center" class="column">
 	            <td ><b>번호</b></td>
 				<td ><b>아이디</b></td>
-				<td><b>비밀번호</b></td>
 				<td><b>이름</b></td>
 				<td><b>연락쳐</b></td>
 				<td><b>이메일</b></td>
@@ -65,7 +64,6 @@
 	            <tr align="center" class="data">
 	              <td>${member.uid}</td>
 			      <td>${member.id}</td>
-			      <td>${member.pwd}</td>
 			      <td>${member.name}</td>
 			      <td>${member.hp}</td>
 			      <td>${member.email1}@${member.email2}</td>

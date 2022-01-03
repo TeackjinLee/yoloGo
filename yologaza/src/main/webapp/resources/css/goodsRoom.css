@@ -234,7 +234,7 @@ a {
   position: relative;
 }
 .tab_each #tab1 .room .room-box .room-select img{
-  width:40%;
+  width:100%;
   cursor: pointer;
 }
 .tab_each #tab1 .room .room-box .room-text-box{
@@ -356,6 +356,7 @@ a {
   /* ·ë ¼³¸í */
 .tab_each ul li .room-box .room-select{
   display:flex;
+  height:300PX;
 }
 .tab_each ul li .room-box .room-text{
   display:block;
@@ -441,7 +442,7 @@ a {
   width: 70px;
   height: 30px;
   position: absolute;
-  bottom: 120px;
+  bottom: 75px;
   left: 50%;
   transform: translatex(-50%);
   z-index: 9;

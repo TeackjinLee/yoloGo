@@ -81,17 +81,6 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
-		
-	@Override
-	@RequestMapping(value="/member/removeMember.do", method=RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id,
-							HttpServletRequest request, 
-							HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/admin_main.do");
-		return mav;
-	}
 	
 	@RequestMapping(value = {"/member/loginForm.do", "/member/logoutForm.do"}, method= {RequestMethod.POST, RequestMethod.GET} )
 	//@RequestMapping(value="/member/*Form.do", method=RequestMethod.GET)

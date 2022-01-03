@@ -36,6 +36,8 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	@Autowired
 	private static final String MEMBER_IMAGE_REPO = "C:\\member\\member_image";
 	@Autowired
+	private static final String ROOM_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	@Autowired
 	BoardService boardService;
 	@Autowired
 	ArticleVO articleVO;

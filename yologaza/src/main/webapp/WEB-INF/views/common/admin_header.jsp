@@ -25,11 +25,11 @@
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
 	      			<li class = cell-r><a href="#">마이페이지</a></li>
-	        		<li class = cell-r><a href="${contextPath}/adminMember/logout.do">로그아웃</a></li>
+	        		<li class = cell-r><a href="${contextPath}/admin/member/logout.do">로그아웃</a></li>
 	      		</c:when>
 	      		<c:otherwise>
-	      			<li class = cell-r><a href="${contextPath}/adminMember/memberForm.do">회원가입</a></li>
-	        		<li class = cell-r><a href="${contextPath}/adminMember/admin_loginForm.do">로그인</a></li>
+	      			<li class = cell-r><a href="${contextPath}/admin/member/memberForm.do">회원가입</a></li>
+	        		<li class = cell-r><a href="${contextPath}/admin/member/admin_loginForm.do">로그인</a></li>
 	      		</c:otherwise>
 	      	</c:choose>
 	      </ul>
@@ -54,8 +54,8 @@
 	              <div>고객 및 문의 관리</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="#">전체 회원 목록</a></li>
-	                  <li><a href="#">탈퇴 회원 목록</a></li>
+	                  <li><a href="${contextPath}/admin/member/listMember.do">전체 회원 목록</a></li>
+	                  <li><a href="${contextPath}/admin/member/deleteMemberList.do">탈퇴 회원 목록</a></li>
 	                </ul>
 	              </div>
 	            </li>

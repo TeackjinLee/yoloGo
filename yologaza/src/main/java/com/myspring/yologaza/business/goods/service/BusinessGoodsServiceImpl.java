@@ -1,6 +1,7 @@
 package com.myspring.yologaza.business.goods.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +33,14 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	
 	@Override
 	public int addNewGoodsRoom(Map newGoodsRoomMap) throws Exception{
-		int goods_id = businessGoodsDAO.insertNewGoodsRoom(newGoodsRoomMap);
+		
+		int goods_uroom = businessGoodsDAO.insertNewGoodsRoom(newGoodsRoomMap);
 		ArrayList<ImageFileVO> imageFileList = (ArrayList)newGoodsRoomMap.get("imageFileList");
 		for(ImageFileVO imageFileVO : imageFileList) {
-			imageFileVO.setGoods_id(goods_id);
+			imageFileVO.setGoods_uroom(goods_uroom);
 		}
 		businessGoodsDAO.insertGoodsRoomImageFile(imageFileList);
-		return goods_id;
+		return goods_uroom;
 	}
 	
 	@Override

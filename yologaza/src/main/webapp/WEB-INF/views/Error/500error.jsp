@@ -18,6 +18,5 @@
 <script>swal ( "500" ,  "error" ,  "error" );</script>
 </head>
 <body>
-	
 </body>
 </html>

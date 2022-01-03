@@ -1,0 +1,25 @@
+package com.myspring.yologaza.admin.member.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.DataAccessException;
+
+
+import com.myspring.yologaza.member.vo.MemberVO;
+
+public interface AdminMemberDAO {
+	public List selectAllMemberList() throws DataAccessException;
+	public List selectAllDeleteMemberList() throws DataAccessException;
+	public int insertMember(MemberVO memberVO) throws DataAccessException;
+	public int deleteMember(String id) throws DataAccessException;
+	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
+	public String selectOverlappedID(String id) throws DataAccessException;
+	public List<MemberVO> findId(String hp)throws Exception;
+	public int findIdCheck(String hp)throws Exception;
+	
+	public int findPwCheck(MemberVO memberVO)throws Exception; 
+	public void findPw(String hp,String id,String pwd)throws Exception;
+	
+}
