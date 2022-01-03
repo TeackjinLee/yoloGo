@@ -38,7 +38,7 @@
   <select id="selectAnnounceList" resultMap="announceResult">
     <![CDATA[
 		
-         select SQL_CALC_FOUND_ROWS * from announce	where auth = #{auth} order by writeDate asc limit #{offset},#{count}
+         select SQL_CALC_FOUND_ROWS * from announce	where auth = #{auth} order by articleNo desc limit #{offset},#{count}
     ]]>
   </select>
   <select id="countAnnounce" resultType="int">
@@ -54,14 +54,14 @@
   <select id="selectFrequentList" resultMap="frequentResult">
     <![CDATA[
 		
-         select * from frequent_question where auth = #{auth}	order by writeDate asc 
+         select * from frequent_question where auth = #{auth}	order by articleNo asc 
     ]]>
   </select>
   
   <select id="selectInPersonQuestion" resultMap="questionResult">
     <![CDATA[
 		
-         select SQL_CALC_FOUND_ROWS * from question_in_person	where id = #{id} order by writeDate desc limit #{offset},#{count}
+         select SQL_CALC_FOUND_ROWS * from question_in_person	where id = #{id} order by articleNo desc limit #{offset},#{count}
     ]]>
   </select>
   <select id="countInPersonQuestion" resultType="int">
@@ -72,7 +72,7 @@
          <foreach collection="list" item="item" open="(" close=")" separator=",">
              		 #{item.articleNo}
          </foreach>
-         order by writeDate desc
+         order by articleNo desc
   </select>
   
   <insert id="insertNewQuestion" parameterType="java.util.Map">
