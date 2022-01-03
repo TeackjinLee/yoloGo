@@ -314,10 +314,10 @@ for(var i = 0; i < tabList.length; i++){
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_CCForm.do">공지사항</a>
+              <a href="${contextPath}/CC/business_announceList.do">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_Question1Form.do" class="active">자주묻는 질문</a>
+              <a href="${contextPath}/CC/business_frequentList.do" class="active">자주묻는 질문</a>
             </li>
           </ul>
         </nav>
@@ -337,66 +337,19 @@ for(var i = 0; i < tabList.length; i++){
             </div>
             <!-- 공지사항  -->
             <div class="tab_each">
-              <ul id="tab1" class="active">
+              <c:forEach var="i" begin="1" end="5" step="1">
+              <ul id="tab${i}" class="active">
+              <c:forEach  var="frequent" items="${frequentList}" varStatus="stat">
+              <c:if test="${frequent.type == i}">
                 <li>
-                  <input type="checkbox" class="question" id="que-1">
-                  <label for="que-1">자주묻는질문 이용문의1</label>
-                  <div class="answer" id="ans-1">자주묻는질문 이용문의1 테스트</div>
+                  <input type="checkbox" class="question" id="que-${stat.count}">
+                  <label for="que-${stat.count}">${frequent.title}</label>
+                  <div class="answer" id="ans-${stat.count}">${frequent.content}</div>
                 </li>
-                <li>
-                  <input type="checkbox" class="question" id="que-2">
-                  <label for="que-2">자주묻는질문 이용문의2</label>
-                  <div class="answer" id="ans-1">자주묻는질문 이용문의2 테스트</div>
-                </li>
+              </c:if>
+              </c:forEach>
               </ul>
-              <ul id="tab2">
-                <li>
-                  <input type="checkbox" class="question" id="que-3">
-                  <label for="que-3">자주묻는질문 예약취소1</label>
-                  <div class="answer" id="ans-3">자주묻는질문 예약취소1 테스트</div>
-                </li>
-                <li>
-                  <input type="checkbox" class="question" id="que-4">
-                  <label for="que-4">자주묻는질문 예약취소2</label>
-                  <div class="answer" id="ans-4">자주묻는질문 예약취소2 테스트</div>
-                </li>
-              </ul>
-              <ul id="tab3">
-                <li>
-                  <input type="checkbox" class="question" id="que-5">
-                  <label for="que-5">자주묻는질문 예약문의1</label>
-                  <div class="answer" id="ans-5">자주묻는질문 예약문의1 테스트</div>
-                </li>
-                <li>
-                  <input type="checkbox" class="question" id="que-6">
-                  <label for="que-6">자주묻는질문 예약문의2</label>
-                  <div class="answer" id="ans-6">자주묻는질문 예약문의2 테스트</div>
-                </li>
-              </ul>
-              <ul id="tab4">
-                <li>
-                  <input type="checkbox" class="question" id="que-7">
-                  <label for="que-7">자주묻는질문 리뷰1</label>
-                  <div class="answer" id="ans-7">자주묻는질문 리뷰1 테스트</div>
-                </li>
-                <li>
-                  <input type="checkbox" class="question" id="que-8">
-                  <label for="que-8">자주묻는질문 리뷰2</label>
-                  <div class="answer" id="ans-8">자주묻는질문 리뷰2 테스트</div>
-                </li>
-              </ul>
-              <ul id="tab5">
-                <li>
-                  <input type="checkbox" class="question" id="que-9">
-                  <label for="que-9">자주묻는질문 결제1</label>
-                  <div class="answer" id="ans-9">자주묻는질문 결제1 테스트</div>
-                </li>
-                <li>
-                  <input type="checkbox" class="question" id="que-10">
-                  <label for="que-10">자주묻는질문 결제2</label>
-                  <div class="answer" id="ans-10">자주묻는질문 결제2 테스트</div>
-                </li>
-              </ul>
+             </c:forEach>
             </div>
           </div>
         </div>

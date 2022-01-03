@@ -7,49 +7,61 @@
 	<!-- announce -->
    <definition name="/CC/announceList" extends="baseLayout">
       <put-attribute name="title" value="공지사항" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/User_CCForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/user/User_CCForm.jsp" />
+   </definition>
+   <definition name="/CC/business_announceList" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 공지사항" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/business/Business_CCForm.jsp" />
    </definition>
    <definition name="/CC/admin_announceList" extends="AdminLayout">
       <put-attribute name="title" value="관리자 공지사항" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CCForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/admin/Admin_CCForm.jsp" />
    </definition>
    
    <definition name="/CC/viewAnnounce" extends="baseLayout">
       <put-attribute name="title" value="공지사항 세부" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/user/User_CC2Form.jsp" />
+   </definition>
+   <definition name="/CC/business_viewAnnounce" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 공지사항 세부" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/business/Business_CC2Form.jsp" />
    </definition>
    <definition name="/CC/admin_viewAnnounce" extends="AdminLayout">
       <put-attribute name="title" value="관리자 공지사항 세부" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CC2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/admin/Admin_CC2Form.jsp" />
    </definition>
    
    <definition name="/CC/admin_announceForm" extends="AdminLayout">
       <put-attribute name="title" value="공지사항 작성" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Admin_CC3Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/admin/Admin_CC3Form.jsp" />
    </definition>
    
    <!-- frequent -->
    <definition name="/CC/frequentList" extends="baseLayout">
       <put-attribute name="title" value="자주 묻는 질문" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/user/Question1Form.jsp" />
+   </definition>
+   <definition name="/CC/business_frequentList" extends="BusinessLayout">
+      <put-attribute name="title" value="사업자 자주 묻는 질문" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/business/Business_Question1Form.jsp" />
    </definition>
    <definition name="/CC/admin_frequentList" extends="AdminLayout">
       <put-attribute name="title" value="관리자 자주 묻는 질문" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/AdminQuestion1Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/admin/AdminQuestion1Form.jsp" />
    </definition>
    
    <definition name="/CC/admin_frequentForm" extends="AdminLayout">
       <put-attribute name="title" value="자주 묻는 질문 작성" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/AdminQuestion2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/admin/AdminQuestion2Form.jsp" />
    </definition>
 
    <definition name="/CC/inPersonQuestion" extends="baseLayout">
       <put-attribute name="title" value="1:1문의" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Question2Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/user/Question2Form.jsp" />
    </definition>
    
    <definition name="/CC/questionForm" extends="baseLayout">
       <put-attribute name="title" value="문의 작성" />
-      <put-attribute name="body" value="/WEB-INF/views/CC/Question3Form.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/CC/user/Question3Form.jsp" />
    </definition>
 </tiles-definitions>

@@ -226,6 +226,7 @@ p {
     font-size: 13px;
     line-height: 1.5;
     text-align: center;
+    cursor:pointer;
 }
 
 .paging .on{
@@ -245,10 +246,10 @@ p {
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/CC/business_announceList.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/business_frequentList.do">자주묻는 질문</a>
             </li>
           </ul>
         </nav>
@@ -263,33 +264,35 @@ p {
             <!-- 공지사항  -->
             <div class="tab_each">
               <ul id="notices" class="show_list">
+                <c:forEach  var="announce" items="${announceList}">
                 <li>
-                  <a href="${contextPath}/BusinessCC/Business_CC2Form.do" class="list_que">
-                    <p>[공지]11월 이벤트</p>
+                  <a href="${contextPath}/CC/business_viewAnnounce.do?articleNo=${announce.articleNo}" class="list_que">
+                    <p>${announce.title}</p>
                     <span>
-                      2021.11.10
+                      ${announce.writeDate}
                     </span>
                   </a>
                 </li>
-                <li>
-                  <a href="${contextPath}/BusinessCC/Business_CC2Form.do" class="list_que">
-                    <p>[공지]10월 이벤트</p>
-                    <span>
-                      2021.10.07
-                    </span>
-                  </a>
-                </li>
+                </c:forEach>
               </ul>
               <div id="notice_pagination">
                 <div class="paging">
-                  <button class="prev"><i class="fas fa-angle-double-left"></i></button>
-                  <button class="on">1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                  <button>6</button>
-                  <button class="next"><i class="fas fa-angle-double-right"></i></button>
+                <c:if test="${pagination.startPage > 1}">
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/CC/business_announceList.do?pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                </c:if>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                	<c:choose>
+                		<c:when test="${i == pagination.page}">
+                  			<button class="on" onclick="location.href='${contextPath}/CC/business_announceList.do?pages=${i}'">${i}</button>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<button onclick="location.href='${contextPath}/CC/business_announceList.do?pages=${i}'">${i}</button>
+                  		</c:otherwise>
+                  	</c:choose>
+                </c:forEach>
+                <c:if test="${pagination.endPage < pagination.totalPage}">
+                  <button type="button" class="next" onclick="location.href='${contextPath}/CC/business_announceList.do?pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                </c:if>
                 </div>
               </div>
             </div>

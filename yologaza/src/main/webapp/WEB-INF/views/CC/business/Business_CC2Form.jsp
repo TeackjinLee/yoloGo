@@ -4,6 +4,7 @@
     isELIgnored="false"    
     %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -244,6 +245,7 @@ textarea{
 </style>
 </head>
 <body class="pc">
+    <form name="frmAnnounce" method="post"  action="${contextPath}"  enctype="multipart/form-data">
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
@@ -254,10 +256,10 @@ textarea{
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_CCForm.do" class="active">공지사항</a>
+              <a href="${contextPath}/CC/business_announceList.do" class="active">공지사항</a>
             </li>
             <li>
-              <a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a>
+              <a href="${contextPath}/CC/business_frequentList.do">자주묻는 질문</a>
             </li>
           </ul>
         </nav>
@@ -276,22 +278,23 @@ textarea{
                   <span>작성자</span>
                 </li>
                 <li>
-                  <input type="text" class="input1" value="#" disabled/>
+                  <input type="text" class="input1" value="${announce.id}" disabled/>
                 </li>
                 <li>
                   &nbsp&nbsp<span>작성일</span>
                 </li>
                 <li>
-                  <input type="text" class="input2" value="#" disabled/>
+                  <input type="text" class="input2" value="<fmt:formatDate value="${announce.writeDate}" />" disabled/>
                 </li>
               </ul>
               <div>
-                <textarea disabled></textarea>
+                <textarea disabled>${announce.content}</textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </form>
 </body>
 </html>

@@ -66,8 +66,8 @@
 	              <a>고객센터</a>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="${contextPath}/BusinessCC/Business_CCForm.do">공지사항</a></li>
-	                  <li><a href="${contextPath}/BusinessCC/Business_Question1Form.do">자주묻는 질문</a></li>
+	                  <li><a href="${contextPath}/CC/business_announceList.do">공지사항</a></li>
+	                  <li><a href="${contextPath}/CC/business_frequentList.do">자주묻는 질문</a></li>
 	                </ul>
 	              </div>
 	            </li>
