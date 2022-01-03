@@ -13,9 +13,9 @@ public interface AdminMemberController {
 
 	public ModelAndView removeAdminMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView adminlogout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView adminlogin(MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
+	public ModelAndView login(MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
 

@@ -26,8 +26,6 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 	@Autowired
 	private MemberVO memberVO;
 	@Autowired
-	private MemberService memberService;
-	@Autowired
 	private AdminMemberService adminMemberService;
 	
 	@RequestMapping(value = {"/listMember.do"} ,method={RequestMethod.POST,RequestMethod.GET})
@@ -60,7 +58,7 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/adminloginForm.do", "/adminlogoutForm.do"}, method= {RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value = {"/loginForm.do", "/logoutForm.do"}, method= {RequestMethod.POST, RequestMethod.GET} )
 	//@RequestMapping(value="/member/*Form.do", method=RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
@@ -70,8 +68,8 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 	}
 	
 	@Override
-	@RequestMapping(value = "/adminlogin.do", method = RequestMethod.POST)
-	public ModelAndView adminlogin(@ModelAttribute("member") MemberVO member,
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("member") MemberVO member,
 							RedirectAttributes rAttr,
 							HttpServletRequest request, 
 							HttpServletResponse response) throws Exception {
@@ -105,8 +103,8 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 	}
 	
 	@Override
-	@RequestMapping(value = "/adminlogout.do", method = RequestMethod.GET)
-	public ModelAndView adminlogout(HttpServletRequest request,
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request,
 								HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.removeAttribute("member");
@@ -116,7 +114,7 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		return mav;
 	}
 	
-	@RequestMapping(value="/admin*Form.do", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminform(@RequestParam(value="result", required=false) String result,
 							@RequestParam(value= "action", required=false) String action,
 								HttpServletRequest request, 

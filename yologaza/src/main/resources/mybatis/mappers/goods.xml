@@ -20,7 +20,10 @@
 		<result property="account" column="account" />		
 		<result property="goods_homePage" column="goods_homePage" />
 		<result property="goods_name" column="goods_name" />
-		<result property="goods_address" column="goods_address" />		
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="jibunAddress" column="jibunAddress" />
+		<result property="namujiAddress" column="namujiAddress" />
 		<result property="goods_description" column="goods_description" />
 		<result property="goods_room_price1" column="goods_room_price1" />
 		<result property="goods_room_price2" column="goods_room_price2" />

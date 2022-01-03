@@ -241,7 +241,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -265,7 +265,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -289,7 +289,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -313,7 +313,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -337,7 +337,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -361,7 +361,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
@@ -385,7 +385,7 @@
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
 				            <p class="score"><span><em>8.2</em></p>
-				            <p>${item.goods_address}</p>
+				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
 				            <div class="map_html">

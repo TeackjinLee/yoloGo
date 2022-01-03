@@ -27,7 +27,10 @@
 		<result property="account" column="account" />		
 		<result property="goods_homePage" column="goods_homePage" />
 		<result property="goods_name" column="goods_name" />
-		<result property="goods_address" column="goods_address" />		
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="jibunAddress" column="jibunAddress" />
+		<result property="namujiAddress" column="namujiAddress" />		
 		<result property="goods_description" column="goods_description" />
 		<result property="goods_room_price1" column="goods_room_price1" />
 		<result property="goods_room_price2" column="goods_room_price2" />
@@ -69,7 +72,7 @@
 	
 	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
 		<![CDATA[
-			select g.*,d.fileName, s.goods_name, s.goods_address from goods_detail g, goods_img d, goods s
+			select g.*,d.fileName, s.goods_name, s.roadAddress from goods_detail g, goods_img d, goods s
 			where g.goods_uroom=d.goods_uroom
             and g.goods_id = s.goods_id
 			and d.filetype='room'

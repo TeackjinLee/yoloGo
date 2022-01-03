@@ -223,7 +223,7 @@
       <div class="name">
         <h2>${goods.goods_name}</h2>
         <p class="score"><span>별점 : <em>8.2</em></p>
-        <p> ${goods.goods_address} </p>
+        <p> ${goods.roadAddress} </p>
       </div>
       <div class="business_tell">
         <div class="tell-box">

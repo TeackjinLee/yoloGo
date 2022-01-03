@@ -58,14 +58,12 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-hosthouse.png" alt="yolo가자 관리자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/admin/member/adminlogin.do">
+	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/admin/member/login.do">
 	  <h1>관리자 로그인</h1><br>
 	    <input type="text" name="id" placeholder="아이디를 입력하세요"><br>
 	    <input type="password" name="pwd" placeholder="비밀번호를 입력하세요"><br>
 	    <button type="submit"> 로그인</button><br>
 	
-	    <a href="${contextPath}/admin/member/agreeForm.do">회원가입</a>
-	    |
 	    <a href="${contextPath}/admin/member/findIdView">아이디찾기</a>
 	    |
 	    <a href="${contextPath}/admin/member/findPwView">비밀번호찾기</a><br>
