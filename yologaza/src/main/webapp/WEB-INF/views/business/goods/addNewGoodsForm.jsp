@@ -82,226 +82,274 @@
 	    }
 	  }).open();
 	}
-</script>    
-</head>
-
-<body>
-	<form action="${contextPath}/business/goods/addNewGoods.do" method="post"  enctype="multipart/form-data">
-	<h1>새상품 등록창</h1>
-	<div class="tab_container">
-		<!-- 내용 들어 가는 곳 -->
-		<div class="tab_container" id="container">
-			<ul class="tabs">
-				<li><a href="#tab1">상품정보</a></li>
-				<li><a href="#tab2">상품목차</a></li>
-				<li><a href="#tab3">상품저자소개</a></li>
-				<li><a href="#tab4">상품소개</a></li>
-				<li><a href="#tab5">출판사 상품 평가</a></li>
-				<li><a href="#tab6">추천사</a></li>
-				<li><a href="#tab7">상품이미지</a></li>
-			</ul>
-			<div class="tab_container">
-				<div class="tab_content" id="tab1">
-				<table >
-					<tr>
-						<td >숙박 시설</td>
-						<td>
-						<select name="goods_type">
-						  <option value="motel"  >모텔</option>
-						  <option value="hotel" >호텔</option>
-						  <option value="pension" >펜션</option>
-						  <option value="resort" >리조트</option>
-						  <option value="guestHouse" >게스트하우스</option>
-						  <option value="camping" >캠핑/글램핑</option>
-						  <option value="hanok" >한옥</option>
-						</select>
-						</td>
-					</tr>
-					<tr>
-						<td >상품 작성자 번호</td>
-						<td><input name="uid" type="text" value="${member.uid}" size="40" readonly/></td>
-					</tr>
-					<tr >
-						<td >숙소이름</td>
-						<td><input name="goods_name" type="text" size="40" /></td>
-					</tr>
-					<tr class="dot_line">
-						<td class="fixed_join">주소</td>
-						<td>
-						   <input type="text" id="zipcode" name="zipcode" size="10" > <button><a href="javascript:execDaumPostcode()">우편번호검색</a></button>
-						  <br>
-						  <p> 
-						   지번 주소:<br><input type="text" id="roadAddress"  name="roadAddress" size="50"><br><br>
-						  도로명 주소: <input type="text" id="jibunAddress" name="jibunAddress" size="50"><br><br>
-						  나머지 주소: <input type="text"  name="namujiAddress" size="50" />
-						 <!--   <span id="guide" style="color:#999"></span> -->
-						   </p>
-						</td>
-					</tr>
-					<tr>
-						<td >숙소 이메일</td>
-						<td><input name="goods_email1" type="text" size="16" />@<input name="goods_email2" type="text" size="16" /></td>
-					</tr>
-					<tr>
-						<td >숙소 핸드폰 번호</td>
-						<td><input name="goods_hp" type="text" size="40" /></td>
-					</tr>
-					<tr>
-						<td >숙소 연락처</td>
-						<td><input name="goods_tel1" type="text" size="10" />-<input name="goods_tel2" type="text" size="10" />-<input name="goods_tel3" type="text" size="10" /></td>
-					</tr>
+</script>
+<style>
+	th {
+		background-color:rgb(52, 152, 219);
+		font-size:12px;
+		width:130px;
+	}
+	div#cent {
+		text-align:center;
+		margin-top: 50px;
+		}
+	label {
+		font-size:12px;
+		display:inline-block;
+		width:110px;
+		line-height:25px;
+		}
 	
-					<tr>
-						<td >계좌은행</td>
-						<td><input name="account_bank" type="text" size="40" /></td>
-					</tr>
-					
-					
-					<tr>
-						<td >계좌주 이름</td>
-						<td><input name="account_name" type="text" size="40" /></td>
-					</tr>
-					
-					<tr>
-						<td >계좌번호</td>
-						<td><input  name="account"  type="text" size="40" /></td>
-					</tr>
-					
-					<tr>
-						<td >숙소 홈페이지</td>
-						<td><input name="goods_homePage" type="text" size="40" /></td>
-					</tr>
-					
-					<tr>
-						<td >숙소 설명</td>
-						<td><input name="goods_description" type="text" size="40" /></td>
-					</tr>
-					<tr>
-						<td >숙소 기초 정보</td>
-						<td><input name="goods_baseImpormation" type="text" size="40" /></td>
-					</tr>
-					<tr>
-						<td >예약취소 가능여부</td>
-						<td>
-						<select name="goods_chargeImpormation">
-						  <option value="예약취소 가능"  >예약취소 가능</option>
-						  <option value="예약취소 불가능" >예약취소 불가능</option>
-						</select>
-						</td>
-					</tr>
-					<tr>
-						<td >이용시간</td>
-						<td>
-							<div class="checkIn">
-								<span>체크인 가능시간</span>
-								<select name="goods_checkIn">
-									<option value="13:00" selected>오후 01:00</option>
-									<option value="14:00">오후 02:00</option>
-									<option value="15:00">오후 03:00</option>
-									<option value="16:00">오후 04:00</option>
-									<option value="17:00">오후 05:00</option>
-									<option value="18:00">오후 06:00</option>
-									<option value="19:00">오후 07:00</option>
-									<option value="20:00">오후 08:00</option>
-								</select>
-							</div>
-							<div class="checkOut">
-								<span>체크아웃 가능시간</span>
-								<select name="goods_checkOut">
-									<option value="10:00" selected>오전 10:00</option>
-									<option value="11:00">오전 11:00</option>
-									<option value="12:00">오후 12:00</option>
-									<option value="13:00">오후 01:00</option>
-									<option value="14:00">오후 02:00</option>
-									<option value="15:00">오후 03:00</option>
-									<option value="16:00">오후 04:00</option>
-									<option value="17:00">오후 05:00</option>
-								</select>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td >숙박 가격</td>
-						<td><input name="goods_price1" type="text" size="40" /></td>
-					</tr>
-					<tr>
-						<td >대실 가격</td>
-						<td><input name="goods_price2" type="text" size="40" /></td>
-					</tr>
-				</table>	
-				</div>
-				<div class="tab_content" id="tab2">
-					<h4>책목차</h4>
-					<table>	
-					 <tr>
-						<td ></td>
-						<td><textarea  rows="100" cols="80" name=""></textarea></td>
-					</tr>
-					</table>	
-				</div>
-				<div class="tab_content" id="tab3">
-					<h4>책목차</h4>
-					<table>	
-					 <tr>
-						<td ></td>
-						<td><textarea  rows="100" cols="80" name=""></textarea></td>
-					</tr>
-					</table>
-				</div>
-				<div class="tab_content" id="tab4">
-					<h4>책목차</h4>
-					<table>	
-					 <tr>
-						<td ></td>
-						<td><textarea  rows="100" cols="80" name=""></textarea></td>
-					</tr>
-					</table>
-				</div>
-				<div class="tab_content" id="tab5">
-					<h4>책목차</h4>
-					<table>	
-					 <tr>
-						<td ></td>
-						<td><textarea  rows="100" cols="80" name=""></textarea></td>
-					</tr>
-					</table>
-				</div>
-				<div class="tab_content" id="tab6">
-					<h4>책목차</h4>
-					<table>	
-					 <tr>
-						<td ></td>
-						<td><textarea  rows="100" cols="80" name=""></textarea></td>
-					</tr>
-					</table>
-				</div>
-				<div class="tab_content" id="tab7">
-					<h4>상품이미지</h4>
-					<table >
-						<tr>
-							<td align="right">이미지파일 첨부</td>
-				            
-				            <td  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()"/></td>
-				            <td>
+	input#checkbox {
+		border:1px soild ;
+		width:10px;
+		height:10px;
+		margin-right:5px;
+		margin-left:5px;
+		}
+	p {
+		font-size:14px;
+	  color:#555;
+		}
+	p#img {
+		font-size:14px;
+	  color:#555;
+		}
+	button {
+	  width:150px;
+	  height:40px;
+	  color:black;
+	  padding-bottom: 5px;
+	  box-sizing: border-box;
+	  font-size:16px;
+	}textarea{
+	  padding:10px;
+	  box-sizing:border-box;
+	  width: 800px;
+	  font-size: 18px;
+	}
+	input#zipcode {
+		width:200px;
+		height:40px;
+		font-size:12px;
+		margin-bottom:5px;
+	  padding:10px;
+	  box-sizing:border-box;
+		}
+	input {
+		width:550px;
+		height:30px;
+		font-size:16px;
+		margin-bottom:5px;
+	  box-sizing:border-box;
+		}
+	select{
+	  width:150px;
+	  height:40px;
+	  margin-top:10px;
+	}
+	section form table{
+	  width:1024px;
+	  margin: 0 auto;
+	  border: 1px solid #999;
+	  box-sizing:border-box;
+	}
+	section form table tbody tr td{
+	  padding: 20px;
+	  box-sizing:border-box;
+	  text-align:left;
+	}
+	section form table tbody tr th{
+	  color:white;
+	  font-size:16px;
+	}
+</style>
+    
+</head>
+<body>
+<section>
+      <form action="${contextPath}/business/goods/addNewGoods.do" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
+        <div id="cent">
+        * [이용규칙관리]는 업체 공통적인 정책을 기입하는 란입니다. (체크인, 체크아웃, 성수기 설정 등)
+        <input name="uid" type="text" value="${member.uid}" size="40" style="visibility: hidden;" readonly/>
+        <h3>[필수 기입 정보]</h3>
+        </div>
+         <table border="1px" cellspacing="0">
+          <tbody>
+           <tr>
+             <th>게스트하우스 <br> 기본 정보</th>
+             <td>
+                 <strong>숙박 시설</strong><br>
+                 <select name="goods_type" style="width:150px; height:40px; margin-top:10px; margin-bottom: 20px; color:#555">
+                   <option value="motel"  >모텔</option>
+                   <option value="hotel" >호텔</option>
+                   <option value="pension" >펜션</option>
+                   <option value="resort" >리조트</option>
+                   <option value="guestHouse" >게스트하우스</option>
+                   <option value="camping" >캠핑/글램핑</option>
+                   <option value="hanok" >한옥</option>
+                 </select>
+                   <br><strong>업체명</strong>
+                   <p><input type="text" name="goods_name"  placeholder="업체명을 입력하세요"></p>
+                   <strong>숙소 핸드폰 번호</strong>
+                   <p><input name="goods_hp" type="text" /></p>
+                   <strong>숙소 연락처</strong>
+                   <p><select name="goods_tel1" type="text" style="width:20%; height:40px; font-size:16px;" >
+                     <option>없음</option>
+                     <option value="02">02</option>
+                     <option value="031">031</option>
+                     <option value="032">032</option>
+                     <option value="033">033</option>
+                     <option value="041">041</option>
+                     <option value="042">042</option>
+                     <option value="043">043</option>
+                     <option value="044">044</option>
+                     <option value="051">051</option>
+                     <option value="052">052</option>
+                     <option value="053">053</option>
+                     <option value="054">054</option>
+                     <option value="055">055</option>
+                     <option value="061">061</option>
+                     <option value="062">062</option>
+                     <option value="063">063</option>
+                     <option value="064">064</option>
+                     <option value="0502">0502</option>
+                     <option value="0503">0503</option>
+                     <option value="0505">0505</option>
+                     <option value="0506">0506</option>
+                     <option value="0507">0507</option>
+                     <option value="0508">0508</option>
+                     <option value="070">070</option>
+                   </select>
+                     <span style="padding:0px 7px; font-size:18px;">-</span><input name="goods_tel2" type="text" style="width:20%;"/><span style="padding:0px 7px; font-size:18px;">-</span><input name="goods_tel3" type="text" style="width:20%;" /></p>
+                   <strong>숙소 이메일</strong>
+                   <p><input name="goods_email1" type="text" style="width:27%;"/><span style="padding:0px 7px; font-size:18px;">@</span><input name="goods_email2" type="text" style="width:35%;"/></p>
+                      <strong>주소</strong>
+                      <div>
+                         <input type="text" id="zipcode" name="zipcode" size="10" /> <a href="javascript:execDaumPostcode()" style="color: black; text-decoration: none; cursor:pointer; padding:8px; background:#eee; border-radius:3px; border:1px solid #777; box-sizing:border-box;">우편번호검색</a>
+                       <br>
+                       
+                        지번 주소<br><input type="text" id="roadAddress"  name="roadAddress" size="50"	/><br>
+                        도로명 주소<br><input type="text" id="jibunAddress" name="jibunAddress" size="50"	/><br>
+                        나머지 주소<br><input type="text" id="namujiAddress"  name="namujiAddress" size="50" />
+                   
+                         
+                      </div>
+                    </div>
+            </td>
+            </tr>
+
+            <tr>
+              <th>업체 이미지 <br> (최대 20장)</th>
+               <td>
+                 <p>
+                   *객실 및 업체 전경, 로비, 주차장 등 업체의 전반적인 이미지를 업로드해주시길 바랍니다. <br>
+                   *이미지 교체를 원하시면 "변경"을 선택하시고 삭제를 원하시면 우측 "삭제"를 선택하시길 바랍니다. <br>
+                   *이미지 장소는 짧게 기입해주시길 바랍니다. ex). 전경, 로비, 주차장 등 <br>
+                   *첫 이미지가 메인 이미지이며 드래그를 통해 순서 변경이 가능합니다. <br><br></p>
+                    <div  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()" style="width:auto; cursor:pointer;"/></div>
+				            <div>
 					            <div id="d_file">
 					            </div>
-				            </td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="clear"></div>
-	<center>	
-		 <table>
-		 <tr>
-				  <td align=center>
-					<!--   <input  type="submit" value="상품 등록하기"> --> 
-					  <input  type="button" value="상품 등록하기"  onClick="fn_add_new_goods(this.form)">
-				  </td>
-				</tr>
-		 </table>
-	</center>	 
-	</div>
-	</form>
+				            </div>
+             </td>
+           </tr>
+
+           <tr>
+             <th>주인장 소개글 <br> (호스트 소개)</th>
+             <td>
+             <p><br>
+               <textarea name="goods_description" rows="20" cols="110" maxlength="1000" placeholder="사장님의 특이 경력 혹은 사장님만의 재밌는 이야기가 있으면 게스트들에게 소개해주세요. 게스트는 숙소의 시설과 위치, 서비스는 물론, 사장님이 어떤 분인지도 관심이 있답니다."></textarea>
+             </p><br>
+           </td>
+           </tr>
+
+           <tr>
+             <br>
+             <th>숙소<br>기초 정보</th>
+           <td><span>교통 편의 시설</span><br><br>
+             <div class="wep">
+               <textarea id="write "name="goods_baseImpormation" rows="20" cols="110" maxlength="1000" placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요."></textarea>
+             </div><br>
+             <div style="width:50%; height:150px; float:left;">
+               
+               <strong>이용 시간</strong>
+               <div class="checkIn">
+                  <span>체크인 가능시간</span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="goods_checkIn">
+                    <option value="13:00" selected>오후 01:00</option>
+                    <option value="14:00">오후 02:00</option>
+                    <option value="15:00">오후 03:00</option>
+                    <option value="16:00">오후 04:00</option>
+                    <option value="17:00">오후 05:00</option>
+                    <option value="18:00">오후 06:00</option>
+                    <option value="19:00">오후 07:00</option>
+                    <option value="20:00">오후 08:00</option>
+                  </select>
+                </div>
+                <div class="checkOut">
+                  <span>체크아웃 가능시간</span>
+                  &nbsp;&nbsp;<select name="goods_checkOut">
+                    <option value="10:00" selected>오전 10:00</option>
+                    <option value="11:00">오전 11:00</option>
+                    <option value="12:00">오후 12:00</option>
+                    <option value="13:00">오후 01:00</option>
+                    <option value="14:00">오후 02:00</option>
+                    <option value="15:00">오후 03:00</option>
+                    <option value="16:00">오후 04:00</option>
+                    <option value="17:00">오후 05:00</option>
+                  </select>
+                </div>
+              </div>
+               <div style="width:50%; height:150px; float:left;">
+                 <strong>예약 취소 가능 여부</strong><br>
+                 <select name="goods_chargeImpormation">
+                   <option value="예약취소 가능"  >예약취소 가능</option>
+                   <option value="예약취소 불가능" >예약취소 불가능</option>
+                 </select>
+                 <br> <br>
+               </div>
+              <div>
+                <strong>숙박가격</strong>
+                 <div>
+                  <input name="goods_price1" type="text" />
+                 </div>
+                <strong>대실가격</strong>
+                 <div>
+                  <input name="goods_price2" type="text" />
+                 </div>
+              </div>
+           </td>
+         </tr>
+         <tr>
+           <th>예약 정산<br>입금 계좌명</th>
+           <td>
+             <div class="account_bank" style="margin-bottom:30px;">
+               <div><strong>계좌은행</strong></div>
+               <select name="account_bank">
+                 <option value="삼성" selected>삼성</option>
+                 <option value="하나SK">하나SK</option>
+                 <option value="현대">현대</option>
+                 <option value="KB">KB</option>
+                 <option value="신한">신한</option>
+                 <option value="롯데">롯데</option>
+                 <option value="BC">BC</option>
+                 <option value="시티">시티</option>
+                 <option value="NH농협">NH농협</option>
+               </select>
+             </div>
+             <strong>계좌주 이름</strong>
+             <p><input type="text" name="account_name"  placeholder="계좌주 이름"></p>
+             <strong>계좌 번호</strong>
+             <p><input type="text" name="account"  placeholder="계좌 번호"></p>
+           </td>
+           </tr>
+       </tbody>
+      </table>
+      <div id="button" style="margin: 0 auto; margin-top:30px; text-align: center;">
+        <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
+      </div>
+   </form>
+ 
+ </section>
 </body>
