@@ -15,6 +15,12 @@
   <meta charset="UTF-8">
 <title>어드민헤더</title>
 <link href="${contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" media="screen">
+<script type="text/javascript">
+	if(("${member.auth}" != 3) && (window.location != "http://localhost:8080/yologaza/admin/member/admin_loginForm.do")){
+		alert("관리자 권한이 필요합니다.");
+		document.location.href = "/yologaza/admin/member/admin_loginForm.do";
+	}
+</script>
 </head>
 <body>
 	<div class="wrap main_wrap show">
