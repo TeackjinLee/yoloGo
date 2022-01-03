@@ -39,7 +39,7 @@ public class CC_ControllerImpl implements CC_Controller {
 	Question_VO question_VO;
 	
 	@Override
-	@RequestMapping(value= {"/CC/announceList.do", "/CC/admin_announceList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= {"/CC/announceList.do", "/CC/business_announceList.do", "/CC/admin_announceList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int auth = 1;
 		//pagination
@@ -63,7 +63,7 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
-	@RequestMapping(value= {"/CC/frequentList.do", "/CC/admin_frequentList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= {"/CC/frequentList.do", "/CC/business_frequentList.do", "/CC/admin_frequentList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		int auth = 1;
@@ -124,7 +124,7 @@ public class CC_ControllerImpl implements CC_Controller {
 		return mav;
 	}
 	
-	@RequestMapping(value={"/CC/viewAnnounce.do","/CC/admin_viewAnnounce.do"} ,method = RequestMethod.GET)
+	@RequestMapping(value={"/CC/viewAnnounce.do","/CC/business_viewAnnounce.do","/CC/admin_viewAnnounce.do"} ,method = RequestMethod.GET)
 	public ModelAndView viewAnnounce(@RequestParam("articleNo") int articleNo,
                                     HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
