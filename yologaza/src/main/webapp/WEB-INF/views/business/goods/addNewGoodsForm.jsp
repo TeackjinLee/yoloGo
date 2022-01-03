@@ -84,6 +84,48 @@
 	}
 </script>
 <style>
+	.sub_top_wrap{
+	  height: 150px;
+	  background:rgb(52, 152, 219);
+	}
+	.sub_top{
+	  position:relative;
+	  width:1024px;
+	  height:150px;
+	  margin:0 auto;
+	  border-radius:0;
+	  text-align:left;
+	}
+	
+	.sub_top a{
+		position: absolute;
+	    color: #ddd;
+	    font-weight: 500;
+	    font-size: 32px;
+	    bottom:20px;
+	    text-align: center;
+	}
+	.sub_top a{
+		color:#ddd;
+	}
+	.sub_top a:nth-child(1){
+		color:white;
+	}
+	.sub_top a:nth-child(1) i{
+		color:white;
+	}
+	.sub_top a:nth-child(2){
+		left:333px;
+	}
+	.sub_top a:nth-child(3){
+		right:333px;
+	}
+	.sub_top a:nth-child(4){
+		right:0;
+	}
+	.sub_top a div{
+		font-size:14px;
+	}
 	th {
 		background-color:rgb(52, 152, 219);
 		font-size:12px;
@@ -125,8 +167,7 @@
 	}textarea{
 	  padding:10px;
 	  box-sizing:border-box;
-	  width: 800px;
-	  font-size: 18px;
+	  width: 750px;
 	}
 	input#zipcode {
 		width:200px;
@@ -149,33 +190,66 @@
 	  margin-top:10px;
 	}
 	section form table{
-	  width:1024px;
+	  width: 100%;
 	  margin: 0 auto;
-	  border: 1px solid #999;
-	  box-sizing:border-box;
+	  box-sizing: border-box;
+	  padding: 40px 50px;
+	  border-radius: 15px;
+	  box-shadow: 1px 1px 2px 2px #ddd;
+	}
+	section form table tbody tr:nth-child(1) td{
+		border-top:1px solid #999;
+	}
+	section form table tbody tr:nth-child(1) th{
+		border-top:1px solid #999;
 	}
 	section form table tbody tr td{
 	  padding: 20px;
 	  box-sizing:border-box;
 	  text-align:left;
+	  border-bottom: 1px solid #999;
+	  border-right: 1px solid #999;
+      box-sizing: border-box;
 	}
 	section form table tbody tr th{
 	  color:white;
 	  font-size:16px;
+	  border-bottom: 1px solid #999;
+	  border-left: 1px solid #999;
+	  border-right: 1px solid #999;
+      box-sizing: border-box;
+	}
+	.fas{
+		font-size:50px;
+		padding-bottom:10px;
+		box-sizing: border-box;
+		color: #eee;
 	}
 </style>
     
 </head>
 <body>
 <section>
+	  <div class="sub_top_wrap">
+        <div class="sub_top">
+          <a href="${contextPath}/business/goods/addNewGoodsForm.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+          <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
+          <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
+          <a href="${contextPath}/business/goods/addNewGoodsRoomForm.do"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+        </div>
+      </div>
       <form action="${contextPath}/business/goods/addNewGoods.do" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
         <div id="cent">
-        * [이용규칙관리]는 업체 공통적인 정책을 기입하는 란입니다. (체크인, 체크아웃, 성수기 설정 등)
-        <input name="uid" type="text" value="${member.uid}" size="40" style="visibility: hidden;" readonly/>
-        <h3>[필수 기입 정보]</h3>
+        
+        <input name="uid" type="text" value="${member.uid}" style="visibility: hidden;" readonly/>
+        
         </div>
-         <table border="1px" cellspacing="0">
+         <table cellspacing="0"	>
           <tbody>
+          <div>
+          * [이용규칙관리]는 업체 공통적인 정책을 기입하는 란입니다. (체크인, 체크아웃, 성수기 설정 등)
+          <h3>[필수 기입 정보]</h3>
+          </div>
            <tr>
              <th>게스트하우스 <br> 기본 정보</th>
              <td>
