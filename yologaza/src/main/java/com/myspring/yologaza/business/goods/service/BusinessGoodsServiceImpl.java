@@ -47,4 +47,20 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	public List<GoodsVO> listNewGoods(Map condMap) throws Exception{
 		return businessGoodsDAO.selectNewGoodsList(condMap);
 	}
+	
+	@Override
+	public Map selectNewGoods(String goods_id) throws Exception {
+		Map goodsMap=new HashMap();
+		GoodsVO goodsVO = businessGoodsDAO.selectNewGoods(goods_id);
+		goodsMap.put("goodsVO", goodsVO);
+		List<ImageFileVO> imageList =businessGoodsDAO.selectNewGoodsImg(goods_id);
+		goodsMap.put("imageList", imageList);
+		return goodsMap;
+	}
+	
+	@Override
+	public void modifyGoodsInfo(Map goodsMap) throws Exception{
+		businessGoodsDAO.updateGoodsInfo(goodsMap);
+	}
+	
 }

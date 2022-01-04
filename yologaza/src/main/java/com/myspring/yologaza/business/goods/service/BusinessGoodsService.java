@@ -8,5 +8,7 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 public interface BusinessGoodsService {
 	public int  addNewGoods(Map newGoodsMap) throws Exception;
 	public int addNewGoodsRoom(Map newGoodsRoomMap) throws Exception;
-	public List<GoodsVO> listNewGoods(Map condMap) throws Exception;	
+	public List<GoodsVO> listNewGoods(Map condMap) throws Exception;
+	public Map selectNewGoods(String goods_id) throws Exception;
+	public void modifyGoodsInfo(Map goodsMap) throws Exception;	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.yologaza.board.vo.ArticleVO;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.goods.vo.ImageFileVO;
 
@@ -51,4 +52,20 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 		}
 	}
 	
+	@Override
+	public GoodsVO selectNewGoods(String goods_id) throws DataAccessException {
+		GoodsVO goodsVO=(GoodsVO)sqlSession.selectOne("mapper.business.goods.selectNewGoods",goods_id);
+		return goodsVO;
+	}
+	
+	@Override
+	public List<ImageFileVO> selectNewGoodsImg(String goods_id) throws DataAccessException {
+		List<ImageFileVO> imageList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectNewGoodsImg",goods_id);
+		return imageList;
+	}
+	
+	@Override
+	public void updateGoodsInfo(Map goodsMap) throws DataAccessException{
+		sqlSession.update("mapper.business.goods.updateGoodsInfo",goodsMap);
+	}
 }
