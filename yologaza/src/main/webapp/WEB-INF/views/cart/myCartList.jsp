@@ -457,7 +457,7 @@ function fn_order_all_cart_goods(){
 			              <div class="descript">
 			                <a1 style= "font-weight:bold;">${item.goods_name}</a1>
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
-			                <a2>${item.goods_address}</a2>
+			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
 			                
 			                
@@ -476,6 +476,7 @@ function fn_order_all_cart_goods(){
 									</c:otherwise>
 								</c:choose>
 			                </div>
+			                <div style="position: absolute;bottom: 10px; right: 10px;">
 			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
 								삭제하기
 							</a>
@@ -494,6 +495,7 @@ function fn_order_all_cart_goods(){
 									</a>
 								</c:otherwise>
 							</c:choose>
+							</div>
 			              </div>
 			            </li>
 			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_room_price1 }" />
