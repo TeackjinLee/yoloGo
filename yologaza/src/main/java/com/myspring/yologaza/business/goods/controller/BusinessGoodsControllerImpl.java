@@ -184,7 +184,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 				}
 			}
 			message= "<script>";
-			message += " alert('새상품을 추가했습니다.');";
+			message += " alert('새상품을 수정했습니다.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do?goods_id="+goods_id+"';";
 			message +="</script>";
 		}catch(Exception e) {
@@ -209,49 +209,41 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	@Override
 	@RequestMapping(value="/modGoods.do" ,method={RequestMethod.POST})
 	@ResponseBody
-	public ResponseEntity modGoods( MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
-		 multipartRequest.setCharacterEncoding("utf-8");
-		 Map<String,Object> goodsMap = new HashMap<String, Object>();
-		 Enumeration enu=multipartRequest.getParameterNames();
-		 while(enu.hasMoreElements()){
-			 String name=(String)enu.nextElement();
-			 String value=multipartRequest.getParameter(name);
-			 goodsMap.put(name,value);
-		 }
-		 List<ImageFileVO> imageFileName= upload(multipartRequest);
-		 goodsMap.put("imageFileName", imageFileName);
-		 String articleNO=(String)goodsMap.get("goods_id");
-		 String message;
-		 ResponseEntity resEnt=null;
-		 HttpHeaders responseHeaders = new HttpHeaders();
-		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		  try {
-			  businessGoodsService.modifyGoodsInfo(goodsMap);
-			  if(imageFileName!=null && imageFileName.length()!=0) {
-				File srcFile = new 
-				File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-				   
-				String originalFileName = (String)goodsMap.get("originalFileName");
-				File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO+"\\"+originalFileName);
-				oldFile.delete();
-			  }
-			  message = "<script>";
-			  message += " alert('글을 수정했습니다.');";
-			  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
-			  message +=" </script>";
-			  resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		  } catch(Exception e) {
-			  File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-			  srcFile.delete();
-			  message = "<script>";
-			  message += " alert('오류가 발생했습니다.다시 수정해주세요');";
-			  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
-			  message +=" </script>";
-			  resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		  }
-		  return resEnt;
+	public ResponseEntity modGoods(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String fileName=null;
+		
+		Map modGoodsMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			modGoodsMap.put(name,value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			businessGoodsService.modifyGoodsInfo(modGoodsMap);
+			message= "<script>";
+			message += " alert('상품을 수정했습니다.');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do?goods_id="+goods_id+"';";
+			message +=("</script>");
+		}catch(Exception e) {
+			message= "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do';";
+			message +=("</script>");
+			e.printStackTrace();
+		}
+		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
 	}
 	
 	@Override

@@ -59,8 +59,12 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	}
 	
 	@Override
-	public void modifyGoodsInfo(Map goodsMap) throws Exception{
-		businessGoodsDAO.updateGoodsInfo(goodsMap);
+	public void modifyGoodsInfo(Map modGoodsMap) throws Exception{
+		businessGoodsDAO.updateGoodsInfo(modGoodsMap);
 	}
 	
+	@Override
+	public void modifyGoodsImage(List<ImageFileVO> imageFileList) throws Exception{
+		businessGoodsDAO.updateGoodsImage(imageFileList); 
+	}
 }

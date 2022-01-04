@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
-<c:set var="imageList"  value="${goodsMap.imageList }"  />
+<c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
@@ -34,7 +34,7 @@
 	}
 
   function fn_modify_goods(obj){
-		 obj.action="${contextPath}/business/goods/modGoods.do";
+		 obj.action="${contextPath}/business/goods/modGoods.do?goods_id="+${goods.goods_id};
 		 obj.submit();
 	 }
   
@@ -487,6 +487,5 @@
         <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
       </div>
    </form>
- 
  </section>
 </body>

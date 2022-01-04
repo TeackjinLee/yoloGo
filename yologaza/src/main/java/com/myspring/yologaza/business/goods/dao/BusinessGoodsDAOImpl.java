@@ -65,7 +65,17 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
-	public void updateGoodsInfo(Map goodsMap) throws DataAccessException{
-		sqlSession.update("mapper.business.goods.updateGoodsInfo",goodsMap);
+	public void updateGoodsInfo(Map modGoodsMap) throws DataAccessException{
+		sqlSession.update("mapper.business.goods.updateGoodsInfo",modGoodsMap);
+	}
+	
+	@Override
+	public void updateGoodsImage(List<ImageFileVO> imageFileList) throws DataAccessException {
+		
+		for(int i=0; i<imageFileList.size();i++){
+			ImageFileVO imageFileVO = imageFileList.get(i);
+			sqlSession.update("mapper.business.goods.updateGoodsImage",imageFileVO);	
+		}
+		
 	}
 }
