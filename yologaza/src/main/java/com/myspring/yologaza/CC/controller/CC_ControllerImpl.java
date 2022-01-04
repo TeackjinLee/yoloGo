@@ -39,9 +39,12 @@ public class CC_ControllerImpl implements CC_Controller {
 	Question_VO question_VO;
 	
 	@Override
+	@ResponseBody
 	@RequestMapping(value= {"/CC/announceList.do", "/CC/business_announceList.do", "/CC/admin_announceList.do"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView announceList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int auth = 1;
+		if(request.getRequestURL().toString().equals("http://localhost:8080/yologaza/CC/business_announceList.do"))
+			auth = 2;
 		//pagination
 		Pagination pagination = new Pagination();
 		pagination.setPage(1);
@@ -67,6 +70,8 @@ public class CC_ControllerImpl implements CC_Controller {
 	public ModelAndView frequentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		int auth = 1;
+		if(request.getRequestURL().toString().equals("http://localhost:8080/yologaza/CC/business_frequentList.do"))
+			auth = 2;
 		if(request.getParameter("auth") != null)
 			auth = Integer.parseInt(request.getParameter("auth"));
 		request.setAttribute("auth", auth);

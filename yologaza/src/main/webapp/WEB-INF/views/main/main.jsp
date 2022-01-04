@@ -168,7 +168,15 @@
           <div class="community-name"><img src="${contextPath}/resources/image/yolo-guesthouse.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;등록하기</p></div>
         </div>
         <div class="host-box">
-          <a href="${contextPath}/businessMember/business_loginForm.do"><img src="${contextPath}/resources/image/host.png" alt="사업자등록"></a>
+       	  <c:choose>
+	      		<c:when test="${isLogOn == true  && member!= null}">
+	      			<a href="${contextPath}/business_main.do"><img src="${contextPath}/resources/image/host.png" alt="사업자등록"></a>
+	      		</c:when>
+	      		<c:otherwise>
+	      			<a href="${contextPath}/businessMember/business_loginForm.do"><img src="${contextPath}/resources/image/host.png" alt="사업자등록"></a>
+	      		</c:otherwise>
+	      	</c:choose>
+          
         </div>
       </div>
 
