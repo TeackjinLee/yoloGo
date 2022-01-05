@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +34,9 @@ import com.myspring.yologaza.member.vo.MemberVO;
 @Controller("BusinessGoodsController")
 @RequestMapping(value="/business/goods")
 public class BusinessGoodsControllerImpl  extends BaseController implements BusinessGoodsController {
+	@Autowired
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	@Autowired
 	private static final String ROOM_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	@Autowired
 	private BusinessGoodsService businessGoodsService;
@@ -80,7 +83,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String fileName=null;
-		int goods_uroom=0;
 		
 		Map newGoodsMap = new HashMap();
 		Enumeration enu=multipartRequest.getParameterNames();
@@ -182,7 +184,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 				}
 			}
 			message= "<script>";
-			message += " alert('새상품을 추가했습니다.');";
+			message += " alert('새상품을 수정했습니다.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/addNewGoodsRoomForm.do?goods_id="+goods_id+"';";
 			message +="</script>";
 		}catch(Exception e) {
@@ -202,6 +204,60 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
+	}
+	
+	@Override
+	@RequestMapping(value="/modGoods.do" ,method={RequestMethod.POST})
+	@ResponseBody
+	public ResponseEntity modGoods(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String fileName=null;
+		
+		Map modGoodsMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			modGoodsMap.put(name,value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			businessGoodsService.modifyGoodsInfo(modGoodsMap);
+			message= "<script>";
+			message += " alert('상품을 수정했습니다.');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do?goods_id="+goods_id+"';";
+			message +=("</script>");
+		}catch(Exception e) {
+			message= "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do';";
+			message +=("</script>");
+			e.printStackTrace();
+		}
+		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@Override
+	@RequestMapping(value="/viewNewGoods.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView viewNewGoods(@RequestParam("goods_id") String goods_id,
+									HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		Map goodsMap=businessGoodsService.selectNewGoods(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
 	}
 	
 }

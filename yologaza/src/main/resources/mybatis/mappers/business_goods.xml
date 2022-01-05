@@ -230,7 +230,96 @@
    								 #{fileType}
    								  )
 		]]>
-	</insert> 
+	</insert>
 	
+	<select id="selectNewGoods" resultMap="goodsResult"  parameterType="String">
+		<![CDATA[
+			select goods_id,
+	                uid, 
+	                goods_type,
+                    goods_email1,
+                    goods_email2,
+                    goods_hp,
+					goods_tel1,
+					goods_tel2,
+					goods_tel3,
+					account_bank,
+					account_name,
+					account,
+					goods_homePage,
+					goods_name,
+					zipcode,
+					roadAddress,
+					jibunAddress,
+					namujiAddress,
+					goods_description,
+					goods_baseImpormation,
+					goods_chargeImpormation,
+					goods_checkIn,
+					goods_checkOut,
+					goods_motel_endtime,
+					goods_motel_usetime,
+					goods_price1,
+					goods_price2 
+					from goods where goods_id=#{goods_id}
+		]]>
+	</select>
+	<select id="selectNewGoodsImg" resultMap="imageResult"   parameterType="String">
+		<![CDATA[
+			select goods_uimg,
+					goods_id,
+					reg_id,
+					fileName,
+					fileType 
+					from goods_img 
+					where goods_id=#{goods_id} 
+					and fileType like 'goods%';
+		]]>
+	</select>
+	
+	<update id="updateGoodsInfo" parameterType="java.util.Map" >
+		update goods
+		set goods_type=#{goods_type},
+			goods_email1=#{goods_email1},
+			goods_email2=#{goods_email2},
+			
+			goods_hp=#{goods_hp},
+			goods_tel1=#{goods_tel1},
+			goods_tel2=#{goods_tel2},
+			goods_tel3=#{goods_tel3},
+			
+			account_bank=#{account_bank},
+			account_name=#{account_name},
+			account=#{account},
+			
+			goods_homePage=#{goods_homePage},
+			goods_name=#{goods_name},
+			
+			zipcode=#{zipcode},
+			roadAddress=#{roadAddress},
+			jibunAddress=#{jibunAddress},
+			namujiAddress=#{namujiAddress},
+			
+			goods_description=#{goods_description},
+			goods_baseImpormation=#{goods_baseImpormation},
+			goods_chargeImpormation=#{goods_chargeImpormation},
+			
+			goods_checkIn=#{goods_checkIn},
+			goods_checkOut=#{goods_checkOut},
+			goods_motel_endtime=#{goods_motel_endtime},
+			goods_motel_usetime=#{goods_motel_usetime},
+			goods_price1=#{goods_price1},
+			goods_price2=#{goods_price2}
+	    where 
+	    goods_id=#{goods_id}
+	
+	</update>
+	
+	<update id="updateGoodsImage" parameterType="imageFileVO">
+		update goods_img
+		set fileName=#{fileName}
+		where	 
+		goods_id=#{goods_id} and goods_uimg=#{goods_uimg}
+	</update>
 	
 </mapper>
