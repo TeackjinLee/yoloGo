@@ -67,4 +67,14 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	public void modifyGoodsImage(List<ImageFileVO> imageFileList) throws Exception{
 		businessGoodsDAO.updateGoodsImage(imageFileList); 
 	}
+	
+	@Override
+	public void removeGoodsImage(int goods_uimg) throws Exception{
+		businessGoodsDAO.deleteGoodsImage(goods_uimg);
+	}
+	
+	@Override
+	public void addNewGoodsImage(List imageFileList) throws Exception{
+		businessGoodsDAO.insertGoodsImageFile(imageFileList);
+	}
 }

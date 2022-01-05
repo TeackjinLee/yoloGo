@@ -12,5 +12,7 @@ public interface BusinessGoodsService {
 	public List<GoodsVO> listNewGoods(Map condMap) throws Exception;
 	public Map selectNewGoods(String goods_id) throws Exception;
 	public void modifyGoodsInfo(Map modGoodsMap) throws Exception;
-	public void modifyGoodsImage(List<ImageFileVO> imageFileList) throws Exception;	
+	public void modifyGoodsImage(List<ImageFileVO> imageFileList) throws Exception;
+	public void removeGoodsImage(int goods_uimg) throws Exception;
+	public void addNewGoodsImage(List imageFileList) throws Exception;	
 }
