@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
-
+<c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
 <%
 String goods_id = request.getParameter("goods_id");
 %>
@@ -14,12 +14,23 @@ String goods_id = request.getParameter("goods_id");
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-
+	
+	function readURL(input,preview) {
+		//  alert(preview);
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $('#'+preview).attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	  } 
+	
 	var cnt =1;
 	function fn_addFile(){
 		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' id='goods"+cnt+"'  onchange=readURL(this,'previewImage"+cnt+"') />");
 		  $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
-		  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('goods"+cnt+"','${imageList.goods_id}','goods"+cnt+"')  />");
+		  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('goods')  />");
 		  cnt++;
 	}
 	
@@ -27,7 +38,6 @@ String goods_id = request.getParameter("goods_id");
 		// alert(fileId);
 		var form = $('#FILE_FORM')[0];
 		var formData = new FormData(form);
-		formData.append("fileName", $('#'+fileId)[0].files[0]);
 		formData.append("goods_id", goods_id);
 		formData.append("goods_uimg", goods_uimg);
 		formData.append("fileType", fileType);
@@ -44,16 +54,13 @@ String goods_id = request.getParameter("goods_id");
 		});
 	}
 	
-	function addNewImageFile(fileId,goods_id, fileType){
+	function addNewImageFile(fileType){
 		   //  alert(fileId);
 			  var form = $('#FILE_FORM')[0];
 		      var formData = new FormData(form);
-		      formData.append("uploadFile", $('#'+fileId)[0].files[0]);
-		      formData.append("goods_id", goods_id);
 		      formData.append("fileType", fileType);
-		      
-		      $.ajax({
-		          url: '${contextPath}/business/goods/addNewGoodsImage.do',
+	    	  $.ajax({
+		          url: '${contextPath}/business/goods/addNewGoodsImage.do?goods_id='+<%=goods_id%>,
 		                  processData: false,
 		                  contentType: false,
 		                  data: formData,
@@ -62,6 +69,7 @@ String goods_id = request.getParameter("goods_id");
 		                      alert("이미지를 수정했습니다!");
 		                  }
 		          });
+
 		  }
 	
 	function deleteImageFile(goods_id,goods_uimg,fileName,trId){
@@ -548,33 +556,7 @@ String goods_id = request.getParameter("goods_id");
 				<table>
 					<tr>
 					<c:forEach var="item" items="${goodsMap.imageList}"  varStatus="itemNum">
-						<c:choose>
-							<c:when test="${item.fileType=='goods' }">
-								<tr>
-									<td>메인 이미지</td>
-									<td>
-										<input type="file"  id="goods"  name="goods"  onchange="readURL(this,'preview${itemNum.count}');" />
-										<%-- <input type="text" id="goods_uimg${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
-										<input type="text"  name="goods_uimg" value="${item.goods_uimg}"  />
-										<br>
-									</td>
-									<td><img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" />
-									</td>
-									<td>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-									</td>
-									<td>
-										<input  type="button" value="수정"  onClick="modifyImageFile('goods','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
-									</td> 
-								</tr>
-								<tr>
-									<td>
-										<br>
-									</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<tr  id="${itemNum.count-1}">
+						<tr  id="${itemNum.count-1}">
 									<td>상세 이미지${itemNum.count-1 }</td>
 									<td>
 										<input type="file" name="goods"  id="goods"   onchange="readURL(this,'preview${itemNum.count}');" />
@@ -590,17 +572,10 @@ String goods_id = request.getParameter("goods_id");
 										&nbsp;&nbsp;&nbsp;&nbsp;
 									</td>
 									<td>
-										<input  type="button" value="수정"  onClick="modifyImageFile('goods','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
+										<input  type="button" value="수정"  onClick="modifyImageFile('${item.fileType}','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
 										<input  type="button" value="삭제"  onClick="deleteImageFile('${item.goods_id}','${item.goods_uimg}','${item.fileName}','${itemNum.count-1}')"/>
 									</td> 
-								</tr>
-								<tr>
-									<td>
-									<br>
-									</td>
-								</tr> 
-							</c:otherwise>
-						</c:choose>		
+								</tr>		
 					</c:forEach>
 					<tr align="center">
 						<td colspan="3">

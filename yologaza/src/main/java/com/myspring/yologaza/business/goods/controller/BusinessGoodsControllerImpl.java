@@ -260,7 +260,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	
 	@Override
 	@RequestMapping(value="/addNewGoodsImage.do" ,method={RequestMethod.POST})
-	public void addNewGoodsImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+	public void addNewGoodsImage(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		System.out.println("addNewGoodsImage");
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -277,24 +277,21 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String reg_id = memberVO.getId();
-		
 		List<ImageFileVO> imageFileList=null;
-		int goods_id=0;
 		try {
 			imageFileList =upload(multipartRequest);
 			if(imageFileList!= null && imageFileList.size()!=0) {
 				for(ImageFileVO imageFileVO : imageFileList) {
-					goods_id = (Integer) goodsMap.get("goods_id");
 					imageFileVO.setGoods_id(goods_id);
 					imageFileVO.setReg_id(reg_id);
 				}
-				
 				businessGoodsService.addNewGoodsImage(imageFileList);
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
 					File destDir = new File(CURR_IMAGE_REPO_PATH+"\\"+goods_id);
 					FileUtils.moveFileToDirectory(srcFile, destDir,true);
+					
 				}
 			}
 		}catch(Exception e) {
