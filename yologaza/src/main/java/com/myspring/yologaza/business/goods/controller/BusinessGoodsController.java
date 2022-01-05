@@ -23,4 +23,13 @@ public interface BusinessGoodsController {
 	public ResponseEntity modGoods(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 
+	public void removeGoodsImage(@RequestParam("goods_id") int goods_id,
+									@RequestParam("goods_uimg") int goods_uimg,
+									@RequestParam("fileName") String fileName, HttpServletRequest request,
+									HttpServletResponse response) throws Exception;
+
+	public void modifyGoodsImageInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
+	public void addNewGoodsImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
 }

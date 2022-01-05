@@ -26,6 +26,9 @@ import com.myspring.yologaza.goods.vo.ImageFileVO;
 
 public abstract class BaseController  {
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
+	private static final String MEMBER_IMAGE_REPO = "C:\\member\\member_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
+	private static final String ROOM_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	
 	protected List<ImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		List<ImageFileVO> fileList= new ArrayList<ImageFileVO>();

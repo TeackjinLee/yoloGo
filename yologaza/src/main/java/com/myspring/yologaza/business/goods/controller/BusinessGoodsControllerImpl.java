@@ -34,9 +34,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 @Controller("BusinessGoodsController")
 @RequestMapping(value="/business/goods")
 public class BusinessGoodsControllerImpl  extends BaseController implements BusinessGoodsController {
-	@Autowired
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
-	@Autowired
 	private static final String ROOM_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo";
 	@Autowired
 	private BusinessGoodsService businessGoodsService;
@@ -207,6 +205,20 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	}
 	
 	@Override
+	@RequestMapping(value="/viewNewGoods.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView viewNewGoods(@RequestParam("goods_id") String goods_id,
+									HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		Map goodsMap=businessGoodsService.selectNewGoods(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}
+	
+	@Override
 	@RequestMapping(value="/modGoods.do" ,method={RequestMethod.POST})
 	@ResponseBody
 	public ResponseEntity modGoods(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
@@ -247,17 +259,125 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	}
 	
 	@Override
-	@RequestMapping(value="/viewNewGoods.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView viewNewGoods(@RequestParam("goods_id") String goods_id,
-									HttpServletRequest request, 
-									HttpServletResponse response) throws Exception{
-		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session=request.getSession();
-		Map goodsMap=businessGoodsService.selectNewGoods(goods_id);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("goodsMap", goodsMap);
-		return mav;
+	@RequestMapping(value="/addNewGoodsImage.do" ,method={RequestMethod.POST})
+	public void addNewGoodsImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		System.out.println("addNewGoodsImage");
+		multipartRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		String fileName=null;
+		
+		Map goodsMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			goodsMap.put(name,value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String reg_id = memberVO.getId();
+		
+		List<ImageFileVO> imageFileList=null;
+		int goods_id=0;
+		try {
+			imageFileList =upload(multipartRequest);
+			if(imageFileList!= null && imageFileList.size()!=0) {
+				for(ImageFileVO imageFileVO : imageFileList) {
+					goods_id = (Integer) goodsMap.get("goods_id");
+					imageFileVO.setGoods_id(goods_id);
+					imageFileVO.setReg_id(reg_id);
+				}
+				
+				businessGoodsService.addNewGoodsImage(imageFileList);
+				for(ImageFileVO  imageFileVO:imageFileList) {
+					fileName = imageFileVO.getFileName();
+					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
+					File destDir = new File(CURR_IMAGE_REPO_PATH+"\\"+goods_id);
+					FileUtils.moveFileToDirectory(srcFile, destDir,true);
+				}
+			}
+		}catch(Exception e) {
+			if(imageFileList!=null && imageFileList.size()!=0) {
+				for(ImageFileVO  imageFileVO:imageFileList) {
+					fileName = imageFileVO.getFileName();
+					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
+					
+				}
+			}
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	@RequestMapping(value="/modifyGoodsImageInfo.do" ,method={RequestMethod.POST})
+	public void modifyGoodsImageInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+		System.out.println("modifyGoodsImageInfo");
+		multipartRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		String fileName=null;
+		
+		Map goodsMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			goodsMap.put(name,value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String reg_id = memberVO.getId();
+		
+		List<ImageFileVO> imageFileList=null;
+		int goods_id=0;
+		int goods_uimg=0;
+		try {
+			imageFileList =upload(multipartRequest);
+			if(imageFileList!= null && imageFileList.size()!=0) {
+				for(ImageFileVO imageFileVO : imageFileList) {
+					goods_id = Integer.parseInt((String)goodsMap.get("goods_id"));
+					goods_uimg = Integer.parseInt((String)goodsMap.get("goods_uimg"));
+					imageFileVO.setGoods_id(goods_id);
+					imageFileVO.setGoods_uimg(goods_uimg);
+					imageFileVO.setReg_id(reg_id);
+				}
+				
+				businessGoodsService.modifyGoodsImage(imageFileList);
+				for(ImageFileVO  imageFileVO:imageFileList) {
+					fileName = imageFileVO.getFileName();
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + fileName);
+					File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + goods_id);
+					FileUtils.moveFileToDirectory(srcFile, destDir,true);
+				}
+			}
+		}catch(Exception e) {
+			if(imageFileList!=null && imageFileList.size()!=0) {
+				for(ImageFileVO  imageFileVO:imageFileList) {
+					fileName = imageFileVO.getFileName();
+					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
+					
+				}
+			}
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	@RequestMapping(value="/removeGoodsImage.do" ,method={RequestMethod.POST})
+	public void  removeGoodsImage(@RequestParam("goods_id") int goods_id,
+			                      @RequestParam("goods_uimg") int goods_uimg,
+			                      @RequestParam("fileName") String fileName,
+			                      HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		
+		businessGoodsService.removeGoodsImage(goods_uimg);
+		try{
+			File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+goods_id+"\\"+fileName);
+			srcFile.delete();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

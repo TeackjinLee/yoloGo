@@ -1,10 +1,7 @@
 package com.myspring.yologaza.admin.member.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.yologaza.admin.member.dao.AdminMemberDAO;
 import com.myspring.yologaza.member.vo.MemberVO;
-
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service("adminMemberService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -26,17 +20,23 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	private MemberVO memberVO;
 	
 	@Override
-	public List listMembers() throws DataAccessException {
-		List membersList = null;
-		membersList = adminMemberDAO.selectAllMemberList();
-		return membersList;
+	public AdminMemberDAO getAdminMemberDAO() {
+		return adminMemberDAO;
 	}
 	
 	@Override
-	public List deletlistMembers() throws DataAccessException {
-		List deleteMemberList = null;
-		deleteMemberList = adminMemberDAO.selectAllDeleteMemberList();
-		return deleteMemberList;
+	public List<MemberVO> listMembers(int offset, int count) throws DataAccessException {
+		return adminMemberDAO.selectAllMemberList(offset, count);
+	}
+	
+	@Override
+	public List<MemberVO> listMembersByAuth(String auth, int offset, int count) throws DataAccessException {
+		return adminMemberDAO.selectAllMemberListByAuth(auth, offset, count);
+	}
+	
+	@Override
+	public List<MemberVO> deletlistMembers(long date1, long date2, int offset, int count) throws DataAccessException {
+		return adminMemberDAO.selectAllDeleteMemberList(date1, date2, offset, count);
 	}
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {

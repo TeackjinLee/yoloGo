@@ -19,4 +19,6 @@ public interface BusinessGoodsDAO {
 	public List<ImageFileVO> selectNewGoodsImg(String goods_id) throws DataAccessException;
 	public void updateGoodsInfo(Map modGoodsMap) throws DataAccessException;
 	public void updateGoodsImage(List<ImageFileVO> imageFileList) throws DataAccessException;
+	public void deleteGoodsImage(int goods_uimg) throws DataAccessException;
+	public void deleteGoodsImage(List fileList) throws DataAccessException;
 }

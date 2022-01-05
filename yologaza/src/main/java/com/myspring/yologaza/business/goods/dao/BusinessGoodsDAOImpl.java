@@ -78,4 +78,19 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 		}
 		
 	}
+	
+	@Override
+	public void deleteGoodsImage(int goods_uimg) throws DataAccessException{
+		sqlSession.delete("mapper.business.goods.deleteGoodsImage",goods_uimg);
+	}
+	
+	@Override
+	public void deleteGoodsImage(List fileList) throws DataAccessException{
+		int goods_uimg;
+		for(int i=0; i<fileList.size();i++){
+			ImageFileVO bean=(ImageFileVO) fileList.get(i);
+			goods_uimg=bean.getGoods_uimg();
+			sqlSession.delete("mapper.business.goods.deleteGoodsImage",goods_uimg);	
+		}
+	}
 }

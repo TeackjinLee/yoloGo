@@ -28,14 +28,25 @@
 	<!-- 관리자 회원 관리 -->
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from member	order by uid asc	
+         select SQL_CALC_FOUND_ROWS * from member	order by uid asc	limit #{offset},#{count}
+      ]]>
+	</select>
+	<select id="countAllMember" resultType="int">
+  		select FOUND_ROWS();
+  	</select>
+  	<select id="selectAllMemberListByAuth" resultMap="memResult">
+      <![CDATA[
+         select SQL_CALC_FOUND_ROWS * from member where auth = #{auth}	order by uid asc	limit #{offset},#{count}
       ]]>
 	</select>
 	<!-- 관리자 탈퇴 회원 관리 -->
 	<select id="selectAllDeleteMemberList" resultMap="memResult">
-      <![CDATA[
-         select * from deletemember	order by uid asc	
-      ]]>
+         select SQL_CALC_FOUND_ROWS * from deletemember 
+         <if test="date1 != 0 and date2 != 0">
+         where UNIX_TIMESTAMP(joinDate) >= #{date1} 
+         and #{date2} >= UNIX_TIMESTAMP(joinDate)  
+         </if>
+         order by joinDate asc	limit #{offset},#{count}
 	</select>
 	
 	<!-- 아이디 찾기 -->

@@ -322,4 +322,9 @@
 		goods_id=#{goods_id} and goods_uimg=#{goods_uimg}
 	</update>
 	
+	<delete id="deleteGoodsImage" parameterType="String">
+	  delete from goods_img
+	  where goods_uimg=#{goods_uimg}
+	</delete>
+	
 </mapper>

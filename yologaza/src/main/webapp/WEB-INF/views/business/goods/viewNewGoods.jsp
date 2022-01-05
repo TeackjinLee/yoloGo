@@ -4,34 +4,89 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
-<c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
+
+<%
+String goods_id = request.getParameter("goods_id");
+%>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-	var cnt=0;
+
+	var cnt =1;
 	function fn_addFile(){
-		  if(cnt == 0){
-			  $("#d_file").append("<br>"+"<input  type='file' name='goods' id='f_goods' />");	  
-		  }else{
-			  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' />");
-		  }
+		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' id='goods"+cnt+"'  onchange=readURL(this,'previewImage"+cnt+"') />");
+		  $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
+		  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('goods"+cnt+"','${imageList.goods_id}','goods"+cnt+"')  />");
+		  cnt++;
+	}
+	
+	function modifyImageFile(fileId,goods_id, goods_uimg,fileType){
+		// alert(fileId);
+		var form = $('#FILE_FORM')[0];
+		var formData = new FormData(form);
+		formData.append("fileName", $('#'+fileId)[0].files[0]);
+		formData.append("goods_id", goods_id);
+		formData.append("goods_uimg", goods_uimg);
+		formData.append("fileType", fileType);
 		
-		cnt++;
+		$.ajax({
+		  url: '${contextPath}/business/goods/modifyGoodsImageInfo.do',
+		  processData: false,
+		  contentType: false,
+		  data: formData,
+		  type: 'POST',
+		 success: function(result){
+		    alert("이미지를 수정했습니다!");
+		  }
+		});
 	}
-  
-  
-	function fn_add_new_goods(obj){
-		 fileName = $('#f_goods').val();
-		 if(fileName != null && fileName != undefined){
-			 obj.submit();
-		 }else{
-			 alert("메인 이미지는 반드시 첨부해야 합니다.");
-			 return;
-		 }
-		 
-	}
+	
+	function addNewImageFile(fileId,goods_id, fileType){
+		   //  alert(fileId);
+			  var form = $('#FILE_FORM')[0];
+		      var formData = new FormData(form);
+		      formData.append("uploadFile", $('#'+fileId)[0].files[0]);
+		      formData.append("goods_id", goods_id);
+		      formData.append("fileType", fileType);
+		      
+		      $.ajax({
+		          url: '${contextPath}/business/goods/addNewGoodsImage.do',
+		                  processData: false,
+		                  contentType: false,
+		                  data: formData,
+		                  type: 'post',
+		                  success: function(result){
+		                      alert("이미지를 수정했습니다!");
+		                  }
+		          });
+		  }
+	
+	function deleteImageFile(goods_id,goods_uimg,fileName,trId){
+		var tr = document.getElementById(trId);
+
+	      	$.ajax({
+	    		type : "post",
+	    		async : true, //false인 경우 동기식으로 처리한다.
+	    		url : "${contextPath}/business/goods/removeGoodsImage.do",
+	    		data: {goods_id:goods_id,
+	     	         goods_uimg:goods_uimg,
+	     	         fileName:fileName},
+	    		success : function(data, textStatus) {
+	    			alert("이미지를 삭제했습니다!!");
+	                tr.style.display = 'none';
+	    		},
+	    		error : function(data, textStatus) {
+	    			alert("에러가 발생했습니다."+textStatus);
+	    		},
+	    		complete : function(data, textStatus) {
+	    			//alert("작업을완료 했습니다");
+	    			
+	    		}
+	    	}); //end ajax	
+	  }
 
   function fn_modify_goods(obj){
 		 obj.action="${contextPath}/business/goods/modGoods.do?goods_id="+${goods.goods_id};
@@ -112,7 +167,6 @@
 		document.getElementById("account_bank").disabled=false;
 		document.getElementById("account_name").disabled=false;
 		document.getElementById("account").disabled=false;
-		document.getElementById("fn_addFile1").disabled=false;
 		document.getElementById("tr_btn").style.display="none";
 		document.getElementById("tr_btn_modify").style.display="block";
 		document.getElementById("tr_file_upload").style.display="block";
@@ -271,7 +325,7 @@
 <section>
 	  <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/addNewGoodsForm.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+          <a href="${contextPath}/business/goods/viewNewGoods.do?goods_id=<%=goods_id%>"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
           <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
           <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
           <a href="${contextPath}/business/goods/addNewGoodsRoomForm.do"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
@@ -362,11 +416,7 @@
                    *이미지 교체를 원하시면 "변경"을 선택하시고 삭제를 원하시면 우측 "삭제"를 선택하시길 바랍니다. <br>
                    *이미지 장소는 짧게 기입해주시길 바랍니다. ex). 전경, 로비, 주차장 등 <br>
                    *첫 이미지가 메인 이미지이며 드래그를 통해 순서 변경이 가능합니다. <br><br></p>
-                    <div  align="left"> <input type="button" id="fn_addFile1"  value="파일 추가" onClick="fn_addFile()" style="width:auto; cursor:pointer;" disabled></div>
-		            <div>
-			            <div id="d_file">
-			            </div>
-		            </div>
+                    
 		            <ul>
 		            <c:forEach var="item" items="${goodsMap.imageList}" >
 		          		<li class="pic" style="width: 511px;height: 360px;overflow: hidden; border:1px solid #ddd; margin-top:30px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
@@ -486,6 +536,86 @@
 	    </c:if>
         <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
       </div>
-   </form>
- </section>
+      
+      
+      
+		
+	</form>
+	
+	<DIV class="tab_content" id="tab7">
+			<form id="FILE_FORM" method="post" enctype="multipart/form-data"  >
+				<h4>상품이미지</h4>
+				<table>
+					<tr>
+					<c:forEach var="item" items="${goodsMap.imageList}"  varStatus="itemNum">
+						<c:choose>
+							<c:when test="${item.fileType=='goods' }">
+								<tr>
+									<td>메인 이미지</td>
+									<td>
+										<input type="file"  id="goods"  name="goods"  onchange="readURL(this,'preview${itemNum.count}');" />
+										<%-- <input type="text" id="goods_uimg${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
+										<input type="text"  name="goods_uimg" value="${item.goods_uimg}"  />
+										<br>
+									</td>
+									<td><img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" />
+									</td>
+									<td>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									</td>
+									<td>
+										<input  type="button" value="수정"  onClick="modifyImageFile('goods','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
+									</td> 
+								</tr>
+								<tr>
+									<td>
+										<br>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr  id="${itemNum.count-1}">
+									<td>상세 이미지${itemNum.count-1 }</td>
+									<td>
+										<input type="file" name="goods"  id="goods"   onchange="readURL(this,'preview${itemNum.count}');" />
+										<%-- <input type="text" id="goods_uimg${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
+										<input type="text"  name="goods_uimg" value="${item.goods_uimg }"  />
+										<input type="text"  name="fileType" value="${item.fileType }"  />
+										<br>
+									</td>
+									<td>
+										<img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}">
+									</td>
+									<td>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									</td>
+									<td>
+										<input  type="button" value="수정"  onClick="modifyImageFile('goods','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
+										<input  type="button" value="삭제"  onClick="deleteImageFile('${item.goods_id}','${item.goods_uimg}','${item.fileName}','${itemNum.count-1}')"/>
+									</td> 
+								</tr>
+								<tr>
+									<td>
+									<br>
+									</td>
+								</tr> 
+							</c:otherwise>
+						</c:choose>		
+					</c:forEach>
+					<tr align="center">
+						<td colspan="3">
+							<div id="d_file">
+								<%-- <img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" /> --%>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td align=center colspan=2> 
+						<input   type="button" value="이미지파일추가하기"  onClick="fn_addFile()"  />
+						</td>
+					</tr> 
+				</table>
+			</form>
+		</DIV>
+	</section>
 </body>
