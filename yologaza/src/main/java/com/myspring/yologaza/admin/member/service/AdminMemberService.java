@@ -1,15 +1,17 @@
 package com.myspring.yologaza.admin.member.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.myspring.yologaza.admin.member.dao.AdminMemberDAO;
 import com.myspring.yologaza.member.vo.MemberVO;
 
 public interface AdminMemberService {
-	public List listMembers() throws DataAccessException;
-	public List deletlistMembers() throws DataAccessException;
+	public AdminMemberDAO getAdminMemberDAO();
+	public List<MemberVO> listMembers(int offset, int count) throws DataAccessException;
+	public List<MemberVO> listMembersByAuth(String auth, int offset, int count) throws DataAccessException;
+	public List<MemberVO> deletlistMembers(long date1, long date2, int offset, int count) throws DataAccessException;
 	public int addMember(MemberVO memberVO) throws DataAccessException;
 	public int removeMember(String id) throws DataAccessException;
 	public MemberVO login(MemberVO memberVO) throws DataAccessException;

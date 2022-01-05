@@ -291,10 +291,6 @@ p {
   background-color: rgb(226, 226, 226);
 }
 
-.dropdown-content.show{
-  display : block;
-}
-
 .paging .write{
   float:right;
   width: 70px;

@@ -1,11 +1,12 @@
 package com.myspring.yologaza.admin.member.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -16,19 +17,69 @@ import com.myspring.yologaza.member.vo.MemberVO;
 public class AdminMemberDAOImpl implements AdminMemberDAO{
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+	int totalCount;
+	
+	public int getTotalCount() {
+		return totalCount;
+	}
 	
 	@Override
-	public List selectAllMemberList() throws DataAccessException {
-		List<MemberVO> membersList = null;
-		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
+	public List<MemberVO> selectAllMemberList(int offset, int count) throws DataAccessException {
+		List<MemberVO> membersList = new ArrayList<MemberVO>();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("count", count);
+		
+		try {
+			membersList = session.selectList("mapper.member.selectAllMemberList",params);
+			this.totalCount = session.selectOne("mapper.member.countAllMember");
+		}finally {
+			session.close();
+		}
 		return membersList;
 	}
 	
 	@Override
-	public List selectAllDeleteMemberList() throws DataAccessException {
-		List<MemberVO> deleteMemberList = null;
-		deleteMemberList = sqlSession.selectList("mapper.member.selectAllDeleteMemberList");
-		return deleteMemberList;
+	public List<MemberVO> selectAllMemberListByAuth(String auth, int offset, int count) throws DataAccessException {
+		List<MemberVO> membersList = new ArrayList<MemberVO>();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("auth", auth);
+		params.put("offset", offset);
+		params.put("count", count);
+		
+		try {
+			membersList = session.selectList("mapper.member.selectAllMemberListByAuth",params);
+			this.totalCount = session.selectOne("mapper.member.countAllMember");
+		}finally {
+			session.close();
+		}
+		return membersList;
+	}
+	
+	@Override
+	public List<MemberVO> selectAllDeleteMemberList(long date1, long date2, int offset, int count) throws DataAccessException {
+		List<MemberVO> membersList = new ArrayList<MemberVO>();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("date1", date1);
+		params.put("date2", date2);
+		params.put("offset", offset);
+		params.put("count", count);
+		
+		try {
+			membersList = session.selectList("mapper.member.selectAllDeleteMemberList",params);
+			this.totalCount = session.selectOne("mapper.member.countAllMember");
+		}finally {
+			session.close();
+		}
+		return membersList;
 	}
 	
 	@Override
