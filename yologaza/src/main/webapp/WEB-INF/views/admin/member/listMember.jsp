@@ -47,7 +47,7 @@
 
 	    <div class="adminCustomer">
 	      <div class="adminCustomer_box">
-	        <h3>고객 문의 관리</h3>
+	        <h3>전체 회원 관리</h3>
 	        <table align="center">
 	          <tr align="center" class="column">
 	            <td ><b>번호</b></td>

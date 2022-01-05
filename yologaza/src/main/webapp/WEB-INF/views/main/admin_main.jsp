@@ -162,8 +162,8 @@ $(function(){
                     </c:choose>
                     </button>
                     <div class="dropdown-content">
-                      <div class="type" onclick='location.href="${contextPath}/admin_main.do?pages=1&auth=1";'>사용자 공지사항 조회</div>
-                      <div class="type" onclick='location.href="${contextPath}/admin_main.do?pages=1&auth=2";'>사업자 공지사항 조회</div>
+                      <div class="type" onclick='location.href="${contextPath}/admin_main.do?pages=1&auth=1";'>사용자 조회</div>
+                      <div class="type" onclick='location.href="${contextPath}/admin_main.do?pages=1&auth=2";'>사업자 조회</div>
                   </div>
                   </div>
 	        <table align="center">
