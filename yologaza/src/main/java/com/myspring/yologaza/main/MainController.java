@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.yologaza.admin.member.service.AdminMemberService;
 import com.myspring.yologaza.common.base.BaseController;
+import com.myspring.yologaza.common.file.Pagination;
 import com.myspring.yologaza.member.controller.MemberControllerImpl;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -26,9 +28,9 @@ import com.myspring.yologaza.member.vo.MemberVO;
 public class MainController{
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
 	@Autowired
-	private MemberService memberService;
-	@Autowired
 	MemberVO memberVO;
+	@Autowired
+	private AdminMemberService adminMemberService;
 	
 
 	@RequestMapping(value = {"/","/main.do"} ,method={RequestMethod.POST,RequestMethod.GET})
@@ -51,10 +53,25 @@ public class MainController{
 	@RequestMapping(value = {"/admin_main.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	private ModelAndView admin_main(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
+		String auth = "1";
+		//pagination
+		Pagination pagination = new Pagination();
+		pagination.setPage(1);
+		pagination.setCountList(5);
+		pagination.setCountPage(6);
+		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
+		if(request.getParameter("pages") != null)
+			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
+		if(request.getParameter("auth") != null)
+			auth = request.getParameter("auth");
+		request.setAttribute("auth", auth);
+		int offset = (pagination.getPage()-1)*pagination.getCountList();
+		pagination.Paging();
 		String viewName = (String) request.getAttribute("viewName");
-		List membersList = memberService.listMembers();
+		List<MemberVO> membersList = adminMemberService.listMembersByAuth(auth, offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);
+		mav.addObject(pagination);
 		return mav;
 	}
 }

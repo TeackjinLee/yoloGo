@@ -1,5 +1,7 @@
 package com.myspring.yologaza.admin.member.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.yologaza.admin.member.service.AdminMemberService;
 import com.myspring.yologaza.common.base.BaseController;
-import com.myspring.yologaza.member.service.MemberService;
+import com.myspring.yologaza.common.file.Pagination;
 import com.myspring.yologaza.member.vo.MemberVO;
 
 @Controller("AdminMemberController")
@@ -31,19 +33,51 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 	@RequestMapping(value = {"/listMember.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	private ModelAndView listMember(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
+		//pagination
+		Pagination pagination = new Pagination();
+		pagination.setPage(1);
+		pagination.setCountList(10);
+		pagination.setCountPage(5);
+		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
+		if(request.getParameter("pages") != null)
+			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
+		int offset = (pagination.getPage()-1)*pagination.getCountList();
+		pagination.Paging();
 		String viewName = (String) request.getAttribute("viewName");
-		List membersList = adminMemberService.listMembers();
+		List<MemberVO> membersList = adminMemberService.listMembers(offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);
+		mav.addObject(pagination);
 		return mav;
 	}
 	@RequestMapping(value = {"/deleteMemberList.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	private ModelAndView deleteMemberList(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
+		Pagination pagination = new Pagination();
+		pagination.setPage(1);
+		pagination.setCountList(10);
+		pagination.setCountPage(5);
+		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
+		if(request.getParameter("pages") != null)
+			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
+		int offset = (pagination.getPage()-1)*pagination.getCountList();
+		pagination.Paging();
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
 		String viewName = (String) request.getAttribute("viewName");
-		List deleteMemberList = adminMemberService.deletlistMembers();
+		List<MemberVO> deleteMemberList = adminMemberService.deletlistMembers(date1, date2, offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("deleteMemberList", deleteMemberList);
+		mav.addObject(pagination);
+		mav.addObject("today", today);
 		return mav;
 	}
 	
