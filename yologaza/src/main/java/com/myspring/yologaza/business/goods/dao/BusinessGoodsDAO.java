@@ -21,4 +21,8 @@ public interface BusinessGoodsDAO {
 	public void updateGoodsImage(List<ImageFileVO> imageFileList) throws DataAccessException;
 	public void deleteGoodsImage(int goods_uimg) throws DataAccessException;
 	public void deleteGoodsImage(List fileList) throws DataAccessException;
+	public GoodsVO selectNewGoodsRoom(String goods_uroom) throws DataAccessException;
+	public List<ImageFileVO> selectNewGoodsRoomImg(String goods_uroom) throws DataAccessException;
+	public List selectAllGoodsList(String uid) throws DataAccessException;
+	public List selectAllRoomList(String goods_id) throws DataAccessException;
 }

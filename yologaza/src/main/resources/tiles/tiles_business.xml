@@ -39,5 +39,20 @@
        <put-attribute name="title" value="등록한 숙박 검색" />
        <put-attribute name="body" value="/WEB-INF/views/business/goods/viewNewGoods.jsp" />
     </definition>
+    
+    <definition name="/business/goods/viewNewGoodsRoom" extends="BusinessLayout">
+       <put-attribute name="title" value="등록한 숙박룸 검색" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/viewNewGoodsRoom.jsp" />
+    </definition>
+    
+    <definition name="/business/goods/listGoods" extends="BusinessLayout">
+       <put-attribute name="title" value="등록한 숙박룸 리스트" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/listGoods.jsp" />
+    </definition>
+    
+    <definition name="/business/goods/listRoom" extends="BusinessLayout">
+       <put-attribute name="title" value="등록한 룸 리스트" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/listRoom.jsp" />
+    </definition>
 
 </tiles-definitions>

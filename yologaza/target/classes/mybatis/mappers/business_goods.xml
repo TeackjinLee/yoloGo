@@ -231,7 +231,7 @@
    								  )
 		]]>
 	</insert>
-	
+	<!-- 숙박 검색 관리 -->
 	<select id="selectNewGoods" resultMap="goodsResult"  parameterType="String">
 		<![CDATA[
 			select goods_id,
@@ -326,5 +326,55 @@
 	  delete from goods_img
 	  where goods_uimg=#{goods_uimg}
 	</delete>
+	
+	<!-- 객실 검색 관리 -->
+	<select id="selectNewGoodsRoom" resultMap="goodsResult"  parameterType="String">
+		<![CDATA[
+			select goods_uroom, 
+					goods_id,
+					goods_room_type,
+					goods_capacity,
+					goods_room_price1,
+					goods_room_price2,
+					goods_introduce
+					from goods_detail where goods_uroom = #{goods_uroom}
+		]]>
+	</select>
+	
+	<select id="selectNewGoodsRoomImg" resultMap="imageResult"   parameterType="String">
+		<![CDATA[
+			select goods_uimg,
+					goods_id,
+					reg_id,
+					fileName,
+					fileType 
+					from goods_img 
+					where goods_uroom=#{goods_uroom} 
+					and fileType like 'room%';
+		]]>
+	</select>
+	
+	<!-- 등록한 숙박 검색 -->
+	<select id="selectAllGoodsList" resultMap="goodsResult">
+      <![CDATA[
+			select g.*, i.fileName 
+			from goods g, goods_img i
+			where g.goods_id = i.goods_id
+			and uid = #{uid}
+			group by goods_id
+			order by goods_id;
+      ]]>
+	</select>
+	
+	<select id="selectAllRoomList" resultMap="goodsResult">
+      <![CDATA[
+			select d.*, i.fileName 
+			from goods_detail d, goods_img i
+			where d.goods_uroom = i.goods_uroom
+            and d.goods_id = #{goods_id}
+            group by goods_uroom
+            order by goods_uroom;
+      ]]>
+	</select>
 	
 </mapper>

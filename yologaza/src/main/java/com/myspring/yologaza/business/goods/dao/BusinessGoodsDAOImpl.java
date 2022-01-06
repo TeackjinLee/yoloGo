@@ -93,4 +93,28 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 			sqlSession.delete("mapper.business.goods.deleteGoodsImage",goods_uimg);	
 		}
 	}
+	
+	@Override
+	public GoodsVO selectNewGoodsRoom(String goods_uroom) throws DataAccessException {
+		GoodsVO goodsVO=(GoodsVO)sqlSession.selectOne("mapper.business.goods.selectNewGoodsRoom",goods_uroom);
+		return goodsVO;
+	}
+
+	@Override
+	public List<ImageFileVO> selectNewGoodsRoomImg(String goods_uroom) throws DataAccessException {
+		List<ImageFileVO> imageList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectNewGoodsRoomImg",goods_uroom);
+		return imageList;
+	}
+	
+	@Override
+	public List selectAllGoodsList(String  uid) throws DataAccessException {
+		List goodsList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectAllGoodsList", uid);
+		return goodsList;
+	}
+	
+	@Override
+	public List selectAllRoomList(String  goods_id) throws DataAccessException {
+		List roomList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectAllRoomList", goods_id);
+		return roomList;
+	}
 }
