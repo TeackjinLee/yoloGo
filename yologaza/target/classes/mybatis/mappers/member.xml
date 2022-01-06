@@ -42,9 +42,18 @@
 	<!-- 관리자 탈퇴 회원 관리 -->
 	<select id="selectAllDeleteMemberList" resultMap="memResult">
          select SQL_CALC_FOUND_ROWS * from deletemember 
+         <if test="(date1 != 0 and date2 != 0) or (auth != '' and auth != null)">
+         where
          <if test="date1 != 0 and date2 != 0">
-         where UNIX_TIMESTAMP(joinDate) >= #{date1} 
+         UNIX_TIMESTAMP(joinDate) >= #{date1} 
          and #{date2} >= UNIX_TIMESTAMP(joinDate)  
+         </if>
+         <if test="(date1 != 0 and date2 != 0) and (auth != '' and auth != null)">
+         and
+         </if>
+         <if test="auth != '' and auth != null">
+          auth = #{auth}
+         </if>
          </if>
          order by joinDate asc	limit #{offset},#{count}
 	</select>

@@ -49,7 +49,7 @@
 .button_div button{
 	float:right;
   width: 60px;
-  height: 30px;
+  height: 25px;
   box-sizing: inherit;
   align-items: center;
   border-radius: 5px;
@@ -59,6 +59,30 @@
   line-height: 1.5;
   text-align: center;
   cursor:pointer;
+}
+
+.button_div{
+	height:29px;
+}
+
+.auth_div button{
+	float:right;
+  width: 60px;
+  height: 25px;
+  box-sizing: inherit;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid rgba(0,0,0,0.15);
+  box-shadow: none;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  cursor:pointer;
+}
+
+.auth_div{
+	height:29px;
+	margin-top:5px;
 }
 </style>
 <meta charset="UTF-8">
@@ -78,6 +102,12 @@
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-2592000}&date2=${today}'">30일</button>
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-604800}&date2=${today}'">1주</button> 
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today}&date2=${today}'">오늘</button>
+	        </div>
+	        <div class="auth_div">
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?auth='">전체</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?auth=3'">관리자</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?auth=2'">사업자</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?auth=1'">사용자</button>
 	        </div>
 	        <table align="center">
 	          <tr align="center" class="column">

@@ -35,8 +35,8 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	}
 	
 	@Override
-	public List<MemberVO> deletlistMembers(long date1, long date2, int offset, int count) throws DataAccessException {
-		return adminMemberDAO.selectAllDeleteMemberList(date1, date2, offset, count);
+	public List<MemberVO> deletelistMembers(String auth, long date1, long date2, int offset, int count) throws DataAccessException {
+		return adminMemberDAO.selectAllDeleteMemberList(auth, date1, date2, offset, count);
 	}
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {

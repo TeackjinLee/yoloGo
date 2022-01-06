@@ -72,8 +72,11 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		date1 = (date1/86400) * 86400;
 		request.setAttribute("date1", date1);
 		request.setAttribute("date2", date2);
+		String auth = "";
+		auth = request.getParameter("auth");
+		request.setAttribute("auth", auth);
 		String viewName = (String) request.getAttribute("viewName");
-		List<MemberVO> deleteMemberList = adminMemberService.deletlistMembers(date1, date2, offset, pagination.getCountList());
+		List<MemberVO> deleteMemberList = adminMemberService.deletelistMembers(auth, date1, date2, offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("deleteMemberList", deleteMemberList);
 		mav.addObject(pagination);
