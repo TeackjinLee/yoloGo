@@ -201,10 +201,10 @@ System.out.println("goods_id :"+goods_id);
 	<section>
 		<div class="sub_top_wrap">
 	      <div class="sub_top">
-	        <a href="${contextPath}/business/goods/viewNewGoods.do?goods_id=<%=goods_id%>"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+	        <a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
           <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
           <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-          <a href="${contextPath}/business/goods/viewNewGoodsRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+          <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
 	      </div>
 	    </div>
 		     <form action="${contextPath}/business/goods/addNewGoodsRoom.do?goods_id=<%=goods_id%>" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">

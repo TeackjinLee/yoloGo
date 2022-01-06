@@ -50,7 +50,7 @@
 			<table align="center">
 			<tr align="center" class="column">
 				<td ><b>업체명</b></td>
-				<td ><b>대표 사진</b></td>
+				<td ><b>예약페이지 이동</b></td>
 				<td ><b>주소</b></td>
 				<td><b>숙박 시설</b></td>
 				<td><b>등록 날짜</b></td>
@@ -62,10 +62,13 @@
 					
 					<td>${goodsList.goods_name}</td>
 					<td><a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }"><img src="${contextPath}/goods_thumbnails.do?goods_id=${goodsList.goods_id}&fileName=${goodsList.fileName}" alt="숙박정보 사진"></a></td>
-					<td>${goodsList.roadAddress}/${goodsList.namujiAddress}</td>
+					<td width="40%">${goodsList.roadAddress}<br>${goodsList.namujiAddress}</td>
 					<td>${goodsList.goods_type}</td>
 					<td>${goodsList.goods_creDate}</td>
-					<td><button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer;" onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button></td>
+					<td>
+						<button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer; display:block;" onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
+						<button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer; display:block; margin-top:9px;" onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 관리</button>
+					</td>
 				</tr>
 			</c:forEach>   
 			</table>

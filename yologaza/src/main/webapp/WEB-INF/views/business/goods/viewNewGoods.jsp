@@ -335,10 +335,10 @@ String goods_id = request.getParameter("goods_id");
 <section>
 	  <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/viewNewGoods.do?goods_id=<%=goods_id%>"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+          <a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
           <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
           <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-          <a href="${contextPath}/business/goods/viewNewGoodsRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+          <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
         </div>
       </div>
       <form name="frmGoods" action="${contextPath}" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
@@ -544,7 +544,7 @@ String goods_id = request.getParameter("goods_id");
       	<c:if test="${member.uid == goods.uid }">
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)" style="width:150px; cursor:pointer;">
 	    </c:if>
-        <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
+        <input  type="button" value="돌아가기"  onclick="location.href='${contextPath}/business/goods/listGoods.do' " style="width:150px; cursor:pointer;">
       </div>
 		
 	</form>

@@ -44,9 +44,9 @@
 	              <div>숙박 관리</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="#">소개작성</a></li>
+	                  <li><a href="${contextPath}/business/goods/addNewGoodsForm.do">소개작성</a></li>
 	                  <li><a href="#">이용규칙 관리</a></li>
-	                  <li><a href="#">객실 관리</a></li>
+	                  <li><a href="${contextPath}/business/goods/listGoods.do">객실 관리</a></li>
 	                  <li><a href="#">리뷰 관리</a></li>
 	                </ul>
 	              </div>  
