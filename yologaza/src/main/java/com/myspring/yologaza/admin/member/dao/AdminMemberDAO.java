@@ -10,7 +10,7 @@ public interface AdminMemberDAO {
 	public int getTotalCount();
 	public List<MemberVO> selectAllMemberList(int offset, int count) throws DataAccessException;
 	public List<MemberVO> selectAllMemberListByAuth(String auth, int offset, int count) throws DataAccessException;
-	public List<MemberVO> selectAllDeleteMemberList(long date1, long date2, int offset, int count) throws DataAccessException;
+	public List<MemberVO> selectAllDeleteMemberList(String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public int insertMember(MemberVO memberVO) throws DataAccessException;
 	public int deleteMember(String id) throws DataAccessException;
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;

@@ -63,11 +63,12 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	}
 	
 	@Override
-	public List<MemberVO> selectAllDeleteMemberList(long date1, long date2, int offset, int count) throws DataAccessException {
+	public List<MemberVO> selectAllDeleteMemberList(String auth, long date1, long date2, int offset, int count) throws DataAccessException {
 		List<MemberVO> membersList = new ArrayList<MemberVO>();
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("auth", auth);
 		params.put("date1", date1);
 		params.put("date2", date2);
 		params.put("offset", offset);
