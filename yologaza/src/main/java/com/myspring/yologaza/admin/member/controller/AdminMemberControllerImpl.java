@@ -70,6 +70,7 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		if(request.getParameter("date2") != null)
 			date2 = Long.parseLong(request.getParameter("date2"));
 		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
 		request.setAttribute("date1", date1);
 		request.setAttribute("date2", date2);
 		String auth = "";

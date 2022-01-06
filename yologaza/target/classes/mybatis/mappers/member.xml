@@ -46,7 +46,7 @@
          where
          <if test="date1 != 0 and date2 != 0">
          UNIX_TIMESTAMP(joinDate) >= #{date1} 
-         and #{date2} >= UNIX_TIMESTAMP(joinDate)  
+         and #{date2} > UNIX_TIMESTAMP(joinDate)  
          </if>
          <if test="(date1 != 0 and date2 != 0) and (auth != '' and auth != null)">
          and
