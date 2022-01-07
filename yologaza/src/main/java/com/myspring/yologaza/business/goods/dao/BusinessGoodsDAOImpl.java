@@ -70,6 +70,11 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
+	public void updateRoomInfo(Map modRoomMap) throws DataAccessException{
+		sqlSession.update("mapper.business.goods.updateRoomInfo",modRoomMap);
+	}
+	
+	@Override
 	public void updateGoodsImage(List<ImageFileVO> imageFileList) throws DataAccessException {
 		
 		for(int i=0; i<imageFileList.size();i++){

@@ -250,7 +250,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		}catch(Exception e) {
 			message= "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do';";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoods.do?goods_id="+goods_id+"';";
 			message +=("</script>");
 			e.printStackTrace();
 		}
@@ -409,18 +409,63 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		return mav;
 	}
 	
-	// 숙박 검색
-		@Override
-		@RequestMapping(value="/listRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView listRoom(@RequestParam("goods_id") String goods_id,
-										HttpServletRequest request, 
-										HttpServletResponse response) throws Exception{
-			String viewName = (String)request.getAttribute("viewName");
-			HttpSession session=request.getSession();
-			Map listRoomMap=businessGoodsService.selectAllRoomList(goods_id);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName(viewName);
-			mav.addObject("listRoomMap", listRoomMap);
-			return mav;
+	// 룸 검색
+	@Override
+	@RequestMapping(value="/listRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listRoom(@RequestParam("goods_id") String goods_id,
+									HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		Map listRoomMap=businessGoodsService.selectAllRoomList(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("listRoomMap", listRoomMap);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/modRoom.do" ,method={RequestMethod.POST})
+	@ResponseBody
+	public ResponseEntity modRoom(@RequestParam("goods_id") int goods_id,
+									@RequestParam("goods_uroom") int goods_uroom,
+									MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String fileName=null;
+		
+		Map modRoomMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			modRoomMap.put(name,value);
 		}
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			businessGoodsService.modifyRoomInfo(modRoomMap);
+			message= "<script>";
+			message += " alert('상품을 수정했습니다.');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoodsRoom.do?goods_id="+goods_id+"&goods_uroom="+goods_uroom+"';";
+			message +=("</script>");
+		}catch(Exception e) {
+			message= "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/business/goods/viewNewGoodsRoom.do?goods_id="+goods_id+"&goods_uroom="+goods_uroom+"';";
+			message +=("</script>");
+			e.printStackTrace();
+		}
+		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+		
+		
+		
 }
