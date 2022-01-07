@@ -95,10 +95,18 @@
   text-decoration : none;
   color : black;
   font-size: 16px;
-  padding : 12px 10px;
+  padding : 12px 10px 12px 12px;
 }
 .dropdown-content div:hover{
   background-color: rgb(226, 226, 226);
+}
+
+.type{
+	text-align:left;
+}
+
+.dropbtn_content{
+	padding-left:10px;
 }
 </style>
 <script type="text/javascript">
@@ -154,10 +162,10 @@ $(function(){
                     <button class="dropbtn">
                     <c:choose>
                     <c:when test="${auth==2}">
-                      <span class="dropbtn_content">사업자 공지사항 조회</span>
+                      <span class="dropbtn_content">사업자 조회</span>
                     </c:when>
                     <c:otherwise>
-                      <span class="dropbtn_content">사용자 공지사항 조회</span>
+                      <span class="dropbtn_content">사용자 조회</span>
                     </c:otherwise>
                     </c:choose>
                     </button>

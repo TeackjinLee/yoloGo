@@ -17,5 +17,6 @@ public interface BusinessGoodsService {
 	public void addNewGoodsImage(List imageFileList) throws Exception;
 	public Map selectNewGoodsRoom(String goods_uroom) throws Exception;
 	public Map selectAllGoodsList(String uid) throws Exception;
-	public Map selectAllRoomList(String goods_id) throws Exception;	
+	public Map selectAllRoomList(String goods_id) throws Exception;
+	public void modifyRoomInfo(Map modRoomMap) throws Exception;	
 }

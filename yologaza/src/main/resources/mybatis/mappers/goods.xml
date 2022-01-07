@@ -62,6 +62,7 @@
 			        	where g.goods_id=d.goods_id 
 			        	and d.filetype like 'goods%'
 			            and goods_type=#{goods_type}
+			            and goods_acess = 1
 			            group by goods_id
 			            order by g.goods_creDate desc)  t
 				             where (@ROWNUM:=0) < 16;

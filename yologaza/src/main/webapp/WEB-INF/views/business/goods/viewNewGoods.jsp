@@ -179,6 +179,13 @@ String goods_id = request.getParameter("goods_id");
 		document.getElementById("tr_btn_modify").style.display="block";
 		
 	}
+	
+	function chageLangSelect(){ 
+		var langSelect = document.getElementById("selectbox"); 
+		var selectValue = langSelect.options[langSelect.selectedIndex].value;  
+		var selectText = langSelect.options[langSelect.selectedIndex].text; 
+	}
+
 </script>
 <style>
 	.sub_top_wrap{
@@ -357,9 +364,9 @@ String goods_id = request.getParameter("goods_id");
              <th>게스트하우스 <br> 기본 정보</th>
              <td>
                  <strong>숙박 시설</strong><br>
-                 <select id="goods_type" name="goods_type" style="width:150px; height:40px; margin-top:10px; margin-bottom: 20px; color:#555" disabled>
+                 <select id="goods_type" name="goods_type" onchange="goods_typeSelect" style="width:150px; height:40px; margin-top:10px; margin-bottom: 20px; color:#555" disabled>
                    <option value="${goods.goods_type }" selected>${goods.goods_type }</option>
-                   <option value="motel"  >모텔</option>
+                   <option value="motel" >모텔</option>
                    <option value="hotel" >호텔</option>
                    <option value="pension" >펜션</option>
                    <option value="resort" >리조트</option>
@@ -499,12 +506,21 @@ String goods_id = request.getParameter("goods_id");
               <div>
                 <strong>숙박가격</strong>
                  <div>
-                  <input id="goods_price1" name="goods_price1" type="text" value=${goods.goods_price1 } disabled/>
+                  <input id="goods_price1" name="goods_price1" type="text" value="${goods.goods_price1 }" disabled/>
                  </div>
-                <strong>대실가격</strong>
-                 <div>
-                  <input id="goods_price2" name="goods_price2" type="text" value=${goods.goods_price2 } disabled/>
-                 </div>
+                <c:choose>
+	                <c:when test="${goods.goods_type == 'motel'}">
+						<strong>대실가격</strong>
+						<div>
+							<input id="goods_price2" name="goods_price2" type="text" value="${goods.goods_price2 }" disabled/>
+						</div>
+	                </c:when>
+	                <c:otherwise>
+						<div>
+							<input id="goods_price2" name="goods_price2" type="text" value="0" style="visibility:hidden;" disabled/>
+						</div>
+	                </c:otherwise>
+                </c:choose>
               </div>
            </td>
          </tr>

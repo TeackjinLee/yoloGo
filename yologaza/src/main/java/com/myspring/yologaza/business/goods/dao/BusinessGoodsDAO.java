@@ -25,4 +25,5 @@ public interface BusinessGoodsDAO {
 	public List<ImageFileVO> selectNewGoodsRoomImg(String goods_uroom) throws DataAccessException;
 	public List selectAllGoodsList(String uid) throws DataAccessException;
 	public List selectAllRoomList(String goods_id) throws DataAccessException;
+	public void updateRoomInfo(Map modRoomMap) throws DataAccessException;
 }

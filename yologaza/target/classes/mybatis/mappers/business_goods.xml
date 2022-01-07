@@ -260,7 +260,8 @@
 					goods_motel_endtime,
 					goods_motel_usetime,
 					goods_price1,
-					goods_price2 
+					goods_price2, 
+					goods_acess
 					from goods where goods_id=#{goods_id}
 		]]>
 	</select>
@@ -376,5 +377,28 @@
             order by goods_uroom;
       ]]>
 	</select>
+	
+	<update id="updateRoomInfo" parameterType="java.util.Map" >
+		update goods_detail
+		 <set> 
+	      <if test=" goods_room_type !='' and goods_room_type !=null">
+	        goods_room_type=#{goods_room_type},
+	      </if>
+	      <if test=" goods_capacity !='' and goods_capacity !=null">
+	        goods_capacity=#{goods_capacity},
+	      </if>
+	      <if test=" goods_room_price1 !='' and goods_room_price1 !=null">
+	        goods_room_price1=#{goods_room_price1},
+	      </if>
+	      <if test=" goods_room_price2 !='' and goods_room_price2 !=null">
+	        goods_room_price2=#{goods_room_price2},
+	      </if>
+	      <if test=" goods_introduce !='' and goods_introduce !=null">
+	        goods_introduce=#{goods_introduce},
+	      </if>
+		</set>
+		where 
+	    goods_uroom=#{goods_uroom} and goods_id = #{goods_id}
+	</update>
 	
 </mapper>
