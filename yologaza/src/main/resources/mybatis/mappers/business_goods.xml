@@ -260,7 +260,8 @@
 					goods_motel_endtime,
 					goods_motel_usetime,
 					goods_price1,
-					goods_price2 
+					goods_price2, 
+					goods_acess
 					from goods where goods_id=#{goods_id}
 		]]>
 	</select>

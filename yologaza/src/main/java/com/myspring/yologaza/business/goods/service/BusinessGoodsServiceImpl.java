@@ -85,7 +85,7 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	
 	@Override
 	public Map selectNewGoodsRoom(String goods_uroom) throws Exception {
-		Map goodsRoomMap=new HashMap();
+		Map<String, Object> goodsRoomMap=new HashMap();
 		GoodsVO roomVO = businessGoodsDAO.selectNewGoodsRoom(goods_uroom);
 		goodsRoomMap.put("roomVO", roomVO);
 		List<ImageFileVO> roomImageList =businessGoodsDAO.selectNewGoodsRoomImg(goods_uroom);
@@ -95,7 +95,7 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	
 	@Override
 	public Map selectAllGoodsList(String uid) throws Exception {
-		Map listGoodsMap=new HashMap();
+		Map<String, Object> listGoodsMap=new HashMap();
 		List goodsList =businessGoodsDAO.selectAllGoodsList(uid);
 		listGoodsMap.put("goodsList", goodsList);
 		return listGoodsMap;
@@ -103,7 +103,7 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	
 	@Override
 	public Map selectAllRoomList(String goods_id) throws Exception {
-		Map listRoomMap=new HashMap();
+		Map<String, Object> listRoomMap=new HashMap();
 		List roomList =businessGoodsDAO.selectAllRoomList(goods_id);
 		listRoomMap.put("roomList", roomList);
 		return listRoomMap;

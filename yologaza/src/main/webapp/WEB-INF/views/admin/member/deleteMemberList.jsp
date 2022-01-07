@@ -47,19 +47,22 @@
 
 .button_div button{
 	float:right;
-  width: 60px;
-  height: 25px;
-  box-sizing: inherit;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid rgba(0,0,0,0.15);
-  box-shadow: none;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: center;
-  cursor:pointer;
+	width: 60px;
+	height: 25px;
+	box-sizing: inherit;
+	align-items: center;
+	border-radius: 5px;
+	border: 2px solid rgba(0,0,0,0.15);
+	box-shadow: none;
+	font-size: 16px;
+	line-height: 1.5;
+	text-align: center;
+	cursor:pointer;
+	margin-left:10px;
 }
-
+.button_div button:nth-child(6){
+	margin-left:0px;
+}
 .button_div{
 	height:29px;
 }
@@ -77,6 +80,7 @@
   line-height: 1.5;
   text-align: center;
   cursor:pointer;
+  margin-left:10px;
 }
 
 .auth_div{
@@ -94,30 +98,36 @@
    	color: #777;
    	border: 1px solid #ddd;
     border-radius: 5px;
-    margin-right:20px;
+    margin-right:5px;
     cursor:pointer;
 }
+#admin_main .far{
+	font-size: 27px;
+	color: #555;
+	margin: 3px 7px 0px 0px;
+}
 </style>
-<script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
-<script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
 <script>
     $(function() {
         $('input[name="daterange"]').daterangepicker({
-        opens: 'left',
-        showDropdowns: true
+	        opens: 'left',
+	        showDropdowns: true
         }, function(start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
-        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
-        var auth = '${auth}'
-        $('.applyBtn').click(function(){
-    		window.location.replace('${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth);
-    	});
+	        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+	        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+	        var auth = '${auth}'
+	        $('#dateApplyBtn').click(function(){
+	    		window.location.replace('${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth);
+	    	});
         });
 
     });
-    </script>
+</script>
+<script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
+
 <meta charset="UTF-8">
 <title>YOLO가자! 관리자 메인페이지</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/admin_main.css" rel="stylesheet" type="text/css" media="screen">
@@ -135,7 +145,11 @@
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-2592000}&date2=${today}&auth=${auth}'">30일</button>
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-604800}&date2=${today}&auth=${auth}'">1주</button> 
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today}&date2=${today}&auth=${auth}'">오늘</button>
-	        <input type="text" id="cal" name="daterange" value="${Ddate1}/ - ${Ddate2}"/>
+	          <button id="dateApplyBtn">검색</button>
+	          <div class="date-box-wrap" style="display: inline-block; float: right;">
+	          	<input type="text" id="cal" name="daterange" value="${Ddate1}/ - ${Ddate2}"/>
+	          	<i class="far fa-calendar-alt"></i>
+	          </div>
 	        </div>
 	        <div class="auth_div">
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${date1}&date2=${date2}&auth='">전체</button>
