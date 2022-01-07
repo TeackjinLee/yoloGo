@@ -53,6 +53,7 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 	@RequestMapping(value = {"/deleteMemberList.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	private ModelAndView deleteMemberList(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
+		//pagination
 		Pagination pagination = new Pagination();
 		pagination.setPage(1);
 		pagination.setCountList(10);
@@ -62,7 +63,11 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
 		pagination.Paging();
+		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String todayDate = timeFormat.format(date);
 		long date1 = 0;
 		long date2 = 0;
 		if(request.getParameter("date1") != null)
@@ -73,6 +78,15 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		date2 = ((date2/86400) * 86400)+1;
 		request.setAttribute("date1", date1);
 		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		//auth
 		String auth = "";
 		auth = request.getParameter("auth");
 		request.setAttribute("auth", auth);
