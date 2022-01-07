@@ -77,4 +77,30 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	public void addNewGoodsImage(List imageFileList) throws Exception{
 		businessGoodsDAO.insertGoodsImageFile(imageFileList);
 	}
+	
+	@Override
+	public Map selectNewGoodsRoom(String goods_uroom) throws Exception {
+		Map goodsRoomMap=new HashMap();
+		GoodsVO roomVO = businessGoodsDAO.selectNewGoodsRoom(goods_uroom);
+		goodsRoomMap.put("roomVO", roomVO);
+		List<ImageFileVO> roomImageList =businessGoodsDAO.selectNewGoodsRoomImg(goods_uroom);
+		goodsRoomMap.put("roomImageList", roomImageList);
+		return goodsRoomMap;
+	}
+	
+	@Override
+	public Map selectAllGoodsList(String uid) throws Exception {
+		Map listGoodsMap=new HashMap();
+		List goodsList =businessGoodsDAO.selectAllGoodsList(uid);
+		listGoodsMap.put("goodsList", goodsList);
+		return listGoodsMap;
+	}
+	
+	@Override
+	public Map selectAllRoomList(String goods_id) throws Exception {
+		Map listRoomMap=new HashMap();
+		List roomList =businessGoodsDAO.selectAllRoomList(goods_id);
+		listRoomMap.put("roomList", roomList);
+		return listRoomMap;
+	}
 }

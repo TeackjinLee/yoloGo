@@ -4,7 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
+<c:set var="room"  value="${goodsRoomMap.roomVO}"  />
+<c:set var="roomImageList"  value="${goodsRoomMap.roomImageList}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -36,6 +38,16 @@ System.out.println("goods_id :"+goods_id);
 				 return;
 			 }
 			 
+		}
+	  
+		function fn_enable(obj){
+			document.getElementById("goods_room_type").disabled=false;
+			document.getElementById("goods_capacity").disabled=false;
+			document.getElementById("goods_introduce").disabled=false;
+			document.getElementById("goods_room_price1").disabled=false;
+			document.getElementById("goods_room_price2").disabled=false;
+			document.getElementById("tr_btn").style.display="none";
+			document.getElementById("tr_btn_modify").style.display="block";
 		}
 	</script>
 	<style>
@@ -180,21 +192,25 @@ System.out.println("goods_id :"+goods_id);
 			box-sizing: border-box;
 			color: #eee;
 		}
+		#tr_btn_modify{
+	       display:none;
+	     }
 	</style>  
 </head>
 <body>
 	<section>
 		<div class="sub_top_wrap">
 	      <div class="sub_top">
-	        <a href="${contextPath}/business/goods/viewNewGoods.do?goods_id=<%=goods_id%>"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
-	        <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
-	        <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-	        <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+	        <a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+          <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
+          <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
+          <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
 	      </div>
 	    </div>
 		     <form action="${contextPath}/business/goods/addNewGoodsRoom.do?goods_id=<%=goods_id%>" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
 	       <div id="cent">
-	       <input name="goods_id" value="<%=goods_id%>" type="text" size="40" style="visibility: hidden;" readonly/>
+	       <input id="goods_id" name="goods_id" value="<%=goods_id%>" type="text" size="40" style="visibility: hidden;" readonly/>
+	       <input id="goods_uid" name="uid" value="${goods.uid}" type="text" size="40" style="visibility: hidden;" readonly/>
 	         
 	       <h3>[객실 등록 창]</h3>
 	       </div>
@@ -204,7 +220,8 @@ System.out.println("goods_id :"+goods_id);
 	            <th>객실 정보</th>
 	            <td>
 	              <div><strong>객실 유형</strong></div>
-	              <select name="goods_room_type">
+	              <select id="goods_room_type" name="goods_room_type" disabled>
+	              	<option value="${room.goods_room_type }" selected>${room.goods_room_type }</option>
 	                <option value="도미토리 혼성"  >도미토리(혼성)</option>
 	                <option value="도미토리(남자)" >도미토리(남자)</option>
 	                <option value="도미토리(여자)" >도미토리(여자)</option>
@@ -212,7 +229,8 @@ System.out.println("goods_id :"+goods_id);
 	                <option value="독채형(콘도롬)" >독채형(콘도롬)</option>
 	              </select>
 	              <div style="margin-top:20px;"><strong>침대 개수</strong></div>
-	              <select name="goods_capacity">
+	              <select id="goods_capacity" name="goods_capacity" disabled>
+	              	<option value="${room.goods_capacity }" selected>${room.goods_capacity }명</option>
 	                <option value="2" >2명</option>
 	                <option value="3" >3명</option>
 	                <option value="4" >4명</option>
@@ -237,18 +255,19 @@ System.out.println("goods_id :"+goods_id);
 	                  * 이미지 교체를 원하시면 "변경"을 선택하시고 삭제를 원하시면 우측 "삭제"를 선택하시기 바랍니다. <br>
 	                  * 이미지 장소는 짧게 기입해주시기 바랍니다. 예시) 객실명, 침대, 화장실 등<br>
 	                  * 첫 이미지가 메인 이미지이며 드래그를 통해 순서 변경이 가능합니다. <br><br></p>
-	                   <div  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()" style="width:auto;"/></div>
-				            <div>
-					            <div id="d_file">
-					            </div>
-				            </div>
+						<ul>
+						<c:forEach var="item" items="${goodsRoomMap.roomImageList}" >
+							<li class="pic" style="width:204px;height:144px;overflow: hidden; float:left; margin:10px; border:1px solid #ddd; margin-top:30px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진" style="width:100%;" /></li>
+						</c:forEach>
+						</ul> 
+				            
 	            </td>
 	          </tr>
 	          <tr>
 	             <th>편의시설<br>서비스 안내</th>
 	             <td>
-	
-	               <textarea name="goods_introduce" rows="20" cols="110" maxlength="1000" placeholder="도미토리 : 객실 내 침대 구성 및 구비 물품 등을 자세히 기재해 주세요.                                                                  개인실 : 객실 내 전용 욕실 여부 및 침대 구성과 구비 물품 등을 자세히 기재해 주세요.                                                           독채 : 객실 구조 및 침대 구성, 취사 구비 물품 등을 자세히 기재해 주세요."></textarea>
+	               <textarea id="goods_introduce" name="goods_introduce" rows="20" cols="110" maxlength="1000" placeholder="도미토리 : 객실 내 침대 구성 및 구비 물품 등을 자세히 기재해 주세요.                                                                  개인실 : 객실 내 전용 욕실 여부 및 침대 구성과 구비 물품 등을 자세히 기재해 주세요.                                                           독채 : 객실 구조 및 침대 구성, 취사 구비 물품 등을 자세히 기재해 주세요."
+	               			disabled>${room.goods_introduce }</textarea>
 	
 	             </td>
 	           </tr>
@@ -256,16 +275,25 @@ System.out.println("goods_id :"+goods_id);
 	             <th>요금설정</th>
 	             <td>
 	               <div style="margin-bottom:10px;"><strong>숙박 가격</strong></div>
-	               <input name="goods_room_price1" type="text" style="width:auto;" /><storong style="padding-left:10px; font-size:16px;">원</storong>
+	               <input id="goods_room_price1" name="goods_room_price1" value="${room.goods_room_price1}" type="text" style="width:auto;" disabled/><storong style="padding-left:10px; font-size:16px;">원</storong>
 	               <div style="margin-top:20px; margin-bottom:10px;"><strong>대실 가격</strong></div>
-	               <input name="goods_room_price2" type="text" style="width:auto;" /><storong style="padding-left:10px; font-size:16px;">원</storong>
+	               <input id="goods_room_price2" name="goods_room_price2" value="${room.goods_room_price2}" type="text" style="width:auto;" disabled/><storong style="padding-left:10px; font-size:16px;">원</storong>
 	             </td>
 	           </tr>
 	      </tbody>
 	     </table>
-	     <div id="button" style="margin: 0 auto; margin-top:30px; text-align: center;">
-	        <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_room(this.form)" style="width:150px; cursor:pointer;">
-	     </div>
+		<div id="tr_btn_modify" align="center" style="margin: 0 auto; margin-top:30px; text-align: center;">
+			<div>
+				<input type=button value="수정반영하기"   onClick="fn_modify_goods(frmGoods)" style="width:150px; cursor:pointer;">
+				<input type=button value="취소"  onClick="backToList(frmGoods)" style="width:150px; cursor:pointer;">
+			</div>   
+		</div>
+		<div id="tr_btn" style="margin: 0 auto; margin-top:30px; text-align: center;">
+			<c:if test="${member.uid == goods.uid }">
+				<input type=button value="수정하기" onClick="fn_enable(this.form)" style="width:150px; cursor:pointer;">
+			</c:if>
+			<input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_room(this.form)" style="width:150px; cursor:pointer;">
+		</div>
 	  </form>
 	
 	</section>

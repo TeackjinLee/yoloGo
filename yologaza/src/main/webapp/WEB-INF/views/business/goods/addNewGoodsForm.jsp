@@ -235,7 +235,7 @@
           <a href="${contextPath}/business/goods/addNewGoodsForm.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
           <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
           <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-          <a href="${contextPath}/business/goods/addNewGoodsRoomForm.do"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+          <a href="#"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
         </div>
       </div>
       <form action="${contextPath}/business/goods/addNewGoods.do" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">

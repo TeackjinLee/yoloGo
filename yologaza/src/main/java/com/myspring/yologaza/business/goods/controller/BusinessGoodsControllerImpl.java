@@ -203,7 +203,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
-	
+	// ¼÷¹Ú µî·Ï °Ë»ö
 	@Override
 	@RequestMapping(value="/viewNewGoods.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView viewNewGoods(@RequestParam("goods_id") String goods_id,
@@ -376,5 +376,51 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			e.printStackTrace();
 		}
 	}
+	// °´½Ç µî·Ï °Ë»ö
+	@Override
+	@RequestMapping(value="/viewNewGoodsRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView viewNewGoodsRoom(@RequestParam("goods_id") String goods_id,
+								@RequestParam("goods_uroom") String goods_uroom,
+									HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		Map goodsRoomMap=businessGoodsService.selectNewGoodsRoom(goods_uroom);
+		Map goodsMap=businessGoodsService.selectNewGoods(goods_id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("goodsMap", goodsMap);
+		mav.addObject("goodsRoomMap", goodsRoomMap);
+		return mav;
+	}
+	// ¼÷¹Ú °Ë»ö
+	@Override
+	@RequestMapping(value="/listGoods.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listGoods(HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String uid = memberVO.getUid();
+		Map listGoodsMap=businessGoodsService.selectAllGoodsList(uid);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("listGoodsMap", listGoodsMap);
+		return mav;
+	}
 	
+	// ¼÷¹Ú °Ë»ö
+		@Override
+		@RequestMapping(value="/listRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView listRoom(@RequestParam("goods_id") String goods_id,
+										HttpServletRequest request, 
+										HttpServletResponse response) throws Exception{
+			String viewName = (String)request.getAttribute("viewName");
+			HttpSession session=request.getSession();
+			Map listRoomMap=businessGoodsService.selectAllRoomList(goods_id);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("listRoomMap", listRoomMap);
+			return mav;
+		}
 }

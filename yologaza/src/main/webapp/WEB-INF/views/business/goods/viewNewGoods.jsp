@@ -177,7 +177,6 @@ String goods_id = request.getParameter("goods_id");
 		document.getElementById("account").disabled=false;
 		document.getElementById("tr_btn").style.display="none";
 		document.getElementById("tr_btn_modify").style.display="block";
-		document.getElementById("tr_file_upload").style.display="block";
 		
 	}
 </script>
@@ -326,6 +325,9 @@ String goods_id = request.getParameter("goods_id");
 	#tr_btn_modify{
        display:none;
      }
+     #FILE_FORM input{
+     	width:auto;
+     }
 </style>
     
 </head>
@@ -333,10 +335,10 @@ String goods_id = request.getParameter("goods_id");
 <section>
 	  <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/viewNewGoods.do?goods_id=<%=goods_id%>"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
+          <a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
           <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
           <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-          <a href="${contextPath}/business/goods/addNewGoodsRoomForm.do"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+          <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
         </div>
       </div>
       <form name="frmGoods" action="${contextPath}" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
@@ -427,7 +429,7 @@ String goods_id = request.getParameter("goods_id");
                     
 		            <ul>
 		            <c:forEach var="item" items="${goodsMap.imageList}" >
-		          		<li class="pic" style="width: 511px;height: 360px;overflow: hidden; border:1px solid #ddd; margin-top:30px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진"></li>
+		          		<li class="pic" style="width:204px;height:144px;overflow: hidden; float:left; margin:10px; border:1px solid #ddd; margin-top:30px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진" style="width:100%;" /></li>
 					</c:forEach>
 					</ul>
              </td>
@@ -542,55 +544,51 @@ String goods_id = request.getParameter("goods_id");
       	<c:if test="${member.uid == goods.uid }">
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)" style="width:150px; cursor:pointer;">
 	    </c:if>
-        <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
+        <input  type="button" value="돌아가기"  onclick="location.href='${contextPath}/business/goods/listGoods.do' " style="width:150px; cursor:pointer;">
       </div>
-      
-      
-      
 		
 	</form>
 	
-	<DIV class="tab_content" id="tab7">
-			<form id="FILE_FORM" method="post" enctype="multipart/form-data"  >
-				<h4>상품이미지</h4>
-				<table>
-					<tr>
-					<c:forEach var="item" items="${goodsMap.imageList}"  varStatus="itemNum">
-						<tr  id="${itemNum.count-1}">
-									<td>상세 이미지${itemNum.count-1 }</td>
-									<td>
-										<input type="file" name="goods"  id="goods"   onchange="readURL(this,'preview${itemNum.count}');" />
-										<%-- <input type="text" id="goods_uimg${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
-										<input type="text"  name="goods_uimg" value="${item.goods_uimg }"  />
-										<input type="text"  name="fileType" value="${item.fileType }"  />
-										<br>
-									</td>
-									<td>
-										<img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}">
-									</td>
-									<td>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-									</td>
-									<td>
-										<input  type="button" value="수정"  onClick="modifyImageFile('${item.fileType}','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
-										<input  type="button" value="삭제"  onClick="deleteImageFile('${item.goods_id}','${item.goods_uimg}','${item.fileName}','${itemNum.count-1}')"/>
-									</td> 
-								</tr>		
-					</c:forEach>
-					<tr align="center">
-						<td colspan="3">
-							<div id="d_file">
-								<%-- <img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" /> --%>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td align=center colspan=2> 
-						<input   type="button" value="이미지파일추가하기"  onClick="fn_addFile()"  />
-						</td>
-					</tr> 
-				</table>
-			</form>
-		</DIV>
+	<form id="FILE_FORM" method="post" enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;" >
+		<h4>상품이미지</h4>
+		<table>
+			<tr>
+			<c:forEach var="item" items="${goodsMap.imageList}"  varStatus="itemNum">
+				<tr  id="${itemNum.count}">
+							<td>상세 이미지${itemNum.count }</td>
+							<td>
+								<input type="file" name="goods"  id="goods"   onchange="readURL(this,'preview${itemNum.count}');" />
+								<%-- <input type="text" id="goods_uimg${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
+								<input type="text"  name="goods_uimg" value="${item.goods_uimg }"  />
+								<input type="text"  name="fileType" value="${item.fileType }"  />
+								<br>
+							</td>
+							<td>
+								<img  id="preview${itemNum.count }"   width=100 height=100 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}">
+							</td>
+							<td>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+							<td>
+								<input  type="button" value="수정"  onClick="modifyImageFile('${item.fileType}','${item.goods_id}','${item.goods_uimg}','${item.fileType}')"/>
+								<input  type="button" value="삭제"  onClick="deleteImageFile('${item.goods_id}','${item.goods_uimg}','${item.fileName}','${itemNum.count}')"/>
+							</td> 
+						</tr>		
+			</c:forEach>
+			<tr align="center">
+				<td colspan="3">
+					<div id="d_file">
+						<%-- <img  id="preview${itemNum.count }"   width=200 height=200 src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" /> --%>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td align=center colspan=2> 
+				<input   type="button" value="이미지파일추가하기"  onClick="fn_addFile()"  />
+				</td>
+			</tr> 
+		</table>
+	</form>
+
 	</section>
 </body>
