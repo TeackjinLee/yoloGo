@@ -7,8 +7,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
-%>    
-
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,6 +108,12 @@
         showDropdowns: true
         }, function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+        var auth = '${auth}'
+        $('.applyBtn').click(function(){
+    		window.location.replace('${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth);
+    	});
         });
 
     });
@@ -130,7 +135,7 @@
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-2592000}&date2=${today}&auth=${auth}'">30일</button>
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-604800}&date2=${today}&auth=${auth}'">1주</button> 
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today}&date2=${today}&auth=${auth}'">오늘</button>
-	        <input type="text" id="cal" name="daterange" value="01/01/2021/ - 01/15/2021" />
+	        <input type="text" id="cal" name="daterange" value="${Ddate1}/ - ${Ddate2}"/>
 	        </div>
 	        <div class="auth_div">
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${date1}&date2=${date2}&auth='">전체</button>
