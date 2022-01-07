@@ -15,21 +15,26 @@
 	<title>사업자 숙박 등록 리스트</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/admin_main.css" rel="stylesheet" type="text/css" media="screen">
 	<style>
+		#admin_main{
+			margin-bottom: -150px;
+		}
 		.admin_main_wrap .admin_main_box .adminCustomer{
 			width: 100%;
-		    margin: 0 auto;
-		    box-sizing: border-box;
-		    padding: 40px 50px 0px 50px;
-		    border-radius: 15px;
-		    box-shadow: 1px 1px 2px 2px #ddd;
-		    border:none;
-		    margin-top:50px;
+			margin: 0 auto;
+			padding: 40px 50px 0px 50px;
+			border-radius: 15px 15px 0 0;
+			border: 9px solid #ddd;
+			border-bottom: 0px;
+			box-sizing: border-box;
+			margin-top: 50px;
 		}
-		#admin_main .box{
+		#admin_main .building_box{
+			display: flex;
 			width:100%;
-			height:150px;
-			padding-top:30px;
+			height:180px;
+			padding-top:60px;
 			box-sizing:border-box;
+			justify-content: space-around;
 		}
 		#admin_main .door{
 			width: 90px;
@@ -37,6 +42,20 @@
 			background:#ddd;
 			margin:0 auto;
 			border-radius:10px 10px 0px 0px;
+		}
+		#admin_main .door{
+			float:left;
+			width: 90px;
+			height:120px;
+			background:#ddd;
+			border-radius:10px 10px 0px 0px;
+		}
+		#admin_main .window{
+			float:left;
+			width: 120px;
+			height:60px;
+			border: 6px solid #ddd;
+			border-radius:10px;
 		}
 	</style>
 </head>
@@ -73,7 +92,11 @@
 			</c:forEach>   
 			</table>
 		</div>
-		<div class="box"><div class="door"></div></div>
+		<div class="building_box">
+			<div class="window"></div>
+			<div class="door"></div>
+			<div class="window"></div>
+		</div>
 	</div>
 </div>
 </body>

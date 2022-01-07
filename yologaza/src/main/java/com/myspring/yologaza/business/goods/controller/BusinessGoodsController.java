@@ -27,4 +27,5 @@ public interface BusinessGoodsController {
 	public ModelAndView viewNewGoodsRoom(@RequestParam("goods_id") String goods_id, @RequestParam("goods_uroom") String goods_uroom, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView listRoom(@RequestParam("goods_id") String goods_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity modRoom(@RequestParam("goods_id") int goods_id,@RequestParam("goods_uroom") int goods_uroom, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 }

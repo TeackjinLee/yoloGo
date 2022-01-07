@@ -453,7 +453,7 @@ function fn_order_all_cart_goods(){
 		            <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
 				    <c:set var="cart_uid" value="${myCartList[cnt.count-1].cart_uid}" />
 			            <li class="reservation" style="margin-bottom: 20px;">
-			              <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
+			              <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
 			              <div class="descript">
 			                <a1 style= "font-weight:bold;">${item.goods_name}</a1>
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
@@ -561,10 +561,10 @@ function fn_order_all_cart_goods(){
 	<center>
     <br><br>	
 		 <a href="javascript:fn_order_all_cart_goods()">
-		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_order_final.jpg">
+		 	<img width="75" alt="" src="#">
 		 </a>
 		 <a href="#">
-		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
+		 	<img width="75" alt="" src="#">
 		 </a>
 	<center>
           	

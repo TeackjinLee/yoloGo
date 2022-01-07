@@ -14,11 +14,18 @@
 
 String goods_id = request.getParameter("goods_id");
 System.out.println("goods_id :"+goods_id);
-
+String goods_uroom = request.getParameter("goods_uroom");
+System.out.println("goods_uroom :"+goods_uroom);
 %>
 <head>
 	<script type="text/javascript">
-	  var cnt=0;goods_uroom_detail
+	
+	function fn_modify_room(obj){
+		 obj.action="${contextPath}/business/goods/modRoom.do?goods_id="+<%=goods_id%>+"&goods_uroom="+<%=goods_uroom%>;
+		 obj.submit();
+	 }
+	
+	  var cnt=0;
 	  function fn_addFile(){
 		  if(cnt == 0){
 			  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");
@@ -27,18 +34,6 @@ System.out.println("goods_id :"+goods_id);
 		  }
 	  	cnt++;
 	  }
-	  
-	  
-	  function fn_add_new_room(obj){
-			 fileName = $('#f_room').val();
-			 if(fileName != null && fileName != undefined){
-				 obj.submit();
-			 }else{
-				 alert("메인 이미지는 반드시 첨부해야 합니다.");
-				 return;
-			 }
-			 
-		}
 	  
 		function fn_enable(obj){
 			document.getElementById("goods_room_type").disabled=false;
@@ -195,6 +190,9 @@ System.out.println("goods_id :"+goods_id);
 		#tr_btn_modify{
 	       display:none;
 	     }
+		section form table tbody tr td img{
+			width:100%;
+		}
 	</style>  
 </head>
 <body>
@@ -207,7 +205,7 @@ System.out.println("goods_id :"+goods_id);
           <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
 	      </div>
 	    </div>
-		     <form action="${contextPath}/business/goods/addNewGoodsRoom.do?goods_id=<%=goods_id%>" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
+			<form name="frmroom" action="${contextPath}/business/goods/addNewGoodsRoom.do?goods_id=<%=goods_id%>" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
 	       <div id="cent">
 	       <input id="goods_id" name="goods_id" value="<%=goods_id%>" type="text" size="40" style="visibility: hidden;" readonly/>
 	       <input id="goods_uid" name="uid" value="${goods.uid}" type="text" size="40" style="visibility: hidden;" readonly/>
@@ -217,7 +215,7 @@ System.out.println("goods_id :"+goods_id);
 	        <table cellspacing="0">
 	         <tbody>
 	          <tr>
-	            <th>객실 정보</th>
+	            <th>객실 정보</th>	            
 	            <td>
 	              <div><strong>객실 유형</strong></div>
 	              <select id="goods_room_type" name="goods_room_type" disabled>
@@ -257,7 +255,9 @@ System.out.println("goods_id :"+goods_id);
 	                  * 첫 이미지가 메인 이미지이며 드래그를 통해 순서 변경이 가능합니다. <br><br></p>
 						<ul>
 						<c:forEach var="item" items="${goodsRoomMap.roomImageList}" >
-							<li class="pic" style="width:204px;height:144px;overflow: hidden; float:left; margin:10px; border:1px solid #ddd; margin-top:30px;"><img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙박정보 사진" style="width:100%;" /></li>
+							<li class="pic" style="width:204px;height:144px;overflow: hidden; float:left; margin:10px; border:1px solid #ddd; margin-top:30px;">
+								<img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=<%=goods_uroom %>&fileName=${item.fileName}" alt="룸 사진">
+							</li>
 						</c:forEach>
 						</ul> 
 				            
@@ -284,8 +284,8 @@ System.out.println("goods_id :"+goods_id);
 	     </table>
 		<div id="tr_btn_modify" align="center" style="margin: 0 auto; margin-top:30px; text-align: center;">
 			<div>
-				<input type=button value="수정반영하기"   onClick="fn_modify_goods(frmGoods)" style="width:150px; cursor:pointer;">
-				<input type=button value="취소"  onClick="backToList(frmGoods)" style="width:150px; cursor:pointer;">
+				<input type=button value="수정반영하기"   onClick="fn_modify_room(frmroom)" style="width:150px; cursor:pointer;">
+				<input type=button value="취소"  onClick="backToList(frmroom)" style="width:150px; cursor:pointer;">
 			</div>   
 		</div>
 		<div id="tr_btn" style="margin: 0 auto; margin-top:30px; text-align: center;">
