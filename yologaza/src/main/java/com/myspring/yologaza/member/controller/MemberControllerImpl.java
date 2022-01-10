@@ -1,9 +1,6 @@
 package com.myspring.yologaza.member.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
-import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.sms.service.certificationService;

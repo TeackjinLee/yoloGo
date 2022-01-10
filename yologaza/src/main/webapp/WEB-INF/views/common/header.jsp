@@ -28,7 +28,71 @@
 		     #head_link ul li {
 			    height: 20px;
 			}
+			#user_header .sub-menu-box ul li:hover{
+				color:rgb(112, 173, 71);
+				font-weight:bold;
+			}
 	</style>
+	<script type="text/javascript">
+		var loopSearch=true;
+		function keywordSearch(){
+			if(loopSearch==false)
+				return;
+		 var value=document.frmSearch.searchWord.value;
+			$.ajax({
+				type : "get",
+				async : true, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/goods/keywordSearch.do",
+				data : {keyword:value},
+				success : function(data, textStatus) {
+				    var jsonInfo = JSON.parse(data);
+					displayResult(jsonInfo);
+				},
+				error : function(data, textStatus) {
+					alert("에러가 발생했습니다."+data);
+				},
+				complete : function(data, textStatus) {
+					//alert("작업을완료 했습니다");
+					
+				}
+			}); //end ajax	
+		}
+		function displayResult(jsonInfo){
+			var count = jsonInfo.keyword.length;
+			if(count > 0) {
+			    var html = '';
+			    for(var i in jsonInfo.keyword){
+				   html += "<a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
+			    }
+			    var listView = document.getElementById("suggestList");
+			    listView.innerHTML = html;
+			    show('suggest');
+			}else{
+			    hide('suggest');
+			} 
+		}
+		
+		function select(selectedKeyword) {
+			 document.frmSearch.searchWord.value=selectedKeyword;
+			 loopSearch = false;
+			 hide('suggest');
+		}
+			
+		function show(elementId) {
+			 var element = document.getElementById(elementId);
+			 if(element) {
+			  element.style.display = 'block';
+			 }
+			}
+		
+		function hide(elementId){
+		   var element = document.getElementById(elementId);
+		   if(element){
+			  element.style.display = 'none';
+		   }
+		}
+		
+	</script>
 </head>
 <body>
 	<div class="wrap main_wrap show">
@@ -84,15 +148,14 @@
 	              <div>숙박종류</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="${contextPath}/searchGoods.do#tab1">모텔</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab2">호텔</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab3">펜션</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab4">리조트</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab5">게스트하우스</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab6">캠핑/글램핑</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do#tab7">한옥</a></li>
-	                  <li><a href="${contextPath}/searchGoods.do">내주변</a></li>
-	                </ul>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=my">내주변</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=motel">모텔</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=hotel">호텔</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=pension">펜션</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=resort">리조트</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=guestHouse">게스트하우스</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=camping">캠핑/글램핑</a></li>
+	                  <li><a href="${contextPath}/searchGoods.do?goods_type=hanok">한옥</a></li>
 	              </div>  
 	             </li>
 	            <li class="cell">
