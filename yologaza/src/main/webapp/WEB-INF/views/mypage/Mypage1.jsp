@@ -284,17 +284,6 @@ p {
 </style>
 
 <script type="text/javascript">
-	
-
-	  
-	  <!--        -->
-
-
-	 
-
-	   
-	
-
 
 	function fn_modify_member_info(attribute){
 		var value;
@@ -343,6 +332,16 @@ p {
 				}
 			}); //end ajax
 	}
+	
+	function readURL(input) {
+	     if (input.files && input.files[0]) {
+	         var reader = new FileReader();
+	         reader.onload = function (e) {
+	             $('#preview').attr('src', e.target.result);
+	         }
+	         reader.readAsDataURL(input.files[0]);
+	     }
+	 }
 
  </script>
 
@@ -383,7 +382,25 @@ p {
               </div>
             </div>
             <div class="tab_each">
-            	
+            	<form name="articleForm" method="GET"   action=""   enctype="multipart/form-data">
+				    <table border="0" align="center">
+						<tr>
+							<td> 
+								
+								<div style="position:relative; width:200px; height:200px; border-radius:100px; overflow:hidden;">
+									<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+								</div>
+								<input type="file" name="imageFileName"  onchange="readURL(this);" />
+							</td>
+						</tr>
+						<tr>
+							<td align="right"> </td>
+							<td colspan="2">
+								<input type="submit" value="이미지 등록하기" />
+							</td>
+						</tr>
+					</table>
+				</form>
             	<form name="frm_mod_member">	
 					<div id="detail_table">
 						<table>
@@ -446,35 +463,6 @@ p {
         </div>
       </div>
     </div>
-
-	<form name="articleForm" method="GET"   action=""   enctype="multipart/form-data">
-    <table border="0" align="center">
-		 
-		<tr>
-			<td align="right">이미지파일 첨부:  </td>
-			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			<td><img  id="preview" src="#"   width=200 height=200/></td> 
-		  
-		  
-			<td align="right">이미지파일 첨부</td>
-			<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-		
-		</tr>
-	  
-	   <tr>
-	      <td colspan="4"><div id="d_file"></div></td>
-	   </tr>
-	    <tr>
-	      <td align="right"> </td>
-	      <td colspan="2">
-	       <input type="submit" value="이미지 등록하기" />
-	      </td>
-     </tr>
-    </table>
-  </form>
-
-	<h3>내 상세 정보</h3>
-
 
 </body>
 </html>

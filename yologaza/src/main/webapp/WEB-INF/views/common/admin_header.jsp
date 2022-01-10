@@ -50,7 +50,7 @@
 	              <div>숙박 관리</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="#">검수 관리 조회</a></li>
+	                  <li><a href="${contextPath}/admin/goods/listGoods.do">검수 관리 조회</a></li>
 	                  <li><a href="#">전체 숙소 목록</a></li>
 	                  <li><a href="#">쿠폰 관리</a></li>
 	                </ul>

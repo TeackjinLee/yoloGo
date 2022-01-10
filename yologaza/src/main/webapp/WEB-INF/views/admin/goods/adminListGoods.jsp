@@ -18,6 +18,12 @@
 		#admin_main{
 			margin-bottom: -150px;
 		}
+		#admin_main button{
+			padding:5px; 
+			box-sizing:boder-box; 
+			cursor:pointer; 
+			display:block;
+		}
 		.admin_main_wrap .admin_main_box .adminCustomer{
 			width: 100%;
 			margin: 0 auto;
@@ -58,6 +64,22 @@
 			border-radius:10px;
 		}
 	</style>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		function adminGoodsAcess(goods_id) {
+			$.ajax({
+				type : "POST",
+				async : false, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/admin/goods/goodsAcess.do?goods_id="+goods_id,
+				data : {
+					goods_id:goods_id
+				},
+				success: function(result){
+					swal("Good job!", "검수 승인을 완료했습니다.", "success");
+				  }
+			}); //end ajax	
+		}
+	</script>
 </head>
 <body>
 <div id="admin_main" class="admin_main_wrap">
@@ -65,7 +87,7 @@
 
 	    <div class="adminCustomer">
 	      <div class="adminCustomer_box">
-	        <h3>숙박 등록 리스트</h3>
+	        <h3>숙박 관리 리스트</h3>
 			<table align="center">
 			<tr align="center" class="column" style="font-size:14px;">
 				<td ><b>업체명</b></td>
@@ -77,25 +99,33 @@
 				<td><b>검색/변경</b></td>
 			</tr>
 			
-			<c:forEach var="goodsList" items="${listGoodsMap.goodsList}" > 
+			<c:forEach var="goodsList" items="${listGoods}" > 
 				<tr align="center" style="box-shadow: 0px 3px #ddd; font-size:14px;">
 					
 					<td>${goodsList.goods_name}</td>
-					<td><a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }"><img src="${contextPath}/goods_thumbnails.do?goods_id=${goodsList.goods_id}&fileName=${goodsList.fileName}" alt="숙박정보 사진"></a></td>
+					<td>
+						<div class="img-box" style="height:90px; overflow:hidden;">
+							<a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }">
+								<img src="${contextPath}/goods_thumbnails.do?goods_id=${goodsList.goods_id}&fileName=${goodsList.fileName}" alt="숙박정보 사진">
+							</a>
+						</div>
+					</td>
 					<td width="40%">${goodsList.roadAddress}<br>${goodsList.namujiAddress}</td>
 					<td>${goodsList.goods_type}</td>
+					<td>
 					<c:choose>
-						<c:when test="${goodsList.goods_acess == 1}">
-							<td style="font-weight:bold; color:rgb(52, 152, 219);">검수완료</td>
+						<c:when test="${goodsList.goods_acess != null && goodsList.goods_acess != ''}">
+							<button disabled>검수 완료</button>
 						</c:when>
 						<c:otherwise>
-							<td style="font-weight:bold; color:rgb(192, 57, 43);">검수중</td>
+							<button><a href="javascript:adminGoodsAcess('${goodsList.goods_id}')">검수 확인</a></button>
 						</c:otherwise>
 					</c:choose>
+					</td>
 					<td>${goodsList.goods_creDate}</td>
 					<td>
-						<button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer; display:block;" onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
-						<button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer; display:block; margin-top:9px;" onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 관리</button>
+						<button type="button" class="next"  onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
+						<button type="button" class="next" style="margin-top:9px;" onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 관리</button>
 					</td>
 				</tr>
 			</c:forEach>   
