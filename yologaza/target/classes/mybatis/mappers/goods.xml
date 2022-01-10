@@ -121,6 +121,26 @@
 				    ) t	
     	]]>
 	</select>
-
+	
+	<select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
+	    <![CDATA[
+	    select goods_name, roadAddress from goods
+        where         
+        goods_name like concat('%',#{keyword},'%') or
+        roadAddress like concat('%',#{keyword},'%')
+        order by goods_creDate desc
+		]]>
+	</select>
+	
+	<select id="selectGoodsBySearchWord" resultMap="goodsResult"   parameterType="String"  >
+     <![CDATA[
+			select g.*,i.fileName from goods g, goods_img i
+		    where g.goods_id=i.goods_id
+		    and i.fileType='goods'
+		    and g.goods_name like concat('%',#{searchWord},'%')
+            group by g.goods_id
+		    order by g.goods_creDate desc;
+		]]>
+	</select>	
 
 </mapper>

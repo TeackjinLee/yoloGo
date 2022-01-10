@@ -7,14 +7,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+	String goods_type = request.getParameter("goods_type");
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>숙박 검색</title>
 	
 	<script src="${contextPath}/resources/jquery/jquery.easing.1.3.js" type="text/javascript"></script>
 	<script src="${contextPath}/resources/jquery/stickysidebar.jquery.js" type="text/javascript"></script>
@@ -31,60 +31,20 @@
     <script>
     $(function() {
         $('input[name="daterange"]').daterangepicker({
-        opens: 'left',
-        showDropdowns: true
+	        opens: 'left',
+	        showDropdowns: true
         }, function(start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+	        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+	        $('#dateApplyBtn').click(function(){
+	    		window.location.replace('${contextPath}/searchGoods.do?goods_type='+<%=goods_type%>+'&date1='+date1+'&date2='+date2);
+	    	});
         });
 
     });
     </script>
-    <script>
-	    
-		var pricelistdesc = function(url){
-		
-			$.ajax({
-				type: 'get',
-				url: "../PricelistDesc",
-				data: "",
-				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-				success: function(data) {
-					$('#product_list').html(data);
-				},
-				error: function(request, status, error) {
-					alert(error);
-				}
-			});
-		};
     
-		$(document).ready(function(){
-			
-			// 객실 선택 뷰
-		  const tabList = document.querySelectorAll('.tab_btn ul li');
-		  const contents = document.querySelectorAll('.tab_each ul');
-		  let activeCont = "";// 현재 활성화 된 컨텐츠
-		
-		  for(var i = 0; i < tabList.length; i++){
-		      tabList[i].querySelector('.tab_btn ul li a').addEventListener('click', function(e){
-		        e.preventDefault();
-		        for(var j = 0; j < tabList.length; j++){
-		          // 나머지 버튼 클래스 제거
-		          tabList[j].classList.remove('active');
-		
-		          // 나머지 컨텐츠 display:none 처리
-		          contents[j].style.display = 'none';
-		        };
-		
-		        // 버튼 관련 이벤트
-		        this.parentNode.classList.add('active');
-		
-		        // 버튼 클릭시 컨텐츠 전환
-		        activeCont = this.getAttribute('href');
-		        document.querySelector(activeCont).style.display = 'block';
-		      });
-		    }
-		});
-	</script>
 	<style>
 		.detail-select .detail-select-box .top_menu ul .active {
 			font-weight:bold;
@@ -97,29 +57,56 @@
 <div class="detail-select">
     <div class="header-bar">
       <div class="text-box con">
-        <p>내주변</p>
+      	<c:set var="index" value="<%=goods_type %>"/>
+      	<c:if test="${index eq 'my'}">
+       		<p>내주변</p>
+       	</c:if>
+        <c:if test="${index eq 'motel'}">
+       		<p>모텔</p>
+       	</c:if>
+       	<c:if test="${index eq 'hotel'}">
+       		<p>호텔</p>
+       	</c:if>	
+       	<c:if test="${index eq 'pension'}">
+       		<p>펜션</p>
+       	</c:if>	
+       	<c:if test="${index eq 'resort'}">
+       		<p>리조트</p>
+       	</c:if>	
+       	<c:if test="${index eq 'guestHouse'}">
+       		<p>게스트하우스</p>
+       	</c:if>	
+       	<c:if test="${index eq 'camping'}">
+       		<p>켐핑/글램핑</p>
+       	</c:if>	
+       	<c:if test="${index eq 'hanok'}">
+       		<p>한옥</p>
+       	</c:if>			
       </div>
     </div>
     <div class="detail-select-box con">
-      <div class="top_menu tab_btn">
-	      <ul class="row">
-	        <li class="cell"><a href="#tab1">모텔</a></li>
-	        <li class="cell"><a href="#tab2">호텔</a></li>
-	        <li class="cell"><a href="#tab3">펜션</a></li>
-	        <li class="cell"><a href="#tab4">리조트</a></li>
-	        <li class="cell"><a href="#tab5">게스트하우스</a></li>
-	        <li class="cell"><a href="#tab6">캠핑/글램핑</a></li>
-	        <li class="cell"><a href="#tab7">한옥</a></li>
-	      </ul>
-	    </div>
+		<div class="top_menu tab_btn">
+			<ul class="row">
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=my">내주변</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=motel">모텔</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=hotel">호텔</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=pension">펜션</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=resort">리조트</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=guestHouse">게스트하우스</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=camping">캠핑/글램핑</a></li>
+				<li class="cell"><a href="${contextPath}/searchGoods.do?goods_type=hanok">한옥</a></li>
+			</ul>
+		</div>
       <!-- 상세 검색창 -->
       <div class="filter_wrap">
         <section class="date-wrap">
           <h3>날짜</h3>
           <div class="btn_date">
             <tr class="date-box">
-              <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
-                  </tr>
+              <td  class="date">
+              <input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" />
+              </td>
+            </tr>
           </div>
         </section>
         <div class="select-wrap">
@@ -229,10 +216,15 @@
           </div>
           <div class="tab_each goods_list">
             <div class="goods_title"><h3>상품 리스트</h3></div>
+            
             <ul id = "tab1" class="active">
-            	<h3 style ="text-align:left">모텔</h3>
-	            <c:forEach var="item" items="${goodsMap.motel}" >     
-					<li class="list_1 goods_menu1 goods_box">
+            	<c:if test="${index eq 'motel' || index eq 'my'}">
+	          		<h3 style ="text-align:left">모텔</h3>
+	          	</c:if>	
+           		<c:forEach var="item" items="${goodsMap.motel}" >
+           			<c:set var="index" value="<%=goods_type %>"/>
+         				<c:if test="${index eq 'motel' || index eq 'my'}">
+            		<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
@@ -251,11 +243,16 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul> 
             <ul id = "tab2" class="active">
-            	<h3 style ="text-align:left">호텔</h3>
-	            <c:forEach var="item" items="${goodsMap.hotel}" >     
+            	<c:if test="${index eq 'hotel' || index eq 'my'}">
+          			<h3 style ="text-align:left">호텔</h3>
+          		</c:if>
+	            <c:forEach var="item" items="${goodsMap.hotel}" >
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'hotel' || index eq 'my'}">  
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -275,11 +272,16 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>
 			<ul id = "tab3" class="active">
-				<h3 style ="text-align:left">펜션</h3>
-	            <c:forEach var="item" items="${goodsMap.pension}" >     
+				<c:if test="${index eq 'pension' || index eq 'my'}">
+	          		<h3 style ="text-align:left">펜션</h3>
+	          	</c:if>
+	            <c:forEach var="item" items="${goodsMap.pension}" >
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'pension' || index eq 'my'}">     
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -299,11 +301,19 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>
 			<ul id = "tab4" class="active">
-				<h3 style ="text-align:left">리조트</h3>
-	            <c:forEach var="item" items="${goodsMap.resort}" >     
+				<c:if test="${index eq 'guestHouse' || index eq 'my'}">
+	        		<h3 style ="text-align:left">게스트하우스</h3>
+	        	</c:if>
+				<c:if test="${index eq 'resort' || index eq 'my'}">
+	          		<h3 style ="text-align:left">리조트</h3>
+	          	</c:if>
+	            <c:forEach var="item" items="${goodsMap.resort}" >
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'resort' || index eq 'my'}">  
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -323,11 +333,13 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>  
 			<ul id = "tab5" class="active">
-				<h3 style ="text-align:left">게스트하우스</h3>
-	            <c:forEach var="item" items="${goodsMap.guestHouse}" >     
+	            <c:forEach var="item" items="${goodsMap.guestHouse}" > 
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'guestHouse' || index eq 'my'}">      
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -347,11 +359,16 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>  
 			<ul id = "tab6" class="active">
-				<h3 style ="text-align:left">캠핑/글램핑</h3>
-	            <c:forEach var="item" items="${goodsMap.camping}" >     
+				<c:if test="${index eq 'camping' || index eq 'my'}">
+	          		<h3 style ="text-align:left">켐핑/글램핑</h3>
+	          	</c:if>
+	            <c:forEach var="item" items="${goodsMap.camping}" >   
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'camping' || index eq 'my'}">    
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -371,11 +388,16 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>
 			<ul id = "tab7" class="active">
-				<h3 style ="text-align:left">한옥</h3>
-	            <c:forEach var="item" items="${goodsMap.hanok}" >     
+				<c:if test="${index eq 'hanok' || index eq 'my'}">
+	         		<h3 style ="text-align:left">한옥</h3>
+	         	</c:if>
+	            <c:forEach var="item" items="${goodsMap.hanok}" >
+	            	<c:set var="index" value="<%=goods_type %>"/>
+          			<c:if test="${index eq 'hanok' || index eq 'my'}">      
 					<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 				        <div class="goods_picture">
@@ -395,6 +417,7 @@
 				        </div>
 				      </a>
 				    </li>
+				    </c:if>
 				</c:forEach>
 			</ul>
 
