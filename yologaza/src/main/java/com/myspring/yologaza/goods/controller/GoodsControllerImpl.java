@@ -1,6 +1,8 @@
 package com.myspring.yologaza.goods.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,30 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		mav.addObject("goodsMap", goodsMap);
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);
+		
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String todayDate = timeFormat.format(date);
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		
 		return mav;
 	}
 	@Override

@@ -9,7 +9,8 @@
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+	String goods_id = request.getParameter("goods_id");
 %>
 <style>
 	.tab_each ul li .room-box .room-text .reserve div{
@@ -56,18 +57,48 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="${contextPath}/resources/css/goodsRoom.css">
     <script src="${contextPath}/resources/js/goodsRoom.js"></script>
-    
-    <!--  달력js -->
-    <script>
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-        opens: 'left',
-        showDropdowns: true
-        }, function(start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
+    <script type="text/javascript">
+	    function add_cart(goods_uroom) {
+			$.ajax({
+				type : "POST",
+				async : false, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/cart/addGoodsInCart.do",
+				data : {
+					goods_uroom:goods_uroom
+				},
+				success : function(data, textStatus) {
+					//alert(data);
+				//	$('#message').append(data);
+					if(data.trim()=='add_success'){
+						imagePopup('open', '.layer01');	
+					}else if(data.trim()=='already_existed'){
+						swal ( "Oops" ,  "이미 카트에 등록된 상품입니다." +data  ,  "error");
+					} 
+				},
+				error : function(data, textStatus) {
+					swal ( "Oops" ,  "로그인후 사용 가능합니다." +data  ,  "error");
+				},
+				complete : function(data, textStatus) {
+					//alert("작업을완료 했습니다");
+				}
+			}); //end ajax	
+		}
+	    
+	    function imagePopup(type) {
+			if (type == 'open') {
+				// 팝업창을 연다.
+				jQuery('#layer').attr('style', 'visibility:visible');
 
-    });
+				// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
+				jQuery('#layer').height(jQuery(document).height());
+			}
+
+			else if (type == 'close') {
+
+				// 팝업창을 닫는다.
+				jQuery('#layer').attr('style', 'visibility:hidden');
+			}
+		}
     </script>
     <style>
     	#tab1 .room-pic-box .slick-list .slick-track{
@@ -152,52 +183,41 @@
 	     #board_head .member_img img{
 	     	width:100%;
 	     }
+	     #tab1 .btn_date{
+			position: relative;
+	     }
+	     #tab1 .far{
+			position: absolute;
+		    left: 5px;
+		    top: 5px;
+		    font-size: 21px;
+		    color: #555;
+	     }
+	     #tab1 .dateApplyBtn{
+	     	position:absolute;
+	     	padding: 5px 10px 5px 10px;
+		    box-sizing: border-box;
+		    right: -60px;
+	     }
     </style>
-    <script type="text/javascript">
-	    function add_cart(goods_uroom) {
-			$.ajax({
-				type : "POST",
-				async : false, //false인 경우 동기식으로 처리한다.
-				url : "${contextPath}/cart/addGoodsInCart.do",
-				data : {
-					goods_uroom:goods_uroom
-					
-				},
-				success : function(data, textStatus) {
-					//alert(data);
-				//	$('#message').append(data);
-					if(data.trim()=='add_success'){
-						imagePopup('open', '.layer01');	
-					}else if(data.trim()=='already_existed'){
-						swal ( "Oops" ,  "이미 카트에 등록된 상품입니다." +data  ,  "error");
-					}
-					
-				},
-				error : function(data, textStatus) {
-					swal ( "Oops" ,  "로그인후 사용 가능합니다." +data  ,  "error");
-				},
-				complete : function(data, textStatus) {
-					//alert("작업을완료 했습니다");
-				}
-			}); //end ajax	
-		}
-	    
-	    function imagePopup(type) {
-			if (type == 'open') {
-				// 팝업창을 연다.
-				jQuery('#layer').attr('style', 'visibility:visible');
-
-				// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
-				jQuery('#layer').height(jQuery(document).height());
-			}
-
-			else if (type == 'close') {
-
-				// 팝업창을 닫는다.
-				jQuery('#layer').attr('style', 'visibility:hidden');
-			}
-		}
+    <!--  달력js -->
+    <script>
+	    $(function() {
+	        $('input[name="daterange"]').daterangepicker({
+		        opens: 'left',
+		        showDropdowns: true
+	        }, function(start, end, label) {
+		        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+		        $('#dateApplyBtn').click(function(){
+		    		window.location.replace('${contextPath}/goods/goodsInformation.do?goods_id='+<%=goods_id%>+'&date1='+date1+'&date2='+date2);
+		    	});
+	        });
+	
+	    });
     </script>
+    
 </head>
 <body>
 <!-- 객실 설명란 -->
@@ -255,8 +275,11 @@
 					<section class="date-wrap">
 					  <div class="btn_date">
 					    <tr class="date-box">
-					      <td  class="date"><input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" /></td>
+					      <td  class="date"><i class="far fa-calendar-alt"></i>
+					      <input type="text" name="daterange" value="${Ddate1}/ - ${Ddate2}" />
+					    </td>
 					    </tr>
+					    <button id="dateApplyBtn" class="dateApplyBtn">검색</button>
 					  </div>
 					</section>
 					<c:choose>
@@ -273,24 +296,47 @@
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 							          <h3>대실</h3>
 							          <br><br><br>
-							          <div class="price"><h2>${item.goods_room_price2}원</h2></div>
+							          <div class="price"><h2><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</h2></div>
 							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
 							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${item.goods_motel_usetime}시간</span></div>
 							          <div class="point">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}' ">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=<fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />' ">예약하기</button>
 							          </div>
 							        </div>
 							        <div class="reserve cell">
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom}')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 							          <h3>숙박</h3>
 							          <br><br><br>
-							          <div class="price"><h2>${item.goods_room_price1}원/1박</h2></div>
+							          <div class="price">
+								          <h2>
+								          <c:set var="index" value="${date1}"/>
+								          <c:if test="${index != 0}">
+								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1 *(date2-date1-1)/86400}" />원/
+								          	  <span style="font-size:16px;">
+										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(date2-date1-1)/86400}" />박
+										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${((date2-date1-1)/86400+1)}" />일
+										       </span>
+								          </c:if>
+								          <c:if test="${index == 0}">
+								          	  ${item.goods_room_price1}원/
+									          <span style="font-size:16px;">
+									          	1박2일
+									          </span>
+								          </c:if>
+								          </h2>
+							          </div>
 							          <div><span style="float: left">입실시간</span>
 							            <span style="float: right">${item.goods_checkIn}시부터</span></div>
 							          <div><span style="float: left">퇴실시간</span>
 							            <span style="float: right">익일${item.goods_checkOut}시</span></div>
 							          <div class="point">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>
+								          <c:set var="index" value="${date1}"/>
+									      <c:if test="${index != 0}">
+								          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />' ">예약하기</button>
+							          	  </c:if>
+								          <c:if test="${index == 0}">
+								          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
+								          </c:if>
 							          </div>
 							        </div>
 							      </div>
@@ -331,11 +377,34 @@
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 							          <h3>숙박</h3>
 							          <br><br><br>
-							          <div class="price"><h2>${item.goods_room_price1}원/1박</h2></div>
+							          <div class="price">
+										<h2>
+								          <c:set var="index" value="${date1}"/>
+								          <c:if test="${index != 0}">
+								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1 *(date2-date1-1)/86400}" />원/
+									          <span style="font-size:16px;">
+										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(date2-date1-1)/86400}" />박
+										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${((date2-date1-1)/86400+1)}" />일
+										       </span>
+								          </c:if>
+								          <c:if test="${index == 0}">
+								          	  ${item.goods_room_price1}원/
+									          <span style="font-size:16px;">
+									          	1박2일
+									          </span>
+								          </c:if>
+								          </h2>
+							          </div>
 							          <div><span style="float: left">입실시간</span> <span style="float: right">${item.goods_checkIn}시부터</span></div>
 							          <div><span style="float: left">퇴실시간</span> <span style="float: right">익일${item.goods_checkOut}시</span></div>
 							          <div class="point">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>
+							          <c:set var="index" value="${date1}"/>
+								      <c:if test="${index != 0}">
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />' ">예약하기</button>
+						          	  </c:if>
+							          <c:if test="${index == 0}">
+							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
+							          </c:if>
 							          </div>
 							        </div>
 							      </div>

@@ -99,7 +99,6 @@
    	border: 1px solid #ddd;
     border-radius: 5px;
     margin-right:5px;
-    cursor:pointer;
 }
 #admin_main .far{
 	font-size: 27px;
