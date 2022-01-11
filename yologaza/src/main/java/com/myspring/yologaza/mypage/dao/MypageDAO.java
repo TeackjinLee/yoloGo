@@ -11,5 +11,6 @@ public interface MypageDAO {
 
 	public void updateMyInfo(Map memberMap) throws DataAccessException;
 	public MemberVO selectMyDetailInfo(String member_id) throws DataAccessException;
+	public void updateMember(Map memberImgMap) throws DataAccessException;
 
 }

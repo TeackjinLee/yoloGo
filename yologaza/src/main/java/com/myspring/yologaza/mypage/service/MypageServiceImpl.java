@@ -25,6 +25,11 @@ public class MypageServiceImpl implements MypageService{
 	public MemberVO myDetailInfo(String id) throws Exception{
 		return mypageDAO.selectMyDetailInfo(id);
 	}
+	
+	@Override
+	public void modImgMember(Map memberImgMap) throws Exception {
+		mypageDAO.updateMember(memberImgMap);
+	}
 
 	
 }

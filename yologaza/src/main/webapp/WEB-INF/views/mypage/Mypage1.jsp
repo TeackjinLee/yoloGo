@@ -332,16 +332,21 @@ p {
 				}
 			}); //end ajax
 	}
-	
-	function readURL(input) {
-	     if (input.files && input.files[0]) {
-	         var reader = new FileReader();
-	         reader.onload = function (e) {
-	             $('#preview').attr('src', e.target.result);
-	         }
-	         reader.readAsDataURL(input.files[0]);
-	     }
+	function fn_modify_memberImg(obj){
+		 obj.action="${contextPath}/mypage/modArticle.do?uid="+${member.uid};
+		 obj.submit();
 	 }
+	 
+	function readURL(input,preview) {
+		//  alert(preview);
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $('#'+preview).attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	  } 
 
  </script>
 
@@ -382,7 +387,7 @@ p {
               </div>
             </div>
             <div class="tab_each">
-            	<form name="articleForm" method="GET"   action=""   enctype="multipart/form-data">
+            	<form name="memberImg" method="POST"   action="${contextPath}"   enctype="multipart/form-data">
 				    <table border="0" align="center">
 						<tr>
 							<td> 
@@ -390,13 +395,15 @@ p {
 								<div style="position:relative; width:200px; height:200px; border-radius:100px; overflow:hidden;">
 									<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
 								</div>
-								<input type="file" name="imageFileName"  onchange="readURL(this);" />
+								<input  type= "text"   name="uid" value="${member.uid }" />
+								<input  type= "text"   name="originalFileName" value="${member.memFileName }" />
+								<input type="file" name="memFileName"  onchange="readURL(this);" />
 							</td>
 						</tr>
 						<tr>
 							<td align="right"> </td>
 							<td colspan="2">
-								<input type="submit" value="이미지 등록하기" />
+								<input type="submit" value="이미지 등록하기" onClick="fn_modify_memberImg(memberImg)" />
 							</td>
 						</tr>
 					</table>

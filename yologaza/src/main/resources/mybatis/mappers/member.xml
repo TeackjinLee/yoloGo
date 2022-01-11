@@ -278,14 +278,19 @@
 		where 
 		id=#{id}
 	</update>
-	
+	<update id="updateImgMember"  parameterType="java.util.Map">
+			update member
+			set  
+			<if test="memFileName != '' and memFileName != null">
+				memFileName=#{memFileName}
+			</if>
+			where 
+			uid = #{uid}
+	</update>
 	<select id="selectMyDetailInfo" resultType="memberVO"   parameterType="String"  >
 	    <![CDATA[
 			select * from member 
 			where id=#{id}
     	]]>
 	</select>	
-	
-	
-
 </mapper>
