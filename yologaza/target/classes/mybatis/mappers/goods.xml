@@ -96,7 +96,7 @@
 					hour(g.goods_checkIn) 
 					goods_checkIn, 
 					hour(g.goods_checkOut) 
-					goods_checkOut, 
+					goods_checkOut,
 					hour(g.goods_motel_endtime) goods_motel_endtime, 
 					hour(g.goods_motel_usetime) goods_motel_usetime 
 					from goods g, goods_detail d, goods_img i
