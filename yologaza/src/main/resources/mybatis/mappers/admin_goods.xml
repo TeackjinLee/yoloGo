@@ -36,6 +36,7 @@
 		<result property="goods_price1" column="goods_price1" />
 		<result property="goods_price2" column="goods_price2" />
 		<result property="goods_acess" column="goods_acess" />
+		<result property="goods_creDate" column="goods_creDate" />
 
 		<result property="goods_room" column="goods_room" />
 		<result property="goods_room_num" column="goods_room_num" />
@@ -49,14 +50,20 @@
 	
 	<!-- 관리자 숙박 검색 -->
 	<select id="selectAllGoodsList" resultMap="goodsResult">
-      <![CDATA[
-			select g.*, i.fileName 
+			select SQL_CALC_FOUND_ROWS g.*, i.fileName 
 			from goods g, goods_img i
-			where g.goods_id = i.goods_id
+			where g.goods_id = i.goods_id 
+			<if test="date1 != 0 and date2 != 0">
+			and 
+			UNIX_TIMESTAMP(goods_creDate) >= #{date1} 
+        	and #{date2} > UNIX_TIMESTAMP(goods_creDate) 
+         	</if> 
 			group by goods_id
-			order by goods_id;
-      ]]>
+			order by goods_id limit #{offset},#{count};
 	</select>
+	<select id="countGoods" resultType="int">
+  		select FOUND_ROWS();
+  	</select>
 	
 	<update id="updateGoodsAcess" parameterType="java.util.Map" >
 		update goods

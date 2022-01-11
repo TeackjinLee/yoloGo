@@ -5,9 +5,12 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-public interface AdminGoodsDAO {
+import com.myspring.yologaza.goods.vo.GoodsVO;
 
-	public List selectAllGoodsList() throws DataAccessException;
+public interface AdminGoodsDAO {
+	public int getTotalCount();
+
+	public List<GoodsVO> selectAllGoodsList(long date1, long date2, int offset, int count) throws DataAccessException;
 
 	public void updateGoodsAcess(Map GoodsAcessMap) throws DataAccessException;
 

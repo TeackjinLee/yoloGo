@@ -4,6 +4,7 @@
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
@@ -18,7 +19,7 @@
 		#admin_main{
 			margin-bottom: -150px;
 		}
-		#admin_main button{
+		#admin_main button :not(.paging button){
 			padding:5px; 
 			box-sizing:boder-box; 
 			cursor:pointer; 
@@ -63,6 +64,82 @@
 			border: 6px solid #ddd;
 			border-radius:10px;
 		}
+		.button_div button{
+	float:right;
+	width: 60px;
+	height: 25px;
+	box-sizing: inherit;
+	align-items: center;
+	border-radius: 5px;
+	border: 2px solid rgba(0,0,0,0.15);
+	box-shadow: none;
+	font-size: 16px;
+	line-height: 1.5;
+	text-align: center;
+	cursor:pointer;
+	margin-left:10px;
+}
+.button_div button:nth-child(6){
+	margin-left:0px;
+}
+.button_div{
+	height:29px;
+}
+
+
+.auth_div{
+	height:29px;
+	margin-top:5px;
+}
+
+#cal{
+	float:right;
+	width: 200px;
+    height: 30px;
+   	border: none;
+   	font-size: 16px;
+   	text-align: center;
+   	color: #777;
+   	border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right:5px;
+}
+#admin_main .far{
+	font-size: 27px;
+	color: #555;
+	margin: 3px 7px 0px 0px;
+}
+#text1{
+  display: inline-block;
+  font-size: 1.17em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  float:left;
+  margin-bottom:30px;
+}
+.paging {
+  padding-top:32px;
+}
+
+.paging button{
+    width: 32px;
+    height: 32px;
+    box-sizing: inherit;
+    align-items: center;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+    cursor:pointer;
+}
+
+.paging .on{
+  background:rgb(192, 57, 43);
+  color:#fff;
+}
 	</style>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
@@ -79,7 +156,26 @@
 				  }
 			}); //end ajax	
 		}
+		
+		 $(function() {
+		        $('input[name="daterange"]').daterangepicker({
+			        opens: 'left',
+			        showDropdowns: true
+		        }, function(start, end, label) {
+			        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+			        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+			        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+			        $('#dateApplyBtn').click(function(){
+			    		window.location.replace('${contextPath}/admin/goods/listGoods.do?date1='+date1+'&date2='+date2);
+			    	});
+		        });
+
+		    });
 	</script>
+	
+<script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
 </head>
 <body>
 <div id="admin_main" class="admin_main_wrap">
@@ -87,7 +183,19 @@
 
 	    <div class="adminCustomer">
 	      <div class="adminCustomer_box">
-	        <h3>숙박 관리 리스트</h3>
+	        <a id="text1">숙박 관리 리스트</a>
+	        <div class="button_div">
+	          <button type="button" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=0&date2=0'">전체</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${today-7776000}&date2=${today}'">90일</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${today-2592000}&date2=${today}'">30일</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${today-604800}&date2=${today}'">1주</button> 
+	          <button type="button" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${today}&date2=${today}'">오늘</button>
+	          <button id="dateApplyBtn">검색</button>
+	          <div class="date-box-wrap" style="display: inline-block; float: right;">
+	          	<input type="text" id="cal" name="daterange" value="${Ddate1}/ - ${Ddate2}"/>
+	          	<i class="far fa-calendar-alt"></i>
+	          </div>
+	        </div>
 			<table align="center">
 			<tr align="center" class="column" style="font-size:14px;">
 				<td ><b>업체명</b></td>
@@ -131,12 +239,33 @@
 			</c:forEach>   
 			</table>
 		</div>
+		<div id="notice_pagination">
+                <div class="paging">
+                <c:if test="${pagination.startPage > 1}">
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${date1}&date2=${date2}&pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                </c:if>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                	<c:choose>
+                		<c:when test="${i == pagination.page}">
+                  			<button class="on" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<button onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:otherwise>
+                  	</c:choose>
+                </c:forEach>
+                <c:if test="${pagination.endPage < pagination.totalPage}">
+                  <button type="button" class="next" onclick="location.href='${contextPath}/admin/goods/listGoods.do?date1=${date1}&date2=${date2}&pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                </c:if>
+                </div>
+              </div>
 		<div class="building_box">
 			<div class="window"></div>
 			<div class="door"></div>
 			<div class="window"></div>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 </html>
