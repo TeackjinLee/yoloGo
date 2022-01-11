@@ -29,7 +29,7 @@
     <!-- 메인이미지 -->
     <div class="slider-wrap con">
         <div class="slider-contents" test="내  주  변">
-          <a href="${contextPath}/searchGoods.do">
+          <a href="${contextPath}/searchGoods.do?goods_type=my">
             <video src="${contextPath}/resources/image/main_image.mp4" loop autoplay muted></video>
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -37,7 +37,7 @@
           </a>
         </div>
         <div class="slider-contents" test="모      텔">
-          <a href="${contextPath}/searchGoods.do#tab1">
+          <a href="${contextPath}/searchGoods.do?goods_type=motel">
             <img src="${contextPath}/resources/image/main_motel.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -45,7 +45,7 @@
           </a>
         </div>
         <div class="slider-contents" test="호      텔">
-          <a href="${contextPath}/searchGoods.do#tab2">
+          <a href="${contextPath}/searchGoods.do?goods_type=hotel">
             <img src="${contextPath}/resources/image/main_hotel.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -53,7 +53,7 @@
           </a>
         </div>
         <div class="slider-contents" test="펜      션">
-          <a href="${contextPath}/searchGoods.do#tab3">
+          <a href="${contextPath}/searchGoods.do?goods_type=pension">
             <img src="${contextPath}/resources/image/main_penction.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -61,7 +61,7 @@
           </a>
         </div>
         <div class="slider-contents" test="리  조  트">
-          <a href="${contextPath}/searchGoods.do#tab4">
+          <a href="${contextPath}/searchGoods.do?goods_type=resort">
             <img src="${contextPath}/resources/image/main_resort.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"></div>
@@ -69,7 +69,7 @@
           </a>
         </div>
         <div class="slider-contents" test="게스트하우스">
-          <a href="${contextPath}/searchGoods.do#tab5">
+          <a href="${contextPath}/searchGoods.do?goods_type=guestHouse">
             <img src="${contextPath}/resources/image/main_guesthouse.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -77,7 +77,7 @@
           </a>
         </div>
         <div class="slider-contents" test="캠핑/글램핑">
-          <a href="${contextPath}/searchGoods.do#tab6">
+          <a href="${contextPath}/searchGoods.do?goods_type=camping">
             <img src="${contextPath}/resources/image/main_glamping.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -85,7 +85,7 @@
           </a>
         </div>
         <div class="slider-contents" test="한      옥">
-          <a href="${contextPath}/searchGoods.do#tab7">
+          <a href="${contextPath}/searchGoods.do?goods_type=hanok">
             <img src="${contextPath}/resources/image/main_khouse.jpg" alt="메인사진pixabay">
             <div class="text-box">
               <div class="text"><h3>즐거운 추억을 저장하다.</h3><img src="${contextPath}/resources/image/yolo-logo-cw.png" alt="YOLO가자로고"></div>
@@ -99,14 +99,14 @@
     <div class="main-link">
       <div class="main-logo-box con">
         <ul  class= "row">
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/8logo_l.png" alt="내주변 로고 이미지"></a></li>
-          <li class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/1logo_m.png" alt="모텔 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/2logo_h.png" alt="호텔 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/3logo_p.png" alt="펜션 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/4logo_r.png" alt="리조트 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/6logo_g.png" alt="캠핑/글램핑 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/5logo_c.png" alt="게스트하우스 로고 이미지"></a></li>
-          <li  class= "cell"><a href="${contextPath}/searchGoods.do"><img src="${contextPath}/resources/image/7logo_h.png" alt="한옥 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=my"><img src="${contextPath}/resources/image/8logo_l.png" alt="내주변 로고 이미지"></a></li>
+          <li class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=motel"><img src="${contextPath}/resources/image/1logo_m.png" alt="모텔 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=hotel"><img src="${contextPath}/resources/image/2logo_h.png" alt="호텔 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=pension"><img src="${contextPath}/resources/image/3logo_p.png" alt="펜션 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=resort"><img src="${contextPath}/resources/image/4logo_r.png" alt="리조트 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=guestHouse"><img src="${contextPath}/resources/image/6logo_g.png" alt="캠핑/글램핑 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=camping"><img src="${contextPath}/resources/image/5logo_c.png" alt="게스트하우스 로고 이미지"></a></li>
+          <li  class= "cell"><a href="${contextPath}/searchGoods.do?goods_type=hanok"><img src="${contextPath}/resources/image/7logo_h.png" alt="한옥 로고 이미지"></a></li>
         </ul>
       </div>
     </div>

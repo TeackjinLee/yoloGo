@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.goods">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="goodsResult" type="goodsVO">
+		<result property="goods_id" column="goods_id" />
+		<result property="uid" column="uid" />
+		<result property="goods_type" column="goods_type" />
+		<result property="goods_email1" column="goods_email1" />
+		<result property="goods_email2" column="goods_email2" />
+		<result property="goods_hp" column="goods_hp" />		
+		<result property="goods_tel1" column="goods_tel1" />
+		<result property="goods_tel2" column="goods_tel2" />
+		<result property="goods_tel3" column="goods_tel3" />
+		<result property="account_bank" column="account_bank" />
+		<result property="account_name" column="account_name" />
+		<result property="account" column="account" />		
+		<result property="goods_homePage" column="goods_homePage" />
+		<result property="goods_name" column="goods_name" />
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="jibunAddress" column="jibunAddress" />
+		<result property="namujiAddress" column="namujiAddress" />		
+		<result property="goods_description" column="goods_description" />
+		<result property="goods_room_price1" column="goods_room_price1" />
+		<result property="goods_room_price2" column="goods_room_price2" />
+		<result property="goods_baseImpormation" column="goods_baseImpormation" />
+		<result property="goods_chargeImpormation" column="goods_chargeImpormation" />
+		<result property="goods_checkIn" column="goods_checkIn" />
+		<result property="goods_checkOut" column="goods_checkOut" />
+		<result property="goods_motel_endtime" column="goods_motel_endtime" />
+		<result property="goods_motel_usetime" column="goods_motel_usetime" />
+		<result property="goods_price1" column="goods_price1" />
+		<result property="goods_price2" column="goods_price2" />
+		<result property="goods_acess" column="goods_acess" />
+
+		<result property="goods_room" column="goods_room" />
+		<result property="goods_room_num" column="goods_room_num" />
+		<result property="goods_uroom_detail" column="goods_uroom_detail" />
+		<result property="goods_room_name" column="goods_room_name" />
+		<result property="goods_room_type" column="goods_room_type" />
+		<result property="goods_capacity" column="goods_capacity" />
+		<result property="goods_introduce" column="goods_introduce" />
+		
+	</resultMap>
+	
+	<!-- 관리자 숙박 검색 -->
+	<select id="selectAllGoodsList" resultMap="goodsResult">
+      <![CDATA[
+			select g.*, i.fileName 
+			from goods g, goods_img i
+			where g.goods_id = i.goods_id
+			group by goods_id
+			order by goods_id;
+      ]]>
+	</select>
+	
+	<update id="updateGoodsAcess" parameterType="java.util.Map" >
+		update goods
+		 set
+	        goods_acess='1'
+		where 
+	    goods_id = #{goods_id}
+	</update>
+	
+</mapper>

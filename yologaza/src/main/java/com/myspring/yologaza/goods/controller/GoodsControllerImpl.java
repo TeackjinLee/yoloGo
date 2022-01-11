@@ -1,6 +1,8 @@
 package com.myspring.yologaza.goods.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.board.service.BoardService;
@@ -25,6 +28,8 @@ import com.myspring.yologaza.goods.service.GoodsService;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
+
+import net.sf.json.JSONObject;
 
 @Controller("goodsController")
 public class GoodsControllerImpl extends BaseController implements GoodsController {
@@ -57,11 +62,36 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		mav.addObject("goodsMap", goodsMap);
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);
+		
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String todayDate = timeFormat.format(date);
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		
 		return mav;
 	}
 	@Override
 	@RequestMapping(value = {"/searchGoods"},method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView searchGoods(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView searchGoods(@RequestParam("goods_type") String goods_type,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
@@ -71,6 +101,43 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = {"/goods/keywordSearchGoods.do"},method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView kewordSearchGoods(@RequestParam("searchWord") String searchWord, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		List<GoodsVO> goodsList=goodsService.searchGoods(searchWord);
+		session=request.getSession();
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		mav.addObject("goodsMap", goodsMap);
+		mav.addObject("goodsList", goodsList);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/goods/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
+	public @ResponseBody String  keywordSearch(@RequestParam("keyword") String keyword,
+			                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		//System.out.println(keyword);
+		if(keyword == null || keyword.equals(""))
+		   return null ;
+	
+		keyword = keyword.toUpperCase();
+	    List<String> keywordList =goodsService.keywordSearch(keyword);
+	    
+	 // 최종 완성될 JSONObject 선언(전체)
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keyword", keywordList);
+		 		
+	    String jsonInfo = jsonObject.toString();
+	   // System.out.println(jsonInfo);
+	    return jsonInfo ;
 	}
 	
 	private void addGoodsInQuick(String goods_id,GoodsVO goodsVO,HttpSession session){

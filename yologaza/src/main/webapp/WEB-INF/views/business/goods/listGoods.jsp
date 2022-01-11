@@ -84,7 +84,16 @@
 					<td><a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }"><img src="${contextPath}/goods_thumbnails.do?goods_id=${goodsList.goods_id}&fileName=${goodsList.fileName}" alt="숙박정보 사진"></a></td>
 					<td width="40%">${goodsList.roadAddress}<br>${goodsList.namujiAddress}</td>
 					<td>${goodsList.goods_type}</td>
-					<td>${goodsList.goods_acess}</td>
+					<td>
+					<c:choose>
+						<c:when test="${goodsList.goods_acess != null && goodsList.goods_acess != ''}">
+							<button disabled>검수 완료</button>
+						</c:when>
+						<c:otherwise>
+							<button>검수 중</button>
+						</c:otherwise>
+					</c:choose>
+					</td>
 					<td>${goodsList.goods_creDate}</td>
 					<td>
 						<button type="button" class="next" style="padding:5px; box-sizing:boder-box; cursor:pointer; display:block;" onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
