@@ -8,14 +8,13 @@
 <c:set var="room"  value="${goodsRoomMap.roomVO}"  />
 <c:set var="roomImageList"  value="${goodsRoomMap.roomImageList}"  />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>
 <%
-
-String goods_id = request.getParameter("goods_id");
-System.out.println("goods_id :"+goods_id);
-String goods_uroom = request.getParameter("goods_uroom");
-System.out.println("goods_uroom :"+goods_uroom);
+	String goods_id = request.getParameter("goods_id");
+	System.out.println("goods_id :"+goods_id);
+	String goods_uroom = request.getParameter("goods_uroom");
+	System.out.println("goods_uroom :"+goods_uroom);
 %>
 <head>
 	<script type="text/javascript">

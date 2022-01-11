@@ -482,15 +482,15 @@ function fn_order_all_cart_goods(){
 							</a>
 							<c:choose>
 								<c:when test="${item.goods_room_price2 != 0}">
-									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
+									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
 										숙박 예약하기
 									</a>
-									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
+									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
 										대실 예약하기
 									</a>
 								</c:when>
 								<c:otherwise>
-									<a class="delete" href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
+									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
 										예약하기
 									</a>
 								</c:otherwise>

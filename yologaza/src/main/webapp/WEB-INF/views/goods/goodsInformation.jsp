@@ -11,6 +11,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String goods_id = request.getParameter("goods_id");
+	String date1 = request.getParameter("date1");
+	String date2 = request.getParameter("date2");
 %>
 <style>
 	.tab_each ul li .room-box .room-text .reserve div{
@@ -300,7 +302,7 @@
 							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
 							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${item.goods_motel_usetime}시간</span></div>
 							          <div class="point">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=<fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />' ">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=<fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />' ">예약하기</button>
 							          </div>
 							        </div>
 							        <div class="reserve cell">
@@ -332,10 +334,10 @@
 							          <div class="point">
 								          <c:set var="index" value="${date1}"/>
 									      <c:if test="${index != 0}">
-								          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />' ">예약하기</button>
+								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 							          	  </c:if>
 								          <c:if test="${index == 0}">
-								          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
+								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
 								          </c:if>
 							          </div>
 							        </div>
@@ -400,10 +402,10 @@
 							          <div class="point">
 							          <c:set var="index" value="${date1}"/>
 								      <c:if test="${index != 0}">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />' ">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 						          	  </c:if>
 							          <c:if test="${index == 0}">
-							          	<button type="button" onclick="location.href='${contextPath}/member/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1}" />' ">예약하기</button>
 							          </c:if>
 							          </div>
 							        </div>
