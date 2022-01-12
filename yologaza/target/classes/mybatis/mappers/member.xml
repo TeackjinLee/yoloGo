@@ -9,9 +9,11 @@
 		<result property="id" column="id" />
         <result property="pwd" column="pwd" />
         <result property="name" column="name" />
+        <result property="nickName" column="nickName" />
         <result property="email1" column="email1" />
         <result property="email2" column="email2" />
         <result property="hp" column="hp" />
+        <result property="member_point" column="member_point" />
         <result property="auth" column="auth" />
         <result property="memFileName" column="memFileName" />
         <result property="joinDate" column="joinDate" />
@@ -276,14 +278,19 @@
 		where 
 		id=#{id}
 	</update>
-	
+	<update id="updateImgMember"  parameterType="java.util.Map">
+			update member
+			set  
+			<if test="memFileName != '' and memFileName != null">
+				memFileName=#{memFileName}
+			</if>
+			where 
+			uid = #{uid}
+	</update>
 	<select id="selectMyDetailInfo" resultType="memberVO"   parameterType="String"  >
 	    <![CDATA[
 			select * from member 
 			where id=#{id}
     	]]>
 	</select>	
-	
-	
-
 </mapper>

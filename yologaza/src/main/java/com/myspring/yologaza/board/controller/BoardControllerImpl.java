@@ -75,7 +75,7 @@ public class BoardControllerImpl implements BoardController {
 				File destDir = new 
 				File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
-			}
+				}
 				message = "<script>";
 				message += "location.href='"+multipartRequest.getContextPath()+"/goods/goodsInformation.do?goods_id=" + goods_id + "';";
 				message +=" </script>";

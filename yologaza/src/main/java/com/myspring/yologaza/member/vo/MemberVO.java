@@ -16,6 +16,7 @@ public class MemberVO {
 	private String hp;
 	private String auth;
 	private String memFileName;
+	private int member_point;
 	private Date joinDate;
 	
 	public MemberVO() {
@@ -111,6 +112,14 @@ public class MemberVO {
 
 	public void setMemFileName(String memFileName) {
 		this.memFileName = memFileName;
+	}
+
+	public int getMember_point() {
+		return member_point;
+	}
+
+	public void setMember_point(int member_point) {
+		this.member_point = member_point;
 	}
 
 	public Date getJoinDate() {

@@ -121,5 +121,80 @@ public class MypageControllerImpl implements MypageController {
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	//한 개 이미지 수정 기능
+	 @RequestMapping(value="/mypage/modArticle.do" ,method = RequestMethod.POST)
+	 @ResponseBody
+	 public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, 
+	 HttpServletResponse response) throws Exception{
+		 multipartRequest.setCharacterEncoding("utf-8");
+		 Map<String,Object> memberImgMap = new HashMap<String, Object>();
+		 Enumeration enu=multipartRequest.getParameterNames();
+		 while(enu.hasMoreElements()){
+			 String name=(String)enu.nextElement();
+			 String value=multipartRequest.getParameter(name);
+			 memberImgMap.put(name,value);
+		 }
+		 String memFileName= upload(multipartRequest);
+		 memberImgMap.put("memFileName", memFileName);
+		 String uid=(String)memberImgMap.get("uid");
+		 String message;
+		 ResponseEntity resEnt=null;
+		 HttpHeaders responseHeaders = new HttpHeaders();
+		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		  try {
+			  mypageService.modImgMember(memberImgMap);
+			  if(memFileName!=null && memFileName.length()!=0) {
+				File srcFile = new 
+				File(MEMBER_IMAGE_REPO+"\\"+"temp"+"\\"+memFileName);
+				File destDir = new File(MEMBER_IMAGE_REPO+"\\"+uid);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				   
+				String originalFileName = (String)memberImgMap.get("originalFileName");
+				File oldFile = new File(MEMBER_IMAGE_REPO+"\\"+uid+"\\"+originalFileName);
+				oldFile.delete();
+			  }
+			  message = "<script>";
+			  message += " alert('글을 수정했습니다.');";
+			  message += " location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage1.do?uid="+uid+"&memFileName="+memFileName+"';";
+			  message +=" </script>";
+			  resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		  } catch(Exception e) {
+			  File srcFile = new File(MEMBER_IMAGE_REPO+"\\"+"temp"+"\\"+memFileName);
+			  srcFile.delete();
+			  message = "<script>";
+			  message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			  message += " location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage1.do?uid="+uid+"&memFileName="+memFileName+"';";
+			  message +=" </script>";
+			  resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		  }
+		  return resEnt;
+
+	 }
+	 
+	//한개 이미지 업로드하기
+		private String upload(MultipartHttpServletRequest multipartRequest) 
+		throws Exception{
+			String memFileName= null;
+			Map<String, String> memberImgMap = new HashMap<String, String>();
+			Iterator<String> fileNames = multipartRequest.getFileNames();
+			while(fileNames.hasNext()){
+				String fileName = fileNames.next();
+				MultipartFile mFile = multipartRequest.getFile(fileName);
+				memFileName=mFile.getOriginalFilename();
+				File file = new File(MEMBER_IMAGE_REPO +"\\"+"temp"+"\\" + fileName);
+				if(mFile.getSize()!=0){
+					if(!file.exists()){
+						if(file.getParentFile().mkdirs()) {
+							file.createNewFile();
+						}
+					}
+					mFile.transferTo(new File(MEMBER_IMAGE_REPO +"\\"+"temp"+ "\\"+memFileName));
+				}
+			}
+			return memFileName;
+			
+		}
+
 
 }

@@ -22,7 +22,11 @@ public class MypageDAOImpl implements MypageDAO{
 	public MemberVO selectMyDetailInfo(String id) throws DataAccessException{
 		MemberVO memberVO=(MemberVO)sqlSession.selectOne("mapper.member.selectMyDetailInfo",id);
 		return memberVO;
-		
+	}
+	
+	@Override
+	public void updateMember(Map memberImgMap) throws DataAccessException {
+		sqlSession.update("mapper.member.updateImgMember", memberImgMap);
 	}
 
 	
