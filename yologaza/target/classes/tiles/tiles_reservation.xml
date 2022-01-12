@@ -8,5 +8,9 @@
 	   <put-attribute name="title" value="상품 예약 페이지" />
 	   <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
 	</definition>
+	<definition name="/reservation/sssForm" extends="baseLayout">
+	   <put-attribute name="title" value="상품 예약 페이지" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/sssForm.jsp" />
+	</definition>
 
 </tiles-definitions>

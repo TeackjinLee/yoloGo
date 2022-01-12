@@ -20,6 +20,7 @@
 <meta charset="UTF-8">
 <title>상품 예약 페이지</title>
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
     <script src="${contextPath}/resources/js/orderGoodsForm.js"></script>
     <style>
@@ -42,19 +43,19 @@
     </style>
 </head>
 <body>
-
+	<form id="formss" name="" method="POST" >
 	<div id="pay" class="wrap">
 		<div class="pay-box con row">
 		  <div class="pay_user_information cell">
 		    
 		    <div class="agree">
-		         <form class="checkbox_group" action="${contextPath}/main.do" method="POST" id="form__wrap">
+		        
 		           <div class="user_information_box">
 				      <h3>예약자 정보</h3>
 				      <div class="name">
 				        <p>예약자 이름</p>
 				        <div>
-				        	<input type="text" name="name" value="${member.name}" placeholder="체크인시 필요한 정보입니다.">
+				        	<input type="text" id="name" name="name" value="${member.name}" placeholder="체크인시 필요한 정보입니다.">
 				        </div>
 				      </div>
 				      <div class="mobileNo dot_line"> 
@@ -96,55 +97,7 @@
 				        <option value="CARD"> 신용/체크카드</option>
 				      </select>
 				    </div>
-		           <div class="terms__check__all">
-		             <input type="checkbox" name="checkAll" id="checkAll" />
-		             <label for="checkAll"><h3>전체 동의</h3></label>
-		           </div>
-		           <ul class="terms__list">
-		             <li class="terms__box">
-		               <div class="input__check">
-		                 <input
-		                        type="checkbox"
-		                        name="agreement"
-		                        id="goodsRefundAgree"
-		                        value="goodsRefundAgree"
-		                        required/>
-		                 <label for="goodsRefundAgree" class="required"><a href="#">숙소이용규칙 및 취소/환불규정 동의<span>(필수)</span></a></label>
-		               </div>
-		             </li>
-		             <li class="terms__box">
-		               <div class="input__check">
-		                 <input
-		                        type="checkbox"
-		                        name="agreement"
-		                        id="privacyPolicy"
-		                        value="privacyPolicy"
-		                        required/>
-		                 <label for="privacyPolicy" class="required"><a href="#">개인정보 처리방침 동의<span>(필수)</span></a></label>
-		               </div>
-		             </li>
-		             <li class="terms__box">
-		               <div class="input__check">
-		                 <input
-		                        type="checkbox"
-		                        name="agreement"
-		                        id="serviceAgree"
-		                        value="serviceAgree"/>
-		                 <label for="serviceAgree"><a href="#">서비스 이용약관 동의<span>(필수)</span></a></label>
-		               </div>
-		             </li>
-		             <li class="terms__box">
-		               <div class="input__check">
-		                 <input
-		                        type="checkbox"
-		                        name="agreement"
-		                        id="ageAgree"
-		                        value="ageAgree"/>
-		                 <label for="ageAgree"><a href="#">만 14세 이상 확인<span>(필수)</span></a></label>
-		               </div>
-		             </li>
-		           </ul>
-		        </form>
+				   
 		     </div>
 		  </div>
 		  <div class="pay_payment cell">
@@ -173,17 +126,21 @@
 		        <h4>${Ddate2} ${goods.goods_checkOut}시</h4>
 		      </div>
 		      <div class="user_goods_cost">
-		       <div class="text-box">
+		       <div class="text-box" >
 		         <h3 style="float:left;">총 결제 금액</h3><p>(VAT포함)</p>
 		         	<br>
 		         	<c:set var="index" value="<%=goods_room_price2%>"/>
 		         	<c:if test="${index == null }">
-		         		<h1 style="color:darkred;"><%=goods_room_price1%>원</h1>
+		         		<h1 style="color:darkred; border:none;">
+		         			<%=goods_room_price1%>원
+		         		</h1>
 		         		
 		         	</c:if>
 		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
 		         	<c:if test="${index2 == null }">
-		         		<h1 style="color:darkred;"><%=goods_room_price2%>원</h1>
+		         		<h1 style="color:darkred;">
+		         			<%=goods_room_price2%>원
+		         		</h1>
 		         	</c:if>		      
 		            <br>
 		            <br>
@@ -193,12 +150,102 @@
 		          </div>
 		         </div>
 		         <div class="pay_result">
-		           <button type="submit" class="next-button" disabled>결제하기</button>
+		         	<div class="goods_impormation">
+						<input id="uid" type="text" name="uid" value="${member.uid}" />
+						<input type="text" name="goods_name" value="${goods.goods_id}" />
+						<input type="text" name="goods_uroom" value="<%=goods_uroom %>" />
+						<input type="text" name="goods_name" value="${goods.goods_name}" />
+						<input type="text" name="account" value="${goods.account}" />
+			         	<input type="text" name="goods_hp" value="${goods.goods_hp}" />
+			         	<c:set var="index" value="<%=goods_room_price2%>"/>
+			         	<c:if test="${index == null }">
+			         			<input type="text" name="rePrice" value="<%=goods_room_price1%>" />
+			         	</c:if>
+			         	<c:set var="index2" value="<%=goods_room_price1%>"/>
+			         	<c:if test="${index2 == null }">
+			         			<input type="text" name="rePrice" value="<%=goods_room_price2%>" />
+			         	</c:if>
+		         	</div>
+		           <button type="submit" onclick="INIStdPay.pay('SendPayForm_id')" class="next-button" disabled>결제하기</button>
 		         </div>
 		       </div>
 		     </div>
 		</div>
 	</div>
+	</form>
+	
+	<form id="SendPayForm_id" name="" method="POST" >
+        <input type="text"    name="goodname" value="테스트" >
+        <input type="text"    name="buyername" value="${goods.goods_id}" >
+        <input type="text"    name="buyertel" value="${goods.goods_hp}" >
+        
+       	<input type="text"    name="price" value="1000" >
+        <input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
+        <input type="hidden"  name="gopaymethod" value="Card" >
+        <input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
+        <input type="hidden"  name="signature" value="f7cd23877d60c4a66564deb4c91967d227c2db723f1686e2a087d26510acca7e" >
+        <input type="hidden"  name="oid" value="INIpayTest_1641968479766" >
+        <input type="hidden"  name="timestamp" value="1641968479766" >
+        <input type="hidden"  name="version" value="1.0" >
+        <input type="hidden"  name="currency" value="WON" >
+        <input type="hidden"  name="acceptmethod" value="below1000" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
+        <input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>/INIStdPayReturn_simple.asp" >
+        <input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>/close.asp" >
+
+   </form>
+
+      <button onclick="INIStdPay.pay('SendPayForm_id')" style="padding:10px; margin-left:10%">결제요청</button>
+	
+	<form class="checkbox_group" action="${contextPath}/main.do" method="POST" id="form__wrap">
+	   <div class="terms__check__all">
+	     <input type="checkbox" name="checkAll" id="checkAll" />
+	     <label for="checkAll"><h3>전체 동의</h3></label>
+	   </div>
+	   <ul class="terms__list">
+	     <li class="terms__box">
+	       <div class="input__check">
+	         <input
+	                type="checkbox"
+	                name="agreement"
+	                id="goodsRefundAgree"
+	                value="goodsRefundAgree"
+	                required/>
+	         <label for="goodsRefundAgree" class="required"><a href="#">숙소이용규칙 및 취소/환불규정 동의<span>(필수)</span></a></label>
+	       </div>
+	     </li>
+	     <li class="terms__box">
+	       <div class="input__check">
+	         <input
+	                type="checkbox"
+	                name="agreement"
+	                id="privacyPolicy"
+	                value="privacyPolicy"
+	                required/>
+	         <label for="privacyPolicy" class="required"><a href="#">개인정보 처리방침 동의<span>(필수)</span></a></label>
+	       </div>
+	     </li>
+	     <li class="terms__box">
+	       <div class="input__check">
+	         <input
+	                type="checkbox"
+	                name="agreement"
+	                id="serviceAgree"
+	                value="serviceAgree"/>
+	         <label for="serviceAgree"><a href="#">서비스 이용약관 동의<span>(필수)</span></a></label>
+	       </div>
+	     </li>
+	     <li class="terms__box">
+	       <div class="input__check">
+	         <input
+	                type="checkbox"
+	                name="agreement"
+	                id="ageAgree"
+	                value="ageAgree"/>
+	         <label for="ageAgree"><a href="#">만 14세 이상 확인<span>(필수)</span></a></label>
+	       </div>
+	     </li>
+	   </ul>
+	</form>
 	<script>
 	
 			//휴대폰 번호 인증
@@ -225,6 +272,7 @@
 					} 
 				}); 
 			});
+			
 	
 	</script>
 	<script>

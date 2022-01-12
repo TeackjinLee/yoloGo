@@ -300,7 +300,7 @@ p {
             <div class="tab">
               <div class="tab_btn">
                 <ul>
-                  <li><a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a></li>
+                  <li style="font-weight:bold;"><a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a></li>
                 </ul>
               </div>
             </div>
@@ -308,7 +308,7 @@ p {
               <ul class="point">
                 <li>
                   <span>사용가능 포인트</span>
-                  <input type="text" value="#P" readonly>
+                  <input style="width:auto; text-align:right;" type="text" value="${member.member_point }" readonly>P
                 </li>
               </ul>
               <ul class="coupon">
