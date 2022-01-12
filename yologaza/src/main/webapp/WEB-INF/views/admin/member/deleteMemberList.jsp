@@ -105,9 +105,89 @@
 	color: #555;
 	margin: 3px 7px 0px 0px;
 }
+
+.dropdown button::before{
+  content: "\f078";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 600;
+  display: block;
+  color: black;
+  float: right;
+  cursor:pointer;
+  position:relative;
+}
+
+.dropdown button {
+  border : 1px solid rgba(0,0,0,0.2);
+  border-radius : 4px;
+  background-color: #fff;
+  font-weight: 400;
+  color : black;
+  padding : 4px;
+  width : 80px;
+  height: 19px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 16px;
+  position : relative;
+  box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.6);
+  z-index:1;
+}
+.dropdown{
+  position : relative;
+  display : inline-block;
+  float : right;
+}
+
+.dropdown-content{
+  display : none;
+  font-weight: 400;
+  background-color: #fff;
+  min-width : 80px;
+  border-radius: 8px;
+  height : 180px;
+  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+  position:absolute;
+  z-index:99;
+}
+
+.dropdown-content div{
+  display : block;
+  text-decoration : none;
+  color : black;
+  font-size: 16px;
+  padding : 12px 10px;
+  cursor : pointer;
+}
+.dropdown-content div:hover{
+  background-color: rgb(226, 226, 226);
+}
+
+#search{
+	float:right;
+	height:25px;
+	font-size:16px;
+}
 </style>
 <script>
     $(function() {
+        $.fn.type();
+        
+    	$('.dropbtn').click(function(){
+    	    event.stopPropagation();
+    		$(this).parent().find('.dropdown-content').toggle();
+    	});
+    	
+    	$('.type').click(function(){
+    		$(this).parent().parent().find('.dropbtn_content').text($(this).text());
+    		$(this).parent('.dropdown-content').toggle();
+    		$.fn.type();
+    	});
+    	
+    	$(document).click(function(){
+    	    $('.dropdown-content').hide();
+    	});
+    	
         $('input[name="daterange"]').daterangepicker({
 	        opens: 'left',
 	        showDropdowns: true
@@ -115,13 +195,38 @@
 	        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
 	        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
-	        var auth = '${auth}'
+	        var auth = '${auth}';
 	        $('#dateApplyBtn').click(function(){
-	    		window.location.replace('${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth);
+	    		window.location.href='${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth;
 	    	});
         });
-
     });
+
+    
+    $.fn.type = function(){
+		var text = $('.dropbtn_content').text();
+    	var type = 'id';
+    	if(text == '아이디'){
+    		type = 'id';
+    	}else if(text == '이름'){
+    		type = 'name';
+    	}else if(text == '연락처'){
+    		type = 'hp';
+    	}else{
+    		type = 'email1';
+    	}
+    	var query = '';
+        $('#search').keyup(function(){
+        	query = $(this).val();
+    	});
+    	var date1 = '${date1}';
+    	var date2 = '${date2}';
+    	var auth = '${auth}';
+        $('#searchBtn').click(function(){
+    		window.location.href='${contextPath}/admin/member/deleteMemberList.do?date1='+date1+'&date2='+date2+'&auth='+auth+'&query='+query+'&type='+type;
+    	});
+	}
+
 </script>
 <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
@@ -155,6 +260,19 @@
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${date1}&date2=${date2}&auth=3'">관리자</button>
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${date1}&date2=${date2}&auth=2'">사업자</button>
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${date1}&date2=${date2}&auth=1'">사용자</button>
+	          <button id="searchBtn">검색</button>
+	       	  <div class="dropdown">
+                    <button class="dropbtn">
+                      <span class="dropbtn_content">아이디</span>
+                    </button>
+                    <div class="dropdown-content">
+                      <div class="type">아이디</div>
+                      <div class="type">이름</div>
+                      <div class="type">연락처</div>
+                      <div class="type">이메일</div>
+                  	</div>
+              </div>
+              <input type="text" id="search">
 	        </div>
 	        <table align="center">
 	          <tr align="center" class="column">
