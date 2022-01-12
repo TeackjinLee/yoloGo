@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +24,9 @@
         <input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
         <input type="hidden"  name="gopaymethod" value="Card" >
         <input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
-        <input type="hidden"  name="signature" value="f7cd23877d60c4a66564deb4c91967d227c2db723f1686e2a087d26510acca7e" >
-        <input type="hidden"  name="oid" value="INIpayTest_1641968479766" >
-        <input type="hidden"  name="timestamp" value="1641968479766" >
+        <input type="hidden"  name="signature" value="a57daa068fdd3381b89e8f802227317c6caeab46ab65bf91b00c0ce6c15bce1c" >
+        <input type="hidden"  name="oid" value="INIpayTest_1641992754924" >
+        <input type="hidden"  name="timestamp" value="1641992754924" >
         <input type="hidden"  name="version" value="1.0" >
         <input type="hidden"  name="currency" value="WON" >
         <input type="hidden"  name="acceptmethod" value="below1000" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
@@ -39,3 +39,5 @@
 
  </body>
 </html>
+
+		
