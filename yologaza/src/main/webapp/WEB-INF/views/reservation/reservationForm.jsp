@@ -175,22 +175,22 @@
 	</form>
 	
 	<form id="SendPayForm_id" name="" method="POST" >
-        <input type="text"    name="goodname" value="테스트" >
-        <input type="text"    name="buyername" value="${goods.goods_id}" >
-        <input type="text"    name="buyertel" value="${goods.goods_hp}" >
-        
-       	<input type="text"    name="price" value="1000" >
+        <input type="text"    name="goodname" value="${goods.goods_name }" >
+        <input type="text"    name="buyername" value="${member.name }" >
+        <input type="text"    name="buyertel" value="${member.hp }" >
+        <input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
+        <input type="text"    name="price" value="1000" >
         <input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
-        <input type="hidden"  name="gopaymethod" value="Card" >
+        <input type="hidden"  name="gopaymethod" value="Card:DirectBank:VBank" >
         <input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
-        <input type="hidden"  name="signature" value="f7cd23877d60c4a66564deb4c91967d227c2db723f1686e2a087d26510acca7e" >
-        <input type="hidden"  name="oid" value="INIpayTest_1641968479766" >
-        <input type="hidden"  name="timestamp" value="1641968479766" >
+        <input type="hidden"  name="signature" value="a57daa068fdd3381b89e8f802227317c6caeab46ab65bf91b00c0ce6c15bce1c" >
+        <input type="hidden"  name="oid" value="INIpayTest_1641992754924" >
+        <input type="hidden"  name="timestamp" value="1641992754924" >
         <input type="hidden"  name="version" value="1.0" >
         <input type="hidden"  name="currency" value="WON" >
         <input type="hidden"  name="acceptmethod" value="below1000" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
-        <input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>/INIStdPayReturn_simple.asp" >
-        <input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>/close.asp" >
+        <input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>&INIStdPayReturn_simple.asp" >
+        <input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>&close.asp" >
 
    </form>
 
