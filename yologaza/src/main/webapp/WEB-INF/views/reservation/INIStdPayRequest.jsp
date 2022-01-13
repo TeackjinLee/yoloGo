@@ -1,13 +1,9 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"	isELIgnored="false"
-	%>
+﻿<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.inicis.std.util.SignatureUtil"%>
 <%@page import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%request.setCharacterEncoding("UTF-8"); %>
 <%
+
 	/*
 		//*** 위변조 방지체크를 signature 생성 ***
 
@@ -172,10 +168,10 @@
 												<input type="hidden" style="width:100%;" name="signature" value="<%=signature%>" >
 
 												<br/><b>returnUrl</b> :
-												<br/><input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.jsp" >
+												<br/><input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do" >
 												<!--
 					                            payViewType이 popup일 경우 crossDomain이슈로 우회처리 
-					                            <input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayRelay.jsp" >
+					                            <input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayRelay.do" >
 												-->
 												<input type="hidden"  name="mKey" value="<%=mKey%>" >
 
@@ -220,12 +216,12 @@
 												<br/><input style="width:100%;" name="payViewType" value="" >
 
 												<br/><b>closeUrl</b> : payViewType='overlay','popup'시 취소버튼 클릭시 창닥기 처리 URL(가맹점에 맞게 설정)
-												<br/>close.jsp 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)
-												<br/><input style="width:100%;" name="closeUrl" value="<%=siteDomain%>/close.jsp" >
+												<br/>close.do 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)
+												<br/><input style="width:100%;" name="closeUrl" value="<%=siteDomain%>/close.do" >
 
 												<br/><b>popupUrl</b> : payViewType='popup'시 팝업을 띄울수 있도록 처리해주는 URL(가맹점에 맞게 설정)
-												<br/>popup.jsp 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
-												<br/><input style="width:100%;" name="popupUrl" value="<%=siteDomain%>/popup.jsp" >
+												<br/>popup.do 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
+												<br/><input style="width:100%;" name="popupUrl" value="<%=siteDomain%>/popup.do" >
 
 											</div>
 											
