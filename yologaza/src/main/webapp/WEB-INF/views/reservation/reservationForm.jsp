@@ -8,12 +8,14 @@
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <c:set var="RoomList"  value="${goodsMap.RoomList}"  />
 <c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String goods_uroom = request.getParameter("goods_uroom");
 	String goods_room_price1 = request.getParameter("goods_room_price1");
 	String goods_room_price2 = request.getParameter("goods_room_price2");
 %>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +45,7 @@
     </style>
 </head>
 <body>
-	<form id="formss" name="" method="POST" >
+	<form id="SendPayForm_id" name="" method="POST" >
 	<div id="pay" class="wrap">
 		<div class="pay-box con row">
 		  <div class="pay_user_information cell">
@@ -55,14 +57,14 @@
 				      <div class="name">
 				        <p>예약자 이름</p>
 				        <div>
-				        	<input type="text" id="name" name="name" value="${member.name}" placeholder="체크인시 필요한 정보입니다.">
+				        	<input type="text" id="buyername" name="buyername" value="${member.name}" placeholder="체크인시 필요한 정보입니다.">
 				        </div>
 				      </div>
 				      <div class="mobileNo dot_line"> 
 							<div class="fixed_join"> 
 								<label for="phone">*휴대폰 번호</label> 
 							</div> 
-							<div> <p> <input id="phone" type="text" name="hp" style="width:78%; margin-bottom:10px;" title="전화번호 입력" required/> 
+							<div> <p> <input id="phone" type="text" name="buyertel" value="${member.hp}" style="width:78%; margin-bottom:10px;" title="전화번호 입력" required/> 
 								<input type="button" id="phoneChk" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="인증전송" />
 								<input id="phone2" type="text" name="phone2" style="width:78%;" title="인증번호 입력" disabled required/> 
 								<input type="button" id="phoneChk2" class="doubleChk" style="width:20%; float:right; cursor:pointer;" value="본인인증" />
@@ -83,20 +85,11 @@
 				    	<c:otherwise>
 				    		<div class="name" style="margin-top:10px;">
 						        <p>할인 선택</p>
-						        <div>
-						        	<input type="text" id="member_point" name="member_point" value="" placeholder="포인트 적용" style="width:100%; height:50px;"	/>
-						        </div>
-						      </div>
+						        <button>포인트 사용</button>
+						    </div>
 				    	</c:otherwise>
 				    </c:choose>
-				    <div class="pay_select">
-				      <h3>결제수단 선택</h3>
-				      <select id="payment-select" class="select_type_1">
-				        <option value="KAKAO"> 카카오페이</option>
-				        <option value="TOSS"> 토스</option>
-				        <option value="CARD"> 신용/체크카드</option>
-				      </select>
-				    </div>
+				    
 				   
 		     </div>
 		  </div>
@@ -150,48 +143,29 @@
 		          </div>
 		         </div>
 		         <div class="pay_result">
-		         	<div class="goods_impormation">
-						<input id="uid" type="text" name="uid" value="${member.uid}" />
-						<input type="text" name="goods_name" value="${goods.goods_id}" />
-						<input type="text" name="goods_uroom" value="<%=goods_uroom %>" />
-						<input type="text" name="goods_name" value="${goods.goods_name}" />
-						<input type="text" name="account" value="${goods.account}" />
-			         	<input type="text" name="goods_hp" value="${goods.goods_hp}" />
-			         	<c:set var="index" value="<%=goods_room_price2%>"/>
-			         	<c:if test="${index == null }">
-			         			<input type="text" name="rePrice" value="<%=goods_room_price1%>" />
-			         	</c:if>
-			         	<c:set var="index2" value="<%=goods_room_price1%>"/>
-			         	<c:if test="${index2 == null }">
-			         			<input type="text" name="rePrice" value="<%=goods_room_price2%>" />
-			         	</c:if>
-		         	</div>
-		           <button type="submit" onclick="INIStdPay.pay('SendPayForm_id')" class="next-button" disabled>결제하기</button>
+					<input type="text"    name="goodname" value="${goods.goods_name }" >
+					<input type="hidden"    name="logo_2nd" value="http://localhost:8080/yologaza/resources/image/64x13yolo_logo_w.png" >
+					<input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
+					<input type="text"    name="price" value="1000" >
+					<input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
+					<input type="hidden"  name="gopaymethod" value="Card:DirectBank:VBank" >
+					<input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
+			        <input type="hidden"  name="signature" value="b69ad1be79707aae52ad04ddc6981929666dc1e05a74c5e383ccf2b1b4c10186" >
+			        <input type="hidden"  name="oid" value="INIpayTest_1642055310800" >
+			        <input type="hidden"  name="timestamp" value="1642055310800" >
+			        <input type="hidden"  name="version" value="1.0" >
+			        <input type="hidden"  name="currency" value="WON" >
+			        <input type="hidden"  name="acceptmethod" value="below1000" >
+					<input type="hidden"  name="acceptmethod" value="SKIN(#70ad47)" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
+					<input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/INIStdPayReturn.do" >
+					<input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/close.do" >
+						
+		           <button onclick="INIStdPay.pay('SendPayForm_id')" class="next-button" disabled>결제하기</button>
 		         </div>
 		       </div>
 		     </div>
 		</div>
 	</div>
-	</form>
-	
-	<form id="SendPayForm_id" name="" method="POST" >
-        <input type="text"    name="goodname" value="${goods.goods_name }" >
-        <input type="text"    name="buyername" value="${member.name }" >
-        <input type="text"    name="buyertel" value="${member.hp }" >
-        <input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
-        <input type="text"    name="price" value="1000" >
-        <input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
-        <input type="hidden"  name="gopaymethod" value="Card:DirectBank:VBank" >
-        <input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
-        <input type="hidden"  name="signature" value="a57daa068fdd3381b89e8f802227317c6caeab46ab65bf91b00c0ce6c15bce1c" >
-        <input type="hidden"  name="oid" value="INIpayTest_1641992754924" >
-        <input type="hidden"  name="timestamp" value="1641992754924" >
-        <input type="hidden"  name="version" value="1.0" >
-        <input type="hidden"  name="currency" value="WON" >
-        <input type="hidden"  name="acceptmethod" value="below1000" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
-        <input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>&INIStdPayReturn_simple.asp" >
-        <input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/reservationForm.do?goods_id=${goods.goods_id }&goods_uroom=<%=goods_uroom%>&goods_room_price1=<%=goods_room_price1%>&close.asp" >
-
    </form>
 
       <button onclick="INIStdPay.pay('SendPayForm_id')" style="padding:10px; margin-left:10%">결제요청</button>

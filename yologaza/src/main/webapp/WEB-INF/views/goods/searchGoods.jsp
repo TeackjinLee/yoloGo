@@ -16,9 +16,6 @@
 	<meta charset="UTF-8">
 	<title>숙박 검색</title>
 	
-	<script src="${contextPath}/resources/jquery/jquery.easing.1.3.js" type="text/javascript"></script>
-	<script src="${contextPath}/resources/jquery/stickysidebar.jquery.js" type="text/javascript"></script>
-	<script src="${contextPath}/resources/jquery/basic-jquery-slider.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/search_goods.css">
 	<script src="${contextPath}/resources/js/search_goods.js"></script>
     <!-- 달력링크 -->
@@ -29,20 +26,20 @@
     
     <!--  달력js -->
     <script>
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-	        opens: 'left',
-	        showDropdowns: true
-        }, function(start, end, label) {
-	        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-	        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
-	        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
-	        $('#dateApplyBtn').click(function(){
-	    		window.location.replace('${contextPath}/searchGoods.do?goods_type='+<%=goods_type%>+'&date1='+date1+'&date2='+date2);
-	    	});
-        });
-
-    });
+	    $(function() {
+	        $('input[name="daterange"]').daterangepicker({
+		        opens: 'left',
+		        showDropdowns: true
+	        }, function(start, end, label) {
+		        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+		        $('#dateApplyBtn').click(function(){
+		    		window.location.replace('${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&date1='+date1+'&date2='+date2);
+		    	});
+	        });
+	
+	    });
     </script>
     
 	<style>
@@ -50,6 +47,16 @@
 			font-weight:bold;
 			color:rgb(112, 173, 71);
 		}
+		#filter_wrap .btn_date{
+			position: relative;
+	     }
+	     #filter_wrap .far{
+			position: absolute;
+		    left: 5px;
+		    top: 5px;
+		    font-size: 21px;
+		    color: #555;
+	     }
 	</style>
 </head>
 <body>
@@ -98,21 +105,21 @@
 			</ul>
 		</div>
       <!-- 상세 검색창 -->
-      <div class="filter_wrap">
+      <div id="filter_wrap" class="filter_wrap">
         <section class="date-wrap">
-          <h3>날짜</h3>
-          <div class="btn_date">
-            <tr class="date-box">
-              <td  class="date">
-              <input type="text" name="daterange" value="01/01/2021/ - 01/15/2022" />
-              </td>
-            </tr>
-          </div>
-        </section>
+		<h3>날짜</h3>
+		<div class="btn_date">
+			<tr class="date-box">
+				<td  class="date"><i class="far fa-calendar-alt"></i>
+					<input type="text" name="daterange" value="${Ddate1}/ - ${Ddate2}" />
+				</td>
+			</tr>
+			
+		</div>
         <div class="select-wrap">
           <h3>상세조건</h3>
           <button type="button" onclick="">초기화</button>
-          <button type="submit">적용</button>
+          <button id="dateApplyBtn" class="dateApplyBtn">적용</button>
         </div>
         
         <section>

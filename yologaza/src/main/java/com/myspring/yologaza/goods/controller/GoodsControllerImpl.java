@@ -89,7 +89,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		return mav;
 	}
 	@Override
-	@RequestMapping(value = {"/searchGoods"},method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = {"/searchGoods"},method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView searchGoods(@RequestParam("goods_type") String goods_type,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -100,6 +100,30 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		session=request.getSession();
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
 		mav.addObject("goodsMap", goodsMap);
+		
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String todayDate = timeFormat.format(date);
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		
 		return mav;
 	}
 	
