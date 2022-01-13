@@ -1,8 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.inicis.std.util.ParseUtil"%>
-<%@ page import="com.inicis.std.util.SignatureUtil"%>
-<%@ page import="com.inicis.std.util.HttpUtil"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -28,7 +24,7 @@
 		Enumeration elems = request.getParameterNames();
 		String temp = "";
 
-		out.println("<form name='frm' method='post' action='/INIStdPayReturn.jsp'>");
+		out.println("<form name='frm' method='post' action='/INIStdPayReturn.do'>");
 		while(elems.hasMoreElements())
 		{
 			temp = (String) elems.nextElement();

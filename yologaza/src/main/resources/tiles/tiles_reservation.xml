@@ -24,4 +24,19 @@
 	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayRequest.jsp" />
 	</definition>
 	
+	<definition name="/reservation/INIStdPayBill" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayBill.jsp" />
+	</definition>
+	
+	<definition name="/reservation/INIStdPayRelay" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayRelay.jsp" />
+	</definition>
+	
+	<definition name="/reservation/popup" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/popup.jsp" />
+	</definition>
+	
 </tiles-definitions>

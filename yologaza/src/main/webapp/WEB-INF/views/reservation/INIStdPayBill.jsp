@@ -31,7 +31,7 @@
 	String timestamp			= SignatureUtil.getTimestamp();			// util에 의해서 자동생성
 
 	String oid					= mid+"_"+SignatureUtil.getTimestamp();	// 가맹점 주문번호(가맹점에서 직접 설정)
-	String price					= "1000";													// 상품가격(특수기호 제외, 가맹점에서 직접 설정)
+	String price					= "100";													// 상품가격(특수기호 제외, 가맹점에서 직접 설정)
 
 	//###############################################
 	// 2. 가맹점 확인을 위한 signKey를 해시값으로 변경 (SHA-256방식 사용)
@@ -52,7 +52,7 @@
 	
 	
 	/* 기타 */
-	String siteDomain = "http://127.0.0.1:8080/INIpayStdSample"; //가맹점 도메인 입력
+	String siteDomain = "http://localhost:8080/yologaza/reservation"; //가맹점 도메인 입력
 
 	// 페이지 URL에서 고정된 부분을 적는다. 
 	// Ex) returnURL이 http://127.0.0.1:8080INIpayStdSample/INIStdPayReturn.jsp 라면
@@ -142,8 +142,9 @@ function hppShow(){
 												<br/><input  style="width:100%;" name="mid" value="<%=mid%>" >
 													
 												<br/><b>goodname</b> :
-												<br/><input  style="width:100%;" name="goodname" value="테스트" >
-
+												<br/><input  style="width:100%;" name="goodname" value="yolo" >
+												<input type="hidden"    name="logo_2nd" value="http://localhost:8080/yologaza/resources/image/64x13yolo_logo_w.png" >
+												
 												<br/><b>oid</b> :
 												<br/><input  style="width:100%;" name="oid" value="<%=oid%>" >
 
@@ -155,7 +156,7 @@ function hppShow(){
 												<br/><input  style="width:100%;" name="currency" value="WON" >
 
 												<br/><b>buyername</b> :
-												<br/><input  style="width:100%;" name="buyername" value="홍길동" >
+												<br/><input  style="width:100%;" name="buyername" value="이택진" >
 
 												<br/><b>buyertel</b> :
 												<br/><input  style="width:100%;" name="buyertel" value="010-1234-5678" >
@@ -171,10 +172,10 @@ function hppShow(){
 												<input type="hidden" style="width:100%;" name="signature" value="<%=signature%>" >
 
 												<br/><b>returnUrl</b> :
-												<br/><input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.jsp" >
+												<br/><input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do" >
 												<!--
                             payViewType이 popup일 경우 crossDomain이슈로 우회처리 권장하지 않음. 
-                            <input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayRelay.jsp" >
+                            <input  style="width:100%;" name="returnUrl" value="<%=siteDomain%>/INIStdPayRelay.do" >
 												-->
 												<input type="hidden"  name="mKey" value="<%=mKey%>" >
 
@@ -183,7 +184,7 @@ function hppShow(){
 											<br/><br/>
 											<b>***** 기본 옵션 *****</b>
 											<div style="border:2px #dddddd double;padding:10px;background-color:#f3f3f3;">												
-                        						<input type="hidden" style="width:100%;" name="gopaymethod" value="">
+                        						<input type="text" style="width:100%;" name="gopaymethod" value="Card:DirectBank:VBank">
 												<br/>
 												<b>offerPeriod</b> : 제공기간
 												<br/>ex)20151001-20151231, [Y2:년단위결제, M2:월단위결제, yyyyMMdd-yyyyMMdd : 시작일-종료일]
@@ -191,8 +192,9 @@ function hppShow(){
 												<br/><br/>
 												
 													<br/><b>acceptmethod : 기타 옵션 정보 및 설명은 연동정의보 참조 구분자 ":"
-											
-												<br/><input style="width:100%;" name="acceptmethod" value="BILLAUTH(card)" > 
+												
+												<br/><input style="width:100%;" name="acceptmethod" value="below1000:SKIN(#70ad47)" >
+												
 												<b>결제일 알림 메세지</b> : 결제일 알림 메세지
 												<br/><input  style="width:100%;" id="billPrint_msg" name="billPrint_msg" value="고객님의 매월 결제일은 24일 입니다." >
 												<br/>
@@ -207,18 +209,18 @@ function hppShow(){
 												<br/><b>charset</b> : 리턴 인코딩
 												<br/>[UTF-8|EUC-KR] (default:UTF-8)
 												<br/><input style="width:100%;" name="charset" value="" >
-
+												
 												<br/><b>payViewType</b> : 결제창 표시방법
 												<br/>[overlay] (default:overlay)
 												<br/><input style="width:100%;" name="payViewType" value="" >
 
 												<br/><b>closeUrl</b> : payViewType='overlay','popup'시 취소버튼 클릭시 창닥기 처리 URL(가맹점에 맞게 설정)
-												<br/>close.jsp 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)
-												<br/><input style="width:100%;" name="closeUrl" value="<%=siteDomain%>/close.jsp" >
+												<br/>close.do 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)
+												<br/><input style="width:100%;" name="closeUrl" value="<%=siteDomain%>/close.do" >
 
 												<br/><b>popupUrl</b> : payViewType='popup'시 팝업을 띄울수 있도록 처리해주는 URL(가맹점에 맞게 설정)
-												<br/>popup.jsp 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
-												<br/><input style="width:100%;" name="popupUrl" value="<%=siteDomain%>/popup.jsp" >
+												<br/>popup.do 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
+												<br/><input style="width:100%;" name="popupUrl" value="<%=siteDomain%>/popup.do" >
 
 											</div>
 											

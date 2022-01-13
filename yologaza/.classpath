@@ -29,6 +29,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/INIpayWebStandard_Sample/PC결제 일반결제 샘플/JSP/INIStdweb_JAVA_Sample_v2.2_jdk1.5/INIStdweb_JAVA_Sample_v2.2_jdk1.5/WebContent/WEB-INF/lib/INIpaySample_v1.3_jdk1.5.jar"/>
+	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.45/lib/INIpaySample_v1.3_jdk1.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
