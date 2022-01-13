@@ -78,7 +78,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		return Integer.toString(randomNumber);
 	}
 	
-	@RequestMapping(value="/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/INIStdPay*.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(HttpServletRequest request, 
 							HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");

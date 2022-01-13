@@ -54,7 +54,7 @@ public class MypageControllerImpl implements MypageController {
 	
 	
 	
-	@RequestMapping(value="/mypage/*.do", method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/*.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
 							@RequestParam(value= "action", required=false) String action,
 								HttpServletRequest request, 
