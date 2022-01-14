@@ -68,6 +68,8 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		Date date = new Date(System.currentTimeMillis()+32400000);
 		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
 		String todayDate = timeFormat.format(date);
+		long today1 = (today/86400) * 86400;
+		long today2 = (((today/86400)+1) * 86400);
 		long date1 = 0;
 		long date2 = 0;
 		if(request.getParameter("date1") != null)
@@ -75,7 +77,7 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		if(request.getParameter("date2") != null)
 			date2 = Long.parseLong(request.getParameter("date2"));
 		date1 = (date1/86400) * 86400;
-		date2 = ((date2/86400) * 86400)+1;
+		date2 = ((date2/86400) * 86400);
 		request.setAttribute("date1", date1);
 		request.setAttribute("date2", date2);
 		String Ddate1 = todayDate;
@@ -90,12 +92,21 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		String auth = "";
 		auth = request.getParameter("auth");
 		request.setAttribute("auth", auth);
+		//query
+		String query = "";
+		query = request.getParameter("query");
+		request.setAttribute("query", query);
+		//type
+		String type = "";
+		type = request.getParameter("type");
+		request.setAttribute("type", type);
 		String viewName = (String) request.getAttribute("viewName");
-		List<MemberVO> deleteMemberList = adminMemberService.deletelistMembers(auth, date1, date2, offset, pagination.getCountList());
+		List<MemberVO> deleteMemberList = adminMemberService.deletelistMembers(type, query, auth, date1, date2, offset, pagination.getCountList());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("deleteMemberList", deleteMemberList);
 		mav.addObject(pagination);
-		mav.addObject("today", today);
+		mav.addObject("today1", today1);
+		mav.addObject("today2", today2);
 		return mav;
 	}
 	
