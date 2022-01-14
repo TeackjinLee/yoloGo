@@ -4,18 +4,12 @@ import java.sql.Date;
 
 public class ReservationVO {
 	private int rid;
-	private int uid;
+	private int goodes_id;
 	private int goods_uroom;
-	private String name;
-	private String hp;
-	private String goods_hp;
-	private String goods_name;
-	private String goodsType;
-	private int rePrice;
-	private String card_select;
-	private Date checkInDate;
-	private Date checkOutDate;
-	private String account;
+	private int price;
+	private Date checkIn;
+	private Date checkOut;
+	private Date rDate;
 	
 	public int getRid() {
 		return rid;
@@ -23,11 +17,11 @@ public class ReservationVO {
 	public void setRid(int rid) {
 		this.rid = rid;
 	}
-	public int getUid() {
-		return uid;
+	public int getGoodes_id() {
+		return goodes_id;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setGoodes_id(int goodes_id) {
+		this.goodes_id = goodes_id;
 	}
 	public int getGoods_uroom() {
 		return goods_uroom;
@@ -35,65 +29,29 @@ public class ReservationVO {
 	public void setGoods_uroom(int goods_uroom) {
 		this.goods_uroom = goods_uroom;
 	}
-	public String getName() {
-		return name;
+	public int getPrice() {
+		return price;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public String getHp() {
-		return hp;
+	public Date getCheckIn() {
+		return checkIn;
 	}
-	public void setHp(String hp) {
-		this.hp = hp;
+	public void setCheckIn(Date checkIn) {
+		this.checkIn = checkIn;
 	}
-	public String getGoods_hp() {
-		return goods_hp;
+	public Date getCheckOut() {
+		return checkOut;
 	}
-	public void setGoods_hp(String goods_hp) {
-		this.goods_hp = goods_hp;
+	public void setCheckOut(Date checkOut) {
+		this.checkOut = checkOut;
 	}
-	public String getGoods_name() {
-		return goods_name;
+	public Date getrDate() {
+		return rDate;
 	}
-	public void setGoods_name(String goods_name) {
-		this.goods_name = goods_name;
-	}
-	public String getGoodsType() {
-		return goodsType;
-	}
-	public void setGoodsType(String goodsType) {
-		this.goodsType = goodsType;
-	}
-	public int getRePrice() {
-		return rePrice;
-	}
-	public void setRePrice(int rePrice) {
-		this.rePrice = rePrice;
-	}
-	public String getCard_select() {
-		return card_select;
-	}
-	public void setCard_select(String card_select) {
-		this.card_select = card_select;
-	}
-	public Date getCheckInDate() {
-		return checkInDate;
-	}
-	public void setCheckInDate(Date checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-	public Date getCheckOutDate() {
-		return checkOutDate;
-	}
-	public void setCheckOutDate(Date checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
+	public void setrDate(Date rDate) {
+		this.rDate = rDate;
 	}
 	
 }

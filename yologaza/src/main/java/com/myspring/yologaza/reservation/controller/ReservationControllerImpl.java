@@ -44,6 +44,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		mav.setViewName(viewName);
 		
+		
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
 		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -86,4 +87,5 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
 }
