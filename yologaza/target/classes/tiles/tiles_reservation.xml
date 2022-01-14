@@ -8,5 +8,35 @@
 	   <put-attribute name="title" value="상품 예약 페이지" />
 	   <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
 	</definition>
-
+	
+	<definition name="/reservation/INIStdPayReturn" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayReturn.jsp" />
+	</definition>
+	
+	<definition name="/reservation/close" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/close.jsp" />
+	</definition>
+	
+	<definition name="/reservation/INIStdPayRequest" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayRequest.jsp" />
+	</definition>
+	
+	<definition name="/reservation/INIStdPayBill" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayBill.jsp" />
+	</definition>
+	
+	<definition name="/reservation/INIStdPayRelay" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/INIStdPayRelay.jsp" />
+	</definition>
+	
+	<definition name="/reservation/popup" extends="baseLayout">
+	   <put-attribute name="title" value="인증결과수신" />
+	   <put-attribute name="body" value="/WEB-INF/views/reservation/popup.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -70,11 +70,20 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 	}
 	
 	@Override
-	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String sendSMS(@RequestParam("phone") String userPhoneNumber) {
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
 		certificationService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		return Integer.toString(randomNumber);
+	}
+	
+	@RequestMapping(value="/INIStdPay*.do", method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView form(HttpServletRequest request, 
+							HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
 	}
 }
