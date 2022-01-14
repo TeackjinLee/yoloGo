@@ -402,7 +402,7 @@
 							          <div class="point">
 							          <c:set var="index" value="${date1}"/>
 								      <c:if test="${index != 0}">
-							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=<fmt:formatNumber type="number" maxFractionDigits="0" value="${item.goods_room_price1 *(date2-date1-1)/86400}" />&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 						          	  </c:if>
 							          <c:if test="${index == 0}">
 							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>

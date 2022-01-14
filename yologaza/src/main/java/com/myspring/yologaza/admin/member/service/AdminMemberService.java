@@ -11,7 +11,7 @@ public interface AdminMemberService {
 	public AdminMemberDAO getAdminMemberDAO();
 	public List<MemberVO> listMembers(int offset, int count) throws DataAccessException;
 	public List<MemberVO> listMembersByAuth(String auth, int offset, int count) throws DataAccessException;
-	public List<MemberVO> deletelistMembers(String auth, long date1, long date2, int offset, int count) throws DataAccessException;
+	public List<MemberVO> deletelistMembers(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public int addMember(MemberVO memberVO) throws DataAccessException;
 	public int removeMember(String id) throws DataAccessException;
 	public MemberVO login(MemberVO memberVO) throws DataAccessException;

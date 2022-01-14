@@ -1,21 +1,78 @@
 <!-- 기여도 : 이택진100%-->
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"	isELIgnored="false"
-	%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.inicis.std.util.SignatureUtil"%>
+<%@page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="goods"  value="${goodsMap.goodsVO}"  />
-<c:set var="RoomList"  value="${goodsMap.RoomList}"  />
-<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
-
+	<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+	<c:set var="goods"  value="${goodsMap.goodsVO}"  />
+	<c:set var="RoomList"  value="${goodsMap.RoomList}"  />
+	<c:set var="imageList"  value="${goodsMap.imageListRoom }"  />
 <%
 	request.setCharacterEncoding("UTF-8");
 	String goods_uroom = request.getParameter("goods_uroom");
 	String goods_room_price1 = request.getParameter("goods_room_price1");
 	String goods_room_price2 = request.getParameter("goods_room_price2");
 %>
-<%@ page import="java.util.*"%>
+
+<%
+
+	/*
+		//*** 위변조 방지체크를 signature 생성 ***
+
+			oid, price, timestamp 3개의 키와 값을
+
+			key=value 형식으로 하여 '&'로 연결한 하여 SHA-256 Hash로 생성 된값
+
+			ex) oid=INIpayTest_1432813606995&price=819000&timestamp=2012-02-01 09:19:04.004
+				
+
+			 * key기준 알파벳 정렬
+
+			 * timestamp는 반드시 signature생성에 사용한 timestamp 값을 timestamp input에 그대로 사용하여야함
+	*/
+
+	//############################################
+	// 1.전문 필드 값 설정(***가맹점 개발수정***)
+	//############################################
+
+	// 여기에 설정된 값은 Form 필드에 동일한 값으로 설정
+	String mid					= "INIpayTest";		// 가맹점 ID(가맹점 수정후 고정)					
+	
+	//인증
+	String signKey			    = "SU5JTElURV9UUklQTEVERVNfS0VZU1RS";	// 가맹점에 제공된 웹 표준 사인키(가맹점 수정후 고정)
+	String timestamp			= SignatureUtil.getTimestamp();			// util에 의해서 자동생성
+
+	String oid					= mid+"_"+SignatureUtil.getTimestamp();	// 가맹점 주문번호(가맹점에서 직접 설정)
+	String price					= "100";													// 상품가격(특수기호 제외, 가맹점에서 직접 설정)
+
+	//###############################################
+	// 2. 가맹점 확인을 위한 signKey를 해시값으로 변경 (SHA-256방식 사용)
+	//###############################################
+	String mKey = SignatureUtil.hash(signKey, "SHA-256");
+	
+	//###############################################
+	// 2.signature 생성
+	//###############################################
+	Map<String, String> signParam = new HashMap<String, String>();
+
+	signParam.put("oid",		oid); 							// 필수
+	signParam.put("price", price);							// 필수
+	signParam.put("timestamp",	timestamp);		// 필수
+
+	// signature 데이터 생성 (모듈에서 자동으로 signParam을 알파벳 순으로 정렬후 NVP 방식으로 나열해 hash)
+	String signature = SignatureUtil.makeSignature(signParam);
+	
+	
+	/* 기타 */
+	String siteDomain = "http://localhost:8080/yologaza/reservation"; //가맹점 도메인 입력
+
+	// 페이지 URL에서 고정된 부분을 적는다. 
+	// Ex) returnURL이 http://127.0.0.1:8080INIpayStdSample/INIStdPayReturn.jsp 라면
+	// http://127.0.0.1:8080/INIpayStdSample 까지만 기입한다.
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +81,10 @@
 	<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/orderGoodsForm.css">
-    <script src="${contextPath}/resources/js/orderGoodsForm.js"></script>
     <style>
+    	#pay .pay-box{
+    		position:relative;
+    	}
     	#tab1 .fa-shopping-cart:before {
 		    content: "\f004";
 		}
@@ -42,16 +101,87 @@
 		#pay .agree .checkbox_group .user_information_box .mobileNo div p input{
 			height:50px;
 		}
+		#pay #next-button{
+			position: absolute;
+		    right: 0;
+		    bottom: 0;
+		    border-radius: 0;
+		    width: 409.5px;
+		}
     </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	  const form = document.querySelector("#form__wrap");
+    	  const checkAll = document.querySelector(".terms__check__all input");
+    	  const checkBoxes = document.querySelectorAll(".input__check input");
+    	  const submitButton = document.querySelector("#next-button");
+    	  
+    	  const agreements = {
+    	    goodsRefundAgree: false,
+    	    privacyPolicy: false,
+    	    serviceAgree: false,
+    	    ageAgree: false
+    	  };
+    	  
+    	  form.addEventListener("submit", (e) => e.preventDefault());
+
+    	checkBoxes.forEach((item) => item.addEventListener("input", toggleCheckbox));
+
+    	function toggleCheckbox(e) {
+    	  const { checked, id } = e.target;
+    	  agreements[id] = checked;
+    	  this.parentNode.classList.toggle("active");
+    	  checkAllStatus();
+    	  toggleSubmitButton();
+    	}
+
+    	function checkAllStatus() {
+    	  const { goodsRefundAgree, privacyPolicy, serviceAgree, ageAgree } = agreements;
+    	  if (goodsRefundAgree && privacyPolicy && serviceAgree && ageAgree) {
+    	    checkAll.checked = true;
+    	  } else {
+    	    checkAll.checked = false;
+    	  }
+    	}
+
+    	function toggleSubmitButton() {
+    	  const { goodsRefundAgree, privacyPolicy, serviceAgree, ageAgree } = agreements;
+    	  if (goodsRefundAgree && privacyPolicy && serviceAgree && ageAgree) {
+    	    submitButton.disabled = false;
+    	  } else {
+    	    submitButton.disabled = true;
+    	  }
+    	}
+
+    	checkAll.addEventListener("click", (e) => {
+    	  const { checked } = e.target;
+    	  if (checked) {
+    	    checkBoxes.forEach((item) => {
+    	      item.checked = true;
+    	      agreements[item.id] = true;
+    	      item.parentNode.classList.add("active");
+    	    });
+    	  } else {
+    	    checkBoxes.forEach((item) => {
+    	      item.checked = false;
+    	      agreements[item.id] = false;
+    	      item.parentNode.classList.remove("active");
+    	    });
+    	  }
+    	  toggleSubmitButton();
+    	});
+    	  
+    	});
+    </script>
 </head>
 <body>
-	<form id="SendPayForm_id" name="" method="POST" >
 	<div id="pay" class="wrap">
 		<div class="pay-box con row">
+		<form id="SendPayForm_id" name="" method="POST" >
 		  <div class="pay_user_information cell">
 		    
 		    <div class="agree">
-		        
+		        	
 		           <div class="user_information_box">
 				      <h3>예약자 정보</h3>
 				      <div class="name">
@@ -72,7 +202,12 @@
 								<input type="hidden" id="phoneDoubleChk"/> </p> 
 							</div> 
 						</div>
-						
+						<div class="name">
+							<p>예약자 이메일</p>
+							<div>
+								<input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
+							</div>
+						</div>
 				    </div>
 				    <c:choose>
 				    	<c:when test="${member.id == null || member.id == ''}">
@@ -125,14 +260,14 @@
 		         	<c:set var="index" value="<%=goods_room_price2%>"/>
 		         	<c:if test="${index == null }">
 		         		<h1 style="color:darkred; border:none;">
-		         			<%=goods_room_price1%>원
+		         			<fmt:formatNumber type="number" maxFractionDigits="0"  value="<%=goods_room_price1%>" />원
 		         		</h1>
 		         		
 		         	</c:if>
 		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
 		         	<c:if test="${index2 == null }">
 		         		<h1 style="color:darkred;">
-		         			<%=goods_room_price2%>원
+		         			<fmt:formatNumber type="number" maxFractionDigits="0"  value="<%=goods_room_price2%>" />원
 		         		</h1>
 		         	</c:if>		      
 		            <br>
@@ -143,34 +278,43 @@
 		          </div>
 		         </div>
 		         <div class="pay_result">
-					<input type="text"    name="goodname" value="${goods.goods_name }" >
+					<input type="hidden"    name="goodname" value="${goods.goods_name }" >
+					<input type="hidden"    name="logo_url" value="http://localhost:8080/yologaza/resources/image/89x18yolo_logo_c.png" >
 					<input type="hidden"    name="logo_2nd" value="http://localhost:8080/yologaza/resources/image/64x13yolo_logo_w.png" >
-					<input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
-					<input type="text"    name="price" value="1000" >
-					<input type="hidden"  name="mid" value="INIpayTest" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
+					
+					<input type="hidden"    name="price" value="<%=price%>" >
+					<input type="hidden"  name="mid" value="<%=mid%>" ><!-- 에스크로테스트 : iniescrow0, 빌링(정기과금)테스트 : INIBillTst -->
 					<input type="hidden"  name="gopaymethod" value="Card:DirectBank:VBank" >
-					<input type="hidden"  name="mKey" value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33" >
-			        <input type="hidden"  name="signature" value="b69ad1be79707aae52ad04ddc6981929666dc1e05a74c5e383ccf2b1b4c10186" >
-			        <input type="hidden"  name="oid" value="INIpayTest_1642055310800" >
-			        <input type="hidden"  name="timestamp" value="1642055310800" >
+					<input type="hidden"  name="mKey" value="<%=mKey%>" >
+			        <input type="hidden"  name="signature" value="<%=signature%>" >
+			        <input type="hidden"  name="oid" value="<%=oid%>" >
+			        <input type="hidden"  name="timestamp" value="<%=timestamp %>" >
 			        <input type="hidden"  name="version" value="1.0" >
 			        <input type="hidden"  name="currency" value="WON" >
-			        <input type="hidden"  name="acceptmethod" value="below1000" >
-					<input type="hidden"  name="acceptmethod" value="SKIN(#70ad47)" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
-					<input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/INIStdPayReturn.do" >
+			        <input type="hidden"  name="acceptmethod" value="below1000:SKIN(#70ad47)" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
+			        <c:set var="index" value="<%=goods_room_price2%>"/>
+		         	<c:if test="${index == null }">
+		         		<input type="hidden"  name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price1=<%=goods_room_price1%>&date1=${date1}&date2=${date2}" >
+		         	</c:if>
+		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
+		         	<c:if test="${index2 == null }">
+		         		<input type="hidden"  name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price2=<%=goods_room_price2%>&date1=${date1}&date2=${date2}" >
+		         	</c:if>	
+					
 					<input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/close.do" >
 						
-		           <button onclick="INIStdPay.pay('SendPayForm_id')" class="next-button" disabled>결제하기</button>
+		           
 		         </div>
 		       </div>
+		       
 		     </div>
+		     </form>
+		     <button onclick="INIStdPay.pay('SendPayForm_id')" class="next-button" id="next-button" disabled>결제하기</button>
 		</div>
 	</div>
-   </form>
-
-      <button onclick="INIStdPay.pay('SendPayForm_id')" style="padding:10px; margin-left:10%">결제요청</button>
+   
 	
-	<form class="checkbox_group" action="${contextPath}/main.do" method="POST" id="form__wrap">
+	<form class="checkbox_group" method="POST" id="form__wrap">
 	   <div class="terms__check__all">
 	     <input type="checkbox" name="checkAll" id="checkAll" />
 	     <label for="checkAll"><h3>전체 동의</h3></label>

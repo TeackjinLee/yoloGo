@@ -1,5 +1,20 @@
 package com.myspring.yologaza.reservation.dao;
 
-public class ReservationDAOImpl implements ReservationDAO {
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+
+@Repository("reservationDAO")
+public class ReservationDAOImpl implements ReservationDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public int insertReservation(Map newResMap) throws DataAccessException {
+		sqlSession.insert("mapper.business.goods.insertNewGoods",newResMap);
+		return Integer.parseInt((String)newResMap.get("rid"));
+	}
 }

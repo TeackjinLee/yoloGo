@@ -170,9 +170,8 @@
 }
 </style>
 <script>
-    $(function() {
+    $(function() {        
         $.fn.type();
-        
     	$('.dropbtn').click(function(){
     	    event.stopPropagation();
     		$(this).parent().find('.dropdown-content').toggle();
@@ -205,17 +204,17 @@
     
     $.fn.type = function(){
 		var text = $('.dropbtn_content').text();
-    	var type = 'id';
-    	if(text == '아이디'){
-    		type = 'id';
+    	var type = '';
+    	if(text == '이메일'){
+    		type = 'email1';
     	}else if(text == '이름'){
     		type = 'name';
     	}else if(text == '연락처'){
     		type = 'hp';
     	}else{
-    		type = 'email1';
+    		type = 'id';
     	}
-    	var query = '';
+    	var query = '${query}';
         $('#search').keyup(function(){
         	query = $(this).val();
     	});
@@ -245,10 +244,10 @@
 	        <a id="text1">탈퇴 회원 관리</a>
 	        <div class="button_div">
 	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=0&date2=0&auth=${auth}'">전체</button>
-	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-7776000}&date2=${today}&auth=${auth}'">90일</button>
-	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-2592000}&date2=${today}&auth=${auth}'">30일</button>
-	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today-604800}&date2=${today}&auth=${auth}'">1주</button> 
-	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today}&date2=${today}&auth=${auth}'">오늘</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today1-7776000}&date2=${today2}&auth=${auth}'">90일</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today1-2592000}&date2=${today2}&auth=${auth}'">30일</button>
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today1-604800}&date2=${today2}&auth=${auth}'">1주</button> 
+	          <button type="button" onclick="location.href='${contextPath}/admin/member/deleteMemberList.do?date1=${today1}&date2=${today2}&auth=${auth}'">오늘</button>
 	          <button id="dateApplyBtn">검색</button>
 	          <div class="date-box-wrap" style="display: inline-block; float: right;">
 	          	<input type="text" id="cal" name="daterange" value="${Ddate1}/ - ${Ddate2}"/>
@@ -263,7 +262,22 @@
 	          <button id="searchBtn">검색</button>
 	       	  <div class="dropdown">
                     <button class="dropbtn">
-                      <span class="dropbtn_content">아이디</span>
+                      <span class="dropbtn_content">
+                      	<c:choose>
+                      		<c:when test="${type == 'name'}">
+                      		이름
+                      		</c:when>
+                      		<c:when test="${type == 'hp'}">
+                      		연락처
+                      		</c:when>
+                      		<c:when test="${type == 'email1'}">
+                      		이메일
+                      		</c:when>
+                      		<c:otherwise>
+                      		아이디
+                      		</c:otherwise>
+                      	</c:choose>
+                      </span>
                     </button>
                     <div class="dropdown-content">
                       <div class="type">아이디</div>
@@ -272,7 +286,7 @@
                       <div class="type">이메일</div>
                   	</div>
               </div>
-              <input type="text" id="search">
+              <input type="text" id="search" value="${query}">
 	        </div>
 	        <table align="center">
 	          <tr align="center" class="column">

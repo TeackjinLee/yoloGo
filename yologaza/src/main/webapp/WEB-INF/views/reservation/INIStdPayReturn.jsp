@@ -3,6 +3,18 @@
 <%@ page import="com.inicis.std.util.SignatureUtil"%>
 <%@ page import="com.inicis.std.util.HttpUtil"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String goods_id = request.getParameter("goods_id");
+	String goods_uroom = request.getParameter("goods_uroom");
+	String date1 = request.getParameter("date1");
+	String date2 = request.getParameter("date2");
+	String goods_room_price1 = request.getParameter("goods_room_price1");
+	String goods_room_price2 = request.getParameter("goods_room_price2");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +31,8 @@
 	<div style="padding:10px;width:100%;font-size:14px;color: #ffffff;background-color: #000000;text-align: center">
 		이니시스 표준결제 인증결과 수신 / 승인요청, 승인결과 표시 샘플
 	</div>
+	
+	
 <% 
 
 	try{
@@ -593,3 +607,21 @@
 		System.out.println(e);
 	}
 %>
+<div id="reservation_result">
+		<form>
+			<input name="goods_id" value="<%=goods_id %>"  />
+			<input name="goods_uroom" value="<%=goods_uroom %>"  />
+			<input name="date1" value="<%=date1 %>"  />
+			<input name="date2" value="<%=date2 %>"  />
+			<c:if test="${index == null }">
+         		<input name="goods_room_price1" value="<%=goods_room_price1 %>"  />
+         	</c:if>
+         	<c:set var="index2" value="<%=goods_room_price1%>"/>
+         	<c:if test="${index2 == null }">
+         		<input name="goods_room_price2" value="<%=goods_room_price2 %>"  />
+         	</c:if>
+			
+		</form>
+		
+	</div>
+</body>
