@@ -1,5 +1,5 @@
 <%-- 송상우 100% --%>
-<%-- 2차 작업 이택진30% --%>
+<%-- 2차 작업 이택진100% --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"
     isELIgnored="false"    

@@ -9,6 +9,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	#board_head_wrap .member_img img{
+		width: 100%;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	}
+</style>
 <meta charset="UTF-8">
 <title>헤더</title>
 	<link href="${contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" media="screen">

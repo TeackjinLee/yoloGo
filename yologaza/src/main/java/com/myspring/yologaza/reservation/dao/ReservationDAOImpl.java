@@ -14,7 +14,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 	
 	@Override
 	public int insertReservation(Map newResMap) throws DataAccessException {
-		sqlSession.insert("mapper.business.goods.insertNewGoods",newResMap);
+		sqlSession.insert("mapper.reservation.insertReservation",newResMap);
 		return Integer.parseInt((String)newResMap.get("rid"));
 	}
 }

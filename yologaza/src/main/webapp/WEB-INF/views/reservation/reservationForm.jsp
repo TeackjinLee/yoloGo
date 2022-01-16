@@ -1,5 +1,8 @@
-<!-- 기여도 : 이택진100%-->
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 기여도 : 이택진100% -->
+<!-- 2차기여도 : 이택진100% -->
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"	isELIgnored="false"
+	%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.inicis.std.util.SignatureUtil"%>
 <%@page import="java.util.*"%>
@@ -107,6 +110,19 @@
 		    bottom: 0;
 		    border-radius: 0;
 		    width: 409.5px;
+		}
+		#pay .pay_user_information .terms__check__all{
+			margin-top:45px;
+		}
+		#pay .pay_user_information .term input{
+		  margin-top: 5px;
+		  margin-right:10px;
+		  float: left;
+		  width: 20px;
+		  height: 20px;
+		}
+		#pay .pay_user_information ul li{
+		  margin-top: 10px;
 		}
     </style>
     <script type="text/javascript">
@@ -223,10 +239,56 @@
 						        <button>포인트 사용</button>
 						    </div>
 				    	</c:otherwise>
-				    </c:choose>
-				    
-				   
+				    </c:choose> 
 		     </div>
+			<div class="terms__check__all term">
+			  <input type="checkbox" name="checkAll" id="checkAll" />
+			  <label for="checkAll"><h3>전체 동의</h3></label>
+			</div>
+			<ul class="terms__list term">
+			  <li class="terms__box">
+			    <div class="input__check">
+			      <input
+			             type="checkbox"
+			             name="agreement"
+			             id="goodsRefundAgree"
+			             value="goodsRefundAgree"
+			             required/>
+			      <label for="goodsRefundAgree" class="required"><a href="#">숙소이용규칙 및 취소/환불규정 동의<span>(필수)</span></a></label>
+			    </div>
+			  </li>
+			  <li class="terms__box">
+			    <div class="input__check">
+			      <input
+			             type="checkbox"
+			             name="agreement"
+			             id="privacyPolicy"
+			             value="privacyPolicy"
+			             required/>
+			      <label for="privacyPolicy" class="required"><a href="#">개인정보 처리방침 동의<span>(필수)</span></a></label>
+			    </div>
+			  </li>
+			  <li class="terms__box">
+			    <div class="input__check">
+			      <input
+			             type="checkbox"
+			             name="agreement"
+			             id="serviceAgree"
+			             value="serviceAgree"/>
+			      <label for="serviceAgree"><a href="#">서비스 이용약관 동의<span>(필수)</span></a></label>
+			    </div>
+			  </li>
+			  <li class="terms__box">
+			    <div class="input__check">
+			      <input
+			             type="checkbox"
+			             name="agreement"
+			             id="ageAgree"
+			             value="ageAgree"/>
+			      <label for="ageAgree"><a href="#">만 14세 이상 확인<span>(필수)</span></a></label>
+			    </div>
+			  </li>
+			</ul>
 		  </div>
 		  <div class="pay_payment cell">
 		    <div class="payment_information">
@@ -315,54 +377,7 @@
    
 	
 	<form class="checkbox_group" method="POST" id="form__wrap">
-	   <div class="terms__check__all">
-	     <input type="checkbox" name="checkAll" id="checkAll" />
-	     <label for="checkAll"><h3>전체 동의</h3></label>
-	   </div>
-	   <ul class="terms__list">
-	     <li class="terms__box">
-	       <div class="input__check">
-	         <input
-	                type="checkbox"
-	                name="agreement"
-	                id="goodsRefundAgree"
-	                value="goodsRefundAgree"
-	                required/>
-	         <label for="goodsRefundAgree" class="required"><a href="#">숙소이용규칙 및 취소/환불규정 동의<span>(필수)</span></a></label>
-	       </div>
-	     </li>
-	     <li class="terms__box">
-	       <div class="input__check">
-	         <input
-	                type="checkbox"
-	                name="agreement"
-	                id="privacyPolicy"
-	                value="privacyPolicy"
-	                required/>
-	         <label for="privacyPolicy" class="required"><a href="#">개인정보 처리방침 동의<span>(필수)</span></a></label>
-	       </div>
-	     </li>
-	     <li class="terms__box">
-	       <div class="input__check">
-	         <input
-	                type="checkbox"
-	                name="agreement"
-	                id="serviceAgree"
-	                value="serviceAgree"/>
-	         <label for="serviceAgree"><a href="#">서비스 이용약관 동의<span>(필수)</span></a></label>
-	       </div>
-	     </li>
-	     <li class="terms__box">
-	       <div class="input__check">
-	         <input
-	                type="checkbox"
-	                name="agreement"
-	                id="ageAgree"
-	                value="ageAgree"/>
-	         <label for="ageAgree"><a href="#">만 14세 이상 확인<span>(필수)</span></a></label>
-	       </div>
-	     </li>
-	   </ul>
+	   
 	</form>
 	<script>
 	

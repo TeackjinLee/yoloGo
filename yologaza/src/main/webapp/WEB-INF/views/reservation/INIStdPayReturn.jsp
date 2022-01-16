@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 기여도 : 이택진100% -->
+<!-- 2차기여도 : 이택진100% -->
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"	isELIgnored="false"
+	%>
 <%@ page import="com.inicis.std.util.ParseUtil"%>
 <%@ page import="com.inicis.std.util.SignatureUtil"%>
 <%@ page import="com.inicis.std.util.HttpUtil"%>
@@ -7,6 +11,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String hp = request.getParameter("hp");
+	String name = request.getParameter("name");
 	String goods_id = request.getParameter("goods_id");
 	String goods_uroom = request.getParameter("goods_uroom");
 	String date1 = request.getParameter("date1");
@@ -25,7 +31,7 @@
 		table, img {border:none}
 		
 	</style>
-	<link rel="stylesheet" href="../css/group.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/yologaza/resources/css/group.css" />
 </head>
 <body bgcolor="#FFFFFF" text="#242424" leftmargin=0 topmargin=15 marginwidth=0 marginheight=0 bottommargin=0 rightmargin=0>
 	<div style="padding:10px;width:100%;font-size:14px;color: #ffffff;background-color: #000000;text-align: center">
@@ -607,20 +613,27 @@
 		System.out.println(e);
 	}
 %>
-<div id="reservation_result">
-		<form>
+	<div id="reservation_result">
+		<form action="${contextPath}/yologaza/reservation/addReservation.do" method="post">
+			<input name="uid" value="${member.uid }"  />
+			<input name="name" value="${member.name }"  />
+			<input name="hp" value="${member.hp }"  />
 			<input name="goods_id" value="<%=goods_id %>"  />
 			<input name="goods_uroom" value="<%=goods_uroom %>"  />
-			<input name="date1" value="<%=date1 %>"  />
-			<input name="date2" value="<%=date2 %>"  />
+			
+			<input name="checkIn" value="${Ddate1}"  />
+         	
+			<input name="checkOut" value="${Ddate2}"  />
+
+			<c:set var="index" value="<%=goods_room_price2%>"/>
 			<c:if test="${index == null }">
-         		<input name="goods_room_price1" value="<%=goods_room_price1 %>"  />
+         		<input name="price" value="<%=goods_room_price1 %>"  />
          	</c:if>
          	<c:set var="index2" value="<%=goods_room_price1%>"/>
          	<c:if test="${index2 == null }">
-         		<input name="goods_room_price2" value="<%=goods_room_price2 %>"  />
+         		<input name="price" value="<%=goods_room_price2 %>"  />
          	</c:if>
-			
+			<input  type="submit" value="저장 후 다음 단계" style="width:150px; cursor:pointer;">
 		</form>
 		
 	</div>

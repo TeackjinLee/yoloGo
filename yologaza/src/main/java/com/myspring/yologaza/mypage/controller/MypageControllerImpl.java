@@ -36,11 +36,15 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.mypage.service.MypageService;
+import com.myspring.yologaza.reservation.service.ReservationService;
+import com.myspring.yologaza.reservation.vo.ReservationVO;
 
 @Controller("mypageController")
 public class MypageControllerImpl implements MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageControllerImpl.class);
 	private static final String MEMBER_IMAGE_REPO = "C:\\member\\member_image";
+	@Autowired
+	private MemberVO memberVO;
 	@Autowired
 	Announce_VO cc_VO;
 	@Autowired
@@ -50,9 +54,7 @@ public class MypageControllerImpl implements MypageController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private MemberVO memberVO;
-	
-	
+	private ReservationService reservationService;
 	
 	@RequestMapping(value="/mypage/*.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
@@ -75,7 +77,20 @@ public class MypageControllerImpl implements MypageController {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
-	}	
+	}
+	
+	@Override
+	@RequestMapping(value="/mypage/Mypage3.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView Mypage3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		memberVO=(MemberVO)session.getAttribute("member");
+		String hp=memberVO.getHp();
+		List mypageReservation = mypageService.mypageReservation(hp);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("mypageReservation", mypageReservation);
+		return mav;
+	}
 	
 	@RequestMapping(value="/mypage/Mypage4.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView Mypage4(

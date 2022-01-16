@@ -1,5 +1,6 @@
 package com.myspring.yologaza.mypage.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myspring.yologaza.board.vo.ArticleVO;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.mypage.dao.MypageDAO;
+import com.myspring.yologaza.reservation.vo.ReservationVO;
 
 @Service("mypageService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -30,6 +33,10 @@ public class MypageServiceImpl implements MypageService{
 	public void modImgMember(Map memberImgMap) throws Exception {
 		mypageDAO.updateMember(memberImgMap);
 	}
-
 	
+	@Override
+	public List<ReservationVO> mypageReservation(String hp) throws Exception{
+		List<ReservationVO> mypageReservation = mypageDAO.mypageReservation(hp);
+		return mypageReservation;
+	}
 }

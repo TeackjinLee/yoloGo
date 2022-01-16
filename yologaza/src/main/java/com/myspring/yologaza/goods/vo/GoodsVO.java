@@ -1,7 +1,6 @@
 package com.myspring.yologaza.goods.vo;
 
 import java.sql.Date;
-import java.sql.Time;
 
 public class GoodsVO {
 	// goods
@@ -28,8 +27,8 @@ public class GoodsVO {
 	private String goods_baseImpormation;
 	private String goods_chargeImpormation;
 	private String goods_around;
-	private String   goods_checkIn;
-	private String   goods_checkOut;
+	private String goods_checkIn;
+	private String goods_checkOut;
 	private String goods_motel_endtime;
 	private String goods_motel_usetime;
 	

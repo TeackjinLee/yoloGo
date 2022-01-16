@@ -1,10 +1,15 @@
 <%-- 송상우 100% --%>
+<!-- 2차기여도 : 이택진100% -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"
     isELIgnored="false"    
     %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <html>
@@ -224,6 +229,10 @@ p {
   height:500px;
 }
 
+.tab_each .reservation{
+	margin-top:20px;
+}
+
 .tab_each .reservation img{
   width:45%;
   height:220px;
@@ -235,6 +244,7 @@ p {
   width:54%;
   height:220px;
   border:1px solid rgba(0,0,0,0.2);
+  border-left: none;
   display:inline-block;
   position:relative;
   right:6px;
@@ -337,13 +347,13 @@ p {
   text-align:right;
 }
 
-.map{
+.map-box{
   display:none;
   width:300px;
   height:300px;
   position:absolute;
-  margin-left:200px;
-  z-index:2;
+  margin-left:200px;  z-index:2;
+
   background:red;
 }
 </style>
@@ -360,11 +370,11 @@ $(function() {
 });
   $('.mapicon').click(function(){
     var idx = $(".mapicon").index(this)
-    if($('.map').eq(idx).css('display')=='none'){
-           $('.map').eq(idx).show();
+    if($('.map-box').eq(idx).css('display')=='none'){
+           $('.map-box').eq(idx).show();
   }
     else{
-      $('.map').eq(idx).hide();
+      $('.map-box').eq(idx).hide();
     }
 });
 });
@@ -406,48 +416,32 @@ $(function() {
               </div>
             </div>
             <div class="tab_each">
-              <div class="reservation">
-                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/69041/19415/76471771556d9ece792699bf7c21c31c.jpg">
-                <div class="descript">
-                  <a1>숙소명</a1>
-                  <input type="checkbox">
-                  <a2>선택한 방 종류</a2>
-                  <a3>체크인</a3>~<a3>체크아웃</a3>
-                  <div class="detail">
-                    <button class="cancel">예약 취소</button>
-                    <input class="phonenumber" type="text" value="#" readonly>
-                  </div>
-                  <div class="button">
-                    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
-                    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
-                    <a4>결제가</a4>
-                    <input type="text" class="price" value="#원" readonly>
-                  </div>
-                </div>
-                <div id="map1" class="map">
-                </div>
-              </div>
-              <div class="reservation">
-                <img src="https://image.goodchoice.kr/resize_490x348/adimg_new/68065/381552/536f3a7ee6b4bba14b3c710645062570.jpg">
-                <div class="descript">
-                  <a1>숙소명</a1>
-                  <input type="checkbox">
-                  <a2>선택한 방 종류</a2>
-                  <a3>체크인</a3>~<a3>체크아웃</a3>
-                  <div class="detail">
-                    <button class="used">이용 완료</button>
-             	 	<input class="phonenumber" type="text" value="#" readonly>
-                  </div>
-                  <div class="button">
-                    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
-                    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
-                    <a4>결제가</a4>
-                    <input type="text" class="price" value="#원" readonly>
-                  </div>
-                </div>
-                <div id="map2" class="map">
-                </div>
-              </div>
+            	<c:forEach var="item" items="${mypageReservation}">
+	           		<div class="reservation">
+						<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
+						<div class="descript">
+						  <a1>${item.goods_name}</a1>
+						  <input type="checkbox">
+						  <a2>선택한 방 종류</a2>
+						  <a3>${item.checkIn}&nbsp;${item.goods_checkIn}</a3>&nbsp; ~ &nbsp;<a3>${item.checkOut}&nbsp;${item.goods_checkOut}</a3>
+						  <div class="detail">
+						    <button class="cancel">예약 취소</button>
+						    <input class="phonenumber" type="text" value="${item.goods_hp}" readonly>
+						  </div>
+						  <div class="button">
+						    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
+						    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
+						    <a4>결제가</a4>
+						    <h3 class="price"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</h3>
+						  </div>
+						</div>
+						<div id="map-box" class="map-box">
+							<div id="map" style="width:300px;height:300px;"></div>
+						</div>
+		            </div>
+            	</c:forEach>
+              
+              
             </div>
             
           </div>

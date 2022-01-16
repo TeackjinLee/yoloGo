@@ -232,7 +232,7 @@
            			<c:set var="index" value="<%=goods_type %>"/>
          				<c:if test="${index eq 'motel' || index eq 'my'}">
             		<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -261,7 +261,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'hotel' || index eq 'my'}">  
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -290,7 +290,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'pension' || index eq 'my'}">     
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -322,7 +322,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'resort' || index eq 'my'}">  
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -348,7 +348,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'guestHouse' || index eq 'my'}">      
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -377,7 +377,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'camping' || index eq 'my'}">    
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>
@@ -406,7 +406,7 @@
 	            	<c:set var="index" value="<%=goods_type %>"/>
           			<c:if test="${index eq 'hanok' || index eq 'my'}">      
 					<li class="list_1 goods_menu1 goods_box">
-				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">
 				          <img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 				        </div>

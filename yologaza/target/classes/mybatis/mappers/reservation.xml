@@ -6,25 +6,56 @@
 <mapper namespace="mapper.reservation">
 	<resultMap id="reservation" type="reservationVO">
 		<result property="rid" column="rid" />
-		<result property="goodes_id" column="goodes_id" />
+		<result property="uid" column="uid" />
+		<result property="name" column="name" />
+		<result property="hp" column="hp" />
+		<result property="goods_id" column="goods_id" />
+		<result property="goods_hp" column="goods_hp" />
 		<result property="goods_uroom" column="goods_uroom" />
+		<result property="goods_name" column="goods_name" />
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="jibunAddress" column="jibunAddress" />
+		<result property="namujiAddress" column="namujiAddress" />
 		<result property="price" column="price" />
         <result property="checkIn" column="checkIn" />
         <result property="checkOut" column="checkOut" />
+        <result property="goods_checkIn" column="goods_checkIn" />
+		<result property="goods_checkOut" column="goods_checkOut" />
+		<result property="goods_motel_endtime" column="goods_motel_endtime" />
+		<result property="goods_motel_usetime" column="goods_motel_usetime" />
+        <result property="fileName" column="fileName" />
         <result property="rDate" column="rDate" />
-	</resultMap> 
-
+	</resultMap>
+	
 	<insert id="insertReservation" parameterType="java.util.Map"   >
 	    <![CDATA[
 		   insert into reservation values(
 		   						 #{rid},
+		   						 #{uid},
+   								 #{name},
+   								 #{hp},
    					 			 #{goods_id},
    								 #{goods_uroom},
    								 #{price},
    								 #{checkIn},
    								 #{checkOut},
-   								 #{rDate}
+   								 now()
    								  )
 		]]>
 	</insert> 
+	
+	<select id="mypageSelectReservation" resultMap="reservation"   parameterType="String"  >
+	    <![CDATA[
+	        select r.*, g.*, d.*, i.fileName
+			from reservation r, goods g, goods_detail d, goods_img i
+			where r.goods_id = g.goods_id
+			and r.goods_uroom = d.goods_uroom
+			and g.goods_id = d.goods_id
+			and r.goods_id = i.goods_id
+			and r.hp = #{hp}
+			group by rid;
+    	]]>
+	</select>
+	
 </mapper>

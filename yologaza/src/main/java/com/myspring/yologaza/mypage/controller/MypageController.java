@@ -13,4 +13,5 @@ public interface MypageController {
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
             @RequestParam("value")  String value,
             HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView Mypage3(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
