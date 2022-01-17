@@ -9,7 +9,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 
 public interface AdminMemberService {
 	public AdminMemberDAO getAdminMemberDAO();
-	public List<MemberVO> listMembers(int offset, int count) throws DataAccessException;
+	public List<MemberVO> listMembers(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public List<MemberVO> listMembersByAuth(String auth, int offset, int count) throws DataAccessException;
 	public List<MemberVO> deletelistMembers(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public int addMember(MemberVO memberVO) throws DataAccessException;

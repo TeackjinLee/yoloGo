@@ -29,9 +29,20 @@
 
 	<!-- 관리자 회원 관리 -->
 	<select id="selectAllMemberList" resultMap="memResult">
-      <![CDATA[
-         select SQL_CALC_FOUND_ROWS * from member	order by uid asc	limit #{offset},#{count}
-      ]]>
+      select SQL_CALC_FOUND_ROWS * from member 
+		 <where>
+         <if test="date1 != 0 and date2 != 0">
+         UNIX_TIMESTAMP(joinDate) >= #{date1} 
+         and #{date2} > UNIX_TIMESTAMP(joinDate)  
+         </if>
+         <if test="auth != '' and auth != null">
+         and auth = #{auth}
+         </if>
+         <if test="type != '' and type != null and query != '' and query != null">
+         and ${type} like CONCAT('%',#{query},'%')
+         </if>
+         </where>
+         order by joinDate asc	limit #{offset},#{count}
 	</select>
 	<select id="countAllMember" resultType="int">
   		select FOUND_ROWS();

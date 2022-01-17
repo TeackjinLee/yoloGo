@@ -25,8 +25,8 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	}
 	
 	@Override
-	public List<MemberVO> listMembers(int offset, int count) throws DataAccessException {
-		return adminMemberDAO.selectAllMemberList(offset, count);
+	public List<MemberVO> listMembers(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException {
+		return adminMemberDAO.selectAllMemberList(type, query, auth, date1, date2, offset, count);
 	}
 	
 	@Override

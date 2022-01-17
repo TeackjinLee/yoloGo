@@ -8,7 +8,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 
 public interface AdminMemberDAO {
 	public int getTotalCount();
-	public List<MemberVO> selectAllMemberList(int offset, int count) throws DataAccessException;
+	public List<MemberVO> selectAllMemberList(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public List<MemberVO> selectAllMemberListByAuth(String auth, int offset, int count) throws DataAccessException;
 	public List<MemberVO> selectAllDeleteMemberList(String type, String query, String auth, long date1, long date2, int offset, int count) throws DataAccessException;
 	public int insertMember(MemberVO memberVO) throws DataAccessException;
