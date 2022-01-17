@@ -21,6 +21,7 @@
     <!-- 달력링크 -->
     <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cf929ac0c936c4cda3566648aaf3dc4&libraries=services"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/daterangepicker.css" />
     
     
@@ -67,27 +68,75 @@
       	<c:set var="index" value="<%=goods_type %>"/>
       	<c:if test="${index eq 'my'}">
        		<p>내주변</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(1){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>
         <c:if test="${index eq 'motel'}">
        		<p>모텔</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(2){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>
        	<c:if test="${index eq 'hotel'}">
        		<p>호텔</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(3){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>	
        	<c:if test="${index eq 'pension'}">
        		<p>펜션</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(4){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>	
        	<c:if test="${index eq 'resort'}">
        		<p>리조트</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(5){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>	
        	<c:if test="${index eq 'guestHouse'}">
        		<p>게스트하우스</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(6){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>	
        	<c:if test="${index eq 'camping'}">
        		<p>켐핑/글램핑</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(7){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>	
        	<c:if test="${index eq 'hanok'}">
        		<p>한옥</p>
+       		<style>
+       			.detail-select .detail-select-box .top_menu ul li:nth-child(8){
+       				font-weight:bold;
+       				color:rgb(112, 173, 71);
+       			}
+       		</style>
        	</c:if>			
       </div>
     </div>
@@ -219,7 +268,7 @@
              <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc()">높은 가격 순</a></span></button>
              <button type="text" id="lowerPrice" ><span><a href="javascript:search_Goods_Price('lowerPrice')">낮은 가격 순</a></span></button>
             </div>
-            <button type="button" class="btn_map" onclick="pop_map_pc();">지도</button>
+            <button type="button" class="btn_map" onclick="pop_map_pc();">지도</button> 
           </div>
           <div class="tab_each goods_list">
             <div class="goods_title"><h3>상품 리스트</h3></div>
@@ -279,6 +328,7 @@
 				        </div>
 				      </a>
 				    </li>
+				    
 				    </c:if>
 				</c:forEach>
 			</ul>
@@ -427,7 +477,6 @@
 				    </c:if>
 				</c:forEach>
 			</ul>
-
           </div>
         </div>
       </div>

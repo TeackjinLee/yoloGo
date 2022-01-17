@@ -101,8 +101,24 @@
 				jQuery('#layer').attr('style', 'visibility:hidden');
 			}
 		}
+	    
+	    
+	    $(function() {
+	    	  $('.tab_each #tab1 .room .room-box .room-select img').click(function(){
+	    	    var idx = $(".tab_each #tab1 .room .room-box .room-select img").index(this)
+	    	    if($('#tab1 .room-box-wrap').eq(idx).css('display')=='none'){
+	    	           $('#tab1 .room-box-wrap').eq(idx).show();
+	    	  }
+	    	    else{
+	    	      $('#tab1 .room-box-wrap').eq(idx).hide();
+	    	    }
+	    	});
+	    	});
     </script>
     <style>
+    	#tab1 .room-box-wrap{
+    		display:none;
+    	}
     	#tab1 .room-pic-box .slick-list .slick-track{
     		width: 6720px;
     	}
@@ -418,15 +434,14 @@
 							        	<c:forEach var="itemRoom" items="${goodsMap.imageListRoom}" >
 							        		<c:choose>
 								        		<c:when test="${item.goods_uroom == itemRoom.goods_uroom}">
-								        			<div class="content cell" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;"><img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지"></div>
+								        			<div class="content cell slick-slide" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;"><img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지"></div>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 							        </div>
 							      </div>
 							      <div class="page-num row">
-							        <p class="current-txt cell"> 1 </p>
-							        <p class="all-txt cell">  &nbsp;/ 6 </p>
+							        <p class="current-txt cell" style="margin-left: 14px;"> 1 </p>
 							    </div>
 							    </div>
 							  </div>

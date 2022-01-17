@@ -15,7 +15,7 @@
 <html>
 <head>
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1f3ccdf06f19b1518173124c82247b3"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cf929ac0c936c4cda3566648aaf3dc4&libraries=services"></script>
 <style>
 body{
   font-size: 14px;
@@ -225,25 +225,20 @@ p {
   margin-top:30px;
 }
 
-.tab_each{
-  height:500px;
-}
-
 .tab_each .reservation{
+	height:220px;
 	margin-top:20px;
+	border:1px solid #ddd;
+	box-sizing: border-box;
 }
 
 .tab_each .reservation img{
-  width:45%;
-  height:220px;
-  border:1px solid rgba(0,0,0,0.2);
+  height:100%;
   display:inline-block;
 }
 
 .tab_each .reservation .descript{
-  width:54%;
-  height:220px;
-  border:1px solid rgba(0,0,0,0.2);
+  height:100%;
   border-left: none;
   display:inline-block;
   position:relative;
@@ -257,8 +252,10 @@ p {
 }
 
 .tab_each .reservation .descript input{
-  float:right;
-  cursor:pointer;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  cursor: pointer;
 }
 
 .tab_each .reservation .descript a2{
@@ -276,7 +273,7 @@ p {
 
 .tab_each .reservation .descript .detail{
   display:block;
-  width:365px;
+  width:410px;
   height:30px;
   margin-top:30px;
 }
@@ -285,7 +282,9 @@ p {
   display:none;
   width:200px;
   height:30px;
-  position:relative;
+  position: absolute;
+  top: 221px;
+  left: 85px;
   border : 1px solid rgba(0,0,0,0.2);
   border-radius : 4px;
   box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.6);
@@ -317,7 +316,7 @@ p {
 .tab_each .reservation .descript .button{
   position:absolute;
   bottom:0;
-  width:365px;
+  width:410px;
 }
 
 .tab_each .reservation .descript .button button{
@@ -337,7 +336,7 @@ p {
 
 .tab_each .reservation .descript .button .price{
   zoom:1;
-  width:130px;
+  width:180px;
   float:right;
   position:relative;
   margin-top:15px;
@@ -348,13 +347,13 @@ p {
 }
 
 .map-box{
-  display:none;
-  width:300px;
-  height:300px;
-  position:absolute;
-  margin-left:200px;  z-index:2;
-
-  background:red;
+	display:none;
+	height: 270px;
+	position: absolute;
+	right: 365px;
+	top: 220px;
+	z-index: 2;
+	background:red;
 }
 </style>
 <script type="text/javascript">
@@ -416,14 +415,15 @@ $(function() {
               </div>
             </div>
             <div class="tab_each">
-            	<c:forEach var="item" items="${mypageReservation}">
+            	<c:forEach var="item" items="${mypageReservation}" varStatus="cnt">
 	           		<div class="reservation">
+	           			
 						<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
 						<div class="descript">
-						  <a1>${item.goods_name}</a1>
+						  <h1>${item.goods_name}</h1><br>
 						  <input type="checkbox">
-						  <a2>선택한 방 종류</a2>
-						  <a3>${item.checkIn}&nbsp;${item.goods_checkIn}</a3>&nbsp; ~ &nbsp;<a3>${item.checkOut}&nbsp;${item.goods_checkOut}</a3>
+						  <h3>체 크 인&nbsp; : ${item.checkIn}&nbsp;${item.goods_checkIn}</h3>
+						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
 						  <div class="detail">
 						    <button class="cancel">예약 취소</button>
 						    <input class="phonenumber" type="text" value="${item.goods_hp}" readonly>
@@ -431,14 +431,54 @@ $(function() {
 						  <div class="button">
 						    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
 						    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
-						    <a4>결제가</a4>
-						    <h3 class="price"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</h3>
+						    <h3 class="price">결제가 : <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</h3>
 						  </div>
-						</div>
-						<div id="map-box" class="map-box">
-							<div id="map" style="width:300px;height:300px;"></div>
-						</div>
+						  <div id="map-box" class="map-box">
+							  <div id="${item.rid}" style="width:270px;height:270px;"></div>
+						  </div>
+						   <script>
+								//주소-좌표 변환 객체를 생성합니다
+								var geocoder = new kakao.maps.services.Geocoder();
+									var mapContainer = document.getElementById('${item.rid}'), // 지도를 표시할 div 
+									    mapOption = {
+									        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+									        level: 3 // 지도의 확대 레벨
+									    };  
+									
+									// 지도를 생성합니다    
+									var map = new kakao.maps.Map(mapContainer, mapOption); 
+									
+									
+									
+									// 주소로 좌표를 검색합니다
+									geocoder.addressSearch('${item.roadAddress}', function(result, status) {
+									
+									    // 정상적으로 검색이 완료됐으면 
+									     if (status === kakao.maps.services.Status.OK) {
+									
+									        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+									
+									        // 결과값으로 받은 위치를 마커로 표시합니다
+									        var marker = new kakao.maps.Marker({
+									            map: map,
+									            position: coords
+									        });
+									
+									        // 인포윈도우로 장소에 대한 설명을 표시합니다
+									        var infowindow = new kakao.maps.InfoWindow({
+									            content: '<div style="width:150px;text-align:center;padding:6px 0;">${item.goods_name}</div>'
+									        });
+									        infowindow.open(map, marker);
+									
+									        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+									        map.setCenter(coords);
+									    } 
+									});    
+								</script>
+						</div>	
 		            </div>
+
+					
             	</c:forEach>
               
               
@@ -449,47 +489,9 @@ $(function() {
       </div>
     </div>
     
-<div id="map" style="width:500px;height:500px;"></div>
+    
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cf929ac0c936c4cda3566648aaf3dc4&libraries=services"></script>
-<script>
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-	
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-	        });
-	        infowindow.open(map, marker);
-	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});    
-</script>
+
+
 </body>
 </html>

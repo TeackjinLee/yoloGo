@@ -103,24 +103,7 @@ for(var i = 0; i < tabList.length; i++){
     $(".page-num > .current-txt").text(currentSlide+1);
     
 });
-  
-  
-  // on 실행
-  $(".tab_each #tab1 .room .room-box .room-select img").click(function(){
-    
-    var indexNum = $(this).index();
-    console.log(indexNum);
-    if($(".tab_each #tab1 .room").hasClass("on")){
-      $(".tab_each #tab1 .room").removeClass("on");
 
-    } else{
-      $(".tab_each #tab1 .room").removeClass("on");
-      $(".tab_each #tab1 .room").addClass("on");
-    }
- 
-  });
-  
 
-  
 });
 
