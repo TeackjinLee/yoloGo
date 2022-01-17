@@ -417,8 +417,9 @@ $(function() {
             <div class="tab_each">
             	<c:forEach var="item" items="${mypageReservation}" varStatus="cnt">
 	           		<div class="reservation">
-	           			
-						<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
+	           			<a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+							<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
+						</a>
 						<div class="descript">
 						  <h1>${item.goods_name}</h1><br>
 						  <input type="checkbox">

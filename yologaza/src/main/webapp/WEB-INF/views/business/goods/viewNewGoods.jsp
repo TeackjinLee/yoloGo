@@ -1,7 +1,10 @@
+<!-- 1차기여도 : 이택진100%-->
+<!-- 2차기여도 : 이택진100%-->
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"
-	isELIgnored="false" %>
+	pageEncoding="utf-8"	isELIgnored="false"
+	%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
@@ -30,7 +33,7 @@ String goods_id = request.getParameter("goods_id");
 	function fn_addFile(){
 		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' id='goods"+cnt+"'  onchange=readURL(this,'previewImage"+cnt+"') />");
 		  $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
-		  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('goods')  />");
+		  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('goods"+cnt+"')  />");
 		  cnt++;
 	}
 	

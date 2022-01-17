@@ -145,6 +145,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 			String value=multipartRequest.getParameter(name);
 			newGoodsMap.put(name,value);
 		}
+		
 		String message = null;
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
