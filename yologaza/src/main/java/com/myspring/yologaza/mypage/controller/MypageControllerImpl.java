@@ -100,7 +100,6 @@ public class MypageControllerImpl implements MypageController {
 		List articlesList = boardService.listArticles();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);
-
 		return mav;
 	}
 	
@@ -209,6 +208,17 @@ public class MypageControllerImpl implements MypageController {
 			}
 			return memFileName;
 			
+		}	
+		
+		@Override
+		@RequestMapping(value="/mypage/nonReservation.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView nonReservation(@RequestParam("hp") String hp,HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			List nonReservation = mypageService.mypageReservation(hp);
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("nonReservation", nonReservation);
+			System.out.println("½ÇÇà");
+			return mav;
 		}
 
 

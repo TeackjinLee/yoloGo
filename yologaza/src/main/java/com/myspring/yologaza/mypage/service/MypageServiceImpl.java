@@ -18,6 +18,8 @@ import com.myspring.yologaza.reservation.vo.ReservationVO;
 public class MypageServiceImpl implements MypageService{
 	@Autowired
 	private MypageDAO mypageDAO;
+	@Autowired
+	private ReservationVO reservationVO;
 	
 	public MemberVO  modifyMyInfo(Map memberMap) throws Exception{
 		 String id=(String)memberMap.get("id");
@@ -39,4 +41,10 @@ public class MypageServiceImpl implements MypageService{
 		List<ReservationVO> mypageReservation = mypageDAO.mypageReservation(hp);
 		return mypageReservation;
 	}
+	
+	@Override
+	public int findPwCheck(ReservationVO reservationVO)throws Exception{
+		return mypageDAO.nonReservation(reservationVO);
+	}
+	
 }

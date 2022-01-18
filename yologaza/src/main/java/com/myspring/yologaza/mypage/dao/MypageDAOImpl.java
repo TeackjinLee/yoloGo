@@ -1,5 +1,6 @@
 package com.myspring.yologaza.mypage.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,12 @@ public class MypageDAOImpl implements MypageDAO{
 	
 	@Override
 	public List mypageReservation(String hp) throws DataAccessException{
-		List<ReservationVO> reservationVO=sqlSession.selectList("mapper.reservation.mypageSelectReservation",hp);
-		return reservationVO;
+		List<ReservationVO> reservation=sqlSession.selectList("mapper.reservation.mypageSelectReservation", hp);
+		return reservation;
 	}
 	
+	@Override
+	public int nonReservation(ReservationVO reservationVO)throws Exception{
+	return sqlSession.selectOne("mapper.reservation.nonReservation", reservationVO);	
+	}
 }

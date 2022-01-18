@@ -50,7 +50,7 @@
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
-	<form  class="join_inner_float">
+	<form  class="join_inner_float" method="GET" action="${contextPath}/mypage/nonReservation.do">
 	  <div class="input_line">
 	    <h1 class="join_minisub">비회원 예약 조회</h1>
 	  </div>
@@ -65,13 +65,13 @@
 	      <td>
 	        <input type="text" name="hp" style="width:70%; margin-bottom:10px;"/>
 	        <input type="button"  id="hp" value="인증 전송" onClick="" style="width:28%; float:right; cursor:pointer;"/>
-	        <input type="text" name="hpA" style="width:70%;"/>
+	        <input type="text" style="width:70%;"/>
 	        <input type="button"  id="hpA" value="인증 확인" onClick="" style="width:28%; float:right; cursor:pointer;"/>
 	      </td>
 	    </tr>
 	    </tbody>
 	  </table>
-	  <button type="button" onclick="location.href='${contextPath}/mypage/Mypage3.do' ">예약 확인하기</button>
+	  <button type="submit">예약 확인하기</button>
 	</form>
 </body>
 </html>

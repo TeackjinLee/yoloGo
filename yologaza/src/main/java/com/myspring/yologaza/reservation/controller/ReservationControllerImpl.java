@@ -152,6 +152,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			reservationService.reservationResult(newGoodsMap);
+			System.out.println("실행");
 			message= "<script>";
 			message += " alert('주문내역을 저장했습니다.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";

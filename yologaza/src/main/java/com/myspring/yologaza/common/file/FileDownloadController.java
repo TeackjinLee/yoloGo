@@ -139,7 +139,7 @@ private static final String ROOM_IMAGE_REPO_PATH = "C:\\yoloshopping\\file_repo"
 		                 	@RequestParam("goods_uroom") String goods_uroom,
 			                 HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath=CURR_IMAGE_REPO_PATH+"\\"+goods_id+"\\"+goods_uroom+"\\"+fileName;
+		String filePath=ROOM_IMAGE_REPO_PATH+"\\"+goods_id+"\\"+goods_uroom+"\\"+fileName;
 		File image=new File(filePath);
 
 		response.setHeader("Cache-Control","no-cache");

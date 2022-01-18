@@ -11,4 +11,5 @@ public interface MypageService {
 	public MemberVO myDetailInfo(String id) throws Exception;
 	public void modImgMember(Map memberImgMap) throws Exception;
 	public List<ReservationVO> mypageReservation(String hp) throws Exception;
+	public int findPwCheck(ReservationVO reservationVO) throws Exception;
 }
