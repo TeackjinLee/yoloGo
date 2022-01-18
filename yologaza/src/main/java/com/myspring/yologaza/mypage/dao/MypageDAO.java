@@ -15,5 +15,6 @@ public interface MypageDAO {
 	public MemberVO selectMyDetailInfo(String member_id) throws DataAccessException;
 	public void updateMember(Map memberImgMap) throws DataAccessException;
 	public List mypageReservation(String hp) throws DataAccessException;
+	public int nonReservation(ReservationVO reservationVO) throws Exception;
 
 }
