@@ -27,12 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.yologaza.CC.service.CC_Service;
+
 import com.myspring.yologaza.CC.vo.Announce_VO;
 import com.myspring.yologaza.board.service.BoardService;
-import com.myspring.yologaza.board.vo.ArticleVO;
-import com.myspring.yologaza.goods.service.GoodsService;
-import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.mypage.service.MypageService;
@@ -51,10 +48,7 @@ public class MypageControllerImpl implements MypageController {
 	private MypageService mypageService;
 	@Autowired
 	private BoardService boardService;
-	@Autowired
-	private MemberService memberService;
-	@Autowired
-	private ReservationService reservationService;
+	
 	
 	@RequestMapping(value="/mypage/*.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
@@ -212,9 +206,9 @@ public class MypageControllerImpl implements MypageController {
 		
 		@Override
 		@RequestMapping(value="/mypage/nonReservation.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView nonReservation(@RequestParam("hp") String hp,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		public ModelAndView nonReservation(ReservationVO reservationVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
 			String viewName = (String)request.getAttribute("viewName");
-			List nonReservation = mypageService.mypageReservation(hp);
+			List<ReservationVO> nonReservation = mypageService.nonReservation(reservationVO);
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("nonReservation", nonReservation);
 			System.out.println("½ÇÇà");

@@ -33,7 +33,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.reservation.service.ReservationService;
 import com.myspring.yologaza.sms.service.certificationService;
 
-@Controller("ReservationController")
+@Controller("reservationController")
 @RequestMapping(value="/reservation")
 public class ReservationControllerImpl extends BaseController implements ReservationController {
 	@Autowired

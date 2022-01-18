@@ -40,7 +40,7 @@ public class MypageDAOImpl implements MypageDAO{
 	}
 	
 	@Override
-	public int nonReservation(ReservationVO reservationVO)throws Exception{
-	return sqlSession.selectOne("mapper.reservation.nonReservation", reservationVO);	
+	public List nonReservation(ReservationVO reservationVO)throws Exception{
+	return sqlSession.selectList("mapper.reservation.nonReservation", reservationVO);	
 	}
 }

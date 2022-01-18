@@ -72,7 +72,7 @@
     	]]>
 	</select>
 	
-	<select id="nonReservation" resultMap="reservation" resultType="int" >
+	<select id="nonReservation" resultMap="reservation" parameterType="String" >
 	    <![CDATA[
 	        select r.*, g.*, d.*, i.fileName
 			from reservation r, goods g, goods_detail d, goods_img i
@@ -84,5 +84,6 @@
 			group by rid;
     	]]>
 	</select>
+
 	
 </mapper>

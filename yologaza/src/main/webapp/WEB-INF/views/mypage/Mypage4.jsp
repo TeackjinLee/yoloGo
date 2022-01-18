@@ -318,6 +318,7 @@ p {
 			float: right;
 		}
 		#board_head .member_img{
+		    position: relative;
 	     	float:right;
 	     	width:60px;
 	     	height:60px;
@@ -327,7 +328,11 @@ p {
 	     	overflow: hidden;
 	     }
 	     #board_head .member_img img{
-	     	width:100%;
+	     	width: 100%;
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
 	     }
 
 

@@ -380,23 +380,14 @@ $(function() {
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a>MY페이지</a>
+          <a>예약 조회</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/mypage/Mypage1.do">회원정보 수정</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage3.do" class="active">예약 내역</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a>
+              <a href="${contextPath}/searchGoods.do?goods_type=my">예약하러 가기</a>
             </li>
           </ul>
         </nav>
@@ -413,7 +404,7 @@ $(function() {
             </div>
             <div class="tab_each">
            	 
-            	<c:forEach var="item" items="${nonReservation.reservationVO}">
+            	<c:forEach var="item" items="${nonReservation}">
 	           		<div class="reservation">
 	           			<a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 							<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>

@@ -16,5 +16,5 @@ public interface MypageController {
             @RequestParam("value")  String value,
             HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView Mypage3(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView nonReservation(@RequestParam("hp") String hp, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView nonReservation(ReservationVO reservationVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
