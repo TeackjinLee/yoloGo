@@ -5,10 +5,11 @@
 
 <mapper namespace="mapper.cart">
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="cartResult" type="CartVO">
+	<resultMap id="cartResult" type="cartVO">
+		<result property="cart_uid" column="cart_uid" />
 		<result property="id" column="id" />
 		<result property="goods_uroom" column="goods_uroom" />
-		<result property="cart_uid" column="cart_uid" />
+		<result property="price" column="price" />
 		<result property="cart_goods_qty" column="cart_goods_qty" />
 		<result property="creaDatetime" column="creaDatetime" />
 	</resultMap>
@@ -51,7 +52,6 @@
 		<result property="goods_room_type" column="goods_room_type" />
 		<result property="goods_capacity" column="goods_capacity" />
 		<result property="goods_introduce" column="goods_introduce" />
-		
 	</resultMap>	
 	
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -63,10 +63,10 @@
 
 	<select id="selectCartList"  parameterType="cartVO"  resultMap="cartResult"  >
 		<![CDATA[
-			select c.*, d.goods_room_price1, d.goods_room_price2
-			from yolo_cart c, goods_detail d
-			where id=#{id} 
-            and c.goods_uroom = d.goods_uroom;
+			select yolo_cart.*
+			from yolo_cart
+			where id=#{id}
+			order by goods_uroom;
 		]]>
 	</select>
 	
@@ -83,7 +83,7 @@
 		</foreach>
 		<![CDATA[
 			group by goods_uroom
-			order by g.goods_room_creDate desc
+            order by goods_uroom;
 		]]>
 	</select>
 	

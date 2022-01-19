@@ -74,11 +74,10 @@
 					if(data.trim()=='add_success'){
 						imagePopup('open', '.layer01');	
 					}else if(data.trim()=='already_existed'){
-						swal ( "Oops" ,  "이미 카트에 등록된 상품입니다." +data  ,  "error");
-					} 
-				},
-				error : function(data, textStatus) {
-					swal ( "Oops" ,  "로그인후 사용 가능합니다." +data  ,  "error");
+						swal ( "Oops" ,  "이미 카트에 등록된 상품입니다."  ,  "error");
+					} else{
+						swal ( "Oops" ,  "로그인후 사용 가능합니다."  ,  "error");
+					}
 				},
 				complete : function(data, textStatus) {
 					//alert("작업을완료 했습니다");

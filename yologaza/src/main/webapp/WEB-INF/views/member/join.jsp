@@ -288,10 +288,6 @@ function fn_overlapped(){
 		</table>
 		</div>	
 	</form>	
-	
-	
-	
-	
 
 <script>
 

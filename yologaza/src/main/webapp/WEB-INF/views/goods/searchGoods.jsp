@@ -17,7 +17,7 @@
 	<title>숙박 검색</title>
 	
 	<link rel="stylesheet" href="${contextPath}/resources/css/search_goods.css">
-	<script src="${contextPath}/resources/js/search_goods.js"></script>
+	<!--  <script src="${contextPath}/resources/js/search_goods.js"></script>  -->
     <!-- 달력링크 -->
     <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
@@ -81,7 +81,7 @@
 		    width: 100%;
 		    height: 100%;
 		    background: rgba(0,0,0,0.5);
-		    z-index: 9;
+		    z-index: 99;
 		    padding-bottom:100vh;
 	     }
 	     #map .map-close{
@@ -102,8 +102,41 @@
 		    transform: translate(-50%, -50%);
 	     }
 	</style>
+	
+	<script>
+	var pricelistdesc = function(url){
+
+		$.ajax({
+			type: 'get',
+			url: "${contextPath}/searchGoods.do?goods_type=<%=goods_type%>",
+			data: "",
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			success: function(data) {
+				$('#searchGoods').html(data);
+			},
+			error: function(request, status, error) {
+				alert(error);
+			}
+		});
+	};
+	var priceListasc = function(url){
+
+		$.ajax({
+			type: 'get',
+			url: "${contextPath}/searchGoods.do?goods_type=<%=goods_type%>",
+			data: "",
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			success: function(data) {
+				$('#searchGoods').html(data);
+			},
+			error: function(request, status, error) {
+				alert(error);
+			}
+		});
+	};
+	</script>
 </head>
-<body>
+<body id="searchGoods">
 <!-- yolo가자 작성 -->
 <div class="detail-select">
     <div class="header-bar">
@@ -308,12 +341,12 @@
           <div class="search-menu">
             <div class="search-box">
              <button type="text" id="goods_newest" ><span><a href="javascript:search_Goods_Price('newest')">최신순</a></span></button>
-             <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc()">높은 가격 순</a></span></button>
-             <button type="text" id="lowerPrice" ><span><a href="javascript:search_Goods_Price('lowerPrice')">낮은 가격 순</a></span></button>
+             <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc('heaghtPrice')">높은 가격 순</a></span></button>
+             <button type="text" id="lowerPrice" ><span><a href="javascript:priceListasc('lowerPrice')">낮은 가격 순</a></span></button>
             </div>
             <button id="btn_map" type="button" class="btn_map" onclick="pop_map_pc();">지도</button> 
           </div>
-          <div class="tab_each goods_list">
+          <div id="goods_list" class="tab_each goods_list">
             <div class="goods_title"><h3>상품 리스트</h3></div>
             
             <ul id = "tab1" class="active">
