@@ -93,8 +93,7 @@ public abstract class BaseController  {
 		if(fixedSearchPeriod == null) {
 			cal.add(cal.MONTH,-4);
 		}else if(fixedSearchPeriod.equals("one_week")) {
-			ca@Override
-	l.add(Calendar.DAY_OF_YEAR, -7);
+			cal.add(Calendar.DAY_OF_YEAR, -7);
 		}else if(fixedSearchPeriod.equals("two_week")) {
 			cal.add(Calendar.DAY_OF_YEAR, -14);
 		}else if(fixedSearchPeriod.equals("one_month")) {
