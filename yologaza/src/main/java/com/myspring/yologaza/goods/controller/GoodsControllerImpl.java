@@ -3,6 +3,7 @@ package com.myspring.yologaza.goods.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,8 +98,11 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
+		Map<String, Object> param = new HashMap<String, Object>();
+		
 		
 		session=request.getSession();
+		
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
 		mav.addObject("goodsMap", goodsMap);
 		

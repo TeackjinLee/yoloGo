@@ -155,11 +155,11 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 			System.out.println("실행");
 			message= "<script>";
 			message += " alert('주문내역을 저장했습니다.');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/member/nonReservation.do?name=${name}&hp=${hp}';";
 			message +=("</script>");
 		}catch(Exception e) {
 			message= "<script>";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/main.do';";
 			message +=("</script>");
 			e.printStackTrace();
 		}
