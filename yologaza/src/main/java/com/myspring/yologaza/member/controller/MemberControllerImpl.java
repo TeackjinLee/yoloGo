@@ -1,6 +1,9 @@
 package com.myspring.yologaza.member.controller;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -178,6 +182,29 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		} 
 	}
 	
+	@Override
+	@RequestMapping(value="/member/removeMember.do", method = RequestMethod.POST)
+	public ModelAndView removeMember(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception{
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			articleMap.put(name,value);
+		}
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		articleMap.put("id", id);
+		memberService.removeMember(id);
+		memberService.addDeletedMember(articleMap);
+		session.removeAttribute("member");
+		session.removeAttribute("isLogOn");
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		return mav;
+	}
+	
 	@RequestMapping(value="/member/*Form.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView form(@RequestParam(value="result", required=false) String result,
 							@RequestParam(value= "action", required=false) String action,
@@ -190,6 +217,18 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value= "/member/QuitForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView quit(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("id",id);
 		return mav;
 	}
 	

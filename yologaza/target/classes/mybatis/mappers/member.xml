@@ -166,6 +166,14 @@
 	   
 	]]>      
   </delete>
+  
+  <update id="updateDeletedMember" parameterType="java.util.HashMap">
+		 update deletemember set detail1 = #{detail1}
+		 <if test="detail2 != '' and detail2 != null">
+		 , detail2 = #{detail2}
+		 </if>
+		 where id = #{id}
+  </update>
 	
 	
 	<!-- 동적 SQL문 -->
