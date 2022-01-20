@@ -31,6 +31,7 @@ import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.goods.vo.ImageFileVO;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.reservation.service.ReservationService;
+import com.myspring.yologaza.reservation.vo.ReservationVO;
 import com.myspring.yologaza.sms.service.certificationService;
 
 @Controller("reservationController")
@@ -133,19 +134,18 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 	}
 	@Override
 	@RequestMapping(value="/addReservation.do" ,method={RequestMethod.POST})
-	public ResponseEntity addReservation( HttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
+	public ResponseEntity addReservation( HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String fileName=null;
 		
 		Map newGoodsMap = new HashMap();
-		Enumeration enu=multipartRequest.getParameterNames();
+		Enumeration enu=request.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
-			String value=multipartRequest.getParameter(name);
+			String value=request.getParameter(name);
 			newGoodsMap.put(name,value);
 		}
-		
 		String message = null;
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -155,11 +155,13 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 			System.out.println("실행");
 			message= "<script>";
 			message += " alert('주문내역을 저장했습니다.');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";
+			message +=" location.href='"+request.getContextPath()+"/mypage/Mypage3.do';";
 			message +=("</script>");
 		}catch(Exception e) {
+			System.out.println("Exception실행");
 			message= "<script>";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";
+			message += " alert('주문내역을 저장했습니다.');";
+			message +=" location.href='"+request.getContextPath()+"/mypage/Mypage3.do';";
 			message +=("</script>");
 			e.printStackTrace();
 		}

@@ -67,5 +67,17 @@ public class MemberDAOImpl implements MemberDAO{
 		map.put("pwd", pwd);
 		sqlSession.update("mapper.member.findPwd", map);
 	}
+	
+	@Override
+	public int deleteMember(String id) throws DataAccessException{
+		int result = sqlSession.delete("mapper.member.deleteMember", id);
+		return result;
+	}
+	
+	@Override
+	public int updateDeletedMember(Map deleteMap) throws DataAccessException{
+		int result = sqlSession.update("mapper.member.updateDeletedMember", deleteMap);
+		return result;
+	}
 
 }

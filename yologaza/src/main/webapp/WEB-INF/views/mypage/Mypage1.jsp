@@ -281,6 +281,12 @@ p {
   top:10px;
 }
 
+.Withdrawal{
+	float:left;
+	font-weight: bold;
+    color: #777;
+    font-size:16px;
+}
 </style>
 
 <script type="text/javascript">
@@ -467,6 +473,7 @@ p {
             	
              
           </div>
+          <a class="Withdrawal" href="${contextPath}/member/QuitForm.do">탈퇴하기</a>
         </div>
       </div>
     </div>

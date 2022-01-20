@@ -55,7 +55,7 @@
 	</resultMap>
 
 	<select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
-		<![CDATA[
+			<![CDATA[
 			select @ROWNUM:=@ROWNUM+1 ,t.*
 			          from(
 						select g.*,d.fileName from goods g, goods_img d
@@ -65,9 +65,24 @@
 			            and goods_acess = 1
 			            group by goods_id
 			            order by g.goods_creDate desc)  t
-				             where (@ROWNUM:=0) < 16;
-			
-		]]>
+				            where (@ROWNUM:=0) < 16
+							order by
+			]]>
+						<choose>
+							<when test="value == 'higher_price'">
+								goods_price1 desc
+							</when>
+							<when test="value == 'lower_price'">
+			             		goods_price1 asc
+							</when>
+							<when test="value == 'new_up'">
+				             	goods_creDate asc
+				             </when>
+				             <otherwise>
+				             	goods_creDate asc
+				             </otherwise>
+						</choose>
+						
 	</select>
 	
 	<select id="selectGoodsDetail" resultMap="goodsResult"   parameterType="String"  >
