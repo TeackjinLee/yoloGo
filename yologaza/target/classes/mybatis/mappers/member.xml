@@ -15,6 +15,8 @@
         <result property="hp" column="hp" />
         <result property="member_point" column="member_point" />
         <result property="auth" column="auth" />
+        <result property="detail1" column="detail1" />
+        <result property="detail2" column="detail2" />
         <result property="memFileName" column="memFileName" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
