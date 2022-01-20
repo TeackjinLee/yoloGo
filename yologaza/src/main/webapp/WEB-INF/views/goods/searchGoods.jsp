@@ -341,7 +341,7 @@
           <div class="search-menu">
             <div class="search-box">
              <button type="text" id="goods_newest" ><span><a href="javascript:search_Goods_Price('newest')">최신순</a></span></button>
-             <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc('heaghtPrice')">높은 가격 순</a></span></button>
+             <button type="text" id="hightPrice" ><span><a href="javascript:pricelistdesc('heaghtPrice')">높은 가격 순</span></button>
              <button type="text" id="lowerPrice" ><span><a href="javascript:priceListasc('lowerPrice')">낮은 가격 순</a></span></button>
             </div>
             <button id="btn_map" type="button" class="btn_map" onclick="pop_map_pc();">지도</button> 
@@ -355,7 +355,7 @@
 	          	</c:if>	
            		<c:forEach var="item" items="${goodsMap.motel}" >
            			<c:set var="index" value="<%=goods_type %>"/>
-         				<c:if test="${index eq 'motel' || index eq 'my'}">
+         			<c:if test="${index eq 'motel' || index eq 'my'}">
             		<li class="list_1 goods_menu1 goods_box">
 				      <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }&date1=${date1}&date2=${date2}">
 				        <div class="goods_picture">

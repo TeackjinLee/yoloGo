@@ -456,4 +456,5 @@ public class GoodsVO {
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
+	
 }
