@@ -197,7 +197,7 @@
 	          </div>
 	        </div>
 			<table align="center">
-			<tr align="center" class="column" style="font-size:14px;">
+			<tr align="center" class="column" style="font-size:12px;">
 				<td ><b>업체명</b></td>
 				<td ><b>예약페이지 이동</b></td>
 				<td ><b>주소</b></td>
@@ -232,7 +232,7 @@
 					</td>
 					<td>${goodsList.goods_creDate}</td>
 					<td>
-						<button type="button" class="next"  onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
+						<button type="button" class="next" style="display:block;"  onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
 						<button type="button" class="next" style="margin-top:9px;" onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 관리</button>
 					</td>
 				</tr>

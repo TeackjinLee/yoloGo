@@ -20,28 +20,8 @@ import com.myspring.yologaza.goods.vo.ImageFileVO;
 		@Autowired
 		private GoodsDAO goodsDAO;
 		@Override
-		public Map<String,List<GoodsVO>> listGoods() throws Exception {
-			Map<String,List<GoodsVO>> goodsMap=new HashMap<String,List<GoodsVO>>();
-			List<GoodsVO> goodsList=goodsDAO.selectGoodsList("hotel");
-			goodsMap.put("hotel",goodsList);
-			goodsList=goodsDAO.selectGoodsList("motel");
-			goodsMap.put("motel",goodsList);
-			
-			goodsList=goodsDAO.selectGoodsList("pension");
-			goodsMap.put("pension",goodsList);
-			
-			goodsList=goodsDAO.selectGoodsList("resort");
-			goodsMap.put("resort",goodsList);
-			
-			goodsList=goodsDAO.selectGoodsList("guestHouse");
-			goodsMap.put("guestHouse",goodsList);
-			
-			goodsList=goodsDAO.selectGoodsList("camping");
-			goodsMap.put("camping",goodsList);
-			
-			goodsList=goodsDAO.selectGoodsList("hanok");
-			goodsMap.put("hanok",goodsList);
-			return goodsMap;
+		public List<GoodsVO> listGoods(GoodsVO goodsVO) throws Exception {
+			return goodsDAO.selectGoodsList(goodsVO);
 		}
 		@Override
 		public Map goodsDetail(String goods_id) throws Exception {

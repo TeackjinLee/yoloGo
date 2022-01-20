@@ -36,7 +36,6 @@ import net.sf.json.JSONObject;
 public class GoodsControllerImpl extends BaseController implements GoodsController {
 	@Autowired
 	private GoodsService goodsService;
-	
 	@Autowired
 	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
 	@Autowired
@@ -92,18 +91,17 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	}
 	@Override
 	@RequestMapping(value = {"/searchGoods"},method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView searchGoods(@RequestParam("goods_type") String goods_type,
-			HttpServletRequest request, HttpServletResponse response) throws Exception{
-		HttpSession session;
+	public ModelAndView searchGoods(GoodsVO goodsVO,
+									HttpServletRequest request, 
+									HttpServletResponse response) throws Exception{
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		Map<String, Object> param = new HashMap<String, Object>();
 		
+		HttpSession session=request.getSession();
 		
-		session=request.getSession();
-		
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		List<GoodsVO> goodsMap=goodsService.listGoods(goodsVO);
 		mav.addObject("goodsMap", goodsMap);
 		
 		long today = (System.currentTimeMillis()/1000) + 32400;
@@ -134,14 +132,15 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	
 	@Override
 	@RequestMapping(value = {"/goods/keywordSearchGoods.do"},method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView kewordSearchGoods(@RequestParam("searchWord") String searchWord, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView kewordSearchGoods(@RequestParam("searchWord") String searchWord, 
+			GoodsVO goodsVO,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		List<GoodsVO> goodsList=goodsService.searchGoods(searchWord);
 		session=request.getSession();
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		List<GoodsVO> goodsMap=goodsService.listGoods(goodsVO);
 		mav.addObject("goodsMap", goodsMap);
 		mav.addObject("goodsList", goodsList);
 		return mav;

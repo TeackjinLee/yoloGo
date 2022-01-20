@@ -63,6 +63,9 @@ public class GoodsVO {
 	private String fileName;
 	private String fileType;
 	
+	// value
+	private String value;
+	
 	public GoodsVO() {
 	}
 
@@ -455,6 +458,14 @@ public class GoodsVO {
 
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 	
 }

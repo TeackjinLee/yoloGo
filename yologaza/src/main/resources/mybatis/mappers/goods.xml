@@ -44,7 +44,8 @@
 		<result property="goods_room_type" column="goods_room_type" />
 		<result property="goods_capacity" column="goods_capacity" />
 		<result property="goods_introduce" column="goods_introduce" />
-		
+		<result property="value" column="value" />
+		<result property="goods_creDate" column="goods_creDate" />
 	</resultMap>	
 
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -61,13 +62,22 @@
 						select g.*,d.fileName from goods g, goods_img d
 			        	where g.goods_id=d.goods_id 
 			        	and d.filetype like 'goods%'
-			            and goods_type=#{goods_type}
+			 			]]>
+			 			<choose>
+			 				<when test="goods_type == 'my'">
+				        		
+				        	</when>
+				        	<when test="goods_type != null and goods_type != '' and goods_type != 'my'">
+				        		and goods_type=#{goods_type}
+				        	</when>
+			        	</choose>
+			        	<![CDATA[
 			            and goods_acess = 1
 			            group by goods_id
 			            order by g.goods_creDate desc)  t
-				            where (@ROWNUM:=0) < 16
-							order by
-			]]>
+				            where (@ROWNUM:=0) < 16 
+				            order by
+						]]>
 						<choose>
 							<when test="value == 'higher_price'">
 								goods_price1 desc
@@ -76,12 +86,14 @@
 			             		goods_price1 asc
 							</when>
 							<when test="value == 'new_up'">
-				             	goods_creDate asc
+				             	goods_creDate desc
 				             </when>
 				             <otherwise>
-				             	goods_creDate asc
+				             	goods_creDate desc
 				             </otherwise>
 						</choose>
+			
+						
 						
 	</select>
 	
