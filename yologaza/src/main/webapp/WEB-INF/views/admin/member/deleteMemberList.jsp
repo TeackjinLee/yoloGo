@@ -168,7 +168,20 @@
 	height:25px;
 	font-size:16px;
 }
+
+.detail{
+	width:25px;
+	height:25px;
+	cursor:pointer;
+	border:1px solid rgba(0,0,0,0.25);
+	border-radius:4px;
+	background-color:rgba(0,0,0,0.15)
+}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script>
     $(function() {        
         $.fn.type();
@@ -201,6 +214,7 @@
         });
     });
 
+    
     
     $.fn.type = function(){
 		var text = $('.dropbtn_content').text();
@@ -296,10 +310,11 @@
 				<td><b>연락처</b></td>
 				<td><b>이메일</b></td>
 				<td><b>권한</b></td>
+				<td><b>사유</b></td>
 				<td><b>탈퇴일</b></td>
 	          </tr>
 	   
-	          <c:forEach var="member" items="${deleteMemberList}" >     
+	          <c:forEach var="member" items="${deleteMemberList}" varStatus="status">     
 	            <tr align="center" class="data">
 	              <td>${member.uid}</td>
 			      <td>${member.id}</td>
@@ -307,8 +322,30 @@
 			      <td>${member.hp}</td>
 			      <td>${member.email1}@${member.email2}</td>
 			      <td>${member.auth}</td>
+			      <td>
+			      <c:choose>
+			      	<c:when test="${member.detail1 == '자주 사용하지 않아요'}">
+			      		<div class="detail"><a href="#ex${status.count}" rel="modal:open">1</a></div>
+			      	</c:when>
+			      	<c:when test="${member.detail1 == '원하는 숙소가 없어요'}">
+			      		<div class="detail"><a href="#ex${status.count}" rel="modal:open">2</a></div>
+			      	</c:when>
+			      	<c:when test="${member.detail1 == '다른 계정이 있어요'}">
+			      		<div class="detail"><a href="#ex${status.count}" rel="modal:open">3</a></div>
+			      	</c:when>
+			      	<c:when test="${member.detail1 == '개인정보를 위해 삭제할 정보가 있어요'}">
+			      		<div class="detail"><a href="#ex${status.count}" rel="modal:open">4</a></div>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<div class="detail"><a href="#ex${status.count}" rel="modal:open">5</a></div>
+			      	</c:otherwise>
+			      </c:choose>
+			      </td>
 			      <td>${member.joinDate}</td>
 	            </tr>
+	            <div id="ex${status.count}" class="modal">
+	            <a>${member.detail1} / ${member.detail2}</a>
+	            </div>
 	          </c:forEach>   
 	        </table>
 	        <div id="notice_pagination">
