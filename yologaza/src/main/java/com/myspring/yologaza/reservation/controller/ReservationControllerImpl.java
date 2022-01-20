@@ -33,7 +33,7 @@ import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.reservation.service.ReservationService;
 import com.myspring.yologaza.sms.service.certificationService;
 
-@Controller("ReservationController")
+@Controller("reservationController")
 @RequestMapping(value="/reservation")
 public class ReservationControllerImpl extends BaseController implements ReservationController {
 	@Autowired
@@ -145,12 +145,14 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 			String value=multipartRequest.getParameter(name);
 			newGoodsMap.put(name,value);
 		}
+		
 		String message = null;
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			reservationService.reservationResult(newGoodsMap);
+			System.out.println("실행");
 			message= "<script>";
 			message += " alert('주문내역을 저장했습니다.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/mypage/Mypage3.do';";

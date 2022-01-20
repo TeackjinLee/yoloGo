@@ -51,7 +51,6 @@
 		<result property="goods_uimg" column="goods_uimg" />
 	   <result property="goods_id" column="goods_id" />
 	   <result property="goods_uroom" column="goods_uroom" />
-	   <result property="goods_uroom_detail" column="goods_uroom_detail" />
 	   <result property="fileName" column="fileName" />
 	   <result property="image_id" column="image_id" />
 	   <result property="fileType" column="fileType" />

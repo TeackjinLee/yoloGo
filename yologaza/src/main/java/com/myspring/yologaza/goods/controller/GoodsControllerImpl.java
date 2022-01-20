@@ -60,6 +60,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);
 		mav.addObject("goodsMap", goodsMap);
+		// Äü »ç¿ë½Ã
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);
 		

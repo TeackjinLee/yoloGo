@@ -7,14 +7,11 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page import="java.util.Date" %>
-<%@page import="java.text.SimpleDateFormat" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <html>
 <head>
-<script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cf929ac0c936c4cda3566648aaf3dc4&libraries=services"></script>
 <style>
 body{
@@ -383,23 +380,14 @@ $(function() {
     <div class="wrap show">
       <div class="sub_top_wrap">
         <div class="sub_top">
-          <a>MY페이지</a>
+          <a>예약 조회</a>
         </div>
       </div>
       <div id="content" class="sub_wrap">
         <nav>
           <ul>
             <li>
-              <a href="${contextPath}/mypage/Mypage1.do">회원정보 수정</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage2.do">쿠폰/포인트</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage3.do" class="active">예약 내역</a>
-            </li>
-            <li>
-              <a href="${contextPath}/mypage/Mypage4.do">내 리뷰 관리</a>
+              <a href="${contextPath}/searchGoods.do?goods_type=my">예약하러 가기</a>
             </li>
           </ul>
         </nav>
@@ -415,7 +403,8 @@ $(function() {
               </div>
             </div>
             <div class="tab_each">
-            	<c:forEach var="item" items="${mypageReservation}" varStatus="cnt">
+           	 
+            	<c:forEach var="item" items="${nonReservation}">
 	           		<div class="reservation">
 	           			<a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
 							<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>

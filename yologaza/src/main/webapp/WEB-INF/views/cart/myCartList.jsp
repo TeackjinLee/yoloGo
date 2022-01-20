@@ -459,7 +459,7 @@ function fn_order_all_cart_goods(){
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
 			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
-			                
+			                ${cart_uid}
 			                
 			                <div class="detail">
 								

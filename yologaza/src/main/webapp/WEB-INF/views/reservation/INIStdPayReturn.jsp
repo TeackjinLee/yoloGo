@@ -31,13 +31,14 @@
 		table, img {border:none}
 		
 	</style>
-	<link rel="stylesheet" type="text/css" href="${contextPath}/yologaza/resources/css/group.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/group.css" />
 </head>
 <body bgcolor="#FFFFFF" text="#242424" leftmargin=0 topmargin=15 marginwidth=0 marginheight=0 bottommargin=0 rightmargin=0>
 	<div style="padding:10px;width:100%;font-size:14px;color: #ffffff;background-color: #000000;text-align: center">
 		이니시스 표준결제 인증결과 수신 / 승인요청, 승인결과 표시 샘플
 	</div>
-	
+	<div id="reservation_result">
+		<form action="${contextPath}/yologaza/reservation/addReservation.do" method="post">
 	
 <% 
 
@@ -198,6 +199,8 @@
 					
 				//공통 부분만
 				out.println("<tr><th class='line' colspan='2'><p></p></th></tr>");
+				out.println("<tr><th class='td01'><p>구매자명</p></th>");
+				out.println("<td class='td02'><p>" +resultMap.get("buyerName")+"</p></td></tr>");
 				out.println("<tr><th class='td01'><p>거래 번호</p></th>");
 				out.println("<td class='td02'><p>" +resultMap.get("tid")+"</p></td></tr>");
 				out.println("<tr><th class='line' colspan='2'><p></p></th></tr>");
@@ -216,6 +219,11 @@
 				out.println("<tr><th class='td01'><p>승인시간</p></th>");
 				out.println("<td class='td02'><p>" +resultMap.get("applTime")+"</p></td></tr>");
 				out.println("<tr><th class='line' colspan='2'><p></p></th></tr>");
+				
+				out.println("<input name='name' value='" +resultMap.get("buyerName")+"'  />");
+				out.println("<input name='hp' value='" +resultMap.get("buyerTel")+"'  />");
+				
+				
 				
 				if("VBank".equals(resultMap.get("payMethod"))){ //가상계좌
 					
@@ -563,9 +571,7 @@
 				out.println("</table>");
 				out.println("<span style='padding-left : 100px;'>");
 				out.println("</span>");
-				out.println("<form name='frm' method='post'>"); 
-				out.println("<input type='hidden' name='tid' value='"+resultMap.get("tid")+"'/>");
-				out.println("</form>");
+		
 				
 				out.println("</pre>");
 				
@@ -613,14 +619,12 @@
 		System.out.println(e);
 	}
 %>
-	<div id="reservation_result">
-		<form action="${contextPath}/yologaza/reservation/addReservation.do" method="post">
+	
 			<input name="uid" value="${member.uid }"  />
-			<input name="name" value="${member.name }"  />
-			<input name="hp" value="${member.hp }"  />
+
 			<input name="goods_id" value="<%=goods_id %>"  />
 			<input name="goods_uroom" value="<%=goods_uroom %>"  />
-			
+
 			<input name="checkIn" value="${Ddate1}"  />
          	
 			<input name="checkOut" value="${Ddate2}"  />

@@ -282,10 +282,12 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			imageFileList =upload(multipartRequest);
 			if(imageFileList!= null && imageFileList.size()!=0) {
 				for(ImageFileVO imageFileVO : imageFileList) {
+					goods_id = Integer.parseInt((String)goodsMap.get("goods_id"));
 					imageFileVO.setGoods_id(goods_id);
 					imageFileVO.setReg_id(reg_id);
 				}
 				businessGoodsService.addNewGoodsImage(imageFileList);
+				System.out.println("addNewGoodsImage");
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
@@ -299,7 +301,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
-					
+					srcFile.delete();
 				}
 			}
 			e.printStackTrace();
@@ -339,7 +341,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 					imageFileVO.setGoods_uimg(goods_uimg);
 					imageFileVO.setReg_id(reg_id);
 				}
-				
 				businessGoodsService.modifyGoodsImage(imageFileList);
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
@@ -358,7 +359,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 			}
 			e.printStackTrace();
 		}
-		
+		System.out.println("modifyGoodsImageInfo2");
 	}
 	
 	@Override

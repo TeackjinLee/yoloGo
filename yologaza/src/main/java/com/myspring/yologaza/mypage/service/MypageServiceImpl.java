@@ -39,4 +39,10 @@ public class MypageServiceImpl implements MypageService{
 		List<ReservationVO> mypageReservation = mypageDAO.mypageReservation(hp);
 		return mypageReservation;
 	}
+	
+	@Override
+	public List<ReservationVO> nonReservation(ReservationVO reservationVO)throws Exception{
+		return mypageDAO.nonReservation(reservationVO);
+	}
+	
 }
