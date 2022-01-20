@@ -1,6 +1,7 @@
 package com.myspring.yologaza.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -55,5 +56,14 @@ public class MemberServiceImpl implements MemberService{
 	public void findPw(String hp,String id, String pwd)throws Exception{
     	memberDAO.findPw(hp, id, pwd);
 	}
+    
+	@Override
+	public int removeMember(String id) throws DataAccessException{
+		return memberDAO.deleteMember(id);
+	}
 
+	@Override
+	public int addDeletedMember(Map deleteMap) throws DataAccessException {
+		return memberDAO.updateDeletedMember(deleteMap);
+	}
 }
