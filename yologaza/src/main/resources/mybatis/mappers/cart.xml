@@ -10,6 +10,8 @@
 		<result property="id" column="id" />
 		<result property="goods_uroom" column="goods_uroom" />
 		<result property="price" column="price" />
+		<result property="checkIn" column="checkIn" />
+		<result property="checkOut" column="checkOut" />
 		<result property="cart_goods_qty" column="cart_goods_qty" />
 		<result property="creaDatetime" column="creaDatetime" />
 	</resultMap>
@@ -100,10 +102,16 @@
 	    <![CDATA[
 		    	insert into yolo_cart(cart_uid,
 		    	                           goods_uroom,
-		    	                           id)
+		    	                           id,
+		    	                           price,
+		    	                           checkIn,
+		    	                           checkOut)
 		        				 values(#{cart_uid},
     							        #{goods_uroom},
-    							        #{id})
+    							        #{id},
+    							        #{price},
+    							        #{checkIn},
+    							        #{checkOut})
     	]]>
 	</insert>
 	

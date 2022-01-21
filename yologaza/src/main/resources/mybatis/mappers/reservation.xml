@@ -84,6 +84,5 @@
 			group by rid;
     	]]>
 	</select>
-
 	
 </mapper>

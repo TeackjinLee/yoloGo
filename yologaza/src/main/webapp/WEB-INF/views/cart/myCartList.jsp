@@ -450,6 +450,7 @@ function fn_order_all_cart_goods(){
             <form name="frm_order_all_cart">
 	            <ul class="tab_each" >
 		            <c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
+		            
 		            <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
 				    <c:set var="cart_uid" value="${myCartList[cnt.count-1].cart_uid}" />
 			            <li class="reservation" style="margin-bottom: 20px;">
@@ -459,7 +460,6 @@ function fn_order_all_cart_goods(){
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
 			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
-			                ${cart_uid}
 			                
 			                <div class="detail">
 								
@@ -500,6 +500,7 @@ function fn_order_all_cart_goods(){
 			            </li>
 			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_room_price1 }" />
 						<c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
+					
 		            </c:forEach>
 		        </ul>
           	</form>
