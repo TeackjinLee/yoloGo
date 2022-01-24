@@ -25,6 +25,7 @@ public class ReservationVO {
 	private Date checkIn;
 	private Date checkOut;
 	private Date rDate;
+	private String goods_room_type;
 	
 	public int getRid() {
 		return rid;
@@ -157,6 +158,12 @@ public class ReservationVO {
 	}
 	public void setrDate(Date rDate) {
 		this.rDate = rDate;
+	}
+	public String getGoods_room_type() {
+		return goods_room_type;
+	}
+	public void setGoods_room_type(String goods_room_type) {
+		this.goods_room_type = goods_room_type;
 	}
 	
 }

@@ -399,5 +399,4 @@
 		where 
 	    goods_uroom=#{goods_uroom} and goods_id = #{goods_id}
 	</update>
-	
 </mapper>

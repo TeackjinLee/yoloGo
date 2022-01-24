@@ -1,15 +1,16 @@
 package com.myspring.yologaza.business.goods.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.yologaza.board.vo.ArticleVO;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.goods.vo.ImageFileVO;
 
@@ -17,6 +18,13 @@ import com.myspring.yologaza.goods.vo.ImageFileVO;
 public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+	int totalCount;
+	
+	public int getTotalCount() {
+		return totalCount;
+	}
 	
 	@Override
 	public int insertNewGoods(Map newGoodsMap) throws DataAccessException {
@@ -121,5 +129,26 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	public List selectAllRoomList(String  goods_id) throws DataAccessException {
 		List roomList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectAllRoomList", goods_id);
 		return roomList;
+	}
+	
+	@Override
+	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid) throws DataAccessException{
+		List<GoodsVO> reservationList = new ArrayList<GoodsVO>();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("date1", date1);
+		params.put("date2", date2);
+		params.put("offset", offset);
+		params.put("count", count);
+		params.put("uid", uid);
+		
+		try {
+			reservationList = session.selectList("mapper.reservation.selectReservation",params);
+			this.totalCount = session.selectOne("mapper.reservation.countAllGoods");
+		}finally {
+			session.close();
+		}
+		return reservationList;
 	}
 }
