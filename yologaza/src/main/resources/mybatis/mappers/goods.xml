@@ -135,7 +135,6 @@
     	]]>
 	</select>
 	
-	
 	<select id="selectGoodsDetailImageRoom" resultMap="imageResult"   parameterType="String"  >
 	    <![CDATA[
 				select t.*

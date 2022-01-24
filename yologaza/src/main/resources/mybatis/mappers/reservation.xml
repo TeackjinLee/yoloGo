@@ -85,6 +85,7 @@
 			group by rid;
     	]]>
 	</select>
+<<<<<<< HEAD
 	
 	<select id="selectReservation" parameterType="java.util.Map" resultMap="reservation">
 		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type 
@@ -106,5 +107,7 @@
   	</select>
 	
 
+=======
+>>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo.git
 	
 </mapper>

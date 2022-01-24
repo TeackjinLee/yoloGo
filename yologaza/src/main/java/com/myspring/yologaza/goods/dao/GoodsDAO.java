@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.goods.vo.ImageFileVO;
+import com.myspring.yologaza.reservation.vo.ReservationVO;
 
 public interface GoodsDAO {
 

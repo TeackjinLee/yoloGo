@@ -1,5 +1,6 @@
 package com.myspring.yologaza.cart.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,9 @@ public class CartControllerImpl extends BaseController implements CartController
 	}
 	@RequestMapping(value="/addGoodsInCart.do" ,method = RequestMethod.POST,produces = "application/text; charset=utf8")
 	public  @ResponseBody String addGoodsInCart(@RequestParam("goods_uroom") int goods_uroom,
+												@RequestParam("price") double price,
+												@RequestParam("checkIn") String checkIn,
+												@RequestParam("checkOut") String checkOut,
 			                    HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("member");
@@ -54,6 +58,9 @@ public class CartControllerImpl extends BaseController implements CartController
 		//카트 등록전에 이미 등록된 제품인지 판별한다.
 		cartVO.setGoods_uroom(goods_uroom);
 		cartVO.setId(id);
+		cartVO.setPrice(price);
+		cartVO.setCheckIn(checkIn);
+		cartVO.setCheckOut(checkOut);
 		boolean isAreadyExisted=cartService.findCartGoods(cartVO);
 		System.out.println("isAreadyExisted:"+isAreadyExisted);
 		if(isAreadyExisted==true){

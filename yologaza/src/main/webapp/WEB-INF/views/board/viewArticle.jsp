@@ -43,14 +43,20 @@
      	margin-top: 10px;
      }
      #board_head .member_img{
-     	float:left;
-     	width:40px;
-     	height:40px;
-     	border-radius: 20px;
-     	overflow: hidden;
+     	float: left;
+	    width: 40px;
+	    height: 40px;
+	    border-radius: 20px;
+	    overflow: hidden;
+	    position: relative;
+	    border: 1px solid #ddd;
      }
      #board_head .member_img img{
-     	width:100%;
+     	width: 100%;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
      }
      #board_head .board_box{
      	float:left;

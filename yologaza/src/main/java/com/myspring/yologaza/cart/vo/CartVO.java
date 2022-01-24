@@ -10,6 +10,9 @@ public class CartVO {
 	private int goods_uroom;
 	private int cart_uid;
 	private int cart_goods_qty;
+	private double price;
+	private String checkIn;
+	private String checkOut;
 	private Date creaDatetime;
 	
 	
@@ -36,6 +39,24 @@ public class CartVO {
 	}
 	public void setCart_goods_qty(int cart_goods_qty) {
 		this.cart_goods_qty = cart_goods_qty;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getCheckIn() {
+		return checkIn;
+	}
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
+	}
+	public String getCheckOut() {
+		return checkOut;
+	}
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
 	}
 	public Date getCreaDatetime() {
 		return creaDatetime;
