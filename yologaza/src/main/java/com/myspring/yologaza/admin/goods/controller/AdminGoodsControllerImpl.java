@@ -102,7 +102,10 @@ public class AdminGoodsControllerImpl extends BaseController implements AdminGoo
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			adminGoodsService.updateGoodsAcess(GoodsAcessMap);
-			
+			message= "<script>";
+			message += " alert('검수를 완료했습니다.');";
+			message +=" location.href='"+Request.getContextPath()+"/admin/goods/listGoods.do';";
+			message +=("</script>");
 		}catch(Exception e) {
 			message= "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
