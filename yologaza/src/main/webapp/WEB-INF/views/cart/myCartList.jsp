@@ -177,6 +177,7 @@
 	  width:30%;
 	  height:220px;
 	  border:1px solid rgba(0,0,0,0.2);
+	  border-right: none;
 	  display:inline-block;
 	}
 	
@@ -461,18 +462,18 @@ function fn_order_all_cart_goods(){
 			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
 			                
-			                <div class="detail">
+			                <div class="detail" style = "font-weight:bold;">
 								
 								<c:choose>
 									<c:when test="${item.goods_room_price2 != 0}">
 										<span id="type">대실</span>
-										<span id="price2" style="padding-right:10px; box-sizing: border-box;">${item.goods_room_price2}원</span>
+										<span id="price2" style="padding-right:10px; box-sizing: border-box;"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</span>
 										<span id="type">숙박</span>
-										<span id="price1">${item.goods_room_price1}원</span>
+										<span id="price1"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</span>
 									</c:when>
 									<c:otherwise>
 										<span id="type">숙박</span>
-										<span id="price1">${item.goods_room_price1}원</span>
+										<span id="price1"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</span>
 									</c:otherwise>
 								</c:choose>
 			                </div>
@@ -513,7 +514,7 @@ function fn_order_all_cart_goods(){
 		       <td>총 예약 금액</td>
 		       <td>  </td>
 		       <td>옵션 비용</td>
-		       <td>  </td>
+		       <td>  </td>z
 		       <td>총 할인 금액 </td>
 		       <td>  </td>
 		       <td>최종 결제금액</td>

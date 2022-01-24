@@ -66,6 +66,11 @@ public class GoodsVO {
 	// value
 	private String value;
 	
+	// cart
+	private int price;
+	private Date checkIn;
+	private Date checkOut;
+	
 	public GoodsVO() {
 	}
 
@@ -466,6 +471,30 @@ public class GoodsVO {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Date getCheckIn() {
+		return checkIn;
+	}
+
+	public void setCheckIn(Date checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	public Date getCheckOut() {
+		return checkOut;
+	}
+
+	public void setCheckOut(Date checkOut) {
+		this.checkOut = checkOut;
 	}
 	
 }

@@ -31,14 +31,14 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<script>
-	function fn_articleForm(isLogOn,articleForm,loginForm){
-	  if(isLogOn != '' && isLogOn != 'false'){
-	    location.href=articleForm;
-	  }else{
-		swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
-	    swal.location.href=loginForm+'?action=/board/articleForm.do';
-	  }
-	}
+		function fn_articleForm(isLogOn,articleForm,loginForm){
+		  if(isLogOn != '' && isLogOn != 'false'){
+		    location.href=articleForm;
+		  }else{
+			swal ( "Oops" ,  "로그인 후 글쓰기가 가능합니다." ,  "error" );
+		    swal.location.href=loginForm+'?action=/board/articleForm.do';
+		  }
+		}
 	</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -322,34 +322,42 @@
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom }','${item.goods_room_price1 *(date2-date1-1)/86400}','${Ddate3}','${Ddate4}')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
 							          <h3>대실</h3>
 							          <br><br><br>
-							          <div class="price"><h2><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</h2></div><br>
+							          <div class="price"><h2><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</h2></div>
+							          <div style="float:left; font-size:14px;">${Ddate3}</div>
 							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
 							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${item.goods_motel_usetime}시간</span></div>
 							          <div class="point">
-							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'">예약하기</button>
+							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}&date1=<%=date1%>&date2=<%=date1%>'">예약하기</button>
 							          </div>
 							        </div>
 							        <div class="reserve cell">
+							          <if>
 							          <h2>${item.goods_room_name}<a href="javascript:add_cart('${item.goods_uroom}','${item.goods_room_price1 *(date2-date1-1)/86400}','${Ddate3}','${Ddate4}')" style="float:right; color:rgba(192, 57, 43, 0.7);"><i class="fas fa-shopping-cart"></i></a></h2>
+							          </if>
 							          <h3>숙박</h3>
 							          <br><br><br>
 							          <div class="price">
 								          <h2>
-								          <c:set var="index" value="${date1}"/>
-								          <c:if test="${index != 0}">
+								          <c:set var="index" value="<%=date1 %>"/>
+								          <c:set var="index2" value="<%=date2 %>"/>
+						
+								          <c:if test="${index != index2 and index != 0}">
 								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1 *(date2-date1-1)/86400}" />원/
 								          	  <span style="font-size:16px;">
-								          	  	  <span style="float:left;">${Ddate3} - ${Ddate4}</span>
 										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(date2-date1-1)/86400}" />박
 										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${((date2-date1-1)/86400+1)}" />일
 										       </span>
+										       <div style="float:left; font-size:14px;">${Ddate3} - ${Ddate4}</div>
 								          </c:if>
-								          <c:if test="${index == 0}">
+								          <c:if test="${index == index2 or index == 0}">
+								          	  
 								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1}" />원/
 									          <span style="font-size:16px;">
 									          	1박2일
 									          </span>
-								          </c:if>
+									          <br>
+									          <div style="float:left; font-size:14px;">${Ddate3} - ${Ddate4}</div>
+								          </c:if> 
 								          </h2>
 							          </div>
 							          <div><span style="float: left">입실시간</span>
@@ -362,7 +370,7 @@
 								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 							          	  </c:if>
 								          <c:if test="${index == 0}">
-								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}' ">예약하기</button>
+								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 								          </c:if>
 							          </div>
 							        </div>

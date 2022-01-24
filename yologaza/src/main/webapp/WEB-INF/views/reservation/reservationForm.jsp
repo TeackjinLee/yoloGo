@@ -17,8 +17,9 @@
 	String goods_uroom = request.getParameter("goods_uroom");
 	String goods_room_price1 = request.getParameter("goods_room_price1");
 	String goods_room_price2 = request.getParameter("goods_room_price2");
+	String date1 = request.getParameter("date1");
+	String date2 = request.getParameter("date2");
 %>
-
 <%
 
 	/*
@@ -312,26 +313,37 @@
 		        <p>체크인</p>
 		        <h4>${Ddate1} ${goods.goods_checkIn}시</h4>
 		        <br>
-		        <p>체크아웃</p>
-		        <h4>${Ddate2} ${goods.goods_checkOut}시</h4>
+		        <c:set var="index" value="<%=date1 %>"/>
+				<c:set var="index2" value="<%=date2 %>"/>
+		        <c:choose>
+		        	<c:when test="${index==index2}">
+		        		<p>사용시간</p>
+			        	<h4>${goods.goods_motel_usetime}시</h4>
+		        	</c:when>
+			        <c:when test="${index!=index2}">
+			        	<p>체크아웃</p>
+			        	<h4>${Ddate2} ${goods.goods_checkOut}시</h4>
+			        </c:when>
+		        </c:choose>
 		      </div>
 		      <div class="user_goods_cost">
 		       <div class="text-box" >
 		         <h3 style="float:left;">총 결제 금액</h3><p>(VAT포함)</p>
 		         	<br>
 		         	<c:set var="index" value="<%=goods_room_price2%>"/>
-		         	<c:if test="${index == null }">
+		         	
+		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
+		         	<c:if test="${index == null}">
 		         		<h1 style="color:darkred; border:none;">
 		         			<fmt:formatNumber type="number" maxFractionDigits="0"  value="<%=goods_room_price1%>" />원
 		         		</h1>
-		         		
 		         	</c:if>
-		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
 		         	<c:if test="${index2 == null }">
 		         		<h1 style="color:darkred;">
 		         			<fmt:formatNumber type="number" maxFractionDigits="0"  value="<%=goods_room_price2%>" />원
 		         		</h1>
-		         	</c:if>		      
+		         	</c:if>
+		         		      
 		            <br>
 		            <br>
 		            <p>- 해당 객실가 세금, 봉사료가 포함된 금액입니다</p>
