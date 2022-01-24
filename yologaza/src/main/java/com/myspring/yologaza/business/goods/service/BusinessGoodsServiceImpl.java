@@ -21,6 +21,11 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	private BusinessGoodsDAO businessGoodsDAO;
 	
 	@Override
+	public BusinessGoodsDAO getBusinessGoodsDAO() {
+		return businessGoodsDAO;
+	}
+	
+	@Override
 	public int addNewGoods(Map newGoodsMap) throws Exception{
 		int goods_id = businessGoodsDAO.insertNewGoods(newGoodsMap);
 		ArrayList<ImageFileVO> imageFileList = (ArrayList)newGoodsMap.get("imageFileList");
@@ -107,5 +112,10 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 		List roomList =businessGoodsDAO.selectAllRoomList(goods_id);
 		listRoomMap.put("roomList", roomList);
 		return listRoomMap;
+	}
+	
+	@Override
+	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid) throws Exception{
+		return businessGoodsDAO.selectReservation(date1, date2, offset, count, uid);
 	}
 }

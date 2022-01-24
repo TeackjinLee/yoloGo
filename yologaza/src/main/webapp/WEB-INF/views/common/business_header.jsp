@@ -61,7 +61,7 @@
 	              <div>예약관리</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="#">예약 관리</a></li>
+	                  <li><a href="${contextPath}/business/goods/reservationManagement.do">예약 관리</a></li>
 	                  <li><a href="#">예약 내역</a></li>
 	                  <li><a href="#">정산 내역</a></li>
 	                  <li><a href="#">매출 내역</a></li>
