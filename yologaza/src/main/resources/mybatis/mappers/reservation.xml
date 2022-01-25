@@ -94,6 +94,14 @@
          UNIX_TIMESTAMP(r.checkIn) >= #{date1} 
          and #{date2} > UNIX_TIMESTAMP(r.checkIn)  
          </if>
+         <if test="type != 0">
+         	<if test="type == 1">
+         	and r.checkIn = r.checkOut
+         	</if>
+         	<if test="type == 2">
+         	and r.checkIn != r.checkOut
+         	</if>
+         </if>
          and r.uid = #{uid}
          and r.goods_id = g.goods_id
          and r.goods_uroom = d.goods_uroom

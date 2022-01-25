@@ -132,7 +132,7 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
-	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid) throws DataAccessException{
+	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid, int type) throws DataAccessException{
 		List<GoodsVO> reservationList = new ArrayList<GoodsVO>();
 		SqlSession session = sqlSessionFactory.openSession();
 		
@@ -142,6 +142,7 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 		params.put("offset", offset);
 		params.put("count", count);
 		params.put("uid", uid);
+		params.put("type", type);
 		
 		try {
 			reservationList = session.selectList("mapper.reservation.selectReservation",params);

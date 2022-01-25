@@ -509,13 +509,17 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		}
 		request.setAttribute("Ddate1", Ddate1);
 		request.setAttribute("Ddate2", Ddate2);
+		int type = 0;
+		if(request.getParameter("type") != null)
+			type = Integer.parseInt(request.getParameter("type"));
+		request.setAttribute("type", type);
 		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		ModelAndView mav = new ModelAndView(viewName);
 		if(memberVO != null) {
 			String uid = memberVO.getUid();
-			List<GoodsVO> selectReservation = businessGoodsService.selectReservation(date1, date2, offset, pagination.getCountList(), uid);
+			List<GoodsVO> selectReservation = businessGoodsService.selectReservation(date1, date2, offset, pagination.getCountList(), uid, type);
 			mav.addObject("selectReservation", selectReservation);
 			mav.addObject(pagination);
 			mav.addObject("today1", today1);

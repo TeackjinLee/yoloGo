@@ -91,7 +91,7 @@ td {
   background-color: #fff;
   min-width : 120px;
   border-radius: 8px;
-  height : 90px;
+  height : 135px;
   box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
   position:absolute;
   z-index:99;
@@ -228,13 +228,22 @@ if(("${member.auth}" != "2") && ("${isLogOn}" == "true")){
        <button id="dateApplyBtn">검색</button>
         <div class="dropdown">
                     <button class="dropbtn">
-                      <span class="dropbtn_content">
-                      	숙박
-                      </span>
+                    <c:choose>
+                    <c:when test="${type==2}">
+                      <span class="dropbtn_content">숙박</span>
+                    </c:when>
+                    <c:when test="${type==1}">
+                      <span class="dropbtn_content">대실</span>
+                    </c:when>
+                    <c:otherwise>
+                      <span class="dropbtn_content">전체</span>
+                    </c:otherwise>
+                    </c:choose>
                     </button>
                     <div class="dropdown-content">
-                      <div class="type">숙박</div>
-                      <div class="type">대실</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=0"'>전체</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=2"'>숙박</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=1"'>대실</div>
                   	</div>
               </div>
       </div>
@@ -242,12 +251,12 @@ if(("${member.auth}" != "2") && ("${isLogOn}" == "true")){
       <table align="center">
 	          <tr align="center" class="column">
 	            <td ><b>성함</b></td>
+	            <td ><b>연락처</b></td>
 				<td ><b>방 종류</b></td>
 				<td><b>숙박 / 대실</b></td>
 				<td><b>이용시간</b></td>
 				<td><b>상세 이용시간</b></td>
 				<td><b>일련번호</b></td>
-				<td><b>상세</b></td>
 	          </tr>
 	    <c:forEach var="rsv" items="${selectReservation}">     
         <tr align="center" class="data">
@@ -256,6 +265,7 @@ if(("${member.auth}" != "2") && ("${isLogOn}" == "true")){
         <fmt:parseNumber var="checkInDate_N" value="${checkInDate.time/(1000*60*60*24)}" integerOnly="true"/>
         <fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*60*60*24)}" integerOnly="true"/>
 	              <td>${rsv.name}</td>
+	              <td>${rsv.hp}</td>
 			      <td>${rsv.goods_room_type}</td>
 			      <c:choose>
 			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">
@@ -275,7 +285,6 @@ if(("${member.auth}" != "2") && ("${isLogOn}" == "true")){
 			      </c:choose>
 			      <td>${rsv.checkIn}&nbsp${rsv.goods_checkIn}~${rsv.checkOut}&nbsp${rsv.goods_checkOut}</td>
 			      <td>${rsv.rid}</td>
-          <td>icon</td>
         </tr>
         </c:forEach>
       </table>
