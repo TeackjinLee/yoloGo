@@ -190,7 +190,7 @@ $(function() {
 		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
 		        var type = '${type}';
 		        $('#dateApplyBtn').click(function(){
-		    		window.location.href='${contextPath}/business/goods/reservationManagement.do?date1='+date1+'&date2='+date2+'&type='+type;
+		    		window.location.href='${contextPath}/business/goods/reservationHistory.do?date1='+date1+'&date2='+date2+'&type='+type;
 		    	});
 	        });
 	 });
@@ -213,8 +213,8 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
   <section>
     <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/reservationManagement.do" class="active">예약 관리</a>
-          <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
+          <a href="${contextPath}/business/goods/reservationManagement.do">예약 관리</a>
+          <a href="${contextPath}/business/goods/reservationHistory.do" class="active">예약 내역</a>
           <a href="#">정산 내역</a>
           <a href="#">매출 내역</a>
         </div>
@@ -259,16 +259,17 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 				<td><b>이용시간</b></td>
 				<td><b>상세 이용시간</b></td>
 				<td><b>일련번호</b></td>
+				<td><b>이용/취소</b></td>
 	          </tr>
-	    <c:forEach var="rsv" items="${selectReservation}">     
+	    <c:forEach var="rsv_history" items="${selectReservationHistory}">     
         <tr align="center" class="data">
-        <fmt:parseDate var="checkInDate" value="${rsv.checkIn}" pattern="yyyy-MM-dd"/>
-        <fmt:parseDate var="checkOutDate" value="${rsv.checkOut}" pattern="yyyy-MM-dd"/>
+        <fmt:parseDate var="checkInDate" value="${rsv_history.checkIn}" pattern="yyyy-MM-dd"/>
+        <fmt:parseDate var="checkOutDate" value="${rsv_history.checkOut}" pattern="yyyy-MM-dd"/>
         <fmt:parseNumber var="checkInDate_N" value="${checkInDate.time/(1000*60*60*24)}" integerOnly="true"/>
         <fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*60*60*24)}" integerOnly="true"/>
-	              <td>${rsv.name}</td>
-	              <td>${rsv.hp}</td>
-			      <td>${rsv.goods_room_type}</td>
+	              <td>${rsv_history.name}</td>
+	              <td>${rsv_history.hp}</td>
+			      <td>${rsv_history.goods_room_type}</td>
 			      <c:choose>
 			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">
 			      		<td>숙박</td>
@@ -277,17 +278,18 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 			      		<td>대실</td>
 			      	</c:otherwise>
 			      </c:choose>
-			      <td>${rsv.price}</td>
+			      <td>${rsv_history.price}</td>
 			      <c:choose>
 			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">
 			      		<td>${checkOutDate_N - checkInDate_N}박</td>
 			      	</c:when>
 			      	<c:otherwise>
-			      		<td>${rsv.goods_motel_usetime}</td>
+			      		<td>${rsv_history.goods_motel_usetime}</td>
 			      	</c:otherwise>
 			      </c:choose>
-			      <td>${rsv.checkIn}&nbsp${rsv.goods_checkIn}~${rsv.checkOut}&nbsp${rsv.goods_checkOut}</td>
-			      <td>${rsv.rid}</td>
+			      <td>${rsv_history.checkIn}&nbsp${rsv_history.goods_checkIn}~${rsv_history.checkOut}&nbsp${rsv_history.goods_checkOut}</td>
+			      <td>${rsv_history.rid}</td>
+			      <td>${rsv_history.reservationType}</td>
         </tr>
         </c:forEach>
       </table>

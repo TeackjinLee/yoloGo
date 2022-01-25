@@ -27,5 +27,6 @@ public interface BusinessGoodsDAO {
 	public List selectAllGoodsList(String uid) throws DataAccessException;
 	public List selectAllRoomList(String goods_id) throws DataAccessException;
 	public void updateRoomInfo(Map modRoomMap) throws DataAccessException;
-	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid) throws DataAccessException;
+	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid, int type) throws DataAccessException;
+	public List<GoodsVO> selectReservationHistory(long date1, long date2, int offset, int count, String uid, int type) throws DataAccessException;
 }

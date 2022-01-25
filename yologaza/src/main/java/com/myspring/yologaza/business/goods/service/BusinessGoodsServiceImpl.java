@@ -115,7 +115,12 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	}
 	
 	@Override
-	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid) throws Exception{
-		return businessGoodsDAO.selectReservation(date1, date2, offset, count, uid);
+	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid, int type) throws Exception{
+		return businessGoodsDAO.selectReservation(date1, date2, offset, count, uid, type);
+	}
+	
+	@Override
+	public List<GoodsVO> selectReservationHistory(long date1, long date2, int offset, int count, String uid, int type) throws Exception{
+		return businessGoodsDAO.selectReservationHistory(date1, date2, offset, count, uid, type);
 	}
 }

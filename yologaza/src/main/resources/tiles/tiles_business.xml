@@ -59,5 +59,10 @@
        <put-attribute name="title" value="예약 관리" />
        <put-attribute name="body" value="/WEB-INF/views/business/goods/reservationManagement.jsp" />
     </definition>
+    
+    <definition name="/business/goods/reservationHistory" extends="BusinessLayout">
+       <put-attribute name="title" value="예약 내역" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/reservationHistory.jsp" />
+    </definition>
 
 </tiles-definitions>
