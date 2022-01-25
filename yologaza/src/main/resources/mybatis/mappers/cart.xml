@@ -54,6 +54,7 @@
 		<result property="goods_room_type" column="goods_room_type" />
 		<result property="goods_capacity" column="goods_capacity" />
 		<result property="goods_introduce" column="goods_introduce" />
+		<result property="price" column="price" />
 	</resultMap>	
 	
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -74,9 +75,10 @@
 	
 	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
 		<![CDATA[
-			select g.*,d.fileName, s.goods_name, s.roadAddress from goods_detail g, goods_img d, goods s
+			select g.*,d.fileName, s.goods_name, s.roadAddress, c.price, c.checkIn, c.checkOut from goods_detail g, goods_img d, goods s, yolo_cart c
 			where g.goods_uroom=d.goods_uroom
             and g.goods_id = s.goods_id
+            and g.goods_uroom = c.goods_uroom
 			and d.filetype='room'
 			and g.goods_uroom in
 		]]>

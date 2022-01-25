@@ -177,6 +177,7 @@
 	  width:30%;
 	  height:220px;
 	  border:1px solid rgba(0,0,0,0.2);
+	  border-right: none;
 	  display:inline-block;
 	}
 	
@@ -198,8 +199,27 @@
 		border-radius: 5px;
 		font-weight: bold;
 		margin-left: 10px;
+		cursor:pointer;
+	}
+	.tab_each .reservation .descript .btn{
+		float: right;
+		width:120px;
+		height:31.5px;
+		padding: 3px 5px;
+		border: 1px solid #777;
+		border-radius: 5px;
+		font-weight: bold;
+		margin-left: 10px;
+		cursor:pointer;
+		font-size:16px;
+		background:white;
 	}
 	.tab_each .reservation .descript .delete:hover{
+		color:white;
+		background:rgb(112,173,71);
+		border: 1px solid #ddd;
+	}
+	.tab_each .reservation .descript .btn:hover{
 		color:white;
 		background:rgb(112,173,71);
 		border: 1px solid #ddd;
@@ -423,6 +443,7 @@ function fn_order_all_cart_goods(){
 }
 
 </script>
+<!--  달력js -->
 
 
 </head>
@@ -461,18 +482,18 @@ function fn_order_all_cart_goods(){
 			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
 			                
-			                <div class="detail">
+			                <div class="detail" style = "font-weight:bold;">
 								
 								<c:choose>
 									<c:when test="${item.goods_room_price2 != 0}">
 										<span id="type">대실</span>
-										<span id="price2" style="padding-right:10px; box-sizing: border-box;">${item.goods_room_price2}원</span>
+										<span id="price2" style="padding-right:10px; box-sizing: border-box;"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</span>
 										<span id="type">숙박</span>
-										<span id="price1">${item.goods_room_price1}원</span>
+										<span id="price1"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</span>
 									</c:when>
 									<c:otherwise>
 										<span id="type">숙박</span>
-										<span id="price1">${item.goods_room_price1}원</span>
+										<span id="price1"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</span>
 									</c:otherwise>
 								</c:choose>
 			                </div>
@@ -480,19 +501,19 @@ function fn_order_all_cart_goods(){
 			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
 								삭제하기
 							</a>
+							<script>
+								const date3 = new Date("${item.checkIn}");
+								const date4 = new Date("${item.checkOut}");
+								const dateTime3 = date3.getTime()/1000;
+								const dateTime4 = date4.getTime()/1000;
+							</script>
 							<c:choose>
 								<c:when test="${item.goods_room_price2 != 0}">
-									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
-										숙박 예약하기
-									</a>
-									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}'> 
-										대실 예약하기
-									</a>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1='+dateTime3+'&date2='+dateTime4">숙박 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}&date1='+dateTime3+'&date2='+dateTime3">대실 예약하기</button>
 								</c:when>
 								<c:otherwise>
-									<a class="delete" href='${contextPath}/reservation/reservationForm.do?goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}'> 
-										예약하기
-									</a>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1='+dateTime3+'&date2='+dateTime4">숙박 예약하기</button>
 								</c:otherwise>
 							</c:choose>
 							</div>

@@ -20,6 +20,7 @@ public class ReservationVO {
 	private String goods_motel_endtime;
 	private String goods_motel_usetime;
 	private String fileName;
+	private String reservationType;
 	private int price;
 	private Date checkIn;
 	private Date checkOut;
@@ -130,6 +131,12 @@ public class ReservationVO {
 	}
 	public int getPrice() {
 		return price;
+	}
+	public String getReservationType() {
+		return reservationType;
+	}
+	public void setReservationType(String reservationType) {
+		this.reservationType = reservationType;
 	}
 	public void setPrice(int price) {
 		this.price = price;

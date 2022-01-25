@@ -66,7 +66,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
-		SimpleDateFormat timeFormat = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
 		SimpleDateFormat timeFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		String todayDate = timeFormat.format(date);
 		long date1 = 0;
@@ -88,6 +88,11 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 			Ddate2 = timeFormat.format(date2*1000);
 			Ddate3 = timeFormat2.format(date1*1000);
 			Ddate4 = timeFormat2.format(date2*1000);
+		} else if( date1 == 0 && date2 == 1) {
+			Ddate1 = timeFormat.format(today*1000);
+			Ddate2 = timeFormat.format((today+86400)*1000);
+			Ddate3 = timeFormat2.format(today*1000);
+			Ddate4 = timeFormat2.format((today+86400)*1000);
 		}
 		request.setAttribute("Ddate1", Ddate1);
 		request.setAttribute("Ddate2", Ddate2);
@@ -114,6 +119,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
 		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat timeFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		String todayDate = timeFormat.format(date);
 		long date1 = 0;
 		long date2 = 0;
@@ -127,12 +133,23 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		request.setAttribute("date2", date2);
 		String Ddate1 = todayDate;
 		String Ddate2 = todayDate;
+		String Ddate3 = todayDate;
+		String Ddate4 = todayDate;
 		if(date1 != 0 && date2 != 0) {
 			Ddate1 = timeFormat.format(date1*1000);
 			Ddate2 = timeFormat.format(date2*1000);
+			Ddate3 = timeFormat2.format(date1*1000);
+			Ddate4 = timeFormat2.format(date2*1000);
+		} else if( date1 == 0 && date2 == 1) {
+			Ddate1 = timeFormat.format(today*1000);
+			Ddate2 = timeFormat.format((today+86400)*1000);
+			Ddate3 = timeFormat2.format(today*1000);
+			Ddate4 = timeFormat2.format((today+86400)*1000);
 		}
 		request.setAttribute("Ddate1", Ddate1);
 		request.setAttribute("Ddate2", Ddate2);
+		request.setAttribute("Ddate3", Ddate3);
+		request.setAttribute("Ddate4", Ddate4);
 		
 		return mav;
 	}

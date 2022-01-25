@@ -25,22 +25,24 @@
 		<result property="goods_motel_endtime" column="goods_motel_endtime" />
 		<result property="goods_motel_usetime" column="goods_motel_usetime" />
         <result property="fileName" column="fileName" />
+        <result property="reservationType" column="reservationType" />
         <result property="rDate" column="rDate" />
         <result property="goods_room_type" column="goods_room_type" />
 	</resultMap>
 	
 	<insert id="insertReservation" parameterType="java.util.Map"   >
-	   
+		   <![CDATA[
 		   insert into reservation(`uid`, 
 		   							`name`, 
 		   							`hp`, 
 		   							`goods_id`, 
 		   							`goods_uroom`, 
-		   							`price`, 
+		   							`price`,
+		   							`reservationType`,
 		   							`checkIn`, 
 		   							`checkOut`)
-		   
 		   						values(
+		   	]]>
 		   						<choose>
 			   						<when test="uid == '' or uid == null">
 										null,
@@ -49,14 +51,17 @@
 										#{uid},
 									</when>
 		   						</choose>
+		   						<![CDATA[
    								 #{name},
    								 #{hp},
    					 			 #{goods_id},
-   								 #{goods_uroom},
+   					 			 #{goods_uroom},
    								 #{price},
+   								 #{reservationType},
    								 #{checkIn},
    								 #{checkOut}
    								  )
+   								  ]]>
 	
 	</insert> 
 	

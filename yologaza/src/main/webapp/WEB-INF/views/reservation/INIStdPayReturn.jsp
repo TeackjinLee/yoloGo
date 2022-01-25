@@ -628,7 +628,7 @@
 			<input name="checkIn" value="${Ddate1}"  />
          	
 			<input name="checkOut" value="${Ddate2}"  />
-
+			<input name="reservationType" value="예약완료"  />
 			<c:set var="index" value="<%=goods_room_price2%>"/>
 			<c:if test="${index == null }">
          		<input name="price" value="<%=goods_room_price1 %>"  />
