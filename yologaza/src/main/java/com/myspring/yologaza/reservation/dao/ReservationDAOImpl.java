@@ -17,4 +17,9 @@ public class ReservationDAOImpl implements ReservationDAO {
 		sqlSession.insert("mapper.reservation.insertReservation",newResMap);
 		return Integer.parseInt((String)newResMap.get("rid"));
 	}
+	
+	@Override
+	public void deleteReservation(int rid) throws DataAccessException{
+		sqlSession.delete("mapper.reservation.deleteReservation",rid);
+	}
 }

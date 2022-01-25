@@ -8,4 +8,6 @@ public interface ReservationDAO {
 
 	public int insertReservation(Map newResMap) throws DataAccessException;
 
+	public void deleteReservation(int rid) throws DataAccessException;
+
 }

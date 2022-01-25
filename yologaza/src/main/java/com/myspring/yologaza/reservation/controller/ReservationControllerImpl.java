@@ -193,4 +193,13 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+	@Override
+	@RequestMapping(value="/removeReservation.do" ,method = RequestMethod.POST)
+	public ModelAndView removeCartGoods(@RequestParam("rid") int rid,
+			                          HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		ModelAndView mav=new ModelAndView();
+		reservationService.removeReservation(rid);
+		mav.setViewName("redirect:/mypage/Mypage3.do");
+		return mav;
+	}
 }

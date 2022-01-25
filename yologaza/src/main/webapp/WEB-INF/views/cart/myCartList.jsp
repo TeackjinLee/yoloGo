@@ -481,7 +481,7 @@ function fn_order_all_cart_goods(){
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
 			                <a2>${item.roadAddress}</a2>
 			                <a3>${item.goods_room_name}</a3>
-			                
+			                <h3>${item.checkIn} - ${item.checkOut}</h3>
 			                <div class="detail" style = "font-weight:bold;">
 								
 								<c:choose>
@@ -501,19 +501,20 @@ function fn_order_all_cart_goods(){
 			                <a class="delete" href="javascript:delete_cart_goods('${cart_uid}');"> 
 								삭제하기
 							</a>
-							<script>
-								const date3 = new Date("${item.checkIn}");
-								const date4 = new Date("${item.checkOut}");
-								const dateTime3 = date3.getTime()/1000;
-								const dateTime4 = date4.getTime()/1000;
-							</script>
+							<fmt:parseDate var="date3" value="${item.checkIn}" pattern="yyyy-MM-dd"/>
+					        <fmt:parseDate var="date4" value="${item.checkOut}" pattern="yyyy-MM-dd"/>
+					        <fmt:parseNumber var="dateTime3" value="${date3.time/(1000*60*60*24)}" integerOnly="true"/>
+					        <fmt:parseNumber var="dateTime4" value="${date4.time/(1000*60*60*24)}" integerOnly="true"/>
+							<!-- 날짜 변환 -->
+							<!--<c:set var="now" value="<%=new java.util.Date()%>" />
+							<c:set var="sysYear"><fmt:formatDate value="${item.checkIn}" pattern="yyyy-MM-dd" /></c:set> -->
 							<c:choose>
 								<c:when test="${item.goods_room_price2 != 0}">
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1='+dateTime3+'&date2='+dateTime4">숙박 예약하기</button>
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}&date1='+dateTime3+'&date2='+dateTime3">대실 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.price}&date1=${dateTime3*86400}&date2=${dateTime3*86400}'">대실 예약하기</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1='+dateTime3+'&date2='+dateTime4">숙박 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
 								</c:otherwise>
 							</c:choose>
 							</div>

@@ -294,14 +294,14 @@ p {
 }
 
 .tab_each .reservation .descript .detail .cancel{
-  display:block;
-  height:30px;
-  font-size:16px;
-  border:2px solid rgba(0,0,0,0.2);
-  border-radius:6px;
-  cursor:pointer;
-  float:right;
-  
+    display: block;
+    font-size: 16px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    padding: 2px 5px 2px 5px;
+    z-index: 9;
 }
 
 .tab_each .reservation .descript .detail .used{
@@ -377,6 +377,20 @@ $(function() {
     }
 });
 });
+
+function delete_reservation_goods(rid){
+	var rid=Number(rid);
+	var formObj=document.createElement("form");
+	var i_rid = document.createElement("input");
+	i_rid.name="rid";
+	i_rid.value=rid;
+	
+	formObj.appendChild(i_rid);
+    document.body.appendChild(formObj); 
+    formObj.method="post";
+    formObj.action="${contextPath}/reservation/removeReservation.do";
+    formObj.submit();
+}
 </script>
 </head>
 <body class="pc">
@@ -414,6 +428,7 @@ $(function() {
                 </ul>
               </div>
             </div>
+            
             <div class="tab_each">
             	<c:forEach var="item" items="${mypageReservation}" varStatus="cnt">
 	           		<div class="reservation">
@@ -426,7 +441,11 @@ $(function() {
 						  <h3>체 크 인&nbsp; : ${item.checkIn}&nbsp;${item.goods_checkIn}</h3>
 						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
 						  <div class="detail">
-						    <button class="cancel">예약 취소</button>
+						  	<form>
+						    <a class="cancel" href="javascript:delete_reservation_goods('${item.rid}');"> 
+								예약취소
+							</a>
+							</form>
 						    <input class="phonenumber" type="text" value="${item.goods_hp}" readonly>
 						  </div>
 						  <div class="button">

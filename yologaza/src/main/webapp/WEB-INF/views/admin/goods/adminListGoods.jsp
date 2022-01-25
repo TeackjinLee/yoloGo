@@ -143,13 +143,14 @@
 	</style>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		function adminGoodsAcess(goods_id) {
+		function adminGoodsAcess(goods_id,uid) {
 			$.ajax({
 				type : "POST",
 				async : false, //false인 경우 동기식으로 처리한다.
 				url : "${contextPath}/admin/goods/goodsAcess.do?goods_id="+goods_id,
 				data : {
-					goods_id:goods_id
+					goods_id:goods_id,
+					uid:uid
 				},
 				success: function(result){
 					swal("Good job!", "검수 승인을 완료했습니다.", "success");
@@ -226,7 +227,7 @@
 							<button disabled>검수 완료</button>
 						</c:when>
 						<c:otherwise>
-							<button><a href="javascript:adminGoodsAcess('${goodsList.goods_id}')">검수 확인</a></button>
+							<button><a href="javascript:adminGoodsAcess('${goodsList.goods_id}','${goodsList.uid}')">검수 확인</a></button>
 						</c:otherwise>
 					</c:choose>
 					</td>

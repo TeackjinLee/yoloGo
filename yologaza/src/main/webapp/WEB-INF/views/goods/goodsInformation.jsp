@@ -356,6 +356,7 @@
 							          <br><br><br>
 							          <div class="price">
 								          <h2>
+								          
 								          <c:set var="index" value="<%=date1 %>"/>
 								          <c:set var="index2" value="<%=date2 %>"/>
 						
@@ -485,7 +486,9 @@
 							        	<c:forEach var="itemRoom" items="${goodsMap.imageListRoom}" >
 							        		<c:choose>
 								        		<c:when test="${item.goods_uroom == itemRoom.goods_uroom}">
-								        			<div class="content cell slick-slide" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;"><img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지"></div>
+								        			<div class="content cell slick-slide" style="width: 962px;height: 500px;margin-bottom: 50px;overflow: hidden;">
+								        				<img src="${contextPath}/room_download.do?goods_id=${itemRoom.goods_id}&goods_uroom=${itemRoom.goods_uroom}&fileName=${itemRoom.fileName}" alt="객실 이미지">
+								        			</div>
 												</c:when>
 											</c:choose>
 										</c:forEach>

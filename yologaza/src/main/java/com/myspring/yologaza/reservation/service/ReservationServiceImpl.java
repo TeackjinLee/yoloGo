@@ -21,4 +21,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return rid;
 	}
 	
+	@Override
+	public void removeReservation(int rid) throws Exception{
+		reservationDAO.deleteReservation(rid);
+	}
+	
 }

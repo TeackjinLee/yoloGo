@@ -15,4 +15,6 @@ public interface AdminGoodsService {
 
 	public void updateGoodsAcess(Map GoodsAcessMap) throws Exception;
 
+	public void updateMemberAcess(Map GoodsAcessMap) throws Exception;
+
 }
