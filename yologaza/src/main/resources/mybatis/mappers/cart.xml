@@ -75,18 +75,19 @@
 	
 	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
 		<![CDATA[
-			select g.*,d.fileName, s.goods_name, s.roadAddress, c.price, c.checkIn, c.checkOut from goods_detail g, goods_img d, goods s, yolo_cart c
+			select g.*,d.fileName, s.goods_name, s.roadAddress, c.cart_uid, c.id, c.price, c.checkIn, c.checkOut, c.creaDatetime 
+			from goods_detail g, goods_img d, goods s, yolo_cart c
 			where g.goods_uroom=d.goods_uroom
-            and g.goods_id = s.goods_id
+            and s.goods_id = g.goods_id
+            and s.goods_id = d.goods_id
             and g.goods_uroom = c.goods_uroom
-			and d.filetype='room'
 			and g.goods_uroom in
 		]]>
 		<foreach item="item" collection="list" open="(" separator="," close=")">
 			#{item.goods_uroom}
 		</foreach>
 		<![CDATA[
-			group by goods_uroom
+            group by c.creaDatetime
             order by goods_uroom;
 		]]>
 	</select>

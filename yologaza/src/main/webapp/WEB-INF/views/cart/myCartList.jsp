@@ -474,6 +474,7 @@ function fn_order_all_cart_goods(){
 		            
 		            <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
 				    <c:set var="cart_uid" value="${myCartList[cnt.count-1].cart_uid}" />
+				    
 			            <li class="reservation" style="margin-bottom: 20px;">
 			              <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
 			              <div class="descript">
@@ -510,11 +511,11 @@ function fn_order_all_cart_goods(){
 							<c:set var="sysYear"><fmt:formatDate value="${item.checkIn}" pattern="yyyy-MM-dd" /></c:set> -->
 							<c:choose>
 								<c:when test="${item.goods_room_price2 != 0}">
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.price}&date1=${dateTime3*86400}&date2=${dateTime3*86400}'">대실 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400+86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}&date1=${dateTime3*86400}&date2=${dateTime3*86400}'">대실 예약하기</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
+									<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.price}&date1=${dateTime3*86400+86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
 								</c:otherwise>
 							</c:choose>
 							</div>
