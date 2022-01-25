@@ -423,9 +423,11 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session=request.getSession();
 		Map listRoomMap=businessGoodsService.selectAllRoomList(goods_id);
+		Map goodsMap=businessGoodsService.selectNewGoods(goods_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("listRoomMap", listRoomMap);
+		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}
 	

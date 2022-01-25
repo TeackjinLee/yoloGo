@@ -14,4 +14,6 @@ public interface AdminGoodsDAO {
 
 	public void updateGoodsAcess(Map GoodsAcessMap) throws DataAccessException;
 
+	public void updateMemberAcess(Map GoodsAcessMap) throws DataAccessException;
+
 }

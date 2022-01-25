@@ -226,7 +226,18 @@
 		color: #eee;
 	}
 </style>
-    
+<script>
+	$(document).ready(function() {
+	  $('#goods_type').change(function() {
+	    var result = $('#goods_type option:selected').val();
+	    if (result == 'motel') {
+	      $('#goods_price2').show();
+	    } else {
+	      $('#goods_price2').hide();
+	    }
+	  }); 
+	}); 
+</script>
 </head>
 <body>
 <section>
@@ -254,7 +265,7 @@
              <th>게스트하우스 <br> 기본 정보</th>
              <td>
                  <strong>숙박 시설</strong><br>
-                 <select name="goods_type" style="width:150px; height:40px; margin-top:10px; margin-bottom: 20px; color:#555">
+                 <select id="goods_type" name="goods_type" style="width:150px; height:40px; margin-top:10px; margin-bottom: 20px; color:#555">
                    <option value="motel"  >모텔</option>
                    <option value="hotel" >호텔</option>
                    <option value="pension" >펜션</option>
@@ -383,16 +394,16 @@
                  </select>
                  <br> <br>
                </div>
-              <div>
-                <strong>숙박가격</strong>
-                 <div>
-                  <input name="goods_price1" type="text" />
-                 </div>
-                <strong>대실가격</strong>
-                 <div>
-                  <input name="goods_price2" type="text" />
-                 </div>
-              </div>
+				<div>
+					<div>
+						<div><strong>숙박가격</strong></div>
+						<input id="goods_price1" name="goods_price1" type="text" />
+					</div>
+					<div id="goods_price2">
+						<div><strong>대실가격</strong></div>
+						<input name="goods_price2" type="text" value="0" />
+					</div>
+				</div>
            </td>
          </tr>
          <tr>

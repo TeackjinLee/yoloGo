@@ -5,6 +5,7 @@
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 	String goods_id = request.getParameter("goods_id");
@@ -116,7 +117,9 @@
 							<div class="room_text">
 								<h3>${roomList.goods_room_type}</h3>
 								<div>숙박가격 : ${roomList.goods_room_price1}원</div>
+								<c:if test="${goods.goods_type=='motel'}">
 								<div>대실가격 : ${roomList.goods_room_price2}원</div>
+								</c:if>
 							</div>
 						</a>
 					</div>

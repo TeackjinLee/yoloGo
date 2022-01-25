@@ -5,6 +5,23 @@
 
 <mapper namespace="mapper.admin.goods">
 <!-- 리절트 맵 정의 -->	
+	<resultMap id="memResult" type="memberVO">
+		<result property="uid" column="uid" />
+		<result property="id" column="id" />
+        <result property="pwd" column="pwd" />
+        <result property="name" column="name" />
+        <result property="nickName" column="nickName" />
+        <result property="email1" column="email1" />
+        <result property="email2" column="email2" />
+        <result property="hp" column="hp" />
+        <result property="member_point" column="member_point" />
+        <result property="auth" column="auth" />
+        <result property="detail1" column="detail1" />
+        <result property="detail2" column="detail2" />
+        <result property="memFileName" column="memFileName" />
+        <result property="joinDate" column="joinDate" />
+	</resultMap> 
+	
 	<resultMap id="goodsResult" type="goodsVO">
 		<result property="goods_id" column="goods_id" />
 		<result property="uid" column="uid" />
@@ -71,6 +88,14 @@
 	        goods_acess='1'
 		where 
 	    goods_id = #{goods_id}
+	</update>
+	
+	<update id="updateMemberAcess" parameterType="java.util.Map" >
+		update member
+		 set
+	        auth='2'
+		where 
+	    uid = #{uid} and auth = '1'
 	</update>
 	
 </mapper>

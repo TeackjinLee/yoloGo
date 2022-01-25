@@ -27,4 +27,9 @@ public class AdminGoodsServiceImpl implements AdminGoodsService{
 	public void updateGoodsAcess(Map GoodsAcessMap) throws Exception{
 		adminGoodsDAO.updateGoodsAcess(GoodsAcessMap);
 	}
+	
+	@Override
+	public void updateMemberAcess(Map GoodsAcessMap) throws Exception{
+		adminGoodsDAO.updateMemberAcess(GoodsAcessMap);
+	}
 }

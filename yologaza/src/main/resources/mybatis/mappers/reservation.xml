@@ -109,4 +109,11 @@
 	<select id="countAllGoods" resultType="int">
   		select FOUND_ROWS();
   	</select>
+  	
+  	<delete id="deleteReservation" parameterType="int">
+	    <![CDATA[
+	      delete from reservation
+	      where rid=#{rid}
+    	]]>
+	</delete>
 </mapper>

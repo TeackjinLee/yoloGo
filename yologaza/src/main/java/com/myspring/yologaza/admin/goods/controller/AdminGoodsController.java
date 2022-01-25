@@ -12,6 +12,6 @@ public interface AdminGoodsController {
 
 	public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ResponseEntity goodsAcess(@RequestParam("goods_id") int goods_id,HttpServletRequest Request, HttpServletResponse response) throws Exception;
+	public ResponseEntity goodsAcess(@RequestParam("goods_id") int goods_id, @RequestParam("uid") int uid, HttpServletRequest Request, HttpServletResponse response) throws Exception;
 
 }

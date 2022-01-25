@@ -6,4 +6,6 @@ public interface ReservationService {
 
 	public int reservationResult(Map newResMap) throws Exception;
 
+	public void removeReservation(int rid) throws Exception;
+
 }
