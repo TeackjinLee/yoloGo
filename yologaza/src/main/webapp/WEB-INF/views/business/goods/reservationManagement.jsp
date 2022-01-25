@@ -193,7 +193,7 @@ $(function() {
 		    	});
 	        });
 	 });
-if(("${member.auth}" != "2") && ("${isLogOn}" == "true")){
+if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 	alert("사업자 권한이 필요합니다.");
 	document.location.href = "/yologaza/business_main.do";
 }else if(('${member}' == '') || ('${member}' == null)){
