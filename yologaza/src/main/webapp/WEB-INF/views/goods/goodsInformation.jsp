@@ -441,22 +441,27 @@
 							          <br><br><br>
 							          <div class="price">
 										<h2>
-								          <c:set var="index" value="${date1}"/>
-								          <c:if test="${index != 0}">
+								          <c:set var="index" value="<%=date1 %>"/>
+								          <c:set var="index2" value="<%=date2 %>"/>
+						
+								          <c:if test="${index != index2 and index != 0}">
 								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1 *(date2-date1-1)/86400}" />원/
-									          <span style="font-size:16px;">
+								          	  <span style="font-size:16px;">
 										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(date2-date1-1)/86400}" />박
 										          <fmt:formatNumber type="number" maxFractionDigits="0"  value="${((date2-date1-1)/86400+1)}" />일
-										          <span style="float:right;">${Ddate3} - ${Ddate4}</span>
 										       </span>
+										       <br>
+										       <div style="float:left; font-size:14px;">${Ddate3} - ${Ddate4}</div>
 								          </c:if>
-								          <c:if test="${index == 0}">
+								          <c:if test="${index == index2 or index == 0}">
+								          	  
 								          	  <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price1}" />원/
 									          <span style="font-size:16px;">
 									          	1박2일
-									          	<span style="float:right;">${Ddate3} - ${Ddate4}</span>
 									          </span>
-								          </c:if>
+									          <br>
+									          <div style="float:left; font-size:14px;">${Ddate3} - ${Ddate4}</div>
+								          </c:if> 
 								          </h2>
 							          </div>
 							          <div><span style="float: left">입실시간</span> <span style="float: right">${item.goods_checkIn}시부터</span></div>
