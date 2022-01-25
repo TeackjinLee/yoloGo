@@ -141,13 +141,14 @@
   		select FOUND_ROWS();
   	</select>
   	
-<<<<<<< HEAD
+
   	<delete id="deleteReservation" parameterType="int">
 	    <![CDATA[
 	      delete from reservation
 	      where rid=#{rid}
     	]]>
 	</delete>
-=======
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
+	
+	
+
 </mapper>
