@@ -71,6 +71,38 @@
 				        		and goods_type=#{goods_type}
 				        	</when>
 			        	</choose>
+			        	<choose>
+			        		<when test="roadAddress == '서울'">
+				        		and roadAddress like '서울%'
+				        	</when>
+				        	<when test="roadAddress == '부산'">
+				        		and roadAddress like '부산%'
+				        	</when>
+			        		<when test="roadAddress == '제주'">
+				        		and roadAddress like '제주%'
+				        	</when>
+				        	<when test="roadAddress == '강원'">
+				        		and roadAddress like '강원%'
+				        	</when>
+			        		<when test="roadAddress == '경기'">
+				        		and roadAddress like '경기%'
+				        	</when>
+				        	<when test="roadAddress == '인천'">
+				        		and roadAddress like '인천%'
+				        	</when>
+			        		<when test="roadAddress == '경상'">
+				        		and roadAddress like '경상%'
+				        	</when>
+				        	<when test="roadAddress == '전라'">
+				        		and roadAddress like '전라%'
+				        	</when>
+				        	<when test="roadAddress == '충청'">
+				        		and roadAddress like '충청%'
+				        	</when>
+				        	<when test="roadAddress == '세종'">
+				        		and roadAddress like '세종%'
+				        	</when>
+			        	</choose>
 			        	<![CDATA[
 			            and goods_acess = 1
 			            group by goods_id
