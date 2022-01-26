@@ -22,7 +22,115 @@
     <link rel="stylesheet" href="${contextPath}/resources/slick/slick-theme.css">
     <script src="${contextPath}/resources/slick/slick.min.js"></script>
     <link rel="stylesheet" href="${contextPath}/resources/css/main.css" rel="stylesheet" type="text/css" media="screen">
-    <script src="${contextPath}/resources/js/script.js"></script>
+    <style>
+    	.content-wrap {
+		    height: 300px;
+		    overflow: visible;
+		}
+    	.content-wrap > .content-list {
+    		top:0;
+    	}
+    	.content-wrap > .content-list > .content-box > ul > li:nth-child(-n+8){
+    		display:block;
+    	}
+    	
+    	.content-wrap > .content-list > .content-box > ul > li{
+    		display:none;
+    	}
+    	.content-wrap > .content-list > .content-box > ul > li > a > img{
+    		border:1px solid #ddd;
+    	}
+    	#load{
+    		color:black;
+    		width:100%;
+    		padding:5px;
+    		font-size:18px;
+    		font-weight:bold;
+    		cursor:pointer;
+    		border:none;
+    		margin-top:10px;
+    		background-color: white ;
+    		border:1px solid #ddd;
+    		box-sizing:border-box;
+    		transition: 0.1s;
+    	}
+    	#load:hover{
+    		color:white;
+    		background-color: rgb(112, 173, 71);
+    		border:1px solid rgb(112, 173, 71);
+    	}
+    	#product_list #header{
+    		display:none;
+    	}
+    	#product_list #footer{
+    		display:none;
+    	}
+    	#product_list #board{
+    		border:1px solid #ddd;
+    	}
+    </style>
+    <script>
+	    $(document).ready(function () {
+	    	  $(".slider-wrap").slick({
+	    	    slide: "div", //슬라이드 되어야 할 태그 ex) div, li
+	    	    infinite: true, //무한 반복 옵션
+	    	    slidesToShow: 1, // 한 화면에 보여질 컨텐츠 개수
+	    	    slidesToScroll: 1, //스크롤 한번에 움직일 컨텐츠 개수
+	    	    speed: 500, // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+	    	    arrows: true, // 옆으로 이동하는 화살표 표시 여부
+	    	    dots: true, // 스크롤바 아래 점으로 페이지네이션 여부
+	    	    autoplay: false, // 자동 스크롤 사용 여부
+	    	    autoplaySpeed: 10000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+	    	    pauseOnHover: true, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
+	    	    vertical: false, // 세로 방향 슬라이드 옵션
+	    	    prevArrow: "<button type='button' class='slick-prev'>Previous</button>", // 이전 화살표 모양 설정"<button type='button' class='slick-prev'>Previous</button>"
+	    	    nextArrow: "<button type='button' class='slick-next'>Next</button>", // 다음 화살표 모양 설정"<button type='button' class='slick-next'>Next</button>"
+	    	    dotsClass: "slick-dots", //아래 나오는 페이지네이션(점) css class 지정
+	    	    draggable: true, //드래그 가능 여부
+	
+	    	    customPaging: function(slider, i) {
+	    	      var target_txt = $(slider.$slides[i]).attr('test');
+	    	      console.log(target_txt);
+	//    	       console.log(target_txt);
+	    	      
+	//    	       var thumb = "<span class='page-nav'> " + target_txt + " </span>";
+	//    	       // var thumb = "<span>"+ target_txt + "</span>";
+	    	      var thumb = target_txt;
+	    	      return thumb;
+	    	    }
+	    	    
+	    	    
+	    	  });
+	    	});
+
+    	// YOLO가자!커뮤니티
+    	$(function(){
+		    $(".content-wrap > .content-list > .content-box > ul > li").slice(0, 8).show(); // select the first ten
+		    $("#load").click(function(e){ // click event for load more
+		        e.preventDefault();
+		        $(".content-wrap > .content-list > .content-box > ul > li:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
+		        if($(".content-wrap > .content-list > .content-box > ul > li:hidden").length == 0){ // check if any hidden divs still exist
+		            alert("No more divs"); // alert if there are none left
+		        }
+		    });
+		});
+    	
+    	var boardArticleNO = function(articleNO){
+
+    		$.ajax({
+    			type: 'get',
+    			data: "",
+    			url: "${contextPath}/board/viewArticle.do?articleNO="+articleNO,
+    			contentType:"${contextPath}/main.do; charset=UTF-8",
+    			success: function(data) {
+    				$('#product_list').html(data);
+    			},
+    			error: function(request, status, error) {
+    				alert(error);
+    			}
+    		});
+    	};
+    </script>
 </head>
 <!-- 메인 페이지 -->
 <body>
@@ -111,48 +219,6 @@
       </div>
     </div>
 
-    <!-- YOLO가자!커뮤니티 -->
-    <div class="main-community con">
-      <div class="community-name"><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;COMMUNITY</p></div>
-      <div class="community-box">
-        <div class="content-wrap con">
-          <div class="content-list row">
-            <div class="content-box content-box-1 cell">
-              <ul class="row">
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2016/03/05/21/45/pizza-1239077__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2021/07/09/02/29/family-6398107__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2019/10/25/19/15/family-children-4577797__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2020/03/24/05/37/family-4962873__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-              </ul>
-            </div>
-            <div class="content-box content-box-2 cell">
-              <ul class="row">
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2017/10/11/02/13/hanok-2839691_960_720.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2016/11/22/20/10/dog-1850465__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2018/04/27/08/55/water-3354062__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2016/11/23/13/45/celebration-1852926__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-              </ul>
-            </div>
-            <div class="content-box content-box-3 cell">
-              <ul class="row">
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2018/07/06/00/33/couple-3519503__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2019/08/28/14/24/tokyo-4436914__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2020/03/24/05/37/family-4962874__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2018/12/02/21/47/couple-3852277__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-              </ul>
-            </div>
-            <div class="content-box content-box-4 cell">
-              <ul class="row">
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2014/08/14/14/21/shish-kebab-417994__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2016/11/13/21/45/airport-1822133__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2019/04/08/04/22/glasses-4111357__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-                <li class="cell"><a href="#"><img src="https://cdn.pixabay.com/photo/2016/11/08/06/45/couple-1807617__340.jpg" alt="추후 리뷰 이미지 등록"></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- YOLO가자! 쿠폰 커뮤니티 -->
     <div class="main-guest con row">
       <div class="guest-box cell">
@@ -181,6 +247,32 @@
       </div>
 
     </div>
-
+     <!-- YOLO가자!커뮤니티 -->
+    <div class="main-community con" style="margin-top:50px;">
+      <div class="community-name"><img src="${contextPath}/resources/image/yolo-logo-c.png" alt="YOLO가자로고"><p>&nbsp;&nbsp;COMMUNITY</p></div>
+      <div class="community-box">
+        <div class="content-wrap con">
+          <div class="content-list row">
+            <div class="content-box content-box-1 cell">
+              <ul class="row">
+              	<c:forEach var="article" items="${mainBoard}" >
+                <li class="cell">
+	                <a href="javascript:boardArticleNO(${article.articleNO});">
+	                	<img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" alt="리뷰 이미지 등록">
+	                </a>
+                </li>
+              	</c:forEach>
+              </ul>
+              <button id="load">더 보 기</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="board_detail_box">
+		<div id="product_list" style="width:100%;">
+</div>
+	</div>
 </body>
 </html>

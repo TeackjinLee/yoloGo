@@ -358,7 +358,11 @@
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
-				              <p>숙박&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price1}</b></p>
+				            	<c:set var="index" value="<%=goods_type %>"/>
+									<c:if test="${index eq 'motel'}">
+				            			<p>대실&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price2}</b></p>
+									</c:if>
+									<p>숙박&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price1}</b></p>
 				            </div>
 				          </div>    
 				        </div>
