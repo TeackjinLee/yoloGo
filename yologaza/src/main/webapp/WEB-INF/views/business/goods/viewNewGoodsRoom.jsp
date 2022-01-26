@@ -276,7 +276,7 @@
 	               <div style="margin-bottom:10px;"><strong>숙박 가격</strong></div>
 	               <input id="goods_room_price1" name="goods_room_price1" value="${room.goods_room_price1}" type="text" style="width:auto;" disabled/><storong style="padding-left:10px; font-size:16px;">원</storong>
 	               <c:if test="${goods.goods_type=='motel'}">
-	               <div style="margin-top:20px; margin-bottom:10px;"><strong>대실 가격</strong></div>
+	               	<div style="margin-top:20px; margin-bottom:10px;"><strong>대실 가격</strong></div>
 	               <input id="goods_room_price2" name="goods_room_price2" value="${room.goods_room_price2}" value="0" type="text" style="width:auto;" disabled/><storong style="padding-left:10px; font-size:16px;">원</storong>
 	               </c:if>
 	             </td>

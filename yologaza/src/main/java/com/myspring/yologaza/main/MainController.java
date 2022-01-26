@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.yologaza.admin.member.service.AdminMemberService;
+import com.myspring.yologaza.board.service.BoardService;
 import com.myspring.yologaza.common.base.BaseController;
 import com.myspring.yologaza.common.file.Pagination;
 import com.myspring.yologaza.member.controller.MemberControllerImpl;
@@ -30,6 +31,8 @@ public class MainController{
 	@Autowired
 	MemberVO memberVO;
 	@Autowired
+	private BoardService boardService;
+	@Autowired
 	private AdminMemberService adminMemberService;
 	
 
@@ -37,7 +40,9 @@ public class MainController{
 	private ModelAndView main(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 			String viewName = (String) request.getAttribute("viewName");
+			List mainBoard = boardService.mainBoard();
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("mainBoard", mainBoard);
 			mav.setViewName(viewName);
 			return mav;
 	}

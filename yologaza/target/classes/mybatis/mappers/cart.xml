@@ -81,10 +81,10 @@
             and s.goods_id = g.goods_id
             and s.goods_id = d.goods_id
             and g.goods_uroom = c.goods_uroom
-			and g.goods_uroom in
+			and c.cart_uid in
 		]]>
 		<foreach item="item" collection="list" open="(" separator="," close=")">
-			#{item.goods_uroom}
+			#{item.cart_uid}
 		</foreach>
 		<![CDATA[
             group by c.creaDatetime

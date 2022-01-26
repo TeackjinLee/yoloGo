@@ -55,4 +55,10 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete("mapper.board.deleteArticle", articleNO);
 	}
 	
+	@Override
+	public List mainBoard() throws Exception {
+		List<ArticleVO> mainBoard = sqlSession.selectList("mapper.board.mainBoard");
+		return mainBoard;
+	}
+	
 }

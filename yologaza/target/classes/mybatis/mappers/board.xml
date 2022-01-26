@@ -55,6 +55,14 @@
 		]]>
 	</select>
 	
+	<select id="mainBoard" resultMap="articlesResult" parameterType="String">
+		<![CDATA[
+			select @ROWNUM:=@ROWNUM+1 ,b.* from board b
+						where (@ROWNUM:=0) < 16
+                        and imageFileName != ''
+		]]>
+	</select>
+	
 	<select id="selectArticle" resultType="articleVO"   parameterType="int">
 		<![CDATA[
 			SELECT b.*, m.uid, m.memFileName from board b, member m
