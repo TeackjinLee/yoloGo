@@ -215,7 +215,7 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
         <div class="sub_top">
           <a href="${contextPath}/business/goods/reservationManagement.do" class="active">예약 관리</a>
           <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
-          <a href="#">정산 내역</a>
+          <a href="${contextPath}/business/goods/calHistory.do">정산 내역</a>
           <a href="${contextPath}/business/goods/salesHistory.do">매출 내역</a>
         </div>
       </div>
