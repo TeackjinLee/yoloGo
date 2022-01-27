@@ -123,4 +123,9 @@ public class BusinessGoodsServiceImpl implements BusinessGoodsService {
 	public List<GoodsVO> selectReservationHistory(long date1, long date2, int offset, int count, String uid, int type) throws Exception{
 		return businessGoodsDAO.selectReservationHistory(date1, date2, offset, count, uid, type);
 	}
+	
+	@Override
+	public List selectSalesHistory(String uid, int term) throws Exception{
+		return businessGoodsDAO.selectSalesHistory(uid, term);
+	}
 }

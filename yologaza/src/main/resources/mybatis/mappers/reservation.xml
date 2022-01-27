@@ -28,6 +28,9 @@
         <result property="reservationType" column="reservationType" />
         <result property="rDate" column="rDate" />
         <result property="goods_room_type" column="goods_room_type" />
+        <result property="goods_name" column="goods_name" />
+        <result property="date" column="date" />
+        <result property="sum" column="sum" />
 	</resultMap>
 	
 	<insert id="insertReservation" parameterType="java.util.Map"   >
@@ -92,7 +95,7 @@
 	</select>
 	
 	<select id="selectReservation" parameterType="java.util.Map" resultMap="reservation">
-		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type 
+		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type, g.goods_name
 		from reservation r, goods g, goods_detail d
 		<where>
          <if test="date1 != 0 and date2 != 0">
@@ -115,7 +118,7 @@
 	</select>
 	
 	<select id="selectReservationHistory" parameterType="java.util.Map" resultMap="reservation">
-		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type 
+		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type, g.goods_name
 		from deletedreservation r, goods g, goods_detail d
 		<where>
          <if test="date1 != 0 and date2 != 0">
@@ -141,6 +144,27 @@
   		select FOUND_ROWS();
   	</select>
   	
+  	<select id="selectSalesHistory" parameterType="java.util.Map" resultMap="reservation">
+  		SELECT 
+  			<if test="term == 1">
+				date(r.checkIn)
+  			</if>
+  			<if test="term == 2">  	
+  				DATE_FORMAT(r.checkIn, '%U')
+  			</if>
+  			<if test="term == 3">
+  				month(r.checkIn)
+  			</if>
+  			<if test="term == 4">
+  				year(r.checkIn)
+  			</if>
+  		AS date, sum(r.price) AS sum
+  		FROM deletedreservation r, goods g
+  		where reservationType = "예약완료"
+    	and g.uid = #{uid}
+    	and r.goods_id = g.goods_id
+  		GROUP BY date WITH ROLLUP;
+  	</select>
 
   	<delete id="deleteReservation" parameterType="int">
 	    <![CDATA[

@@ -1,6 +1,5 @@
 package com.myspring.yologaza.business.goods.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +28,5 @@ public interface BusinessGoodsDAO {
 	public void updateRoomInfo(Map modRoomMap) throws DataAccessException;
 	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid, int type) throws DataAccessException;
 	public List<GoodsVO> selectReservationHistory(long date1, long date2, int offset, int count, String uid, int type) throws DataAccessException;
+	public List selectSalesHistory(String uid, int term) throws DataAccessException;
 }
