@@ -173,12 +173,21 @@
 	  position:relative;
 	}
 	
-	.tab_each .reservation img{
+	.tab_each .reservation .img-box{
+	  position:relative;
 	  width:30%;
 	  height:220px;
 	  border:1px solid rgba(0,0,0,0.2);
 	  border-right: none;
 	  display:inline-block;
+	  overflow:hidden;
+	}
+	.tab_each .reservation .img-box img{
+	  position:absolute;
+	  top:50%;
+	  left:50%;
+	  transform:translate(-50%,-50%);
+	  width:100%;	  
 	}
 	
 	.tab_each .reservation .descript{
@@ -476,7 +485,11 @@ function fn_order_all_cart_goods(){
 				    <c:set var="cart_uid" value="${myCartList[cnt.count-1].cart_uid}" />
 				    
 			            <li class="reservation" style="margin-bottom: 20px;">
-			              <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }"><img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="숙소 이미지"/></a>
+			              <div class="img-box">
+			              <a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+			              	<img src="${contextPath}/room_download.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&fileName=${item.fileName}" alt="숙소 이미지"/>
+			              </a>
+			              </div>
 			              <div class="descript">
 			                <a1 style= "font-weight:bold;">${item.goods_name}</a1>
 			                <input type="checkbox" name="checked_goods"  checked  value="${item.goods_uroom }"  onClick="calcGoodsPrice(${item.goods_room_price1 },this)">
@@ -521,7 +534,7 @@ function fn_order_all_cart_goods(){
 							</div>
 			              </div>
 			            </li>
-			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_room_price1 }" />
+			            <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.price }" />
 						<c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
 					
 		            </c:forEach>

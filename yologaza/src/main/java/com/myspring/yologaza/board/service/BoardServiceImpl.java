@@ -48,4 +48,11 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.deleteArticle(articleNO);
 	}
 	
+	// main페이지 리뷰
+	@Override
+	public List<ArticleVO> mainBoard() throws Exception{
+		List<ArticleVO> mainBoard = boardDAO.mainBoard();
+		return mainBoard;
+	}
+	
 }

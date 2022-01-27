@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
+<c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -257,8 +257,8 @@ System.out.println("goods_id :"+goods_id);
 	             <td>
 	               <div style="margin-bottom:10px;"><strong>숙박 가격</strong></div>
 	               <input name="goods_room_price1" type="text" style="width:auto;" /><storong style="padding-left:10px; font-size:16px;">원</storong>
-	               <div style="margin-top:20px; margin-bottom:10px;"><strong>대실 가격</strong></div>
-	               <input name="goods_room_price2" type="text" style="width:auto;" /><storong style="padding-left:10px; font-size:16px;">원</storong>
+	                 <div style="margin-top:20px; margin-bottom:10px;"><strong>대실 가격</strong></div>
+	                 <input name="goods_room_price2" type="text" style="width:auto;" value="0" /><storong style="padding-left:10px; font-size:16px;">원</storong>
 	             </td>
 	           </tr>
 	      </tbody>

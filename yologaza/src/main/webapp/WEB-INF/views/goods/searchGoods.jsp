@@ -58,6 +58,18 @@
 			});
 	    });
 	    
+	 // YOLO가자!커뮤니티
+    	$(function(){
+		    $(".goods_list .goods_box").slice(0, 5).show(); // select the first ten
+		    $("#load").click(function(e){ // click event for load more
+		        e.preventDefault();
+		        $(".goods_list .goods_box:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them
+		        if($(".goods_list .goods_box:hidden").length == 0){ // check if any hidden divs still exist
+		            alert("No more divs"); // alert if there are none left
+		        }
+		    });
+		});
+    	
     </script>
     
 	<style>
@@ -102,6 +114,52 @@
 		    left: 50%;
 		    transform: translate(-50%, -50%);
 	     }
+	     .goods_list .goods_box:nth-child(-n+5){
+	     	display:block;
+	     }
+	     .goods_list .goods_box{
+	     	display:none;
+	     }
+	     #load{
+    		color:black;
+    		width:100%;
+    		padding:5px;
+    		font-size:18px;
+    		font-weight:bold;
+    		cursor:pointer;
+    		border:none;
+    		margin-top:10px;
+    		background-color: white ;
+    		border:1px solid #ddd;
+    		box-sizing:border-box;
+    		transition: 0.1s;
+    	}
+    	#load:hover{
+    		color:white;
+    		background-color: rgb(112, 173, 71);
+    		border:1px solid rgb(112, 173, 71);
+    	}
+    	#roadAddress{
+    		color: white;
+		    width: 120px;
+		    padding: 5px;
+		    border: 1px solid rgba(0,0,0,0.1);
+		    box-sizing: border-box;
+		    font-size: 16px;
+		    background: rgba(0,0,0,0.1);
+		    position: absolute;
+		    bottom: 13px;
+    		left: 0;
+		    border-radius: 6px;
+    	}
+    	#roadAddress option{
+    		color: black;
+    		background: white;
+    	}
+    	.header-bar .text-box p{
+    		left: 0;
+   			bottom: 54px;
+    	}
 	</style>
 	
 </head>
@@ -182,8 +240,24 @@
        				color:rgb(112, 173, 71);
        			}
        		</style>
-       	</c:if>			
+       	</c:if>
+		<div class="location">
+			<select id="roadAddress" name="roadAddress">
+				<option value="">전체</option>
+				<option value="서울">서울</option>
+				<option value="부산">부산</option>
+				<option value="제주">제주</option>
+				<option value="강원">강원</option>
+				<option value="경기">경기</option>
+				<option value="인천">인천</option>
+				<option value="경상">경상</option>
+				<option value="전라">전라</option>
+				<option value="충청">충청</option>
+				<option value="세종">세종</option>
+			</select>
+		</div>		
       </div>
+      
     </div>
     <div class="detail-select-box con">
 		<div class="top_menu tab_btn">
@@ -358,7 +432,11 @@
 				          </div>
 				          <div class="price">
 				            <div class="map_html">
-				              <p>숙박&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price1}</b></p>
+				            	<c:set var="index" value="<%=goods_type %>"/>
+									<c:if test="${index eq 'motel'}">
+				            			<p>대실&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price2}</b></p>
+									</c:if>
+									<p>숙박&nbsp;<span class="build_badge" style="color: rgba(255,255,255,1); background-color: rgba(112, 173, 71, 1);">예약</span>&nbsp;<b>${item.goods_price1}</b></p>
 				            </div>
 				          </div>    
 				        </div>
@@ -366,7 +444,8 @@
 				    </li>
 				
 				</c:forEach>
-			</ul> 
+			</ul>
+			<button id="load">더 보 기</button>
           </div>
         </div>
     

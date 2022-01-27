@@ -59,10 +59,10 @@ body{
     height:100%;
   }
   .header-bar .text-box p{
-    position:absolute;
-    left:0;
-    bottom:20px;
-    color:white;
+    position: absolute;
+    left: 0;
+    bottom: 54px;
+    color: white;
     font-weight: 500;
     font-size: 32px;
   }

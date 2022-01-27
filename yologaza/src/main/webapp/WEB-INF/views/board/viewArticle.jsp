@@ -26,7 +26,7 @@
        display:none;
      }
      #board{
-		width: 1050px;
+		max-width: 1050px;
 		margin: 0 auto;
 		background: white;
 		margin-top:20px;
@@ -37,7 +37,7 @@
      }
      #board_head{
      	margin: 0 auto;
-     	width: 1050px;
+     	width: 100%;
      	height: 50px;
      	text-align: left;
      	margin-top: 10px;
@@ -65,7 +65,9 @@
      #board_head .board_box .board_id{
 		font-weight: bold;
      }
-   
+   	 #board_head h1 a{
+   	 	display:none;
+   	 }
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
@@ -137,6 +139,7 @@
 			<div class="board_id">${article.id }</div>
 			<div class="board_date">${article.writeDate}</div>
 		</div>
+		<div style="text-align:right;"><h1><a href="${contextPath}/main.do">x</a></h1></div>
 	</div>  
 	<c:choose> 
 		<c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
@@ -178,7 +181,7 @@
   </tr>
   <tr>
    <td>
-    <textarea rows="20" cols="140" style="padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled />${article.content }</textarea>
+    <textarea rows="20" cols="140" style="width:100%; padding: 10px; box-sizing:border-box;"  name="content"  id="i_content"  disabled >${article.content }</textarea>
    </td>  
   </tr>
  <%-- 
@@ -217,8 +220,8 @@
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
 	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 	    </c:if>
-	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-	    <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
+	    <input style="cursor:pointer;" type=button value="숙소로 가기"  onClick="backToList(this.form)">
+	    <input style="cursor:pointer;" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
    </td>
   </tr>
  </table>
