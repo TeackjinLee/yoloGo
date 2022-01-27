@@ -26,6 +26,8 @@ public class ReservationVO {
 	private Date checkOut;
 	private Date rDate;
 	private String goods_room_type;
+	private String date;
+	private int sum;
 	
 	public int getRid() {
 		return rid;
@@ -164,6 +166,18 @@ public class ReservationVO {
 	}
 	public void setGoods_room_type(String goods_room_type) {
 		this.goods_room_type = goods_room_type;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	
 }

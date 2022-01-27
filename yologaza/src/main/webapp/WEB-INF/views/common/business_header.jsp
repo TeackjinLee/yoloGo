@@ -63,8 +63,8 @@
 	                <ul>
 	                  <li><a href="${contextPath}/business/goods/reservationManagement.do">예약 관리</a></li>
 	                  <li><a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a></li>
-	                  <li><a href="#">정산 내역</a></li>
-	                  <li><a href="#">매출 내역</a></li>
+	                  <li><a href="${contextPath}/business/goods/calHistory.do">정산 내역</a></li>
+	                  <li><a href="${contextPath}/business/goods/salesHistory.do">매출 내역</a></li>
 	                </ul>
 	              </div>
 	            </li>

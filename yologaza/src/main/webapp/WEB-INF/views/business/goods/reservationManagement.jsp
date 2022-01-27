@@ -215,8 +215,8 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
         <div class="sub_top">
           <a href="${contextPath}/business/goods/reservationManagement.do" class="active">예약 관리</a>
           <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
-          <a href="#">정산 내역</a>
-          <a href="#">매출 내역</a>
+          <a href="${contextPath}/business/goods/calHistory.do">정산 내역</a>
+          <a href="${contextPath}/business/goods/salesHistory.do">매출 내역</a>
         </div>
       </div>
     <div class="content">
@@ -251,10 +251,11 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
       </div>
       <table align="center">
 	          <tr align="center" class="column">
-	            <td ><b>성함</b></td>
-	            <td ><b>연락처</b></td>
-				<td ><b>방 종류</b></td>
-				<td><b>숙박 / 대실</b></td>
+	            <td><b>성함</b></td>
+	            <td><b>연락처</b></td>
+	            <td><b>숙소이름</b></td>
+				<td><b>방 종류</b></td>
+				<td><b>숙박/대실</b></td>
 				<td><b>결제비용</b></td>
 				<td><b>이용시간</b></td>
 				<td><b>상세 이용시간</b></td>
@@ -268,6 +269,7 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
         <fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*60*60*24)}" integerOnly="true"/>
 	              <td>${rsv.name}</td>
 	              <td>${rsv.hp}</td>
+			      <td>${rsv.goods_name}</td>
 			      <td>${rsv.goods_room_type}</td>
 			      <c:choose>
 			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">

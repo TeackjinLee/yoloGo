@@ -63,6 +63,15 @@
     <definition name="/business/goods/reservationHistory" extends="BusinessLayout">
        <put-attribute name="title" value="예약 내역" />
        <put-attribute name="body" value="/WEB-INF/views/business/goods/reservationHistory.jsp" />
+    </definition>	
+    
+    <definition name="/business/goods/calHistory" extends="BusinessLayout">
+       <put-attribute name="title" value="정산 내역" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/calHistory.jsp" />
     </definition>
-
+	
+    <definition name="/business/goods/salesHistory" extends="BusinessLayout">
+       <put-attribute name="title" value="매출 내역" />
+       <put-attribute name="body" value="/WEB-INF/views/business/goods/salesHistory.jsp" />
+    </definition>
 </tiles-definitions>

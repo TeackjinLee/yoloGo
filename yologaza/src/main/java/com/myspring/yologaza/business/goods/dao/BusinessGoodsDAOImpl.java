@@ -174,4 +174,21 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 		}
 		return reservationList;
 	}
+	
+	@Override
+	public List selectSalesHistory(String uid, int term) throws DataAccessException{
+		List salesList = new ArrayList();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("uid", uid);
+		params.put("term", term);
+		
+		try {
+			salesList = session.selectList("mapper.reservation.selectSalesHistory",params);
+		}finally {
+			session.close();
+		}
+		return salesList;
+	}
 }

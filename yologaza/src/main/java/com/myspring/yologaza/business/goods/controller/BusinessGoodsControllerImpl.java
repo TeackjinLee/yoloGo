@@ -587,4 +587,22 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		return mav;
 	}
 	
+	@RequestMapping(value = {"/salesHistory.do"} ,method={RequestMethod.POST,RequestMethod.GET})
+	private ModelAndView salesHistory(HttpServletRequest request,
+								HttpServletResponse response) throws Exception{
+		int term = 1;
+		if(request.getParameter("term") != null)
+			term = Integer.parseInt(request.getParameter("term"));
+		request.setAttribute("term", term);
+		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		ModelAndView mav = new ModelAndView(viewName);
+		if(memberVO != null) {
+			String uid = memberVO.getUid();
+			List selectSalesHistory = businessGoodsService.selectSalesHistory(uid, term);
+			mav.addObject("selectSalesHistory", selectSalesHistory);
+		}
+		return mav;
+	}
 }
