@@ -11,7 +11,7 @@
    request.setCharacterEncoding("UTF-8");
 %>     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>로그인창</title>	
@@ -76,5 +76,8 @@
 	    <a href="${contextPath}/member/findPwView">비밀번호찾기</a><br>
 	    <a href="${contextPath}/member/nonMemberForm.do">비회원 예약 내역 조회</a>
 	</form>
+	 <a href="https://kauth.kakao.com/oauth/authorize?client_id=53670056b11ef5a86e82087f6eccf7d9&redirect_uri=http://localhost:8080/yologaza/login&response_type=code">
+            <img src="/img/kakao_login/ko/kakao_login_medium_wide.png">
+        </a>
 </body>
 </html>

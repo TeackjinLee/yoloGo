@@ -96,8 +96,11 @@
 				        	<when test="roadAddress == '전라'">
 				        		and roadAddress like '전라%'
 				        	</when>
-				        	<when test="roadAddress == '충청'">
-				        		and roadAddress like '충청%'
+				        	<when test="roadAddress == '대전'">
+				        		and roadAddress like '대전%'
+				        	</when>
+				        	<when test="roadAddress == '충남'">
+				        		and roadAddress like '충남%'
 				        	</when>
 				        	<when test="roadAddress == '세종'">
 				        		and roadAddress like '세종%'

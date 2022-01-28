@@ -9,6 +9,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String goods_type = request.getParameter("goods_type");
+	String roadAddress = request.getParameter("roadAddress");
 	String value = request.getParameter("value");
 %>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@
 		        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
 		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
 		        $('#dateApplyBtn').click(function(){
-		    		window.location.replace('${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&date1='+date1+'&date2='+date2);
+		    		window.location.replace('${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=<%=roadAddress%>&date1='+date1+'&date2='+date2);
 		    	});
 	        });
 	
@@ -141,16 +142,17 @@
     	}
     	#roadAddress{
     		color: white;
-		    width: 120px;
+		    width: 90px;
 		    padding: 5px;
 		    border: 1px solid rgba(0,0,0,0.1);
 		    box-sizing: border-box;
-		    font-size: 16px;
+		    font-size: 18px;
 		    background: rgba(0,0,0,0.1);
 		    position: absolute;
-		    bottom: 13px;
+		    top: 0;
     		left: 0;
 		    border-radius: 6px;
+		    cursor:pointer;
     	}
     	#roadAddress option{
     		color: black;
@@ -159,6 +161,36 @@
     	.header-bar .text-box p{
     		left: 0;
    			bottom: 54px;
+    	}
+    	.location{	
+			position: relative;
+    		top: 75px;
+    		z-index: 9;
+    	}
+    	.location ul{
+    		display:none;
+			position: absolute;
+    		top: 36px;
+    		width: 180px;
+			text-align: left;
+			background: white;
+			border: 1px solid #ddd;
+			padding: 10px;
+			box-sizing: border-box;
+			border-radius: 9px;
+    	}
+    	.location:hover ul{
+    		display:block;
+    	}
+    	.location ul li{
+    		width:100%;
+    		padding-bottom: 5px;
+    		box-sizing:border-box;
+    		color:#777;
+    	}
+    	.location ul li:hover{
+    		color:rgb(112, 173, 71);
+    		font-weight:bold;
     	}
 	</style>
 	
@@ -242,19 +274,31 @@
        		</style>
        	</c:if>
 		<div class="location">
-			<select id="roadAddress" name="roadAddress">
-				<option value="">전체</option>
-				<option value="서울">서울</option>
-				<option value="부산">부산</option>
-				<option value="제주">제주</option>
-				<option value="강원">강원</option>
-				<option value="경기">경기</option>
-				<option value="인천">인천</option>
-				<option value="경상">경상</option>
-				<option value="전라">전라</option>
-				<option value="충청">충청</option>
-				<option value="세종">세종</option>
-			</select>
+			<div id="roadAddress">
+			<c:set var="location" value="<%=roadAddress %>"/>
+			<c:choose>
+				<c:when test="${location eq null or location eq 'null'}">
+					지역
+				</c:when>
+				<c:otherwise>
+					<%=roadAddress %>
+				</c:otherwise>
+			</c:choose>
+			</div>
+			<ul>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>">전체</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=서울">서울</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=부산">부산</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=제주">제주</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=강원">강원</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=경기">경기</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=인천">인천</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=경상">경상</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=전라">전라</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=충남">충남</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=대전">대전</a></li>
+				<li><a href="${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=세종">세종</a></li>
+			</ul>
 		</div>		
       </div>
       
@@ -408,9 +452,9 @@
         <div class="goods-wrap">  
           <div class="search-menu">
             <div class="search-box">
-             <button type="text" id="goods_newest" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&value=new_up' "><span>최신순</span></button>
-             <button type="text" id="hightPrice" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&value=higher_price' "><span>높은 가격 순</span></button>
-             <button type="text" id="lowerPrice" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&value=lower_price' "><span>낮은 가격 순</span></button>
+             <button type="text" id="goods_newest" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=<%=roadAddress%>&value=new_up' "><span>최신순</span></button>
+             <button type="text" id="hightPrice" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=<%=roadAddress%>&value=higher_price' "><span>높은 가격 순</span></button>
+             <button type="text" id="lowerPrice" onclick="location.href='${contextPath}/searchGoods.do?goods_type=<%=goods_type%>&roadAddress=<%=roadAddress%>&value=lower_price' "><span>낮은 가격 순</span></button>
             </div>
             <button id="btn_map" type="button" class="btn_map" onclick="pop_map_pc();">지도</button> 
           </div>
@@ -427,7 +471,6 @@
 				        <div class="goos_impormation">
 				          <div class="name">
 				            <strong>${item.goods_name}</strong>
-				            <p class="score"><span><em>8.2</em></p>
 				            <p>${item.roadAddress}</p>
 				          </div>
 				          <div class="price">
