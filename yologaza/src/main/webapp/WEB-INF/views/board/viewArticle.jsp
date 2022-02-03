@@ -68,6 +68,9 @@
    	 #board_head h1 a{
    	 	display:none;
    	 }
+   	 #board_head .cancel{
+   	 	display: none;
+   	 }
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
@@ -138,6 +141,11 @@
 		<div class="board_box">
 			<div class="board_id">${article.id }</div>
 			<div class="board_date">${article.writeDate}</div>
+		</div>
+		<div class="cancel" style="float:right;">
+			<a href="${contextPath}/main.do">
+				<span style="font-size:24px; font-weight:bold;">x</span>
+			</a>
 		</div>
 		<div style="text-align:right;"><h1><a href="${contextPath}/main.do">x</a></h1></div>
 	</div>  
@@ -220,8 +228,8 @@
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
 	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 	    </c:if>
-	    <input style="cursor:pointer;" type=button value="숙소로 가기"  onClick="backToList(this.form)">
-	    <input style="cursor:pointer;" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
+	    <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="숙소로 가기"  onClick="backToList(this.form)">
+	    <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
    </td>
   </tr>
  </table>

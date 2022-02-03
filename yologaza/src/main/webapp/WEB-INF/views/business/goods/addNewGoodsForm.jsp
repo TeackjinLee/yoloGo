@@ -8,7 +8,7 @@
 <head>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-  var cnt=0;
+  var cnt=1;
   function fn_addFile(){
 	  if(cnt == 0){
 		  $("#d_file").append("<br>"+"<input  type='file' name='goods' id='f_goods' />");	  
@@ -21,7 +21,7 @@
   
   
   function fn_add_new_goods(obj){
-		 fileName = $('#f_goods').val();
+	  fileName = $('#f_goods').val();
 		 if(fileName != null && fileName != undefined){
 			 obj.submit();
 		 }else{
@@ -225,6 +225,23 @@
 		box-sizing: border-box;
 		color: #eee;
 	}
+	.ex{
+		width:500px;
+		position:relative;
+	}
+	.ex span{
+		cursor:pointer;
+	}
+	.ex img{
+		display:none;
+		width:100%;
+		position: absolute;
+	}
+	.ex:hover img{
+		display:block;
+		border:1px solid #ddd;
+		box-sizing: border-box;
+	}
 </style>
 <script>
 	$(document).ready(function() {
@@ -327,32 +344,47 @@
             <tr>
               <th>업체 이미지 <br> (최대 20장)</th>
                <td>
+	               <span class="ex" style="float:right;text-align:right;">
+		            	<span>예시 이미지</span>
+		            	<img src="${contextPath}/resources/image/businessEx1.png">
+		            </span>
                  <p>
                    *객실 및 업체 전경, 로비, 주차장 등 업체의 전반적인 이미지를 업로드해주시길 바랍니다. <br>
                    *이미지 교체를 원하시면 "변경"을 선택하시고 삭제를 원하시면 우측 "삭제"를 선택하시길 바랍니다. <br>
                    *이미지 장소는 짧게 기입해주시길 바랍니다. ex). 전경, 로비, 주차장 등 <br>
                    *첫 이미지가 메인 이미지이며 드래그를 통해 순서 변경이 가능합니다. <br><br></p>
                     <div  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()" style="width:auto; cursor:pointer;"/></div>
-				            <div>
-					            <div id="d_file">
-					            </div>
-				            </div>
+		            <div>
+			            <div id="d_file">
+			            </div>
+		            </div>
+		            
              </td>
            </tr>
 
            <tr>
              <th>주인장 소개글 <br> (호스트 소개)</th>
              <td>
+             <span class="ex" style="float:right;text-align:right;">
+				<span>예시 이미지</span>
+				<img src="${contextPath}/resources/image/businessEx2.png">
+			 </span>
              <p><br>
                <textarea name="goods_description" rows="20" cols="110" maxlength="1000" placeholder="사장님의 특이 경력 혹은 사장님만의 재밌는 이야기가 있으면 게스트들에게 소개해주세요. 게스트는 숙소의 시설과 위치, 서비스는 물론, 사장님이 어떤 분인지도 관심이 있답니다."></textarea>
              </p><br>
+				
            </td>
            </tr>
 
            <tr>
              <br>
              <th>숙소<br>기초 정보</th>
-           <td><span>교통 편의 시설</span><br><br>
+           <td><span>교통 편의 시설</span>
+           <span class="ex" style="float:right;text-align:right;">
+            	<span>예시 이미지</span>
+            	<img src="${contextPath}/resources/image/businessEx3.png">
+            </span>
+           <br><br>
              <div class="wep">
                <textarea id="goods_baseImpormation "name="goods_baseImpormation" rows="20" cols="110" maxlength="1000" placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요."></textarea>
              </div><br>
@@ -434,6 +466,7 @@
       <div id="button" style="margin: 0 auto; margin-top:30px; text-align: center;">
         <input  type="button" value="저장 후 다음 단계"  onClick="fn_add_new_goods(this.form)" style="width:150px; cursor:pointer;">
       </div>
+      
    </form>
  
  </section>
