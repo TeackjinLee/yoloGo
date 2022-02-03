@@ -24,4 +24,9 @@ public interface MemberController {
 	public ModelAndView quit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String sendSMS(String userPhoneNumber);
+	public ModelAndView login(@ModelAttribute("member") MemberVO member,
+						@RequestParam(value = "code", required = false) String code,
+						RedirectAttributes rAttr, 
+						HttpServletRequest request, 
+						HttpServletResponse response) throws Exception;
 }

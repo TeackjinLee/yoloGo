@@ -174,7 +174,7 @@
 	    <![CDATA[
 				select t.*
 					from(
-					select g.goods_id,g.goods_uroom,g.goods_room_num ,d.fileName,d.fileType from goods_detail g, goods_img d
+					select g.goods_id,g.goods_uroom, d.fileName,d.fileType from goods_detail g, goods_img d
 					where g.goods_uroom=d.goods_uroom 
 				    and d.fileType like 'room%'
 				    and d.goods_id=#{goods_id}

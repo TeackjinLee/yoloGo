@@ -272,7 +272,7 @@
     </div>
     <div id="board_detail_box">
 		<div id="product_list" style="width:100%;">
-</div>
+	</div>
 	</div>
 </body>
 </html>

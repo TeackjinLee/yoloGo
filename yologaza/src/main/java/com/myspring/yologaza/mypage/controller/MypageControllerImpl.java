@@ -1,6 +1,8 @@
 package com.myspring.yologaza.mypage.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -83,6 +85,42 @@ public class MypageControllerImpl implements MypageController {
 		List mypageReservation = mypageService.mypageReservation(hp);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("mypageReservation", mypageReservation);
+		
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat timeFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		String todayDate = timeFormat.format(date);
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		String Ddate3 = todayDate;
+		String Ddate4 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+			Ddate3 = timeFormat2.format(date1*1000);
+			Ddate4 = timeFormat2.format(date2*1000);
+		} else if( date1 == 0 && date2 == 1) {
+			Ddate1 = timeFormat.format(today*1000);
+			Ddate2 = timeFormat.format((today+86400)*1000);
+			Ddate3 = timeFormat2.format(today*1000);
+			Ddate4 = timeFormat2.format((today+86400)*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		request.setAttribute("Ddate3", Ddate3);
+		request.setAttribute("Ddate4", Ddate4);
+		
 		return mav;
 	}
 	
@@ -212,6 +250,42 @@ public class MypageControllerImpl implements MypageController {
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("nonReservation", nonReservation);
 			System.out.println("½ÇÇà");
+			
+			long today = (System.currentTimeMillis()/1000) + 32400;
+			Date date = new Date(System.currentTimeMillis()+32400000);
+			SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat timeFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+			String todayDate = timeFormat.format(date);
+			long date1 = 0;
+			long date2 = 0;
+			if(request.getParameter("date1") != null)
+				date1 = Long.parseLong(request.getParameter("date1"));
+			if(request.getParameter("date2") != null)
+				date2 = Long.parseLong(request.getParameter("date2"));
+			date1 = (date1/86400) * 86400;
+			date2 = ((date2/86400) * 86400)+1;
+			request.setAttribute("date1", date1);
+			request.setAttribute("date2", date2);
+			String Ddate1 = todayDate;
+			String Ddate2 = todayDate;
+			String Ddate3 = todayDate;
+			String Ddate4 = todayDate;
+			if(date1 != 0 && date2 != 0) {
+				Ddate1 = timeFormat.format(date1*1000);
+				Ddate2 = timeFormat.format(date2*1000);
+				Ddate3 = timeFormat2.format(date1*1000);
+				Ddate4 = timeFormat2.format(date2*1000);
+			} else if( date1 == 0 && date2 == 1) {
+				Ddate1 = timeFormat.format(today*1000);
+				Ddate2 = timeFormat.format((today+86400)*1000);
+				Ddate3 = timeFormat2.format(today*1000);
+				Ddate4 = timeFormat2.format((today+86400)*1000);
+			}
+			request.setAttribute("Ddate1", Ddate1);
+			request.setAttribute("Ddate2", Ddate2);
+			request.setAttribute("Ddate3", Ddate3);
+			request.setAttribute("Ddate4", Ddate4);
+			
 			return mav;
 		}
 

@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
+import com.myspring.yologaza.loginApi.service.KakaoService;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.sms.service.certificationService;
@@ -39,7 +40,8 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
-	
+	@Autowired
+	private KakaoService kakaoService;
 	@Override
 	@RequestMapping(value="/listMembers.do", method=RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -124,12 +126,54 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		}
 		return mav;
 	}
+	
+	// kakaoLogin
+	@Override
+	@RequestMapping(value="/kakaologin", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView login(@ModelAttribute("member") MemberVO member,
+    						@RequestParam(value = "code", required = false) String code,
+    						RedirectAttributes rAttr,
+							HttpServletRequest request, 
+							HttpServletResponse response) throws Exception {
+	 ModelAndView mav = new ModelAndView();
+	 System.out.println("code: " + code); 
+	 String access_token = kakaoService.getAccessToken(code); 
+	 System.out.println("access_token" + access_token); 
+	 HashMap<String,Object> userInfo = kakaoService.getUserInfo(access_token); 
+	 
+	 System.out.println(userInfo);
+	 HttpSession session = request.getSession();
+	 
+	 if(userInfo != null) {
+	        session.setAttribute("member", userInfo);
+			session.setAttribute("isLogOn", true);
+			String action = (String)session.getAttribute("action");
+			session.removeAttribute("action");
+			if(action != null) {
+				mav.setViewName("redirect:action");
+			} else {
+				mav.setViewName("redirect:/main.do");
+			}
+		} else if(userInfo.get("id") == null || userInfo.get("id") == "") {
+			rAttr.addAttribute("result", "idFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		} else {
+			rAttr.addAttribute("result", "loginFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		}
+	 	System.out.println("###access_Token#### : " + access_token);
+		System.out.println("###nickname#### : " + userInfo.get("name"));
+		System.out.println("###email#### : " + userInfo.get("email"));
+	 return mav;
+
+    }
 
 	@Override
-	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView logout(HttpServletRequest request,
 								HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
+		
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();

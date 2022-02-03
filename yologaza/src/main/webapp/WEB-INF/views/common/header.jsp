@@ -114,7 +114,17 @@
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
 	      			<li class = cell-r style="padding-right:10px"><a href="${contextPath}/mypage/Mypage1.do"><div id="board_head_wrap">
-																					<div class="member_img"><img onerror="this.src='${contextPath}/resources/image/noImage.jpg'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" alt="사용자 사진"	/></div>
+																					<div class="member_img">
+																					<c:choose>
+																						<c:when test="${member.memFileName != null}">
+																							<img onerror="this.src='${contextPath}/resources/image/noImage.jpg'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" alt="사용자 사진"	/>
+																						</c:when>
+																						<c:otherwise>
+																							<img onerror="this.src='${contextPath}/resources/image/noImage.jpg'" src="${member.kakaoImg}" alt="사용자 사진"	/>
+																						</c:otherwise>
+																					</c:choose>
+																					
+																					</div>
 																					<div style="float:left;">${member.name}님&nbsp;&nbsp;</div>
 																				</div></a></li>
 	      			<li class = cell-r><a href="${contextPath}/cart/myCartList.do"><i class="far fa-heart" style="color: rgb(192, 57, 43);"></i>&nbsp;찜하기</a></li>
