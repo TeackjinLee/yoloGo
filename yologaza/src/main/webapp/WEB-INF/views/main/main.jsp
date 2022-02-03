@@ -289,12 +289,10 @@
       </div>
     </div>
     <div id="board_detail_box">
-<<<<<<< HEAD
 		<div id="product_list" style="width:100%;">
 	</div>
-=======
 		<div id="product_list" style="width:100%;"></div>
->>>>>>> branch 'master' of https://github.com/TeackjinLee/yoloGo
+
 	</div>
 </body>
 </html>
