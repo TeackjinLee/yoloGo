@@ -76,7 +76,27 @@ td {
 
 .calculate{
 	display:flex;
-	align-items:center;
+	width:900px;
+  height:60px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.calculate a:not(.complete, .standBy){
+	font-size:18px;
+	margin-left:15px;
+}
+
+.complete{
+	color:red;
+	font-size:18px;
+	margin-left:10px;
+}
+
+.standBy{
+	color:blue;
+	font-size:18px;
+	margin-left:10px;
 }
 
 .paging {
@@ -166,7 +186,6 @@ $(function() {
     	});
     });
 });
-}
 /*if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 	alert("사업자 권한이 필요합니다.");
 	document.location.href = "/yologaza/business_main.do";
@@ -225,12 +244,34 @@ $(function() {
       </div>
       <div class="content_bot">
       	<div class="calculate">
+      	 <a>판매금액</a>
+      	 <a class="complete">150000(건)</a>
+      	 <a>정산완료</a>
+      	 <a class="complete">80000(건)</a>
+      	 <a>정산대기</a>
+      	 <a class="standBy">70000(건)</a>
       	</div>
-      	<table align="center">
+      </div>
+      	<table align="center" class="bot_table">
 	          <tr align="center" class="column">
+	          	<td><b>성함</b></td>
+	          	<td><b>방 종류</b></td>
+	          	<td><b>숙박/대실</b></td>
+	          	<td><b>이용시간</b></td>
+	          	<td><b>상세이용시간</b></td>
+	          	<td><b>일련번호</b></td>
+	          	<td><b>정산상태</b></td>
+	          </tr>
+	          <tr align="center" class="data">
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
 	          </tr>
       	</table>
-      </div>
       </div>
   </section>
 </body>
