@@ -8,20 +8,33 @@
 <head>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-  var cnt=1;
-  function fn_addFile(){
-	  if(cnt == 0){
-		  $("#d_file").append("<br>"+"<input  type='file' name='goods' id='f_goods' />");	  
-	  }else{
-		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' />");
-	  }
-  	
-  	cnt++;
-  }
+	function readURL(input,preview) {
+		//  alert(preview);
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $('#'+preview).attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	  } 
+
+	var cnt=0;
+	function fn_addFile(){
+	 if(cnt == 0){
+		$("#d_file").append("<br>"+"<input  type='file' name='goods' id='f_goods' onchange=readURL(this,'previewImage"+cnt+"') />"); 
+	 	$("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />"); 
+	 }else{
+		 $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' onchange=readURL(this,'previewImage"+cnt+"') />");
+		 $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
+	 }
+		
+		cnt++;
+	}
   
   
-  function fn_add_new_goods(obj){
-	  fileName = $('#f_goods').val();
+	function fn_add_new_goods(obj){
+		var fileName = $('#f_goods').val();
 		 if(fileName != null && fileName != undefined){
 			 obj.submit();
 		 }else{

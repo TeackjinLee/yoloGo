@@ -236,7 +236,7 @@ p {
 }
 
 .tab_each .reservation img{
-  width:100%;
+  height:100%;
   display:inline-block;
 }
 
@@ -439,7 +439,7 @@ $(function() {
 						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
 						  <div class="detail">
 						    <c:choose>
-							  <c:when test="${item.goods_checkOut < Ddate3}">
+							  <c:when test="${item.goods_checkIn < Ddate3}">
 							  	<form>
 								    <a class="cancel" href="#"> 
 										예약완료

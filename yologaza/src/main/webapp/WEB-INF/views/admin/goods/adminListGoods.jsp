@@ -18,6 +18,7 @@
 	<style>
 		#admin_main{
 			margin-bottom: -150px;
+			border-bottom: 10px solid #ddd;
 		}
 		#admin_main button :not(.paging button){
 			padding:5px; 
@@ -211,7 +212,7 @@
 			<c:forEach var="goodsList" items="${listGoods}" > 
 				<tr align="center" style="box-shadow: 0px 3px #ddd; font-size:14px;">
 					
-					<td>${goodsList.goods_name}</td>
+					<td width="13%">${goodsList.goods_name}</td>
 					<td>
 						<div class="img-box" style="height:90px; overflow:hidden;">
 							<a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }">

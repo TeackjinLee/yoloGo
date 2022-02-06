@@ -51,9 +51,9 @@
 	
 	    <a href="${contextPath}/member/agreeForm.do">회원가입</a>
 	    |
-	    <a href="${contextPath}/member/idFindForm.do">아이디찾기</a>
+	    <a href="${contextPath}/member/findIdView">아이디찾기</a>
 	    |
-	    <a href="${contextPath}/member/pwdFindForm.do">비밀번호찾기</a><br>
+	    <a href="${contextPath}/member/findPwView">비밀번호찾기</a><br>
 	</form>
 </body>
 </html>

@@ -13,4 +13,8 @@ public interface ReservationService {
 
 	public List<ReservationVO> reservationCheck(ReservationVO reservationVO) throws Exception;
 
+	public int business_point(Map newGoodsMap) throws Exception;
+
+	public int cancel_point(Map newGoodsMap) throws Exception;
+
 }

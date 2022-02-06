@@ -63,6 +63,11 @@
 				swal ( "Oops" ,  msg ,  "error" );
 			}
 	</script>
+	<style>
+		.join_inner_float tr td div{
+			margin-top:10px;
+		}
+	</style>
 </head>
 <body>
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
@@ -81,10 +86,12 @@
 	    -->
 	
 	    <tr>
-	      <td> 휴대폰 번호 </td>
 	      <td>
 	        <div class="hp on">
 	          <span class="text_box text_complete">
+	          	<div>이름</div>
+	          	<input type="name" id="name" name="name" placeholder="가입한이름을 입력하세요">
+	          	<div>휴대폰 번호</div>
 	            <input type="hp" id="hp" name="hp" placeholder="휴대폰번호를 입력하세요">
 	          </span>
 	        </div>

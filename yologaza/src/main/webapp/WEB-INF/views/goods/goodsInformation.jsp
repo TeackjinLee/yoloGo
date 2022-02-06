@@ -333,7 +333,7 @@
 								          </c:otherwise>
 							          </c:choose>				         
 							          <h3>대실</h3>
-							          <br><br><br>
+							          <br>
 							          <div class="price"><h2><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</h2></div>
 							          <div style="float:left; font-size:14px;">${Ddate3}</div>
 							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
@@ -355,7 +355,7 @@
 								          </c:otherwise>
 							          </c:choose>
 							          <h3>숙박</h3>
-							          <br><br><br>
+							          <br>
 							          <div class="price">
 								          <h2>
 								          
@@ -441,7 +441,7 @@
 								          </c:otherwise>
 							          </c:choose>
 							          <h3>숙박</h3>
-							          <br><br><br>
+							          <br>
 							          <div class="price">
 										<h2>
 								          <c:set var="index" value="<%=date1 %>"/>

@@ -400,7 +400,7 @@ p {
 								
 								<div style="position:relative; width:200px; height:200px; border-radius:100px; overflow:hidden; border: 1px solid #ddd; box-sizing: border-box;">
 								<c:choose>
-									<c:when test="${member.memFileName != null}">
+									<c:when test="${member.memFileName != null and member.kakaoImg == null}">
 										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
 									</c:when>
 									<c:otherwise>

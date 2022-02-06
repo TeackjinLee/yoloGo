@@ -15,4 +15,8 @@ public interface ReservationDAO {
 
 	public List<ReservationVO> reservationCheck(ReservationVO reservationVO) throws DataAccessException;
 
+	public int business_point(Map newGoodsMap) throws DataAccessException;
+
+	public int cancel_point(Map newGoodsMap) throws DataAccessException;
+
 }

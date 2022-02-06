@@ -116,7 +116,7 @@
 	      			<li class = cell-r style="padding-right:10px"><a href="${contextPath}/mypage/Mypage1.do"><div id="board_head_wrap">
 																					<div class="member_img">
 																					<c:choose>
-																						<c:when test="${member.memFileName != null}">
+																						<c:when test="${member.memFileName != null and member.kakaoImg == null}">
 																							<img onerror="this.src='${contextPath}/resources/image/noImage.jpg'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" alt="사용자 사진"	/>
 																						</c:when>
 																						<c:otherwise>

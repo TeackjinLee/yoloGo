@@ -14,10 +14,13 @@
         <result property="email2" column="email2" />
         <result property="hp" column="hp" />
         <result property="member_point" column="member_point" />
+        <result property="business_point" column="business_point" />
         <result property="auth" column="auth" />
         <result property="detail1" column="detail1" />
         <result property="detail2" column="detail2" />
         <result property="memFileName" column="memFileName" />
+        <result property="kakaoImg" column="kakaoImg" />
+        <result property="nickName" column="nickName" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
 	<!-- 
@@ -75,14 +78,14 @@
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultMap="memResult">
       <![CDATA[
-         select * from member where hp= #{hp}
+         select * from member where hp= #{hp} and name = #{name}
       ]]>
 	</select>
 	
 	<!-- 아이디 개수 -->
-	<select id="findIdCheck" resultType="int">
+	<select id="findIdCheck" resultMap="memResult">
 		<![CDATA[
-			select count(*) from member where hp= #{hp}
+			select * from member where hp= #{hp} and name = #{name}
 		]]>
 	</select>
 	
@@ -312,5 +315,21 @@
 			select * from member 
 			where id=#{id}
     	]]>
-	</select>	
+	</select>
+	
+	<update id="business_point" parameterType="java.util.HashMap">
+	   update member
+	   		set
+	   		business_point= business_point + #{price}
+		where
+        uid = (select uid from goods where goods_id = #{goods_id})
+	</update>
+	
+	<update id="cancel_point" parameterType="java.util.HashMap">
+	   update member
+	   		set
+	   		business_point= business_point - #{price}
+		where 
+		uid = (select uid from goods where goods_id = #{goods_id})
+	</update>
 </mapper>

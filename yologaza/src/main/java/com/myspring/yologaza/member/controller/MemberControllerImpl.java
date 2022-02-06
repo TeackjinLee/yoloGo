@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
+import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.loginApi.service.KakaoService;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
@@ -191,15 +192,27 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	}
 	
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
-	public String findId(MemberVO memberVO, Model model) throws Exception{
-		logger.info("hp"+memberVO.getHp());
-				
-		if(memberService.findIdCheck(memberVO.getHp())==0) {
-			model.addAttribute("msg", "핸드폰번호를 확인해주세요");
-			return "/member/findIdView";
-		}else {
-			model.addAttribute("member", memberService.findId(memberVO.getHp()));
-			return "/member/findId";
+	public ModelAndView findId(MemberVO memberVO, Model model,
+							HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String name = memberVO.getName();
+		String hp = memberVO.getHp();
+		MemberVO member = memberService.findIdCheck(memberVO);
+		if(name == null || name == "") {
+			model.addAttribute("msg", "이름을 확인해주세요.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else if(hp == null || hp == ""){
+			model.addAttribute("msg", "핸드폰번호를 확인해주세요.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else if(member==null) {
+			model.addAttribute("msg", "가입된 아이디가 아닙니다.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else {
+			model.addAttribute("member", memberService.findId(memberVO));
+			ModelAndView mav = new ModelAndView("/member/findId");
+			return mav;
 		}
 	}
 	

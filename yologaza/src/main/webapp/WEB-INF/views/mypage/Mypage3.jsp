@@ -233,8 +233,8 @@ p {
 }
 
 .tab_each .reservation img{
-  width:100%;
-  display:inline-block;
+  height:100%;
+  display:block;
 }
 
 .tab_each .reservation .descript{
@@ -385,14 +385,25 @@ $(function() {
 });
 });
 
-function delete_reservation_goods(rid){
+function delete_reservation_goods(rid, goods_id, price){
 	var rid=Number(rid);
+	var goods_id=Number(goods_id);
+	var price=Number(price);
 	var formObj=document.createElement("form");
 	var i_rid = document.createElement("input");
+	var i_goods_id = document.createElement("input");
+	var i_price = document.createElement("input");
+
 	i_rid.name="rid";
 	i_rid.value=rid;
+	i_goods_id.name="goods_id";
+	i_goods_id.value=goods_id;
+	i_price.name="price";
+	i_price.value=price;
 	
 	formObj.appendChild(i_rid);
+	formObj.appendChild(i_goods_id);
+	formObj.appendChild(i_price);
     document.body.appendChild(formObj); 
     formObj.method="post";
     formObj.action="${contextPath}/reservation/removeReservation.do";
@@ -465,7 +476,7 @@ function delete_reservation_goods(rid){
 						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
 						  <div class="detail">
 						  <c:choose>
-							  <c:when test="${item.checkOut < Ddate3}">
+							  <c:when test="${item.checkIn <= Ddate3}">
 							  	<form>
 								    <a class="cancel" href="#"> 
 										예약완료
@@ -474,7 +485,7 @@ function delete_reservation_goods(rid){
 							  </c:when>
 							  <c:otherwise>
 							  	<form>
-								    <a class="cancel" href="javascript:delete_reservation_goods('${item.rid}');"> 
+								    <a class="cancel" href="javascript:delete_reservation_goods('${item.rid}','${item.goods_id}','${item.price}');"> 
 										예약취소
 									</a>
 								</form>
@@ -486,6 +497,8 @@ function delete_reservation_goods(rid){
 						    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
 						    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
 						    <h3 class="price">결제가 : <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</h3>
+						    <input style="visibility:hidden;" name="price" value="${item.price}" />
+						    <input style="visibility:hidden;" name="price" value="${item.uid}" />
 						  </div>
 						  <div id="map-box" class="map-box">
 							  <div id="${item.rid}" style="width:270px;height:270px;"></div>

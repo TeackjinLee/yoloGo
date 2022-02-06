@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.yologaza.goods.vo.GoodsVO;
+import com.myspring.yologaza.goods.vo.ImageFileVO;
 import com.myspring.yologaza.reservation.dao.ReservationDAO;
 import com.myspring.yologaza.reservation.vo.ReservationVO;
 
@@ -32,5 +33,17 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public List<ReservationVO> reservationCheck(ReservationVO reservationVO) throws Exception {
 		return reservationDAO.reservationCheck(reservationVO);
+	}
+	
+	@Override
+	public int business_point(Map newGoodsMap) throws Exception{
+		int goods_id = reservationDAO.business_point(newGoodsMap);
+		return goods_id; 
+	}
+	
+	@Override
+	public int cancel_point(Map newGoodsMap) throws Exception{
+		int goods_id = reservationDAO.cancel_point(newGoodsMap);
+		return goods_id; 
 	}
 }

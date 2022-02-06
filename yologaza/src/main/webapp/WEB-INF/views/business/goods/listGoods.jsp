@@ -80,9 +80,9 @@
 			<c:forEach var="goodsList" items="${listGoodsMap.goodsList}" > 
 				<tr align="center" style="box-shadow: 0px 3px #ddd; font-size:14px;">
 					
-					<td>${goodsList.goods_name}</td>
+					<td style="width:13%;">${goodsList.goods_name}</td>
 					<td><a href="${contextPath}/goods/goodsInformation.do?goods_id=${goodsList.goods_id }"><img src="${contextPath}/goods_thumbnails.do?goods_id=${goodsList.goods_id}&fileName=${goodsList.fileName}" alt="숙박정보 사진"></a></td>
-					<td width="40%">${goodsList.roadAddress}<br>${goodsList.namujiAddress}</td>
+					<td width="30%">${goodsList.roadAddress}<br>${goodsList.namujiAddress}</td>
 					<td>${goodsList.goods_type}</td>
 					<td>
 					<c:choose>

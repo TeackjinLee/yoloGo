@@ -50,12 +50,6 @@
 	        <p>카카오톡 로그인</p> 
 	      </span>
 	    </button>
-	    <button type="button" id="facebook-login-btn" class="btn_start-btn_fb">
-	      <span>
-	        <img class="icon-ic_login_facebook" src="${contextPath}/resources/image/ico-facebook.svg" alt="페이스북 로고">
-	        <p>페이스북 로그인</p> 
-	      </span>
-	    </button>
 	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver">
 	      <span>
 	        <img class="icon-ic_login_naver" src="${contextPath}/resources/image/ico-naver.svg" alt="네이버 로고">

@@ -180,4 +180,5 @@
 			where goods_id = #{goods_id}
     	]]>
 	</select>
+	
 </mapper>

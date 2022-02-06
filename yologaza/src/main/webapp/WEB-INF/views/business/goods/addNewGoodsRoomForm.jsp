@@ -16,7 +16,7 @@ System.out.println("goods_id :"+goods_id);
 %>
 <head>
 	<script type="text/javascript">
-	  var cnt=0;goods_uroom_detail
+	  var cnt=0;
 	  function fn_addFile(){
 		  if(cnt == 0){
 			  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");

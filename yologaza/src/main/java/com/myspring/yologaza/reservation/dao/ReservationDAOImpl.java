@@ -32,4 +32,16 @@ public class ReservationDAOImpl implements ReservationDAO {
 		List<ReservationVO> reservationCheck=(ArrayList)sqlSession.selectList("mapper.reservation.reservationCheck", reservationVO);
 		return reservationCheck;
 	}
+	
+	@Override
+	public int business_point(Map newGoodsMap) throws DataAccessException{
+		sqlSession.update("mapper.member.business_point", newGoodsMap);
+		return Integer.parseInt((String)newGoodsMap.get("goods_id"));
+	}
+	
+	@Override
+	public int cancel_point(Map newGoodsMap) throws DataAccessException{
+		sqlSession.update("mapper.member.cancel_point", newGoodsMap);
+		return Integer.parseInt((String)newGoodsMap.get("goods_id"));
+	}
 }

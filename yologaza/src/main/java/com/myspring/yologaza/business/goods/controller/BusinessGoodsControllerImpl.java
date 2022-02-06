@@ -194,7 +194,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(ROOM_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
-					srcFile.delete();
 				}
 			}
 			message= "<script>";
@@ -264,7 +263,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	
 	@Override
 	@RequestMapping(value="/addNewGoodsImage.do" ,method={RequestMethod.POST})
-	public void addNewGoodsImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+	public void addNewGoodsImage(@RequestParam("goods_id") int goods_id, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		System.out.println("addNewGoodsImage");
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -283,7 +282,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		String reg_id = memberVO.getId();
 		
 		List<ImageFileVO> imageFileList=null;
-		int goods_id=0;
 		
 		try {
 			imageFileList =upload(multipartRequest);
@@ -342,8 +340,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		String reg_id = memberVO.getId();
 		
 		List<ImageFileVO> imageFileList=null;
-		int goods_id=0;
-		int goods_uimg=0;
+		int goods_id=1;
+		int goods_uimg=1;
 		try {
 			imageFileList =upload(multipartRequest);
 			if(imageFileList!= null && imageFileList.size()!=0) {
