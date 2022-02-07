@@ -58,6 +58,15 @@
 			border-radius:10px;
 		}
 	</style>
+	<script>
+	if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
+		alert("사업자 권한이 필요합니다.");
+		document.location.href = "/yologaza/business_main.do";
+	}else if(('${member}' == '') || ('${member}' == null)){
+		alert("로그인이 필요합니다.");
+		document.location.href = "/yologaza/businessMember/business_loginForm.do";
+	}
+	</script>
 </head>
 <body>
 <div id="admin_main" class="admin_main_wrap">

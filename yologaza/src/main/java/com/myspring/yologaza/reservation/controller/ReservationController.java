@@ -15,6 +15,8 @@ public interface ReservationController {
 
 	public ModelAndView removeCartGoods(@RequestParam("rid") int rid, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView INIStdPayReturn(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView INIStdPayReturn(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView reservationForm(@RequestParam("goods_id") String goods_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

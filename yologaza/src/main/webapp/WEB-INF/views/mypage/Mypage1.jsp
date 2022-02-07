@@ -352,7 +352,18 @@ p {
 	        }
 	        reader.readAsDataURL(input.files[0]);
 	    }
-	  } 
+	  }
+	
+	
+	function readURL(input) {
+	     if (input.files && input.files[0]) {
+	         var reader = new FileReader();
+	         reader.onload = function (e) {
+	             $('#preview').attr('src', e.target.result);
+	         }
+	         reader.readAsDataURL(input.files[0]);
+	     }
+	 }  
 
  </script>
 
@@ -401,10 +412,10 @@ p {
 								<div style="position:relative; width:200px; height:200px; border-radius:100px; overflow:hidden; border: 1px solid #ddd; box-sizing: border-box;">
 								<c:choose>
 									<c:when test="${member.memFileName != null and member.kakaoImg == null}">
-										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" onchange=readURL(this,'previewImage') style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
 									</c:when>
 									<c:otherwise>
-										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${member.kakaoImg}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${member.kakaoImg}" onchange=readURL(this,'previewImage') style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
 									</c:otherwise>
 								</c:choose>
 								</div>
