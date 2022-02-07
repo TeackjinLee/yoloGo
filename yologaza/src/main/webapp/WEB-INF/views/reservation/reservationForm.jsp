@@ -222,7 +222,15 @@
 						<div class="name">
 							<p>예약자 이메일</p>
 							<div>
-								<input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
+								<c:choose>
+							   		<c:when test="${member.email1 != null }">
+							   			<input type="text"    name="buyeremail" value="${member.email1 }@${member.email2 }" >
+							   		</c:when>
+							   		<c:otherwise>
+							   			<input type="text"    name="buyeremail" value="${member.email}" >
+							   		</c:otherwise>
+							   </c:choose>
+								
 							</div>
 						</div>
 				    </div>

@@ -16,7 +16,7 @@ System.out.println("goods_id :"+goods_id);
 %>
 <head>
 	<script type="text/javascript">
-	  var cnt=0;goods_uroom_detail
+	  var cnt=0;
 	  function fn_addFile(){
 		  if(cnt == 0){
 			  $("#d_file").append("<br>"+"<input  type='file' name='room' id='f_room' />");
@@ -180,6 +180,24 @@ System.out.println("goods_id :"+goods_id);
 			box-sizing: border-box;
 			color: #eee;
 		}
+		.ex{
+		width:500px;
+		position:relative;
+		}
+		.ex span{
+			cursor:pointer;
+		}
+		.ex img{
+			display:none;
+			width:100%;
+			position: absolute;
+			z-index:9;
+		}
+		.ex:hover img{
+			display:block;
+			border:1px solid #ddd;
+			box-sizing: border-box;
+		}
 	</style>  
 </head>
 <body>
@@ -203,6 +221,10 @@ System.out.println("goods_id :"+goods_id);
 	          <tr>
 	            <th>객실 정보</th>
 	            <td>
+	            	<span class="ex" style="float:right;text-align:right;">
+		            	<span>예시 이미지</span>
+		            	<img src="${contextPath}/resources/image/businessEx4.png">
+		            </span>
 	              <div><strong>객실 유형</strong></div>
 	              <select name="goods_room_type">
 	                <option value="도미토리 혼성"  >도미토리(혼성)</option>
@@ -222,6 +244,7 @@ System.out.println("goods_id :"+goods_id);
 	                <option value="8" >8명</option>
 	                <option value="9" >9명</option>
 	                <option value="10" >10명</option>
+	                <option value="10" >10명 이상</option>
 	              </select>
 	              
 	             
@@ -232,6 +255,10 @@ System.out.println("goods_id :"+goods_id);
 	           <tr>
 	             <th>이미지 정보<br> (최대 15장)</th>
 	              <td>
+	              	<span class="ex" style="float:right;text-align:right;">
+		            	<span>예시 이미지</span>
+		            	<img src="${contextPath}/resources/image/businessEx5.png">
+		            </span>
 	                <p>
 	                  * 객실의 전반적인 이미지를 업로드 해주시기 바랍니다. <br>
 	                  * 이미지 교체를 원하시면 "변경"을 선택하시고 삭제를 원하시면 우측 "삭제"를 선택하시기 바랍니다. <br>

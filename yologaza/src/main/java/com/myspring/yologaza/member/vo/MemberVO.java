@@ -18,7 +18,9 @@ public class MemberVO {
 	private String detail1;
 	private String detail2;
 	private String memFileName;
+	private String kakaoImg;
 	private int member_point;
+	private int business_point;
 	private Date joinDate;
 	
 	public MemberVO() {
@@ -132,12 +134,28 @@ public class MemberVO {
 		this.memFileName = memFileName;
 	}
 
+	public String getKakaoImg() {
+		return kakaoImg;
+	}
+
+	public void setKakaoImg(String kakaoImg) {
+		this.kakaoImg = kakaoImg;
+	}
+
 	public int getMember_point() {
 		return member_point;
 	}
 
 	public void setMember_point(int member_point) {
 		this.member_point = member_point;
+	}
+
+	public int getBusiness_point() {
+		return business_point;
+	}
+
+	public void setBusiness_point(int business_point) {
+		this.business_point = business_point;
 	}
 
 	public Date getJoinDate() {

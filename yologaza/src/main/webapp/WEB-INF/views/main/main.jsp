@@ -68,6 +68,23 @@
     	#product_list #board{
     		border:1px solid #ddd;
     	}
+    	#board_detail_box{
+    		    position: fixed;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    z-index: 999;
+			    background: rgba(0,0,0,0.5);
+			    width: 200%;
+    	}
+    	#board_detail_box #product_list #board{
+    		    width: 750px;
+    		    box-shadow: none;
+    		    margin-top:50px;
+    	}
+    	#board_detail_box #board_head .cancel{
+	   	 	display: block;
+	   	 }
     </style>
     <script>
 	    $(document).ready(function () {
@@ -129,6 +146,7 @@
     				alert(error);
     			}
     		});
+    		
     	};
     </script>
 </head>
@@ -272,7 +290,9 @@
     </div>
     <div id="board_detail_box">
 		<div id="product_list" style="width:100%;">
-</div>
+	</div>
+		<div id="product_list" style="width:100%;"></div>
+
 	</div>
 </body>
 </html>

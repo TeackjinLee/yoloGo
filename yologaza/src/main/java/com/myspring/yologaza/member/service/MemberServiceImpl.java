@@ -39,12 +39,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.selectOverlappedID(id);
 	}
 	@Override
-	public List<MemberVO> findId(String hp) throws Exception {
-		return memberDAO.findId(hp);
+	public List<MemberVO> findId(MemberVO memberVO) throws Exception {
+		return memberDAO.findId(memberVO);
 	}
 	@Override
-	public int findIdCheck(String hp) throws Exception {
-		return  memberDAO.findIdCheck(hp);
+	public MemberVO findIdCheck(MemberVO memberVO) throws Exception {
+		return  memberDAO.findIdCheck(memberVO);
 	}
 	
 	@Override

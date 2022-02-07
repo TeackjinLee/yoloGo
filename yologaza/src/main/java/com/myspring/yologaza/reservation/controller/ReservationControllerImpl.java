@@ -104,15 +104,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		return Integer.toString(randomNumber);
 	}
 	
-	@RequestMapping(value="/INIStdPay*.do", method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView form(HttpServletRequest request, 
-							HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-	
+	@Override
 	@RequestMapping(value="/INIStdPayReturn.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView INIStdPayReturn(HttpServletRequest request, 
 							HttpServletResponse response) throws Exception {
@@ -176,6 +168,7 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
 		try {
+			reservationService.business_point(newGoodsMap);
 			reservationService.reservationResult(newGoodsMap);
 			System.out.println("½ÇÇà");
 			message= "<script>";
@@ -197,7 +190,16 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 	@RequestMapping(value="/removeReservation.do" ,method = RequestMethod.POST)
 	public ModelAndView removeCartGoods(@RequestParam("rid") int rid,
 			                          HttpServletRequest request, HttpServletResponse response)  throws Exception{
+
+		Map newGoodsMap = new HashMap();
+		Enumeration enu=request.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=request.getParameter(name);
+			newGoodsMap.put(name,value);
+		}
 		ModelAndView mav=new ModelAndView();
+		reservationService.cancel_point(newGoodsMap);
 		reservationService.removeReservation(rid);
 		mav.setViewName("redirect:/mypage/Mypage3.do");
 		return mav;

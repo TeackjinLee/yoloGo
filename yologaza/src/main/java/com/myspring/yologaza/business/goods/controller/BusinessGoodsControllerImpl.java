@@ -194,7 +194,6 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(ROOM_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
-					srcFile.delete();
 				}
 			}
 			message= "<script>";
@@ -281,7 +280,9 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String reg_id = memberVO.getId();
+		
 		List<ImageFileVO> imageFileList=null;
+		
 		try {
 			imageFileList =upload(multipartRequest);
 			if(imageFileList!= null && imageFileList.size()!=0) {
@@ -289,9 +290,11 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 					goods_id = Integer.parseInt((String)goodsMap.get("goods_id"));
 					imageFileVO.setGoods_id(goods_id);
 					imageFileVO.setReg_id(reg_id);
+
 				}
+				
 				businessGoodsService.addNewGoodsImage(imageFileList);
-				System.out.println("addNewGoodsImage");
+				System.out.println("addNewGoodsImage2");
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
@@ -299,15 +302,19 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 					FileUtils.moveFileToDirectory(srcFile, destDir,true);
 					
 				}
+				
 			}
 		}catch(Exception e) {
-			if(imageFileList!=null && imageFileList.size()!=0) {
+			if(imageFileList!=null || imageFileList.size()!=0) {
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					fileName = imageFileVO.getFileName();
 					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\"+"temp"+"\\"+fileName);
+					System.out.println("addNewGoodsImage3");
 					srcFile.delete();
 				}
+				System.out.println("addNewGoodsImage4");
 			}
+			
 			e.printStackTrace();
 		}
 	}
@@ -333,8 +340,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		String reg_id = memberVO.getId();
 		
 		List<ImageFileVO> imageFileList=null;
-		int goods_id=0;
-		int goods_uimg=0;
+		int goods_id=1;
+		int goods_uimg=1;
 		try {
 			imageFileList =upload(multipartRequest);
 			if(imageFileList!= null && imageFileList.size()!=0) {

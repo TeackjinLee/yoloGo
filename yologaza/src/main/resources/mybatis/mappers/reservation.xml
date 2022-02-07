@@ -173,6 +173,12 @@
     	]]>
 	</delete>
 	
+	<select id="reservationCheck" parameterType="String" resultMap="reservation"   >
+	    <![CDATA[
+	        select r.goods_id, r.goods_uroom,r.checkIn,r.checkOut 
+			from reservation r
+			where goods_id = #{goods_id}
+    	]]>
+	</select>
 	
-
 </mapper>

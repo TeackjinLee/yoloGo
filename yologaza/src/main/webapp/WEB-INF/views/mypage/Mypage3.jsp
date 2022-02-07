@@ -234,17 +234,18 @@ p {
 
 .tab_each .reservation img{
   height:100%;
-  display:inline-block;
+  display:block;
 }
 
 .tab_each .reservation .descript{
-  height:100%;
-  border-left: none;
-  display:inline-block;
-  position:relative;
-  right:6px;
-  padding:10px 10px 10px 15px;
-  vertical-align:top;
+    width: 70%;
+    height: 100%;
+    float: right;
+    border-left: none;
+    position: relative;
+    right: 6px;
+    padding: 10px 10px 10px 15px;
+    vertical-align: top;
 }
 
 .tab_each .reservation .descript a1{
@@ -257,7 +258,13 @@ p {
   right: 0px;
   cursor: pointer;
 }
-
+.tab_each .reservation .box-reservation{
+	width: 30%;
+    height: 220px;
+    float: left;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
 .tab_each .reservation .descript a2{
   display:block;
 }
@@ -273,9 +280,9 @@ p {
 
 .tab_each .reservation .descript .detail{
   display:block;
-  width:410px;
+  width:500px;
   height:30px;
-  margin-top:30px;
+  margin-top:10px;
 }
 
 .tab_each .reservation .descript .detail .phonenumber{
@@ -316,7 +323,7 @@ p {
 .tab_each .reservation .descript .button{
   position:absolute;
   bottom:0;
-  width:410px;
+  width:500px;
 }
 
 .tab_each .reservation .descript .button button{
@@ -378,19 +385,44 @@ $(function() {
 });
 });
 
-function delete_reservation_goods(rid){
+function delete_reservation_goods(rid, goods_id, price){
 	var rid=Number(rid);
+	var goods_id=Number(goods_id);
+	var price=Number(price);
 	var formObj=document.createElement("form");
 	var i_rid = document.createElement("input");
+	var i_goods_id = document.createElement("input");
+	var i_price = document.createElement("input");
+
 	i_rid.name="rid";
 	i_rid.value=rid;
+	i_goods_id.name="goods_id";
+	i_goods_id.value=goods_id;
+	i_price.name="price";
+	i_price.value=price;
 	
 	formObj.appendChild(i_rid);
+	formObj.appendChild(i_goods_id);
+	formObj.appendChild(i_price);
     document.body.appendChild(formObj); 
     formObj.method="post";
     formObj.action="${contextPath}/reservation/removeReservation.do";
     formObj.submit();
 }
+<!--  달력js -->
+
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+	        opens: 'left',
+	        showDropdowns: true
+        }, function(start, end, label) {
+	        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	        var date1 = Date.parse(start.format('YYYY-MM-DD'))/1000;
+	        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
+        });
+
+    });
+
 </script>
 </head>
 <body class="pc">
@@ -432,26 +464,41 @@ function delete_reservation_goods(rid){
             <div class="tab_each">
             	<c:forEach var="item" items="${mypageReservation}" varStatus="cnt">
 	           		<div class="reservation">
-	           			<a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
-							<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
-						</a>
+	           			<div class="box-reservation">
+		           			<a href="${contextPath}/goods/goodsInformation.do?goods_id=${item.goods_id }">
+								<img src="${contextPath}/goods_download.do?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="숙소 이미지"/>
+							</a>
+						</div>
 						<div class="descript">
-						  <h1>${item.goods_name}</h1><br>
+						  <h1>${item.goods_name}</h1><br>${Ddate3}
 						  <input type="checkbox">
 						  <h3>체 크 인&nbsp; : ${item.checkIn}&nbsp;${item.goods_checkIn}</h3>
 						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
 						  <div class="detail">
-						  	<form>
-						    <a class="cancel" href="javascript:delete_reservation_goods('${item.rid}');"> 
-								예약취소
-							</a>
-							</form>
-						    <input class="phonenumber" type="text" value="${item.goods_hp}" readonly>
+						  <c:choose>
+							  <c:when test="${item.checkIn <= Ddate3}">
+							  	<form>
+								    <a class="cancel" href="#"> 
+										예약완료
+									</a>
+								</form>
+							  </c:when>
+							  <c:otherwise>
+							  	<form>
+								    <a class="cancel" href="javascript:delete_reservation_goods('${item.rid}','${item.goods_id}','${item.price}');"> 
+										예약취소
+									</a>
+								</form>
+							  </c:otherwise>
+						  </c:choose>
+						  <input class="phonenumber" type="text" value="${item.goods_hp}" readonly>
 						  </div>
 						  <div class="button">
 						    <button class="mapicon"><i class="fas fa-map-marker-alt"></i></button>
 						    <button class="phoneicon"><i class="fas fa-phone-alt"></i></button>
 						    <h3 class="price">결제가 : <fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.price}" />원</h3>
+						    <input style="visibility:hidden;" name="price" value="${item.price}" />
+						    <input style="visibility:hidden;" name="price" value="${item.uid}" />
 						  </div>
 						  <div id="map-box" class="map-box">
 							  <div id="${item.rid}" style="width:270px;height:270px;"></div>

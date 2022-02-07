@@ -29,7 +29,7 @@ String goods_id = request.getParameter("goods_id");
 	    }
 	  } 
 	
-	var cnt =1;
+	var cnt =0;
 	function fn_addFile(){
 		  $("#d_file").append("<br>"+"<input  type='file' name='goods"+cnt+"' id='goods"+cnt+"'  onchange=readURL(this,'previewImage"+cnt+"') />");
 		  $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
@@ -69,7 +69,7 @@ String goods_id = request.getParameter("goods_id");
 		                  data: formData,
 		                  type: 'post',
 		                  success: function(result){
-		                      alert("이미지를 수정했습니다!");
+		                      alert("이미지를 추가했습니다.!");
 		                  }
 		          });
 
@@ -599,6 +599,7 @@ String goods_id = request.getParameter("goods_id");
 						<td align=center colspan=2> 
 						<input   type="button" value="이미지파일추가하기"  onClick="fn_addFile()"  />
 						</td>
+						
 					</tr> 
 				</table>
 			</form>

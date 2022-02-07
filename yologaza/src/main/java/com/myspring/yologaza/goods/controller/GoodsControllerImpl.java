@@ -29,6 +29,8 @@ import com.myspring.yologaza.goods.service.GoodsService;
 import com.myspring.yologaza.goods.vo.GoodsVO;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
+import com.myspring.yologaza.reservation.service.ReservationService;
+import com.myspring.yologaza.reservation.vo.ReservationVO;
 
 import net.sf.json.JSONObject;
 
@@ -48,10 +50,12 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	ArticleVO articleVO;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	ReservationService reservationService;
 	
 	@Override
 	@RequestMapping(value="/goods/goodsInformation.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listArticles(@RequestParam("goods_id") String goods_id,
+	public ModelAndView listArticles(@RequestParam("goods_id") String goods_id, ReservationVO reservationVO,
 					HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session=request.getSession();
@@ -60,6 +64,9 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);
 		mav.addObject("goodsMap", goodsMap);
+		// reservationCheck
+		List<ReservationVO> reservationCheck=reservationService.reservationCheck(reservationVO);
+		mav.addObject("reservationCheck", reservationCheck);
 		// Äü »ç¿ë½Ã
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);

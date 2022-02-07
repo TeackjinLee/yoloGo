@@ -30,7 +30,7 @@
 	      <ul class = row>
 	      	<c:choose>
 	      		<c:when test="${isLogOn == true  && member!= null}">
-	      			<li class = cell-r><a href="#">마이페이지</a></li>
+	      			<li class = cell-r><a href="${contextPath}/business/goods/listGoods.do">객실 관리</a></li>
 	        		<li class = cell-r><a href="${contextPath}/businessMember/logout.do">로그아웃</a></li>
 	      		</c:when>
 	      		<c:otherwise>
@@ -50,7 +50,7 @@
 	              <div>숙박 관리</div>
 	              <div class="sub-menu-box">
 	                <ul>
-	                  <li><a href="${contextPath}/business/goods/addNewGoodsForm.do">소개작성</a></li>
+	                  <li><a href="${contextPath}/business/goods/addNewGoodsForm.do">숙소등록</a></li>
 	                  <li><a href="#">이용규칙 관리</a></li>
 	                  <li><a href="${contextPath}/business/goods/listGoods.do">객실 관리</a></li>
 	                  <li><a href="#">리뷰 관리</a></li>

@@ -31,7 +31,6 @@
 		table, img {border:none}
 		
 	</style>
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/group.css" />
 </head>
 <body bgcolor="#FFFFFF" text="#242424" leftmargin=0 topmargin=15 marginwidth=0 marginheight=0 bottommargin=0 rightmargin=0>
 	<div style="padding:10px;width:100%;font-size:14px;color: #ffffff;background-color: #000000;text-align: center">

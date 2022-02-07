@@ -399,7 +399,14 @@ p {
 							<td> 
 								
 								<div style="position:relative; width:200px; height:200px; border-radius:100px; overflow:hidden; border: 1px solid #ddd; box-sizing: border-box;">
-									<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+								<c:choose>
+									<c:when test="${member.memFileName != null and member.kakaoImg == null}">
+										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/mem_download.do?uid=${member.uid}&memFileName=${member.memFileName}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+									</c:when>
+									<c:otherwise>
+										<img id="preview" onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${member.kakaoImg}" style="position:absolute; top:50%; left: 50%; transform: translate(-50%, -50%); width:100%;"/>
+									</c:otherwise>
+								</c:choose>
 								</div>
 								<input  type= "hidden"   name="uid" value="${member.uid }" />
 								<input  type= "hidden"   name="originalFileName" value="${member.memFileName }" />
@@ -450,8 +457,14 @@ p {
 								<tr class="dot_line">
 									<td class="fixed_join">이메일</td>
 									<td>
-									   <input style="width:auto;" type="text" name="email1" size=5 value="${member.email1 }" /> @ <input style="width:auto;" type="text" size=7 name="email2" value="${member.email2 }" /> 
-									
+									   <c:choose>
+									   		<c:when test="${member.email1 != null}">
+									   			<input style="width:auto;" type="text" name="email1" size=5 value="${member.email1 }" /> @ <input style="width:auto;" type="text" size=7 name="email2" value="${member.email2 }" /> 
+									   		</c:when>
+									   		<c:otherwise>
+									   			${member.email}
+									   		</c:otherwise>
+									   </c:choose>
 									</td>
 									
 								</tr>
@@ -471,7 +484,6 @@ p {
 				
 				</form>	
             	
-             
           </div>
           <a class="Withdrawal" href="${contextPath}/member/QuitForm.do">탈퇴하기</a>
         </div>

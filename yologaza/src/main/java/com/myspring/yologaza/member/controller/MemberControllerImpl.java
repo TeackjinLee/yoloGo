@@ -27,6 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.yologaza.common.interceptor.ViewNameInterceptor;
+import com.myspring.yologaza.goods.vo.GoodsVO;
+import com.myspring.yologaza.loginApi.service.KakaoService;
 import com.myspring.yologaza.member.service.MemberService;
 import com.myspring.yologaza.member.vo.MemberVO;
 import com.myspring.yologaza.sms.service.certificationService;
@@ -39,7 +41,8 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
-	
+	@Autowired
+	private KakaoService kakaoService;
 	@Override
 	@RequestMapping(value="/listMembers.do", method=RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -124,12 +127,54 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 		}
 		return mav;
 	}
+	
+	// kakaoLogin
+	@Override
+	@RequestMapping(value="/kakaologin", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView login(@ModelAttribute("member") MemberVO member,
+    						@RequestParam(value = "code", required = false) String code,
+    						RedirectAttributes rAttr,
+							HttpServletRequest request, 
+							HttpServletResponse response) throws Exception {
+	 ModelAndView mav = new ModelAndView();
+	 System.out.println("code: " + code); 
+	 String access_token = kakaoService.getAccessToken(code); 
+	 System.out.println("access_token" + access_token); 
+	 HashMap<String,Object> userInfo = kakaoService.getUserInfo(access_token); 
+	 
+	 System.out.println(userInfo);
+	 HttpSession session = request.getSession();
+	 
+	 if(userInfo != null) {
+	        session.setAttribute("member", userInfo);
+			session.setAttribute("isLogOn", true);
+			String action = (String)session.getAttribute("action");
+			session.removeAttribute("action");
+			if(action != null) {
+				mav.setViewName("redirect:action");
+			} else {
+				mav.setViewName("redirect:/main.do");
+			}
+		} else if(userInfo.get("id") == null || userInfo.get("id") == "") {
+			rAttr.addAttribute("result", "idFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		} else {
+			rAttr.addAttribute("result", "loginFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		}
+	 	System.out.println("###access_Token#### : " + access_token);
+		System.out.println("###nickname#### : " + userInfo.get("name"));
+		System.out.println("###email#### : " + userInfo.get("email"));
+	 return mav;
+
+    }
 
 	@Override
-	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView logout(HttpServletRequest request,
 								HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
+		
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
@@ -147,15 +192,27 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 	}
 	
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
-	public String findId(MemberVO memberVO, Model model) throws Exception{
-		logger.info("hp"+memberVO.getHp());
-				
-		if(memberService.findIdCheck(memberVO.getHp())==0) {
-			model.addAttribute("msg", "핸드폰번호를 확인해주세요");
-			return "/member/findIdView";
-		}else {
-			model.addAttribute("member", memberService.findId(memberVO.getHp()));
-			return "/member/findId";
+	public ModelAndView findId(MemberVO memberVO, Model model,
+							HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String name = memberVO.getName();
+		String hp = memberVO.getHp();
+		MemberVO member = memberService.findIdCheck(memberVO);
+		if(name == null || name == "") {
+			model.addAttribute("msg", "이름을 확인해주세요.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else if(hp == null || hp == ""){
+			model.addAttribute("msg", "핸드폰번호를 확인해주세요.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else if(member==null) {
+			model.addAttribute("msg", "가입된 아이디가 아닙니다.");
+			ModelAndView mav = new ModelAndView("/member/findIdView");
+			return mav;
+		} else {
+			model.addAttribute("member", memberService.findId(memberVO));
+			ModelAndView mav = new ModelAndView("/member/findId");
+			return mav;
 		}
 	}
 	

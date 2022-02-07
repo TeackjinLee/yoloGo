@@ -68,6 +68,23 @@
    	 #board_head h1 a{
    	 	display:none;
    	 }
+   	 #board_head .cancel{
+   	 	display: none;
+   	 }
+   	 .review-img-box{
+   	 	width:100%;
+   	 	height: 500px;
+   	 	overflow:hidden;
+   	 	position:relative;
+   	 }
+   	 .review-img-box img{
+   	 	height: 100%;
+	    position: absolute;
+	    top: 0;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    border-radius: 15px;
+   	 }
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
@@ -139,12 +156,19 @@
 			<div class="board_id">${article.id }</div>
 			<div class="board_date">${article.writeDate}</div>
 		</div>
+		<div class="cancel" style="float:right;">
+			<a href="${contextPath}/main.do">
+				<span style="font-size:24px; font-weight:bold;">x</span>
+			</a>
+		</div>
 		<div style="text-align:right;"><h1><a href="${contextPath}/main.do">x</a></h1></div>
 	</div>  
 	<c:choose> 
 		<c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
-		   <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		   <img onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:100%; margin:0 auto" /><br>
+			<input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+			<div class="review-img-box">
+				<img onerror="this.src='${contextPath}/resources/image/1px.gif'" src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" /><br>
+			</div>
 		 <tr>
 		   <td style="float:right; width:180px;">
 		      <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
@@ -217,11 +241,11 @@
   <tr  id="tr_btn"    >
    <td colspan="2" align="center" style="padding: 20px; box-sizing: border-box;">
        <c:if test="${member.id == article.id }">
-	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
+	      <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="수정하기" onClick="fn_enable(this.form)">
+	      <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 	    </c:if>
-	    <input style="cursor:pointer;" type=button value="숙소로 가기"  onClick="backToList(this.form)">
-	    <input style="cursor:pointer;" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
+	    <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="숙소로 가기"  onClick="backToList(this.form)">
+	    <input style="cursor:pointer;padding: 5px;font-weight: bold;box-sizing: border-box;" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do?goods_id=${article.goods_id}', ${article.articleNO})">
    </td>
   </tr>
  </table>
