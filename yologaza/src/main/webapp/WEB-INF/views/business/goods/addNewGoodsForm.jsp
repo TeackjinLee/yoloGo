@@ -267,6 +267,18 @@
 	    }
 	  }); 
 	}); 
+	
+	$(document).ready(function() {
+		  $('#goods_type').change(function() {
+		    var result = $('#goods_type option:selected').val();
+		    if (result == 'motel') {
+		      $('#goods_motel_time').show();
+		    } else {
+		      $('#goods_motel_time').hide();
+		    }
+		  }); 
+		}); 
+	
 	if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 		alert("사업자 권한이 필요합니다.");
 		document.location.href = "/yologaza/business_main.do";
@@ -408,7 +420,7 @@
              <div class="wep">
                <textarea id="goods_baseImpormation "name="goods_baseImpormation" rows="20" cols="110" maxlength="1000" placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요."></textarea>
              </div><br>
-             <div style="width:50%; height:150px; float:left;">
+             <div style="width:50%; float:left; margin-bottom:20px;">
                
                <strong>이용 시간</strong>
                <div class="checkIn">
@@ -438,21 +450,51 @@
                   </select>
                 </div>
               </div>
-               <div style="width:50%; height:150px; float:left;">
+              <div id="goods_motel_time" style="width:50%; float:left; margin-bottom:20px;">
+               
+               <strong>이용 시간</strong>
+               <div class="goods_motel_usetime">
+                  <span>대실 사용 시간</span>
+                  &nbsp;&nbsp;<select name="goods_motel_usetime">
+                    <option value="1" selected>1시간</option>
+                    <option value="2">2시간</option>
+                    <option value="3">3시간</option>
+                    <option value="4">4시간</option>
+                    <option value="5">5시간</option>
+                    <option value="6">6시간</option>
+                    <option value="7">7시간</option>
+                    <option value="8">8시간</option>
+                  </select>
+                </div>
+                <div class="goods_motel_endtime">
+                  <span>대실 마감 시간</span>
+                  &nbsp;&nbsp;<select name="goods_motel_endtime">
+                    <option value="5" selected>오전 05:00</option>
+                    <option value="6">오후 06:00</option>
+                    <option value="7">오후 07:00</option>
+                    <option value="8">오후 08:00</option>
+                    <option value="9">오후 09:00</option>
+                    <option value="10">오후 10:00</option>
+                    <option value="11">오후 11:00</option>
+                    <option value="12">오후 12:00</option>
+                  </select>
+                </div>
+              </div>
+               <div>
                  <strong>예약 취소 가능 여부</strong><br>
                  <select name="goods_chargeImpormation">
                    <option value="예약취소 가능"  >예약취소 가능</option>
                    <option value="예약취소 불가능" >예약취소 불가능</option>
                  </select>
-                 <br> <br>
                </div>
 				<div>
 					<div>
-						<div><strong>숙박가격</strong></div>
+						<br>
+						<strong>숙박가격</strong>&nbsp;&nbsp;
 						<input id="goods_price1" name="goods_price1" type="text" />
-					</div>
+					
 					<div id="goods_price2">
-						<div><strong>대실가격</strong></div>
+						<strong>대실가격</strong>&nbsp;&nbsp;
 						<input name="goods_price2" type="text" value="0" />
 					</div>
 				</div>

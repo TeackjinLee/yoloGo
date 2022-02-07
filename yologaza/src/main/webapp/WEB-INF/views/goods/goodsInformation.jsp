@@ -30,7 +30,7 @@
 <head>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-	<script>
+	<script type="text/javascript">
 		function fn_articleForm(isLogOn,articleForm,loginForm){
 		  if(isLogOn != '' && isLogOn != 'false'){
 		    location.href=articleForm;
@@ -104,7 +104,7 @@
 			}
 		}
 	    
-	    
+
 	    $(function() {
 	    	  $('.tab_each #tab1 .room .room-box .room-select img').click(function(){
 	    	    var idx = $(".tab_each #tab1 .room .room-box .room-select img").index(this)
@@ -115,7 +115,9 @@
 	    	      $('#tab1 .room-box-wrap').eq(idx).hide();
 	    	    }
 	    	});
+    	 
 	    	});
+	    
     </script>
     <style>
     	#tab1 .room-box-wrap{
@@ -227,7 +229,25 @@
 	     }
 	     .room_img_box{
 	     	max-height: 300px;
-	     } 
+	     }
+	     .nonResBtn{
+	     	display:block;
+	     	cursor:pointer;
+	     }
+	     .tab_each ul li .room-box .room-text .reserve .nonResDate{
+	     	position: absolute;
+		    top: 0;
+		    right: -250px;
+		    visibility: hidden;
+		    width: 240px;
+		    padding: 10px;
+		    height: auto;
+		    border: 2px solid #ddd;
+		    box-sizing: border-box;
+	     }
+	     .tab_each ul li .room-box .room-text:hover .reserve .nonResDate{
+	     	visibility: visible;
+	     }
     </style>
     <!--  달력js -->
     <script>
@@ -245,7 +265,6 @@
 	        });
 	
 	    });
-	    
 	    
     </script>
     
@@ -339,8 +358,8 @@
 							          <br>
 							          <div class="price"><h2><fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.goods_room_price2}" />원</h2></div>
 							          <div style="float:left; font-size:14px;">${Ddate3}</div>
-							          <div><span style="float: left">마감시간</span><span style="float: right">${item.goods_motel_endtime}시까지</span></div>
-							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${item.goods_motel_usetime}시간</span></div>
+							          <div><span style="float: left">마감시간</span><span style="float: right">${goods.goods_motel_endtime}시까지</span></div>
+							          <div><span style="float: left">이용시간최대</span><span style="float: right"> ${goods.goods_motel_usetime}시간</span></div>
 							          <div class="point">
 							          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price2=${item.goods_room_price2}&date1=<%=date1%>&date2=<%=date1%>'">예약하기</button>
 							          </div>
@@ -389,13 +408,41 @@
 							          <div><span style="float: left">퇴실시간</span>
 							            <span style="float: right">익일${item.goods_checkOut}시</span></div>
 							          <div class="point">
+							          
+							 			<div class="nonResDate">
+							 			<div class="nonResBtn">실시간 예약 현황</div>
+										<c:forEach var="resCheck" items="${reservationCheck}">
+											
+											
+											<c:choose>
+												<c:when test="${item.goods_uroom == resCheck.goods_uroom}">
+													<div>${resCheck.checkIn} - ${resCheck.checkOut}</div>
+												</c:when>
+											</c:choose>
+											
+											<c:if test="${item.goods_uroom == resCheck.goods_uroom}">
+											<c:choose>	
+									          	<c:when test="${(Ddate3 <= resCheck.checkIn && resCheck.checkIn <= Ddate4)||(Ddate3 <= resCheck.checkOut && resCheck.checkOut <= Ddate4)||(resCheck.checkIn <= Ddate3 && Ddate4 <= resCheck.checkOut)}">
+									          		<c:set var="resOnBtn" value="${item.goods_uroom}" />
+									          	</c:when>
+									    		<c:otherwise>
+									    		</c:otherwise>
+									         </c:choose>
+									         </c:if>
+									         
+										</c:forEach>
+										</div>
 								          <c:set var="index" value="${date1}"/>
-									      <c:if test="${index != 0}">
-								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
-							          	  </c:if>
-								          <c:if test="${index == 0}">
-								          	<button type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
+									      <c:if test="${index != 0 && resOnBtn != item.goods_uroom}">
+								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
+							          	  </c:if> 
+								          <c:if test="${index == 0 && resOnBtn != item.goods_uroom}">
+								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 								          </c:if>
+								          <c:if test="${resOnBtn == item.goods_uroom}">
+								          	<button id="${item.goods_uroom}" style="background:#777;" type="button" " disabled>예약방 없음</button>
+								          </c:if>
+								         
 							          </div>
 							        </div>
 							      </div>
@@ -472,34 +519,40 @@
 							          </div>
 							          <div><span style="float: left">입실시간</span> <span style="float: right">${item.goods_checkIn}시부터</span></div>
 							          <div><span style="float: left">퇴실시간</span> <span style="float: right">익일${item.goods_checkOut}시</span></div>
+							          
 							          <div class="point">
+							          
+							 			<div class="nonResDate">
+							 			<div class="nonResBtn">실시간 예약 현황</div>
 										<c:forEach var="resCheck" items="${reservationCheck}">
-											<!-- 
+											
+											
 											<c:choose>
 												<c:when test="${item.goods_uroom == resCheck.goods_uroom}">
-													${resCheck.checkIn} / ${resCheck.goods_uroom} / ${item.goods_uroom}
+													<div>${resCheck.checkIn} - ${resCheck.checkOut}</div>
 												</c:when>
 											</c:choose>
-											 -->
+											
 											<c:if test="${item.goods_uroom == resCheck.goods_uroom}">
 											<c:choose>	
-									          	<c:when test="${(Ddate3 <= resCheck.checkIn && resCheck.checkIn <= Ddate4)||(Ddate3 <= resCheck.checkOut && resCheck.checkOut <= Ddate4)}">
-									          		<c:set var="resOnBtn" value="resOnBtn" />
+									          	<c:when test="${(Ddate3 <= resCheck.checkIn && resCheck.checkIn <= Ddate4)||(Ddate3 <= resCheck.checkOut && resCheck.checkOut <= Ddate4)||(resCheck.checkIn <= Ddate3 && Ddate4 <= resCheck.checkOut)}">
+									          		<c:set var="resOnBtn" value="${item.goods_uroom}" />
 									          	</c:when>
-									    
+									    		<c:otherwise>
+									    		</c:otherwise>
 									         </c:choose>
 									         </c:if>
 									         
 										</c:forEach>
-									  
+										</div>
 								          <c:set var="index" value="${date1}"/>
-									      <c:if test="${index != 0 && resOnBtn != 'resOnBtn'}">
+									      <c:if test="${index != 0 && resOnBtn != item.goods_uroom}">
 								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 							          	  </c:if> 
-								          <c:if test="${index == 0 && resOnBtn != 'resOnBtn'}">
+								          <c:if test="${index == 0 && resOnBtn != item.goods_uroom}">
 								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 								          </c:if>
-								          <c:if test="${resOnBtn == 'resOnBtn'}">
+								          <c:if test="${resOnBtn == item.goods_uroom}">
 								          	<button id="${item.goods_uroom}" style="background:#777;" type="button" " disabled>예약방 없음</button>
 								          </c:if>
 								         

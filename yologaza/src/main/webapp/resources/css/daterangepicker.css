@@ -374,6 +374,7 @@
 
   .daterangepicker .drp-calendar.right {
     margin-left: 0;
+    display: none;
   }
 
   .daterangepicker .drp-calendar.right .calendar-table {
