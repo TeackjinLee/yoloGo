@@ -233,8 +233,11 @@ p {
 }
 
 .tab_each .reservation img{
-  height:100%;
-  display:block;
+    height: 100%;
+    display: block;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 .tab_each .reservation .descript{
@@ -264,6 +267,7 @@ p {
     float: left;
     overflow: hidden;
     border: 1px solid #ddd;
+    position: relative;
 }
 .tab_each .reservation .descript a2{
   display:block;

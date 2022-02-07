@@ -43,14 +43,13 @@ public class ReservationControllerImpl extends BaseController implements Reserva
 	private GoodsService goodsService;
 	@Autowired
 	private ReservationService reservationService;
-	
+	@Override
 	@RequestMapping(value="/reservationForm.do", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reservationForm(@RequestParam("goods_id") String goods_id, 
 								HttpServletRequest request, 
 								HttpServletResponse response) throws Exception {
 		//String viewName = getViewName(request);
 		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
 		Map goodsMap=goodsService.goodsDetail(goods_id);
 		mav.addObject("goodsMap", goodsMap);

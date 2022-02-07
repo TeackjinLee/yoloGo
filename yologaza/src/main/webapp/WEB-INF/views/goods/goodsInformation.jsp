@@ -224,6 +224,9 @@
 	     	padding: 5px 10px 5px 10px;
 		    box-sizing: border-box;
 		    right: -60px;
+	     }
+	     .room_img_box{
+	     	max-height: 300px;
 	     } 
     </style>
     <!--  달력js -->
@@ -471,33 +474,35 @@
 							          <div><span style="float: left">퇴실시간</span> <span style="float: right">익일${item.goods_checkOut}시</span></div>
 							          <div class="point">
 										<c:forEach var="resCheck" items="${reservationCheck}">
+											<!-- 
 											<c:choose>
 												<c:when test="${item.goods_uroom == resCheck.goods_uroom}">
 													${resCheck.checkIn} / ${resCheck.goods_uroom} / ${item.goods_uroom}
 												</c:when>
 											</c:choose>
-											
+											 -->
 											<c:if test="${item.goods_uroom == resCheck.goods_uroom}">
 											<c:choose>	
 									          	<c:when test="${(Ddate3 <= resCheck.checkIn && resCheck.checkIn <= Ddate4)||(Ddate3 <= resCheck.checkOut && resCheck.checkOut <= Ddate4)}">
 									          		<c:set var="resOnBtn" value="resOnBtn" />
 									          	</c:when>
-									          	<c:otherwise>
-									          		#222#
-									          	</c:otherwise>
+									    
 									         </c:choose>
 									         </c:if>
 									         
 										</c:forEach>
 									  
 								          <c:set var="index" value="${date1}"/>
-									      <c:if test="${index != 0}">
+									      <c:if test="${index != 0 && resOnBtn != 'resOnBtn'}">
 								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1 *(date2-date1-1)/86400}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 							          	  </c:if> 
-								          <c:if test="${index == 0}">
+								          <c:if test="${index == 0 && resOnBtn != 'resOnBtn'}">
 								          	<button id="${item.goods_uroom}" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${item.goods_room_price1}&date1=<%=date1%>&date2=<%=date2%>' ">예약하기</button>
 								          </c:if>
-								    
+								          <c:if test="${resOnBtn == 'resOnBtn'}">
+								          	<button id="${item.goods_uroom}" style="background:#777;" type="button" " disabled>예약방 없음</button>
+								          </c:if>
+								         
 							          </div>
 							        </div>
 							      </div>

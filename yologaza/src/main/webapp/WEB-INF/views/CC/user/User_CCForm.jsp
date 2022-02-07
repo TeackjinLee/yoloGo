@@ -112,6 +112,9 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     font-size: 18px;
     line-height: normal;
     cursor: pointer;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 .show_list li .list_que p {

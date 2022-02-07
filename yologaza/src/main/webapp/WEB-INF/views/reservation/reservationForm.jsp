@@ -376,11 +376,11 @@
 			        <input type="hidden"  name="acceptmethod" value="below1000:SKIN(#70ad47)" ><!-- 에스크로옵션 : useescrow, 빌링(정기과금)옵션 : BILLAUTH(Card) -->
 			        <c:set var="index" value="<%=goods_room_price2%>"/>
 		         	<c:if test="${index == null }">
-		         		<input type="hidden"  name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price1=<%=goods_room_price1%>&date1=${date1}&date2=${date2}" >
+		         		<input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price1=<%=goods_room_price1%>&date1=${date1}&date2=${date2}" >
 		         	</c:if>
 		         	<c:set var="index2" value="<%=goods_room_price1%>"/>
 		         	<c:if test="${index2 == null }">
-		         		<input type="hidden"  name="returnUrl" value="<%=siteDomain%>/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price2=<%=goods_room_price2%>&date1=${date1}&date2=${date2}" >
+		         		<input type="hidden"  name="returnUrl" value="http://localhost:8080/yologaza/reservation/INIStdPayReturn.do?goods_id=${goods.goods_id}&goods_uroom=<%=goods_uroom %>&goods_room_price2=<%=goods_room_price2%>&date1=${date1}&date2=${date2}" >
 		         	</c:if>	
 					
 					<input type="hidden"  name="closeUrl" value="http://localhost:8080/yologaza/reservation/close.do" >

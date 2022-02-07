@@ -61,7 +61,7 @@
 	// http://localhost:8080/INIpayStdSample 까지만 기입한다.
 	
 %>
-
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html>
 <html>
 <head>
