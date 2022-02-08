@@ -31,6 +31,7 @@ public class GoodsVO {
 	private String goods_checkOut;
 	private String goods_motel_endtime;
 	private String goods_motel_usetime;
+	private String yolo_theme;
 	
 	private int goods_price1;
 	private int goods_price2;
@@ -319,6 +320,14 @@ public class GoodsVO {
 
 	public void setGoods_motel_usetime(String goods_motel_usetime) {
 		this.goods_motel_usetime = goods_motel_usetime;
+	}
+
+	public String getYolo_theme() {
+		return yolo_theme;
+	}
+
+	public void setYolo_theme(String yolo_theme) {
+		this.yolo_theme = yolo_theme;
 	}
 
 	public char getGoods_acess() {

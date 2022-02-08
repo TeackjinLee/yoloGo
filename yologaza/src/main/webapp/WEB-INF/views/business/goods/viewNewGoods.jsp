@@ -17,7 +17,16 @@ String goods_id = request.getParameter("goods_id");
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-	
+	$(document).ready(function() {
+	  $('#goods_type').change(function() {
+	    var result = $('#goods_type option:selected').val();
+	    if (result == 'motel') {
+	      $('#goods_price2').show();
+	    } else {
+	      $('#goods_price2').hide();
+	    }
+	  }); 
+	}); 
 	function readURL(input,preview) {
 		//  alert(preview);
 	    if (input.files && input.files[0]) {
@@ -178,6 +187,8 @@ String goods_id = request.getParameter("goods_id");
 		document.getElementById("account_bank").disabled=false;
 		document.getElementById("account_name").disabled=false;
 		document.getElementById("account").disabled=false;
+		document.getElementById("goods_motel_endtime").disabled=false;
+		document.getElementById("goods_motel_usetime").disabled=false;
 		document.getElementById("tr_btn").style.display="none";
 		document.getElementById("tr_btn_modify").style.display="block";
 		
@@ -497,7 +508,46 @@ String goods_id = request.getParameter("goods_id");
                   </select>
                 </div>
               </div>
-               <div style="width:50%; height:150px; float:left;">
+              <c:choose>
+	          <c:when test="${goods.goods_type == 'motel'}">
+              <div id="goods_motel_time" style="width:100%; margin-bottom:20px;">
+               <strong>대실 시간</strong>
+               <div class="goods_motel_usetime">
+                  <span>대실 사용 시간</span>
+                  &nbsp;&nbsp;<select id="goods_motel_usetime" name="goods_motel_usetime" disabled>
+                  	<option value="${goods.goods_motel_usetime }" selected>${goods.goods_motel_usetime }시간</option>
+                    <option value="1" >1시간</option>
+                    <option value="2">2시간</option>
+                    <option value="3">3시간</option>
+                    <option value="4">4시간</option>
+                    <option value="5">5시간</option>
+                    <option value="6">6시간</option>
+                    <option value="7">7시간</option>
+                    <option value="8">8시간</option>
+                  </select>
+                </div>
+                <div class="goods_motel_endtime">
+                  <span>대실 마감 시간</span>
+                  &nbsp;&nbsp;<select id="goods_motel_endtime" name="goods_motel_endtime" disabled>
+                  	<option value="${goods.goods_motel_endtime }" selected>오후 ${goods.goods_motel_endtime }시</option>
+                    <option value="5" >오후 05:00</option>
+                    <option value="6">오후 06:00</option>
+                    <option value="7">오후 07:00</option>
+                    <option value="8">오후 08:00</option>
+                    <option value="9">오후 09:00</option>
+                    <option value="10">오후 10:00</option>
+                    <option value="11">오후 11:00</option>
+                    <option value="12">오후 12:00</option>
+                  </select>
+                </div>
+              </div>
+              </c:when>
+              <c:otherwise>
+              	<input id="goods_motel_usetime" name="goods_motel_usetime" value='0' style="display:none;">
+              	<input id="goods_motel_endtime" name="goods_motel_endtime" value='0' style="display:none;">
+              </c:otherwise>
+              </c:choose>
+               <div style="width:100%; float:left;">
                  <strong>예약 취소 가능 여부</strong><br>
                  <select id="goods_chargeImpormation" name="goods_chargeImpormation" disabled>
                    <option value="${goods.goods_chargeImpormation }" selected>${goods.goods_chargeImpormation }</option>
@@ -506,7 +556,7 @@ String goods_id = request.getParameter("goods_id");
                  </select>
                  <br> <br>
                </div>
-              <div>
+              <div style="float:left;">
                 <strong>숙박가격</strong>
                  <div>
                   <input id="goods_price1" name="goods_price1" type="text" value="${goods.goods_price1 }" disabled/>
