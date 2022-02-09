@@ -17,6 +17,11 @@
 	    left: 50%;
 	    transform: translate(-50%, -50%);
 	}
+	#toggleBtn:checked ~ #toggleBtnOn{
+		color: white;
+		padding: 6px;
+    	box-sizing: border-box;
+	}
 </style>
 <meta charset="UTF-8">
 <title>헤더</title>
@@ -42,6 +47,12 @@
 				color:rgb(112, 173, 71);
 				font-weight:bold;
 			}
+			
+			#toggleBtnOn::placeholder{
+				color:white;
+				opacity: 1;
+			
+			}
 	</style>
 	<script type="text/javascript">
 		var loopSearch=true;
@@ -52,7 +63,7 @@
 			$.ajax({
 				type : "get",
 				async : true, //false인 경우 동기식으로 처리한다.
-				url : "${contextPath}/goods/keywordSearch.do",
+				url : "${contextPath}/keywordSearch.do",
 				data : {keyword:value},
 				success : function(data, textStatus) {
 				    var jsonInfo = JSON.parse(data);
@@ -72,7 +83,7 @@
 			if(count > 0) {
 			    var html = '';
 			    for(var i in jsonInfo.keyword){
-				   html += "<a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
+				   html += "<a style='display:none;' href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
 			    }
 			    var listView = document.getElementById("suggestList");
 			    listView.innerHTML = html;
@@ -142,11 +153,12 @@
 	        <div id = "logo"><a href="${contextPath}/main.do"><img src="${contextPath}/resources/image/yolo-logo-w.png" alt="YOLO가자로고"></a></div>
 	        <div class="menu-bar row">
 		        <div id="search" class="cell">
-		            <form name="frmSearch" action="" >
+		            <form name="frmSearch" action="${contextPath}/searchWorld.do" >
 		              <input type="checkbox" id="toggleBtn">
 		              <label for="toggleBtn" class="toggleBtn">&nbsp;&nbsp; &nbsp;</label>
 					  <!--  <input type="submit" name="search" class="btn1"  value="검 색" > -->
 		              <input name="searchWord" id="toggleBtnOn" class="main_input" type="text"  onKeyUp="keywordSearch()" placeholder="지역, 숙소명" >
+		              <input type="submit" name="search" class="btn1"  value="검 색" style="display: none;">
 		            </form>
 	             </div>
 		         <div id="suggest" class="cell">

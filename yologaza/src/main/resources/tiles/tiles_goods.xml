@@ -15,4 +15,9 @@
       <put-attribute name="body" value="/WEB-INF/views/goods/searchGoods.jsp" />
    </definition>
    
+   <definition name="searchWorld" extends="baseLayout">
+      <put-attribute name="title" value="검색" />
+      <put-attribute name="body" value="/WEB-INF/views/goods/searchGoods.jsp" />
+   </definition>
+   
 </tiles-definitions>
