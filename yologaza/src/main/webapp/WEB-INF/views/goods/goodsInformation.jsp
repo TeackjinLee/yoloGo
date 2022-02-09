@@ -11,6 +11,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String goods_id = request.getParameter("goods_id");
+	
 	String date1 = request.getParameter("date1");
 	String date2 = request.getParameter("date2");
 %>
@@ -24,10 +25,23 @@
 	    top: 50%;
 	    transform: translateY(-50%);
 	}
+	#tab2 label{
+		cursor:pointer;
+	}
+	
+	#tab2 .room-pic-theme{
+		display: block;
+	    width: 20%;
+	    text-align: center;
+	    float:left;
+	    padding: 10px;
+	    box-sizing: border-box;
+	}
+	
 </style>
 <!DOCTYPE html>
-<html lang="ko">
 <head>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cf929ac0c936c4cda3566648aaf3dc4&libraries=services"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<script type="text/javascript">
@@ -592,6 +606,7 @@
                     <input type="checkbox" class="room-search" id="room-3">
                     <label for="room-3">기본정보</label>
                     <div class="room-pic" id="room-pic-3">${goods.goods_baseImpormation}</div>
+                    
                   </li>
                   <li>
                     <input type="checkbox" class="room-search" id="room-4">
@@ -601,9 +616,22 @@
                   <li>
                     <input type="checkbox" class="room-search" id="room-5">
                     <label for="room-5">테마</label>
-                    <div class="room-pic" id="room-pic-5">테마 기제</div>
+                    <div class="room-pic room-pic-themes row" id="room-pic-5">
+						<span>
+						<c:forTokens var="yoloTheme" items="${goods.yolo_theme}" delims = " ">
+		               		<span class="room-pic-theme">
+		               			<span style="display: block;">
+		               			 <img style="width:30%;" src="${contextPath}/resources/image/theme-icon/${yoloTheme}.png" alt="service_image">
+		               			</span>
+		               			<strong style="color:#777;">${yoloTheme}</strong>
+		               		</span>
+		               	</c:forTokens>
+		               	</span>
+					</div>
+					
                   </li>
                 </ul>
+                
                 <ul id="tab3">
                   <table align="center" width="100%" style="margin-top:20px;"  >
 					  <tr height="10" align="center" style="height:30px; color:white; font-weight:bold; background-color:rgb(112, 173, 71);">
@@ -692,5 +720,5 @@
 			</div>
 		  </div>
 	  </div>
+	
 </body>
-</html>

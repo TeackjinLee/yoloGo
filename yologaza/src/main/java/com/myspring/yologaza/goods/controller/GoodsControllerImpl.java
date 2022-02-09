@@ -69,8 +69,9 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		mav.addObject("reservationCheck", reservationCheck);
 		// Äü »ç¿ë½Ã
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
-		addGoodsInQuick(goods_id,goodsVO,session);
 		
+		addGoodsInQuick(goods_id,goodsVO,session);
+    	
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
 		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
