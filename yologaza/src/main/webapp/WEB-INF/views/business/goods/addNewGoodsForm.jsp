@@ -558,65 +558,65 @@
 					</th>
 					<td id="serviceBox">
 													<label for="theme90" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme90" name="yolo_themes" onclick='getCheckboxValue()' value="90">주방/식당</label>
+                        <input type="checkbox" id="theme90" name="yolo_themes" onclick='getCheckboxValue()' value="주방">주방</label>
                                                     <label for="theme91" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme91" name="yolo_themes" onclick='getCheckboxValue()' value="91">세탁기</label>
+                        <input type="checkbox" id="theme91" name="yolo_themes" onclick='getCheckboxValue()' value="세탁기">세탁기</label>
                                                     <label for="theme92" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme92" name="yolo_themes" onclick='getCheckboxValue()' value="92">건조기</label>
+                        <input type="checkbox" id="theme92" name="yolo_themes" onclick='getCheckboxValue()' value="건조기">건조기</label>
                                                     <label for="theme93" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme93" name="yolo_themes" onclick='getCheckboxValue()' value="93">탈수기</label>
+                        <input type="checkbox" id="theme93" name="yolo_themes" onclick='getCheckboxValue()' value="공용PC">공용PC</label>
                                                     <label for="theme94" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme94" name="yolo_themes" onclick='getCheckboxValue()' value="94">엘레베이터</label>
+                        <input type="checkbox" id="theme94" name="yolo_themes" onclick='getCheckboxValue()' value="미니바">미니바</label>
                                                     <label for="theme95" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme95" name="yolo_themes" onclick='getCheckboxValue()' value="95">주차장</label>
+                        <input type="checkbox" id="theme95" name="yolo_themes" onclick='getCheckboxValue()' value="주차장">주차장</label>
                                                     <label for="theme96" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme96" name="yolo_themes" onclick='getCheckboxValue()' value="96">와이파이</label>
+                        <input type="checkbox" id="theme96" name="yolo_themes" onclick='getCheckboxValue()' value="와이파이">와이파이</label>
                                                     <label for="theme98" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme98" name="yolo_themes" onclick='getCheckboxValue()' value="98">욕실용품</label>
+                        <input type="checkbox" id="theme98" name="yolo_themes" onclick='getCheckboxValue()' value="욕실용품">욕실용품</label>
                                                     <label for="theme99" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme99" name="yolo_themes" onclick='getCheckboxValue()' value="99">에어컨</label>
+                        <input type="checkbox" id="theme99" name="yolo_themes" onclick='getCheckboxValue()' value="에어컨">에어컨</label>
                                                     <label for="theme100" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme100" name="yolo_themes" onclick='getCheckboxValue()' value="100">냉장고</label>
+                        <input type="checkbox" id="theme100" name="yolo_themes" onclick='getCheckboxValue()' value="냉장고">냉장고</label>
                                                     <label for="theme101" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme101" name="yolo_themes" onclick='getCheckboxValue()' value="101">객실샤워실</label>
+                        <input type="checkbox" id="theme101" name="yolo_themes" onclick='getCheckboxValue()' value="객실샤워실">객실샤워실</label>
                                                     <label for="theme102" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme102" name="yolo_themes" onclick='getCheckboxValue()' value="102">욕조</label>
+                        <input type="checkbox" id="theme102" name="yolo_themes" onclick='getCheckboxValue()' value="욕조">욕조</label>
                                                     <label for="theme103" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme103" name="yolo_themes" onclick='getCheckboxValue()' value="103">드라이기</label>
+                        <input type="checkbox" id="theme103" name="yolo_themes" onclick='getCheckboxValue()' value="드라이기">드라이기</label>
                                                     <label for="theme104" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme104" name="yolo_themes" onclick='getCheckboxValue()' value="104">다리미</label>
+                        <input type="checkbox" id="theme104" name="yolo_themes" onclick='getCheckboxValue()' value="다리미">다리미</label>
                                                     <label for="theme105" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme105" name="yolo_themes" onclick='getCheckboxValue()' value="105">조식포함</label>
+                        <input type="checkbox" id="theme105" name="yolo_themes" onclick='getCheckboxValue()' value="조식포함">조식포함</label>
                                                     <label for="theme106" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme106" name="yolo_themes" onclick='getCheckboxValue()' value="106">객실내흡연</label>
+                        <input type="checkbox" id="theme106" name="yolo_themes" onclick='getCheckboxValue()' value="금연">금연</label>
                                                     <label for="theme107" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme107" name="yolo_themes" onclick='getCheckboxValue()' value="107">반려견동반</label>
+                        <input type="checkbox" id="theme107" name="yolo_themes" onclick='getCheckboxValue()' value="반려견동반">반려견동반</label>
                                                     <label for="theme127" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme127" name="yolo_themes" onclick='getCheckboxValue()' value="127">짐보관가능</label>
+                        <input type="checkbox" id="theme127" name="yolo_themes" onclick='getCheckboxValue()' value="짐보관가능">짐보관가능</label>
                                                     <label for="theme128" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme128" name="yolo_themes" onclick='getCheckboxValue()' value="128">공용PC</label>
+                        <input type="checkbox" id="theme128" name="yolo_themes" onclick='getCheckboxValue()' value="공용PC">공용PC</label>
                                                     <label for="theme130" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme130" name="yolo_themes" onclick='getCheckboxValue()' value="130">개인사물함</label>
+                        <input type="checkbox" id="theme130" name="yolo_themes" onclick='getCheckboxValue()' value="개인사물함">개인사물함</label>
                                                     <label for="theme163" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme163" name="yolo_themes" onclick='getCheckboxValue()' value="163">프린터사용</label>
+                        <input type="checkbox" id="theme163" name="yolo_themes" onclick='getCheckboxValue()' value="프린터사용">프린터사용</label>
                                                     <label for="theme165" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme165" name="yolo_themes" onclick='getCheckboxValue()' value="165">무료주차</label>
+                        <input type="checkbox" id="theme165" name="yolo_themes" onclick='getCheckboxValue()' value="무료주차">무료주차</label>
                                                     <label for="theme166" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme166" name="yolo_themes" onclick='getCheckboxValue()' value="166">BBQ</label>
+                        <input type="checkbox" id="theme166" name="yolo_themes" onclick='getCheckboxValue()' value="BBQ">BBQ</label>
                                                     <label for="theme167" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme167" name="yolo_themes" onclick='getCheckboxValue()' value="167">라운지</label>
+                        <input type="checkbox" id="theme167" name="yolo_themes" onclick='getCheckboxValue()' value="라운지">라운지</label>
                                                     <label for="theme169" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme169" name="yolo_themes" onclick='getCheckboxValue()' value="169">카페</label>
+                        <input type="checkbox" id="theme169" name="yolo_themes" onclick='getCheckboxValue()' value="카페">카페</label>
                                                     <label for="theme170" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme170" name="yolo_themes" onclick='getCheckboxValue()' value="170">전자레인지</label>
+                        <input type="checkbox" id="theme170" name="yolo_themes" onclick='getCheckboxValue()' value="전자레인지">전자레인지</label>
                                                     <label for="theme171" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme171" name="yolo_themes" onclick='getCheckboxValue()' value="171">취사가능</label>
+                        <input type="checkbox" id="theme171" name="yolo_themes" onclick='getCheckboxValue()' value="취사가능">취사가능</label>
                                                     <label for="theme172" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme172" name="yolo_themes" onclick='getCheckboxValue()' value="172">개인콘센트</label>
+                        <input type="checkbox" id="theme172" name="yolo_themes" onclick='getCheckboxValue()' value="개인콘센트">개인콘센트</label>
                                                     <label for="theme173" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme173" name="yolo_themes" onclick='getCheckboxValue()' value="173">카드결제</label>
+                        <input type="checkbox" id="theme173" name="yolo_themes" onclick='getCheckboxValue()' value="카드결제">카드결제</label>
                                                     <label for="theme295" class="checkbox-inline icon-label">
-                        <input type="checkbox" id="theme295" name="yolo_themes" onclick='getCheckboxValue()' value="295">TV</label>
+                        <input type="checkbox" id="theme295" name="yolo_themes" onclick='getCheckboxValue()' value="TV">TV</label>
                         <textarea style="visibility:hidden; height:0px;" id='yolo_theme' name="yolo_theme" ></textarea>             
 					</td>
 				</tr>
