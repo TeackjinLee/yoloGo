@@ -115,6 +115,11 @@
 	  document.getElementById('yolo_theme').innerText
 	    = yolo_theme;
 	}
+  
+	<!-- textarea의 줄바꿈 -->
+	var str = document.getElementById("textarea").value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	document.getElementById("textarea").value = str;
 
 </script>
 <style>

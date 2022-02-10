@@ -119,6 +119,7 @@
 
 .daterangepicker .drp-calendar.right {
   padding: 8px;
+  display:none;
 }
 
 .daterangepicker .drp-calendar.single .calendar-table {

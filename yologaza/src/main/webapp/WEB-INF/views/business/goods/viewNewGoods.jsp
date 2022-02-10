@@ -5,28 +5,52 @@
 	%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
 <%
 String goods_id = request.getParameter("goods_id");
 %>
+
+
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+	
 	$(document).ready(function() {
-	  $('#goods_type').change(function() {
-	    var result = $('#goods_type option:selected').val();
-	    if (result == 'motel') {
-	      $('#goods_price2').show();
-	    } else {
-	      $('#goods_price2').hide();
-	    }
-	  }); 
-	}); 
+		<!-- textarea의 줄바꿈 -->	
+
+		$("#goods_description").keydown(function(){
+			$('#text').val($(this).val());
+		});
+		$("#goods_description").change(function(){
+			var str = $("#goods_description").val();
+			str = str.replace(/(?:\r\n|\r|\n)/g, "<br />");
+			$('#text').val(str);
+	    });
+		
+		
+		
+	});
+	
+	$(document).ready(function() {
+
+		$("#goods_baseImpormation").keydown(function(){
+			$('#text2').val($(this).val());
+		});
+		$("#goods_baseImpormation").change(function(){
+			var strs = $("#goods_baseImpormation").val();
+			strs = strs.replace(/(?:\r\n|\r|\n)/g, "<br />");
+			$('#text2').val(strs);
+	    });
+		
+	});
+	
+	
 	function readURL(input,preview) {
 		//  alert(preview);
 	    if (input.files && input.files[0]) {
@@ -216,7 +240,9 @@ String goods_id = request.getParameter("goods_id");
 		  document.getElementById('yolo_theme').innerText
 		    = yolo_theme;
 		}
-
+	
+	
+	
 </script>
 <style>
 	.sub_top_wrap{
@@ -371,6 +397,14 @@ String goods_id = request.getParameter("goods_id");
 		width: auto;
     	height: auto;
 	}
+	#text{
+		height:0px;
+		visibility: hidden;
+	}
+	#text2{
+		height:0px;
+		visibility: hidden;
+	}
 </style>
     
 </head>
@@ -482,10 +516,12 @@ String goods_id = request.getParameter("goods_id");
              <th>주인장 소개글 <br> (호스트 소개)</th>
              <td>
              <p><br>
-               <textarea id="goods_description" name="goods_description" rows="20" cols="110" maxlength="1000" '
+               <textarea id="goods_description" rows="20" cols="110" maxlength="1000" '
               				placeholder="사장님의 특이 경력 혹은 사장님만의 재밌는 이야기가 있으면 게스트들에게 소개해주세요. 게스트는 숙소의 시설과 위치, 서비스는 물론, 사장님이 어떤 분인지도 관심이 있답니다." 
-              				disabled>${goods.goods_description }</textarea>
-             </p><br>
+              				disabled>${fn:replace(goods.goods_description, '<br />', '
+')}</textarea>
+             </p>
+             <textarea id="text" name="goods_description" >${goods.goods_description }</textarea>
            </td>
            </tr>
 
@@ -494,10 +530,12 @@ String goods_id = request.getParameter("goods_id");
              <th>숙소<br>기초 정보</th>
            <td><span>교통 편의 시설</span><br><br>
              <div class="wep">
-               <textarea id="goods_baseImpormation" name="goods_baseImpormation" rows="20" cols="110" maxlength="1000" 
+               <textarea id="goods_baseImpormation" rows="20" cols="110" maxlength="1000" 
 			               placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요." 
-			               disabled>${goods.goods_baseImpormation }</textarea>
-             </div><br>
+			               disabled>${fn:replace(goods.goods_baseImpormation, '<br />', '
+')}</textarea>
+             </div>
+             <textarea id="text2" name="goods_baseImpormation">${goods.goods_baseImpormation }</textarea>
              <div style="width:50%; height:150px; float:left;">
                
                <strong>이용 시간</strong>
