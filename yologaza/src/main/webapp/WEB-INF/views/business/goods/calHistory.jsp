@@ -87,14 +87,8 @@ td {
 	margin-left:15px;
 }
 
-.complete{
-	color:red;
-	font-size:18px;
-	margin-left:10px;
-}
-
 .standBy{
-	color:blue;
+	color:red;
 	font-size:18px;
 	margin-left:10px;
 }
@@ -186,13 +180,13 @@ $(function() {
     	});
     });
 });
-/*if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
+if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 	alert("사업자 권한이 필요합니다.");
 	document.location.href = "/yologaza/business_main.do";
 }else if(('${member}' == '') || ('${member}' == null)){
 	alert("로그인이 필요합니다.");
 	document.location.href = "/yologaza/businessMember/business_loginForm.do";
-}*/
+}
 </script>
 <script type="text/javascript" src="${contextPath}/resources/js/moment.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/daterangepicker.js"></script>
@@ -216,13 +210,9 @@ $(function() {
       <div class="content_top">
       	<table align="center">
       		<tr align="center">
-      			<td class="left">입금 계좌정보</td>
-      			<td class="right"><p>계좌</p></td>
-      		</tr>
-      		<tr align="center">
       			<td class="left">정산 및 입금 안내</td>
       			<td class="right">
-      				<p>1. 정산된 금액은 위 계좌정보로 입금됩니다.</p>
+      				<p>1. 정산된 금액은 각 숙소별 계좌정보로 입금됩니다.</p>
       				<p>2. 정산주기는 매주 수요일 일괄 정산됩니다.</p>
       				<p>&nbsp&nbsp&nbsp*단, 정산일인 수요일이 공휴일인 경우 다음날 정산되며,</p>
       				<p>&nbsp&nbsp&nbsp3일이상 공휴일인 경우는 정산일이 호스트하우스 공지사항에 안내됩니다.</p>
@@ -244,34 +234,74 @@ $(function() {
       </div>
       <div class="content_bot">
       	<div class="calculate">
-      	 <a>판매금액</a>
-      	 <a class="complete">150000(건)</a>
-      	 <a>정산완료</a>
-      	 <a class="complete">80000(건)</a>
-      	 <a>정산대기</a>
-      	 <a class="standBy">70000(건)</a>
+      	 <a>사업자포인트</a>
+      	 <a class="standBy">${businessPoint}</a>
+      	 <a>정산대기금액</a>
+      	 <a class="standBy"><fmt:parseNumber value="${businessPoint * 0.9}" integerOnly="true"/></a>
       	</div>
       </div>
       	<table align="center" class="bot_table">
 	          <tr align="center" class="column">
 	          	<td><b>성함</b></td>
+	          	<td><b>숙소이름</b></td>
 	          	<td><b>방 종류</b></td>
 	          	<td><b>숙박/대실</b></td>
+	          	<td><b>결제금액</b></td>
 	          	<td><b>이용시간</b></td>
 	          	<td><b>상세이용시간</b></td>
 	          	<td><b>일련번호</b></td>
-	          	<td><b>정산상태</b></td>
 	          </tr>
+	          <c:forEach var="cal" items="${selectCalHistory}">
 	          <tr align="center" class="data">
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
+        		<fmt:parseDate var="checkInDate" value="${cal.checkIn}" pattern="yyyy-MM-dd"/>
+        		<fmt:parseDate var="checkOutDate" value="${cal.checkOut}" pattern="yyyy-MM-dd"/>
+        		<fmt:parseNumber var="checkInDate_N" value="${checkInDate.time/(1000*60*60*24)}" integerOnly="true"/>
+        		<fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*60*60*24)}" integerOnly="true"/>
+	          	<td>${cal.name}</td>
+	          	<td>${cal.goods_name}</td>
+	          	<td>${cal.goods_room_type}</td>
+			      <c:choose>
+			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">
+			      		<td>숙박</td>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<td>대실</td>
+			      	</c:otherwise>
+			      </c:choose>
+	          	<td>${cal.price}</td>
+			      <c:choose>
+			      	<c:when test="${(checkOutDate_N - checkInDate_N) != 0}">
+			      		<td>${checkOutDate_N - checkInDate_N}박</td>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<td>${cal.goods_motel_usetime}</td>
+			      	</c:otherwise>
+			      </c:choose>
+			      <td>${cal.checkIn}&nbsp${cal.goods_checkIn}~${cal.checkOut}&nbsp${cal.goods_checkOut}</td>
+			      <td>${cal.rid}</td>
 	          </tr>
+	          </c:forEach>
       	</table>
+      	<div id="notice_pagination">
+                <div class="paging">
+                <c:if test="${pagination.startPage > 1}">
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                </c:if>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                	<c:choose>
+                		<c:when test="${i == pagination.page}">
+                  			<button class="on" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<button onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:otherwise>
+                  	</c:choose>
+                </c:forEach>
+                <c:if test="${pagination.endPage < pagination.totalPage}">
+                  <button type="button" class="next" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                </c:if>
+                </div>
+              </div>
       </div>
   </section>
 </body>

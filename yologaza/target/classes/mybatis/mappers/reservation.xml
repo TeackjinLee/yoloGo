@@ -31,6 +31,7 @@
         <result property="goods_name" column="goods_name" />
         <result property="date" column="date" />
         <result property="sum" column="sum" />
+        <result property="business_point" column="business_point" />
 	</resultMap>
 	
 	<insert id="insertReservation" parameterType="java.util.Map"   >
@@ -113,6 +114,7 @@
          and g.uid = #{uid}
          and r.goods_id = g.goods_id
          and r.goods_uroom = d.goods_uroom
+         and r.checkIn > now()
          </where>
          order by rDate asc	limit #{offset},#{count}
 	</select>
@@ -159,12 +161,32 @@
   				year(r.checkIn)
   			</if>
   		AS date, sum(r.price) AS sum
-  		FROM deletedreservation r, goods g
+  		FROM reservation r, goods g
   		where reservationType = "예약완료"
     	and g.uid = #{uid}
     	and r.goods_id = g.goods_id
   		GROUP BY date WITH ROLLUP;
   	</select>
+  	
+	<select id="selectCalHistory" parameterType="java.util.Map" resultMap="reservation">
+		select SQL_CALC_FOUND_ROWS r.*, g.goods_checkIn, g.goods_checkOut, g.goods_motel_usetime, d.goods_room_type, g.goods_name
+		from reservation r, goods g, goods_detail d
+		<where>
+         <if test="date1 != 0 and date2 != 0">
+         UNIX_TIMESTAMP(r.checkIn) >= #{date1} 
+         and #{date2} > UNIX_TIMESTAMP(r.checkIn)  
+         </if>
+         and g.uid = #{uid}
+         and r.goods_id = g.goods_id
+         and r.goods_uroom = d.goods_uroom
+         and now() > r.checkIn 
+         </where>
+         order by r.checkIn asc	limit #{offset},#{count}
+	</select>
+	
+	<select id="selectBusinessPoint" parameterType="String" resultType="int">
+		select business_point from member where uid = #{uid}
+	</select>
 
   	<delete id="deleteReservation" parameterType="int">
 	    <![CDATA[

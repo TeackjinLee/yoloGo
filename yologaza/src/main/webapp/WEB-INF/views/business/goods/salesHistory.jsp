@@ -168,7 +168,7 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 	            <c:if test="${term == 1}">
 	            <td><b>일</b></td>
 	            </c:if>
-	            <td class="price"><b>구매금액</b></td>
+	            <td class="price"><b>매출</b></td>
 	            <td class="price"><b>정산금액</b></td>
 	          </tr>
 	    	<c:forEach var="sales_h" items="${selectSalesHistory}">     

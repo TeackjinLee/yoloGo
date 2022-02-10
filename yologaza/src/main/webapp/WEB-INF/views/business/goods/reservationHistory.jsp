@@ -260,7 +260,7 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 				<td><b>이용시간</b></td>
 				<td><b>상세 이용시간</b></td>
 				<td><b>일련번호</b></td>
-				<td><b>이용/취소</b></td>
+				<td><b>상태</b></td>
 	          </tr>
 	    <c:forEach var="rsv_history" items="${selectReservationHistory}">     
         <tr align="center" class="data">
