@@ -23,5 +23,7 @@ public interface BusinessGoodsService {
 	public void modifyRoomInfo(Map modRoomMap) throws Exception;	
 	public List<GoodsVO> selectReservation(long date1, long date2, int offset, int count, String uid, int type) throws Exception;
 	public List<GoodsVO> selectReservationHistory(long date1, long date2, int offset, int count, String uid, int type) throws Exception;
+	public List<GoodsVO> selectCalHistory(long date1, long date2, int offset, int count, String uid) throws Exception;
+	public int selectBusinessPoint(String uid) throws Exception;
 	public List selectSalesHistory(String uid, int term) throws Exception;
 }

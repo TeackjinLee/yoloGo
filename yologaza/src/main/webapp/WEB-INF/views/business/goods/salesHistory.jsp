@@ -137,8 +137,8 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
   <section>
     <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/reservationManagement.do">예약 관리</a>
-          <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
+          <a href="${contextPath}/business/goods/reservationCheck.do">예약 조회</a>
+          <a href="${contextPath}/business/goods/reservationHistory.do">예약 취소 내역</a>
           <a href="${contextPath}/business/goods/calHistory.do">정산 내역</a>
           <a href="${contextPath}/business/goods/salesHistory.do" class="active">매출 내역</a>
         </div>
@@ -168,7 +168,7 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 	            <c:if test="${term == 1}">
 	            <td><b>일</b></td>
 	            </c:if>
-	            <td class="price"><b>구매금액</b></td>
+	            <td class="price"><b>매출</b></td>
 	            <td class="price"><b>정산금액</b></td>
 	          </tr>
 	    	<c:forEach var="sales_h" items="${selectSalesHistory}">     
