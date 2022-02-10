@@ -36,6 +36,7 @@
 		<result property="goods_price1" column="goods_price1" />
 		<result property="goods_price2" column="goods_price2" />
 		<result property="goods_acess" column="goods_acess" />
+		<result property="yolo_theme" column="yolo_theme" />
 
 		<result property="goods_room" column="goods_room" />
 		<result property="goods_room_num" column="goods_room_num" />
@@ -125,7 +126,8 @@
 										goods_motel_endtime,
 										goods_motel_usetime,
 										goods_price1,
-										goods_price2)
+										goods_price2,
+										yolo_theme)
 										
 					  			values(
 					  			      #{goods_id},
@@ -158,7 +160,8 @@
 					  			      #{goods_motel_endtime},
 					  			      #{goods_motel_usetime},
 					  			      #{goods_price1 },
-					  			      #{goods_price2 }
+					  			      #{goods_price2 },
+					  			      #{yolo_theme}
 					 			 )
 		]]>
 	</insert>
@@ -309,7 +312,8 @@
 			goods_motel_endtime=#{goods_motel_endtime},
 			goods_motel_usetime=#{goods_motel_usetime},
 			goods_price1=#{goods_price1},
-			goods_price2=#{goods_price2}
+			goods_price2=#{goods_price2},
+			yolo_theme = #{yolo_theme}
 	    where 
 	    goods_id=#{goods_id}
 	

@@ -69,8 +69,9 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		mav.addObject("reservationCheck", reservationCheck);
 		// Äü »ç¿ë½Ã
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
-		addGoodsInQuick(goods_id,goodsVO,session);
 		
+		addGoodsInQuick(goods_id,goodsVO,session);
+    	
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
 		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -162,24 +163,8 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	}
 	
 	@Override
-	@RequestMapping(value = {"/goods/keywordSearchGoods.do"},method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView kewordSearchGoods(@RequestParam("searchWord") String searchWord, 
-			GoodsVO goodsVO,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		HttpSession session;
-		ModelAndView mav=new ModelAndView();
-		String viewName=(String)request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		List<GoodsVO> goodsList=goodsService.searchGoods(searchWord);
-		session=request.getSession();
-		List<GoodsVO> goodsMap=goodsService.listGoods(goodsVO);
-		mav.addObject("goodsMap", goodsMap);
-		mav.addObject("goodsList", goodsList);
-		return mav;
-	}
-	
-	@Override
-	@RequestMapping(value="/goods/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
-	public @ResponseBody String  keywordSearch(@RequestParam("keyword") String keyword,
+	@RequestMapping(value="/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
+	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword,
 			                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -197,6 +182,54 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	    String jsonInfo = jsonObject.toString();
 	   // System.out.println(jsonInfo);
 	    return jsonInfo ;
+	}
+
+	@Override
+	@RequestMapping(value="/searchWorld.do" ,method = RequestMethod.GET)
+	public ModelAndView searchWorld(@RequestParam("searchWord") String searchWord,
+			                       HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName=(String)request.getAttribute("viewName");
+		List<GoodsVO> goodsMap=goodsService.searchGoods(searchWord);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("goodsMap", goodsMap);
+		
+		long today = (System.currentTimeMillis()/1000) + 32400;
+		Date date = new Date(System.currentTimeMillis()+32400000);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat timeFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		String todayDate = timeFormat.format(date);
+		long date1 = 0;
+		long date2 = 0;
+		if(request.getParameter("date1") != null)
+			date1 = Long.parseLong(request.getParameter("date1"));
+		if(request.getParameter("date2") != null)
+			date2 = Long.parseLong(request.getParameter("date2"));
+		date1 = (date1/86400) * 86400;
+		date2 = ((date2/86400) * 86400)+1;
+		request.setAttribute("date1", date1);
+		request.setAttribute("date2", date2);
+		String Ddate1 = todayDate;
+		String Ddate2 = todayDate;
+		String Ddate3 = todayDate;
+		String Ddate4 = todayDate;
+		if(date1 != 0 && date2 != 0) {
+			Ddate1 = timeFormat.format(date1*1000);
+			Ddate2 = timeFormat.format(date2*1000);
+			Ddate3 = timeFormat2.format(date1*1000);
+			Ddate4 = timeFormat2.format(date2*1000);
+		} else if( date1 == 0 && date2 == 1) {
+			Ddate1 = timeFormat.format(today*1000);
+			Ddate2 = timeFormat.format((today+86400)*1000);
+			Ddate3 = timeFormat2.format(today*1000);
+			Ddate4 = timeFormat2.format((today+86400)*1000);
+		}
+		request.setAttribute("Ddate1", Ddate1);
+		request.setAttribute("Ddate2", Ddate2);
+		request.setAttribute("Ddate3", Ddate3);
+		request.setAttribute("Ddate4", Ddate4);
+		
+		return mav;
+		
 	}
 	
 	private void addGoodsInQuick(String goods_id,GoodsVO goodsVO,HttpSession session){

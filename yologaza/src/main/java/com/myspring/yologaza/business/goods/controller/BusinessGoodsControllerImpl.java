@@ -81,7 +81,7 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 	}
 	
 	@RequestMapping(value="/addNewGoods.do" ,method={RequestMethod.POST})
-	public ResponseEntity addNewGoods( MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
+	public ResponseEntity addNewGoods( MultipartHttpServletRequest multipartRequest,HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String fileName=null;
@@ -667,4 +667,5 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		}
 		return mav;
 	}
+
 }

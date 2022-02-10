@@ -37,6 +37,7 @@ a {
 }
 
 .con {
+	width:1024px;
     max-width: 1024px;
     margin: 0 auto;
 }
@@ -97,7 +98,7 @@ header section .menu .menu-bar #search{
   transition: all 0.3s;
 }
 #toggleBtn:checked ~ #toggleBtnOn {
-    width: 420px;
+    width: 300px;
     transition: all 0.3s;
 }
 .toggleBtn{

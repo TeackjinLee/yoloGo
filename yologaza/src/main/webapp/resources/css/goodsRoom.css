@@ -275,13 +275,13 @@ a {
     display:none;
   }
   
-  .tab_each ul:nth-child(2) li div{
+  .tab_each ul:nth-child(2) li .room-pic{
     display: none;
   }
-  .tab_each ul:nth-child(3) li div{
+  .tab_each ul:nth-child(3) li .room-pic{
     display: none;
   }
-  .tab_each ul li input:checked + label + div{
+  .tab_each ul li input:checked + label + .room-pic{
     display:block;
     width: 100%;
     padding:20px;
