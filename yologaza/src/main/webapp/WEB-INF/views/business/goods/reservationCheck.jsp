@@ -213,8 +213,8 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
   <section>
     <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/reservationManagement.do" class="active">예약 관리</a>
-          <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
+          <a href="${contextPath}/business/goods/reservationCheck.do" class="active">예약 조회</a>
+          <a href="${contextPath}/business/goods/reservationHistory.do">예약 취소 내역</a>
           <a href="${contextPath}/business/goods/calHistory.do">정산 내역</a>
           <a href="${contextPath}/business/goods/salesHistory.do">매출 내역</a>
         </div>
@@ -242,9 +242,9 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
                     </c:choose>
                     </button>
                     <div class="dropdown-content">
-                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=0"'>전체</div>
-                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=2"'>숙박</div>
-                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=1&type=1"'>대실</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=1&type=0"'>전체</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=1&type=2"'>숙박</div>
+                      <div class="type" onclick='location.href="${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=1&type=1"'>대실</div>
                   	</div>
               </div>
       </div>
@@ -296,20 +296,20 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
       <div id="notice_pagination">
                 <div class="paging">
                 <c:if test="${pagination.startPage > 1}">
-                  <button type="button" class="prev" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
                 </c:if>
                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                 	<c:choose>
                 		<c:when test="${i == pagination.page}">
-                  			<button class="on" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  			<button class="on" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
                   		</c:when>
                   		<c:otherwise>
-                  			<button onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  			<button onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
                   		</c:otherwise>
                   	</c:choose>
                 </c:forEach>
                 <c:if test="${pagination.endPage < pagination.totalPage}">
-                  <button type="button" class="next" onclick="location.href='${contextPath}/business/goods/reservationManagement.do?date1=${date1}&date2=${date2}&pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                  <button type="button" class="next" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
                 </c:if>
                 </div>
               </div>

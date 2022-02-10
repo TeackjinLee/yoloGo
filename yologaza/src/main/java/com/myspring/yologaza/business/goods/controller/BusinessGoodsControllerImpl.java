@@ -480,8 +480,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		return resEntity;
 	}
 	
-	@RequestMapping(value = {"/reservationManagement.do"} ,method={RequestMethod.POST,RequestMethod.GET})
-	private ModelAndView reservationManagement(HttpServletRequest request,
+	@RequestMapping(value = {"/reservationCheck.do"} ,method={RequestMethod.POST,RequestMethod.GET})
+	private ModelAndView reservationCheck(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
 		//pagination
 		Pagination pagination = new Pagination();

@@ -199,8 +199,8 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
   <section>
     <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/reservationManagement.do">예약 관리</a>
-          <a href="${contextPath}/business/goods/reservationHistory.do">예약 내역</a>
+          <a href="${contextPath}/business/goods/reservationCheck.do">예약 조회</a>
+          <a href="${contextPath}/business/goods/reservationHistory.do">예약 취소 내역</a>
           <a href="${contextPath}/business/goods/calHistory.do" class="active">정산 내역</a>
           <a href="${contextPath}/business/goods/salesHistory.do">매출 내역</a>
         </div>
