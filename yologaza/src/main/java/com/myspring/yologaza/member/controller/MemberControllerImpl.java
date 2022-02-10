@@ -196,7 +196,7 @@ public class MemberControllerImpl extends ViewNameInterceptor implements MemberC
 							HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String name = memberVO.getName();
 		String hp = memberVO.getHp();
-		MemberVO member = memberService.findIdCheck(memberVO);
+		List<MemberVO> member = memberService.findId(memberVO);
 		if(name == null || name == "") {
 			model.addAttribute("msg", "이름을 확인해주세요.");
 			ModelAndView mav = new ModelAndView("/member/findIdView");

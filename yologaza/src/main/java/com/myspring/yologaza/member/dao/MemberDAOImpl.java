@@ -46,12 +46,6 @@ public class MemberDAOImpl implements MemberDAO{
 		List<MemberVO> result = sqlSession.selectList("mapper.member.findId", memberVO);
 		return result;
 	}
-
-	@Override
-	public MemberVO findIdCheck(MemberVO memberVO) throws Exception {
-		MemberVO result = sqlSession.selectOne("mapper.member.findIdCheck", memberVO);
-		return result;
-	}
 	
 	@Override
 	public int findPwCheck(MemberVO memberVO)throws Exception{

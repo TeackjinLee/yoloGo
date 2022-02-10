@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"
 	isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />	
 <!DOCTYPE html>
 <meta charset="utf-8">
@@ -117,9 +118,34 @@
 	}
   
 	<!-- textarea의 줄바꿈 -->
-	var str = document.getElementById("textarea").value;
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	document.getElementById("textarea").value = str;
+	$(document).ready(function() {
+		
+
+		$("#goods_description").keydown(function(){
+			$('#text').val($(this).val());
+		});
+		$("#goods_description").change(function(){
+			var str = $("#goods_description").val();
+			str = str.replace(/(?:\r\n|\r|\n)/g, "<br />");
+			$('#text').val(str);
+	    });
+		
+		
+		
+	});
+	<!-- textarea의 줄바꿈 -->	
+	$(document).ready(function() {
+
+		$("#goods_baseImpormation").keydown(function(){
+			$('#text2').val($(this).val());
+		});
+		$("#goods_baseImpormation").change(function(){
+			var strs = $("#goods_baseImpormation").val();
+			strs = strs.replace(/(?:\r\n|\r|\n)/g, "<br />");
+			$('#text2').val(strs);
+	    });
+		
+	});
 
 </script>
 <style>
@@ -286,6 +312,14 @@
 		width: auto;
     	height: auto;
 	}
+	#text{
+		height:0px;
+		visibility: hidden;
+	}
+	#text2{
+		height:0px;
+		visibility: hidden;
+	}
 </style>
 <script>
 	$(document).ready(function() {
@@ -433,8 +467,9 @@
 				<img src="${contextPath}/resources/image/businessEx2.png">
 			 </span>
              <p><br>
-               <textarea name="goods_description" rows="20" cols="110" maxlength="1000" placeholder="사장님의 특이 경력 혹은 사장님만의 재밌는 이야기가 있으면 게스트들에게 소개해주세요. 게스트는 숙소의 시설과 위치, 서비스는 물론, 사장님이 어떤 분인지도 관심이 있답니다."></textarea>
-             </p><br>
+               <textarea id="goods_description" rows="20" cols="110" maxlength="1000" placeholder="사장님의 특이 경력 혹은 사장님만의 재밌는 이야기가 있으면 게스트들에게 소개해주세요. 게스트는 숙소의 시설과 위치, 서비스는 물론, 사장님이 어떤 분인지도 관심이 있답니다."></textarea>
+             </p> 
+             <textarea id="text" name="goods_description" >${goods.goods_description }</textarea>
 				
            </td>
            </tr>
@@ -449,8 +484,10 @@
             </span>
            <br><br>
              <div class="wep">
-               <textarea id="goods_baseImpormation "name="goods_baseImpormation" rows="20" cols="110" maxlength="1000" placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요."></textarea>
-             </div><br>
+               <textarea id="goods_baseImpormation" rows="20" cols="110" maxlength="1000" 
+			               placeholder="주요 버스터미널이나 기차역 혹은 공항 등에서 숙소까지 찾아가는 방법을 자세히 기재해 주세요." ></textarea>
+             </div>
+             <textarea id="text2" name="goods_baseImpormation"></textarea>
              <div style="width:50%; float:left;">
                
                <strong>숙박 시간</strong>
