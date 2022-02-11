@@ -320,6 +320,7 @@
 		height:0px;
 		visibility: hidden;
 	}
+	
 </style>
 <script>
 	$(document).ready(function() {

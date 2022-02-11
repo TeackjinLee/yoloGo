@@ -53,5 +53,8 @@
 		<beans:property name="maxInMemorySize" value="52428800" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.myspring.yologaza.loginApi.Naver.NaverLoginBO" />
+
 
 </beans:beans>

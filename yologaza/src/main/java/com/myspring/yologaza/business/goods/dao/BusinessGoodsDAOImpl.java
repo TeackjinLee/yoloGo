@@ -47,7 +47,7 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 	}
 	
 	@Override
-	public List<GoodsVO>selectNewGoodsList(Map condMap) throws DataAccessException {
+	public List<GoodsVO> selectNewGoodsList(Map condMap) throws DataAccessException {
 		ArrayList goodsList=(ArrayList)sqlSession.selectList("mapper.business.goods.selectNewGoodsList", condMap);
 		return goodsList;
 	}

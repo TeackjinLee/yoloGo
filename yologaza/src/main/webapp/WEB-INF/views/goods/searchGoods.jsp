@@ -405,22 +405,31 @@
         </section>
   
         <section>
-          <strong>가격
-            <span><label for="amount"></label><input type="text" id="amount" class="price_val" readonly="">
-              <input type="hidden" id="min_price" name="min_price" value="">
-              <input type="hidden" id="max_price" name="max_price" value="">
-            </span>
-          </strong>
+          <strong>가격<p class="result" style="float:right;">0</p></strong>
+          
           <div class="slider_wrap">
             <div id="slider"
                  class="slider_align ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                  data-min="1" data-max="30">
-              <div class="ui-slider-range ui-corner-all ui-widget-header"
-                   style="left: 0%; width: 100%;"></div>
-              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
-              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
-            </div><span class="price_txt">1만원</span><span class="price_txt">30만원</span>
+              <input class="slider" type="range" min="10000" max="300000" class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;">
+              
+              </div><span class="price_txt">1만원</span><span class="price_txt">30만원</span>
           </div>
+          <script>
+		      var result = $(".result");
+		      var slider = $(".slider")
+		      slider.on('input', function() {
+		          result.html( $(this).val() );
+		      });
+		      $(function() {
+		    	  $('.result').on('change', function() {
+		    	     var n = $(this).val(); 
+		    	     n = Math.floor(n/1000) * 1000; 
+		    	     //alert(n);  
+		    	     $(this).val(n);
+		    	  });
+		    	});
+		    </script>
          </section>
       </div>
       	<c:set var="index" value="<%=value %>"/>

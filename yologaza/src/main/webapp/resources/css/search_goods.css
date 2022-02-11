@@ -100,7 +100,6 @@ body{
   }
   .detail-select .detail-select-box .filter_wrap .date-wrap .btn_date{
     display: block;
-    width: 240px;
     margin-top:10px;
     margin-bottom: 20px;
     box-sizing: border-box;
@@ -132,7 +131,7 @@ body{
     text-align: left;
   }
   .detail-select .detail-select-box .filter_wrap .select-wrap button{
-    width: 110px;
+    width: 48%;
     border: 1px solid rgb(112, 173, 71);
     border-radius: 5px;
     background: white;
@@ -189,11 +188,9 @@ body{
   .slider_wrap {
       position: relative;
       height: 40px;
-      margin: 34px 24px 0 0;
   }
   .slider_align {
       position: relative;
-      margin: 0 22px;
   }
   .price_val {
       position: relative;

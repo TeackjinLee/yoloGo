@@ -50,7 +50,7 @@
 	        <p>카카오톡 로그인</p> 
 	      </span>
 	    </button>
-	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver">
+	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver" onclick="location.href='${contextPath}/member/naverLogin'">
 	      <span>
 	        <img class="icon-ic_login_naver" src="${contextPath}/resources/image/ico-naver.svg" alt="네이버 로고">
 	        <p>네이버 로그인</p> 

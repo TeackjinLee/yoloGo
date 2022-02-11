@@ -70,6 +70,7 @@
                                   namujiAddress,
 						          goods_checkIn,
 			                      goods_checkOut,
+			                      yolo_theme,
 						          date_format(goods_creDate,'%Y-%m-%d') as goods_creDate
 						       from (
 						             select  goods_id,
@@ -80,6 +81,7 @@
 			                                 namujiAddress,
 											 goods_checkIn,
 											 goods_checkOut,
+											 yolo_theme,
 			                                 goods_creDate
 						              from goods
 						              where date_format(goods_creDate,'%Y-%m-%d') between #{beginDate} and #{endDate}
@@ -262,7 +264,8 @@
 					goods_motel_endtime,
 					goods_motel_usetime,
 					goods_price1,
-					goods_price2, 
+					goods_price2,
+					yolo_theme,
 					goods_acess
 					from goods where goods_id=#{goods_id}
 		]]>

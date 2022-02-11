@@ -241,15 +241,13 @@ String goods_id = request.getParameter("goods_id");
 		    = yolo_theme;
 		}
 	
-	
-	
 </script>
 <style>
 	.sub_top_wrap{
 	  height: 150px;
 	  background:rgb(52, 152, 219);
 	}
-	.sub_top{
+	.sub_top ul{
 	  position:relative;
 	  width:1024px;
 	  height:150px;
@@ -258,7 +256,7 @@ String goods_id = request.getParameter("goods_id");
 	  text-align:left;
 	}
 	
-	.sub_top a{
+	.sub_top ul li{
 		position: absolute;
 	    color: #ddd;
 	    font-weight: 500;
@@ -266,25 +264,25 @@ String goods_id = request.getParameter("goods_id");
 	    bottom:20px;
 	    text-align: center;
 	}
-	.sub_top a{
+	.sub_top ul li{
 		color:#ddd;
 	}
-	.sub_top a:nth-child(1){
+	.sub_top ul li:nth-child(1){
 		color:white;
 	}
-	.sub_top a:nth-child(1) i{
+	.sub_top ul li:nth-child(1) i{
 		color:white;
 	}
-	.sub_top a:nth-child(2){
+	.sub_top ul li:nth-child(2){
 		left:333px;
 	}
-	.sub_top a:nth-child(3){
+	.sub_top ul li:nth-child(3){
 		right:333px;
 	}
-	.sub_top a:nth-child(4){
+	.sub_top ul li:nth-child(4){
 		right:0;
 	}
-	.sub_top a div{
+	.sub_top ul li a div{
 		font-size:14px;
 	}
 	th {
@@ -412,10 +410,12 @@ String goods_id = request.getParameter("goods_id");
 <section>
 	  <div class="sub_top_wrap">
         <div class="sub_top">
-          <a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a>
-          <a href="#"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a>
-          <a href="#"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a>
-          <a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a>
+        	<ul>
+        		<li><a href="${contextPath}/business/goods/listGoods.do"><i class="fas fa-house-user"></i> <div>숙박등록</div></a></li>
+        		<li><a href="#tab2"><i class="fas fa-concierge-bell"></i> <div>서비스등록</div></a></li>
+        		<li><a href="#tab3"><i class="fas fa-calendar-alt"></i> <div>이용약관등록</div></a></li>
+        		<li><a href="${contextPath}/business/goods/listRoom.do?goods_id=<%=goods_id%>"><i class="fas fa-hotel"></i> <div>객실등록</div></a></li>
+        	</ul>
         </div>
       </div>
       <form name="frmGoods" action="${contextPath}" method="post"  enctype="multipart/form-data" style="width:1024px; min-width:1024px; margin:0 auto;">
@@ -658,7 +658,7 @@ String goods_id = request.getParameter("goods_id");
              <strong>계좌주 이름</strong>
              <p><input type="text" id="account_name" name="account_name"  placeholder="계좌주 이름" value=${goods.account_name } disabled /></p>
              <strong>계좌 번호</strong>
-             <p><input type="text" id="account" name="account"  placeholder="계좌 번호" value=${goods.account } disabled /></p>
+             <p><input type="text" id="account" name="account"  placeholder="계좌 번호" value='${goods.account }' disabled /></p>     
            </td>
            </tr>
            <div id="tab2">
@@ -728,7 +728,7 @@ String goods_id = request.getParameter("goods_id");
                         <input type="checkbox" id="theme173" name="yolo_themes" onclick='getCheckboxValue()' value="카드결제">카드결제</label>
                                                     <label for="theme295" class="checkbox-inline icon-label">
                         <input type="checkbox" id="theme295" name="yolo_themes" onclick='getCheckboxValue()' value="TV">TV</label>
-                        <textarea style="visibility:hidden; height:0px;" id='yolo_theme' name="yolo_theme" ></textarea>             
+                        <textarea style="visibility:hidden; height:0px;" id='yolo_theme' name="yolo_theme" >${goods.yolo_theme}</textarea>       
 					</td>
 				</tr>
 			</div>

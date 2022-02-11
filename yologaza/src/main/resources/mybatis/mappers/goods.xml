@@ -36,6 +36,7 @@
 		<result property="goods_price1" column="goods_price1" />
 		<result property="goods_price2" column="goods_price2" />
 		<result property="goods_acess" column="goods_acess" />
+		<result property="yolo_theme" column="yolo_theme" />
 
 		<result property="goods_room" column="goods_room" />
 		<result property="goods_room_num" column="goods_room_num" />

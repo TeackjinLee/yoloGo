@@ -595,6 +595,13 @@ function fn_order_all_cart_goods(){
 			</tr>
 		</tbody>
 	</table>
+	<!--  
+	<c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
+		<input name="goods_id" value="${member.uid}, ${member.name}, ${member.hp}, ${item.goods_id}, ${item.goods_uroom}, ${item.price}, ${item.checkIn}, ${item.checkOut}" />
+		
+		<button class="btn" type="button" onclick="location.href='${contextPath}/reservation/reservationForm.do?goods_id=${item.goods_id}&goods_uroom=${item.goods_uroom}&goods_room_price1=${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}&date1=${dateTime3*86400+86400}&date2=${dateTime4*86400+86400}'">숙박 예약하기</button>
+	</c:forEach>
+	-->
 	<center>
     <br><br>	
 		 <a href="javascript:fn_order_all_cart_goods()">
