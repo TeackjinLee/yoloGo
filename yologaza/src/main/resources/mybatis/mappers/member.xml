@@ -81,14 +81,7 @@
          select * from member where hp= #{hp} and name = #{name}
       ]]>
 	</select>
-	
-	<!-- 아이디 개수 -->
-	<select id="findIdCheck" resultMap="memResult">
-		<![CDATA[
-			select * from member where hp= #{hp} and name = #{name}
-		]]>
-	</select>
-	
+
 	<!-- 비밀번호 변경 -->
 	<update id="findPwd">
 		<![CDATA[

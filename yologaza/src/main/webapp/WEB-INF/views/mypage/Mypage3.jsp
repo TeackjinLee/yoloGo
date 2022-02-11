@@ -366,55 +366,58 @@ p {
 	z-index: 2;
 	background:red;
 }
+
 </style>
 <script type="text/javascript">
-$(function() {
-  $('.phoneicon').click(function(){
-    var idx = $(".phoneicon").index(this)
-    if($('.phonenumber').eq(idx).css('display')=='none'){
-           $('.phonenumber').eq(idx).show();
-  }
-    else{
-      $('.phonenumber').eq(idx).hide();
-    }
-});
-  $('.mapicon').click(function(){
-    var idx = $(".mapicon").index(this)
-    if($('.map-box').eq(idx).css('display')=='none'){
-           $('.map-box').eq(idx).show();
-  }
-    else{
-      $('.map-box').eq(idx).hide();
-    }
-});
-});
-
-function delete_reservation_goods(rid, goods_id, price){
-	var rid=Number(rid);
-	var goods_id=Number(goods_id);
-	var price=Number(price);
-	var formObj=document.createElement("form");
-	var i_rid = document.createElement("input");
-	var i_goods_id = document.createElement("input");
-	var i_price = document.createElement("input");
-
-	i_rid.name="rid";
-	i_rid.value=rid;
-	i_goods_id.name="goods_id";
-	i_goods_id.value=goods_id;
-	i_price.name="price";
-	i_price.value=price;
 	
-	formObj.appendChild(i_rid);
-	formObj.appendChild(i_goods_id);
-	formObj.appendChild(i_price);
-    document.body.appendChild(formObj); 
-    formObj.method="post";
-    formObj.action="${contextPath}/reservation/removeReservation.do";
-    formObj.submit();
-}
-<!--  달력js -->
-
+	$(function() {
+	  $('.phoneicon').click(function(){
+		    var idx = $(".phoneicon").index(this)
+		    if($('.phonenumber').eq(idx).css('display')=='none'){
+		           $('.phonenumber').eq(idx).show();
+		  }
+		    else{
+		      $('.phonenumber').eq(idx).hide();
+		    }
+		});
+		  $('.mapicon').click(function(){
+		    var idx = $(".mapicon").index(this)
+		    if($('.map-box').eq(idx).css('display')=='none'){
+		           $('.map-box').eq(idx).show();
+		  }
+		    else{
+		      $('.map-box').eq(idx).hide();
+		    }
+		});
+	});
+	
+	<!-- 예약 취소js -->
+	function delete_reservation_goods(rid, goods_id, price){
+		var rid=Number(rid);
+		var goods_id=Number(goods_id);
+		var price=Number(price);
+		var formObj=document.createElement("form");
+		var i_rid = document.createElement("input");
+		var i_goods_id = document.createElement("input");
+		var i_price = document.createElement("input");
+	
+		i_rid.name="rid";
+		i_rid.value=rid;
+		i_goods_id.name="goods_id";
+		i_goods_id.value=goods_id;
+		i_price.name="price";
+		i_price.value=price;
+		
+		formObj.appendChild(i_rid);
+		formObj.appendChild(i_goods_id);
+		formObj.appendChild(i_price);
+	    document.body.appendChild(formObj); 
+	    formObj.method="post";
+	    formObj.action="${contextPath}/reservation/removeReservation.do";
+	    formObj.submit();
+	}
+	
+	<!--  달력js -->
     $(function() {
         $('input[name="daterange"]').daterangepicker({
 	        opens: 'left',
@@ -437,6 +440,7 @@ function delete_reservation_goods(rid, goods_id, price){
         </div>
       </div>
       <div id="content" class="sub_wrap">
+      	
         <nav>
           <ul>
             <li>
@@ -474,7 +478,8 @@ function delete_reservation_goods(rid, goods_id, price){
 							</a>
 						</div>
 						<div class="descript">
-						  <h1>${item.goods_name}</h1><br>${Ddate3}
+						  <h1>${item.goods_name}</h1>
+						  <h3>${item.roadAddress}</h3><br>
 						  <input type="checkbox">
 						  <h3>체 크 인&nbsp; : ${item.checkIn}&nbsp;${item.goods_checkIn}</h3>
 						  <h3>체크아웃 : ${item.checkOut}&nbsp;${item.goods_checkOut}</h3>
