@@ -8,7 +8,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="result" value="${param.result }" />
      
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -41,6 +41,7 @@
 </head>
 
 <body>
+	
 	<img src="${contextPath}/resources/image/yolo-logo-c.png" alt="yolo가자 로고" style="margin-top:60px; margin-bottom:30px; width:270px;">
 	<form id="frmLogin" name="frmLogin" method="post"  action="${contextPath}/member/login.do">
 	  <h1>회원로그인</h1><br>
@@ -50,7 +51,7 @@
 	        <p>카카오톡 로그인</p> 
 	      </span>
 	    </button>
-	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver" onclick="location.href='${contextPath}/member/naverLogin'">
+	    <button type="button" id="naver-login-btn" class="btn_start-btn_naver" onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=Ea7fGahGOcYi0aNmhl8j&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fyologaza%2Fcallback&state=1a6a7a74-ac3a-4b8b-b81e-6458f177631d'">
 	      <span>
 	        <img class="icon-ic_login_naver" src="${contextPath}/resources/image/ico-naver.svg" alt="네이버 로고">
 	        <p>네이버 로그인</p> 

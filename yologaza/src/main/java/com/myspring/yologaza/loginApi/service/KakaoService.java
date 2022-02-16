@@ -107,13 +107,13 @@ public class KakaoService {
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-			String name = properties.getAsJsonObject().get("nickname").getAsString();
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String kakaoImg = properties.getAsJsonObject().get("profile_image").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			String id = kakao_account.getAsJsonObject().get("email").getAsString();
 			
 			userInfo.put("id", id);
-			userInfo.put("name", name);
+			userInfo.put("name", nickname);
 			userInfo.put("email", email);
 			userInfo.put("kakaoImg", kakaoImg);
 

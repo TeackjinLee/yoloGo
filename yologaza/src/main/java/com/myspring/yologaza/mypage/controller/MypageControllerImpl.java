@@ -81,10 +81,6 @@ public class MypageControllerImpl implements MypageController {
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("member");
-		String hp=memberVO.getHp();
-		List mypageReservation = mypageService.mypageReservation(hp);
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("mypageReservation", mypageReservation);
 		
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -120,8 +116,17 @@ public class MypageControllerImpl implements MypageController {
 		request.setAttribute("Ddate2", Ddate2);
 		request.setAttribute("Ddate3", Ddate3);
 		request.setAttribute("Ddate4", Ddate4);
+		if(memberVO != null) {
+			String hp=memberVO.getHp();
+			List mypageReservation = mypageService.mypageReservation(hp);
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("mypageReservation", mypageReservation);
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("redirect:/member/nonMemberForm.do");
+			return mav;
+		}
 		
-		return mav;
 	}
 	
 	@RequestMapping(value="/mypage/Mypage4.do", method = {RequestMethod.GET, RequestMethod.POST})

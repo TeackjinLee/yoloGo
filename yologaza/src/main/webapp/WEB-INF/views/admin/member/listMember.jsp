@@ -320,7 +320,10 @@
 	        <div id="notice_pagination">
                 <div class="paging">
                 <c:if test="${pagination.startPage > 1}">
-                  <button type="button" class="prev" onclick="location.href='${contextPath}/admin/member/listMember.do?pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                  <button type="button" class="prev" 
+                  	onclick="location.href='${contextPath}/admin/member/listMember.do?pages=${pagination.startPage-1}'">
+                  	<i class="fas fa-angle-double-left"></i>
+                  </button>
                 </c:if>
                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                 	<c:choose>
@@ -333,7 +336,10 @@
                   	</c:choose>
                 </c:forEach>
                 <c:if test="${pagination.endPage < pagination.totalPage}">
-                  <button type="button" class="next" onclick="location.href='${contextPath}/admin/member/listMember.do?pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                  <button type="button" class="next" 
+                  	onclick="location.href='${contextPath}/admin/member/listMember.do?pages=${pagination.endPage+1}'">
+                  	<i class="fas fa-angle-double-right"></i>
+                  </button>
                 </c:if>
                 </div>
               </div>
