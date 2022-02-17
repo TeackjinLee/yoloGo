@@ -50,16 +50,16 @@ public class CC_ControllerImpl implements CC_Controller {
 		pagination.setPage(1);
 		pagination.setCountList(5);
 		pagination.setCountPage(6);
-		pagination.setTotalCount(cc_Service.getCC_DAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		if(request.getParameter("auth") != null)
 			auth = Integer.parseInt(request.getParameter("auth"));
 		request.setAttribute("auth", auth);
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		String viewName = (String)request.getAttribute("viewName");
 		List<Announce_VO> announceList = cc_Service.listAnnounce(auth, offset, pagination.getCountList());
+		pagination.setTotalCount(cc_Service.getCC_DAO().getTotalCount());
+		pagination.Paging();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("announceList", announceList);
 		mav.addObject(pagination);
@@ -89,17 +89,17 @@ public class CC_ControllerImpl implements CC_Controller {
 		pagination.setPage(1);
 		pagination.setCountList(5);
 		pagination.setCountPage(6);
-		pagination.setTotalCount(cc_Service.getCC_DAO().getCountPerId());
 		if(Request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(Request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		HttpSession session = Request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO != null) {
 			String id = memberVO.getId();
 			List<Question_VO> questionList = cc_Service.listQuestion(offset, pagination.getCountList(), id);
 			List<Question_VO> replyList = cc_Service.listReply(questionList);
+			pagination.setTotalCount(cc_Service.getCC_DAO().getCountPerId());
+			pagination.Paging();
 			
 			mav.addObject("questionList", questionList);
 			mav.addObject(pagination);

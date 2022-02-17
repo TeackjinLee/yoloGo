@@ -53,7 +53,7 @@
 	                  <li><a href="${contextPath}/business/goods/addNewGoodsForm.do">숙소등록</a></li>
 	                  <li><a href="#">이용규칙 관리</a></li>
 	                  <li><a href="${contextPath}/business/goods/listGoods.do">객실 관리</a></li>
-	                  <li><a href="#">리뷰 관리</a></li>
+	                  <li><a href="${contextPath}/business/goods/reviewManagement.do">리뷰 관리</a></li>
 	                </ul>
 	              </div>  
 	             </li>
