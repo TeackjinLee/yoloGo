@@ -58,13 +58,13 @@ public class BusinessMemberControllerImpl implements BusinessMemberController {
 			}
 		} else if(member.getId() == null || member.getId() == "" ) {
 			rAttr.addAttribute("result", "idFailed");
-			mav.setViewName("redirect:/businessMember/loginForm.do");
+			mav.setViewName("redirect:/businessMember/business_loginForm.do");
 		} else if(member.getPwd() == null || member.getPwd() == "" ) {
 			rAttr.addAttribute("result", "PwdFailed");
-			mav.setViewName("redirect:/businessMember/loginForm.do");
+			mav.setViewName("redirect:/businessMember/business_loginForm.do");
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/businessMember/loginForm.do");
+			mav.setViewName("redirect:/businessMember/business_loginForm.do");
 		}
 		return mav;
 	}
