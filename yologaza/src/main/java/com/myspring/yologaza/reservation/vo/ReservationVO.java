@@ -28,6 +28,8 @@ public class ReservationVO {
 	private String goods_room_type;
 	private String date;
 	private int sum;
+	private int businessWeek;
+	private int businessMonth;
 	
 	public int getRid() {
 		return rid;
@@ -178,6 +180,18 @@ public class ReservationVO {
 	}
 	public void setSum(int sum) {
 		this.sum = sum;
+	}
+	public int getBusinessWeek() {
+		return businessWeek;
+	}
+	public void setBusinessWeek(int businessWeek) {
+		this.businessWeek = businessWeek;
+	}
+	public int getBusinessMonth() {
+		return businessMonth;
+	}
+	public void setBusinessMonth(int businessMonth) {
+		this.businessMonth = businessMonth;
 	}
 	
 }

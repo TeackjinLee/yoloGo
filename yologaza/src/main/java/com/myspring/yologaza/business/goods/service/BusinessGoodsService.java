@@ -26,4 +26,6 @@ public interface BusinessGoodsService {
 	public List<GoodsVO> selectCalHistory(long date1, long date2, int offset, int count, String uid) throws Exception;
 	public int selectBusinessPoint(String uid) throws Exception;
 	public List selectSalesHistory(String uid, int term) throws Exception;
+	public List<GoodsVO> selectReservationBusinessMain(int offset, int count, String uid) throws Exception;
+	public List selectReservationCountBusinessMain(String uid) throws Exception;
 }

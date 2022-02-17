@@ -12,6 +12,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.paging {
+  padding-top:32px;
+}
+
+.paging button{
+    width: 32px;
+    height: 32px;
+    box-sizing: inherit;
+    align-items: center;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+    cursor:pointer;
+}
+
+.paging .on{
+  background:rgb(52, 152, 219);
+  color:#fff;
+}
+</style>
 <meta charset="UTF-8">
 <title>YOLO가자! 비지니스메인페이지</title>
 <script src="${contextPath}/resources/js/jquery-3.6.0.min.js"></script>
@@ -38,9 +62,11 @@
 	      <div class="text-box">
 	        <h3>예약 객실 판매 ></h3>
 	        <div class="sell_box">
-	          <div><sapn> 0 <br>오늘</sapn></div>
-	          <div><sapn> 0 <br>이번주</sapn></div>
-	          <div><sapn> 0 <br>이번달</sapn></div>
+	          <div><sapn> ${pagination.totalCount} <br>오늘</sapn></div>
+	          <c:forEach var="rsvCount" items="${selectReservationCount}">
+	          	<div><sapn> ${rsvCount.businessWeek} <br>이번주</sapn></div>
+	          	<div><sapn> ${rsvCount.businessMonth}<br>이번달</sapn></div>
+	          </c:forEach>
 	        </div>
 	      </div>
 	    </div>
@@ -55,22 +81,40 @@
 	            <td><b>전화번호</b></td>
 	            <td><b>예약 시간</b></td>
 	            <td><b>예약 확인</b></td>
-	            <td><b>취소 하기</b></td>
 	          </tr>
 	   
-	          <c:forEach var="member" items="${membersList}" >     
+	          <c:forEach var="r" items="${selectReservationBusinessMain}" >     
 	            <tr align="center" class="data">
-	              <td>$</td>
-	              <td>$</td>
-	              <td>$</td>
-	              <td>$</td>
-	              <td>$</td>
-	              <td>$</td>
-	              <td><a href="${contextPath}/member/removeMember.do?id=${member.id}">취소 하기</a></td>
+	              <td>${r.rid}</td>
+	              <td>${r.goods_name}&nbsp${r.goods_room_type}</td>
+	              <td>${r.name}</td>
+	              <td>${r.hp}</td>
+	              <td>${r.checkIn}</td>
+	              <td>${r.reservationType}</td>
 	            </tr>
 	          </c:forEach>   
 	        </table>
 	      </div>
+	            <div id="notice_pagination">
+                <div class="paging">
+                <c:if test="${pagination.startPage > 1}">
+                  <button type="button" class="prev" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${pagination.startPage-1}'"><i class="fas fa-angle-double-left"></i></button>
+                </c:if>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                	<c:choose>
+                		<c:when test="${i == pagination.page}">
+                  			<button class="on" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<button onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${i}'">${i}</button>
+                  		</c:otherwise>
+                  	</c:choose>
+                </c:forEach>
+                <c:if test="${pagination.endPage < pagination.totalPage}">
+                  <button type="button" class="next" onclick="location.href='${contextPath}/business/goods/reservationCheck.do?date1=${date1}&date2=${date2}&pages=${pagination.endPage+1}'"><i class="fas fa-angle-double-right"></i></button>
+                </c:if>
+                </div>
+              </div>
 	    </div>
 	  </div>
 	</div>

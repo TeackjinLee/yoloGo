@@ -218,4 +218,39 @@ public class BusinessGoodsDAOImpl implements BusinessGoodsDAO {
 		}
 		return salesList;
 	}
+	
+	@Override
+	public List<GoodsVO> selectReservationBusinessMain(int offset, int count, String uid) throws DataAccessException{
+		List<GoodsVO> reservationList = new ArrayList<GoodsVO>();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("count", count);
+		params.put("uid", uid);
+		
+		try {
+			reservationList = session.selectList("mapper.reservation.selectReservationBusinessMain",params);
+			this.totalCount = session.selectOne("mapper.reservation.countAllGoods");
+		}finally {
+			session.close();
+		}
+		return reservationList;
+	}
+	
+	@Override
+	public List selectReservationCountBusinessMain(String uid) throws DataAccessException{
+		List CountList = new ArrayList();
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("uid", uid);
+		
+		try {
+			CountList = session.selectList("mapper.reservation.selectReservationCountBusinessMain",params);
+		}finally {
+			session.close();
+		}
+		return CountList;
+	}
 }
