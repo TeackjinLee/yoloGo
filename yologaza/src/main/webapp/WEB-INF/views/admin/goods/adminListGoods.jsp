@@ -234,8 +234,10 @@
 					</td>
 					<td>${goodsList.goods_creDate}</td>
 					<td>
-						<button type="button" class="next" style="display:block;"  onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
-						<button type="button" class="next" style="margin-top:9px;" onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 검색</button>
+						<button type="button" class="next" style="display:block;"  
+						onclick="location.href='${contextPath}/business/goods/viewNewGoods.do?goods_id=${goodsList.goods_id}'">상세 검색</button>
+						<button type="button" class="next" style="margin-top:9px;" 
+						onclick="location.href='${contextPath}/business/goods/listRoom.do?goods_id=${goodsList.goods_id}'">객실 검색</button>
 					</td>
 				</tr>
 			</c:forEach>   
