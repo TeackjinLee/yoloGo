@@ -190,7 +190,7 @@ $(function() {
 		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
 		        var type = '${type}';
 		        $('#dateApplyBtn').click(function(){
-		    		window.location.href='${contextPath}/business/goods/reservationManagement.do?date1='+date1+'&date2='+date2+'&type='+type;
+		    		window.location.href='${contextPath}/business/goods/reservationCheck.do?date1='+date1+'&date2='+date2+'&type='+type;
 		    	});
 	        });
 	 });
