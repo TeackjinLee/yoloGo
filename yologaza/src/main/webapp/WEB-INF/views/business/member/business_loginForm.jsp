@@ -13,26 +13,27 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인창</title>	
+	<title>로그인창</title>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<c:choose>
 		<c:when test="${result=='loginFailed' }">
 		  <script>
 		    window.onload=function(){
-		      alert("올바른 아이디와 비밀번호를 입력해주세요!");
+		    	swal ( "Oops" ,  "올바른 아이디와 비밀번호를 입력해주세요!" ,  "error" );
 		    }
 		  </script>
 		</c:when>
 		<c:when test="${result=='idFailed' }">
 		  <script>
 		    window.onload=function(){
-		      alert("아이디를 입력해 주세요!");
+		    	swal ( "Oops" ,  "아이디를 입력해 주세요!" ,  "error" );
 		    }
 		  </script>
 		</c:when>
 		<c:when test="${result=='PwdFailed' }">
 		  <script>
 		    window.onload=function(){
-		      alert("비밀번호를 입력해 주세요!");
+		    	swal ( "Oops" ,  "비밀번호를 입력해 주세요!" ,  "error" );
 		    }
 		  </script>
 		</c:when>

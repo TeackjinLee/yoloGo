@@ -40,11 +40,9 @@ public class AdminGoodsControllerImpl extends BaseController implements AdminGoo
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(adminGoodsService.getAdminGoodsDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -71,6 +69,8 @@ public class AdminGoodsControllerImpl extends BaseController implements AdminGoo
 		
 		String viewName = (String) request.getAttribute("viewName");
 		List<GoodsVO> listGoods = adminGoodsService.listGoods(date1, date2, offset, pagination.getCountList());
+		pagination.Paging();
+		pagination.setTotalCount(adminGoodsService.getAdminGoodsDAO().getTotalCount());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("listGoods", listGoods);
 		mav.addObject(pagination);

@@ -31,4 +31,6 @@ public interface BusinessGoodsDAO {
 	public List<GoodsVO> selectCalHistory(long date1, long date2, int offset, int count, String uid) throws DataAccessException;
 	public int selectBusinessPoint(String uid) throws DataAccessException;
 	public List selectSalesHistory(String uid, int term) throws DataAccessException;
+	public List<GoodsVO> selectReservationBusinessMain(int offset, int count, String uid) throws DataAccessException;
+	public List selectReservationCountBusinessMain(String uid) throws DataAccessException;
 }

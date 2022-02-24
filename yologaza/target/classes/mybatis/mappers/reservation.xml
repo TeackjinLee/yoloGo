@@ -32,6 +32,8 @@
         <result property="date" column="date" />
         <result property="sum" column="sum" />
         <result property="business_point" column="business_point" />
+        <result property="businessWeek" column="businessWeek" />
+        <result property="businessMonth" column="businessMonth" />
 	</resultMap>
 	
 	<insert id="insertReservation" parameterType="java.util.Map"   >
@@ -100,8 +102,8 @@
 		from reservation r, goods g, goods_detail d
 		<where>
          <if test="date1 != 0 and date2 != 0">
-         UNIX_TIMESTAMP(r.checkIn) >= #{date1} 
-         and #{date2} > UNIX_TIMESTAMP(r.checkIn)  
+         UNIX_TIMESTAMP(r.checkIn) >= (#{date1}-86400)
+         and (#{date2}-86400) > UNIX_TIMESTAMP(r.checkIn)  
          </if>
          <if test="type != 0">
          	<if test="type == 1">
@@ -114,7 +116,6 @@
          and g.uid = #{uid}
          and r.goods_id = g.goods_id
          and r.goods_uroom = d.goods_uroom
-         and r.checkIn > now()
          </where>
          order by rDate asc	limit #{offset},#{count}
 	</select>
@@ -201,6 +202,33 @@
 			from reservation r
 			where goods_id = #{goods_id}
     	]]>
+	</select>
+	
+	<select id="selectReservationBusinessMain" parameterType="java.util.Map" resultMap="reservation">
+		select SQL_CALC_FOUND_ROWS r.rid, r.hp, r.name, r.checkIn, r.reservationType, g.goods_name, d.goods_room_type
+		from reservation r, goods g, goods_detail d
+		<where>
+		g.uid = #{uid}
+        and r.goods_id = g.goods_id
+        and r.goods_uroom = d.goods_uroom
+        and r.checkIn = curdate()
+		</where>
+         order by r.rid asc	limit #{offset},#{count}
+	</select>
+	
+	<select id="selectReservationCountBusinessMain" parameterType="java.util.Map" resultMap="reservation">
+	<![CDATA[ 
+	select  
+	count(case when g.uid=#{uid} 
+	and r.goods_id = g.goods_id 
+	and r.goods_uroom = d.goods_uroom 
+	and DATE_FORMAT(r.checkIn, '%U') = date_format(now(),'%U') then 1 end) as businessWeek,
+	count(case when g.uid=#{uid} 
+	and r.goods_id = g.goods_id 
+	and r.goods_uroom = d.goods_uroom 
+	and month(r.checkIn) = month(now()) then 1 end) as businessMonth
+	from reservation r, goods g, goods_detail d 
+	]]> 
 	</select>
 	
 </mapper>

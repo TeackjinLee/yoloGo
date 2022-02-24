@@ -480,6 +480,15 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		return resEntity;
 	}
 	
+	@RequestMapping(value="/reviewManagement.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView reviewManagement(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
 	@RequestMapping(value = {"/reservationCheck.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	private ModelAndView reservationCheck(HttpServletRequest request,
 								HttpServletResponse response) throws Exception{
@@ -488,11 +497,9 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -529,6 +536,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		if(memberVO != null) {
 			String uid = memberVO.getUid();
 			List<GoodsVO> selectReservation = businessGoodsService.selectReservation(date1, date2, offset, pagination.getCountList(), uid, type);
+			pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
+			pagination.Paging();
 			mav.addObject("selectReservation", selectReservation);
 			mav.addObject(pagination);
 			mav.addObject("today1", today1);
@@ -545,11 +554,9 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -586,6 +593,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		if(memberVO != null) {
 			String uid = memberVO.getUid();
 			List<GoodsVO> selectReservationHistory = businessGoodsService.selectReservationHistory(date1, date2, offset, pagination.getCountList(), uid, type);
+			pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
+			pagination.Paging();
 			mav.addObject("selectReservationHistory", selectReservationHistory);
 			mav.addObject(pagination);
 			mav.addObject("today1", today1);
@@ -602,11 +611,9 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -639,6 +646,8 @@ public class BusinessGoodsControllerImpl  extends BaseController implements Busi
 		if(memberVO != null) {
 			String uid = memberVO.getUid();
 			List<GoodsVO> selectCalHistory = businessGoodsService.selectCalHistory(date1, date2, offset, pagination.getCountList(), uid);
+			pagination.setTotalCount(businessGoodsService.getBusinessGoodsDAO().getTotalCount());
+			pagination.Paging();
 			int businessPoint = businessGoodsService.selectBusinessPoint(uid);
 			mav.addObject("selectCalHistory", selectCalHistory);
 			mav.addObject("businessPoint", businessPoint);

@@ -38,11 +38,9 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -82,6 +80,8 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		request.setAttribute("type", type);
 		String viewName = (String) request.getAttribute("viewName");
 		List<MemberVO> membersList = adminMemberService.listMembers(type, query, auth, date1, date2, offset, pagination.getCountList());
+		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
+		pagination.Paging();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);
 		mav.addObject(pagination);
@@ -97,11 +97,9 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		pagination.setPage(1);
 		pagination.setCountList(10);
 		pagination.setCountPage(5);
-		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
 		if(request.getParameter("pages") != null)
 			pagination.setPage(Integer.parseInt(request.getParameter("pages")));
 		int offset = (pagination.getPage()-1)*pagination.getCountList();
-		pagination.Paging();
 		//time (date = long type / Ddate = MM/dd/yyyy date type)
 		long today = (System.currentTimeMillis()/1000) + 32400;
 		Date date = new Date(System.currentTimeMillis()+32400000);
@@ -141,6 +139,8 @@ public class AdminMemberControllerImpl  extends BaseController implements AdminM
 		request.setAttribute("type", type);
 		String viewName = (String) request.getAttribute("viewName");
 		List<MemberVO> deleteMemberList = adminMemberService.deletelistMembers(type, query, auth, date1, date2, offset, pagination.getCountList());
+		pagination.setTotalCount(adminMemberService.getAdminMemberDAO().getTotalCount());
+		pagination.Paging();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("deleteMemberList", deleteMemberList);
 		mav.addObject(pagination);

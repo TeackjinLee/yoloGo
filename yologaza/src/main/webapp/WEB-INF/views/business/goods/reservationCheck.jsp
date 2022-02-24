@@ -190,7 +190,7 @@ $(function() {
 		        var date2 = Date.parse(end.format('YYYY-MM-DD'))/1000;
 		        var type = '${type}';
 		        $('#dateApplyBtn').click(function(){
-		    		window.location.href='${contextPath}/business/goods/reservationManagement.do?date1='+date1+'&date2='+date2+'&type='+type;
+		    		window.location.href='${contextPath}/business/goods/reservationCheck.do?date1='+date1+'&date2='+date2+'&type='+type;
 		    	});
 	        });
 	 });
@@ -259,14 +259,15 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 				<td><b>결제비용</b></td>
 				<td><b>이용시간</b></td>
 				<td><b>상세 이용시간</b></td>
+				<td><b>예약 상태</b></td>
 				<td><b>일련번호</b></td>
 	          </tr>
 	    <c:forEach var="rsv" items="${selectReservation}">     
         <tr align="center" class="data">
         <fmt:parseDate var="checkInDate" value="${rsv.checkIn}" pattern="yyyy-MM-dd"/>
         <fmt:parseDate var="checkOutDate" value="${rsv.checkOut}" pattern="yyyy-MM-dd"/>
-        <fmt:parseNumber var="checkInDate_N" value="${checkInDate.time/(1000*60*60*24)}" integerOnly="true"/>
-        <fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*60*60*24)}" integerOnly="true"/>
+        <fmt:parseNumber var="checkInDate_N" value="${checkInDate.time/(1000*24*60*60)}" integerOnly="true"/>
+        <fmt:parseNumber var="checkOutDate_N" value="${checkOutDate.time/(1000*24*60*60)}" integerOnly="true"/>
 	              <td>${rsv.name}</td>
 	              <td>${rsv.hp}</td>
 			      <td>${rsv.goods_name}</td>
@@ -289,6 +290,14 @@ if(("${member.auth}" == "1") && ("${isLogOn}" == "true")){
 			      	</c:otherwise>
 			      </c:choose>
 			      <td>${rsv.checkIn}&nbsp${rsv.goods_checkIn}~${rsv.checkOut}&nbsp${rsv.goods_checkOut}</td>
+			      <c:choose>
+			      	<c:when test="${((checkInDate_N+1)*86400) >= today1}">
+			      		<td>예약 중</td>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<td>사용 완료</td>
+			      	</c:otherwise>
+			      </c:choose>
 			      <td>${rsv.rid}</td>
         </tr>
         </c:forEach>
